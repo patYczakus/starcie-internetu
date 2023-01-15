@@ -312,7 +312,7 @@ function startMatch() {
             }, 50 * i)
         }
         setTimeout(() => {
-            document.querySelector(`div#game.match div[gameplay="player"] div.btns`).innerHTML += `<button id="heal" style="width: 100%; margin: 5px 0">Lecz się (+${100 * Math.pow(classes.indexOf(characters_json[matchSettings.player.name].class)+1, data.characters[matchSettings.player.name].lvl)} HP)</button>`
+            document.querySelector(`div#game.match div[gameplay="player"] div.btns`).innerHTML += `<button id="heal" style="width: 100%; margin: 5px 0">Lecz się (+${(100 + 10 * classes.indexOf(characters_json[matchSettings.player.name].class)) * data.characters[matchSettings.player.name].lvl} HP, -25 BTP)</button>`
         }, 50 * matchSettings.player.atk.length)
         setTimeout(() => {
             document.querySelector(`div#game.match div[gameplay="player"] div.btns`).innerHTML += `<button id="whiteFlag" style="width: 100%; margin: 5px 0">Poddaj się</button>`
@@ -339,7 +339,9 @@ function startMatch() {
             }
             document.querySelector(`div#game.match div[gameplay="player"] div.btns button#heal`).addEventListener("click", () => {
                 if (matchSettings.player.health > document.querySelector(`div#game.match div[gameplay="player"] div.healthBar div.health`).style.getPropertyValue("--healthMax") / 2) return
-                matchSettings.player.health += 100 * Math.pow(classes.indexOf(characters_json[matchSettings.player.name].class), data.characters[matchSettings.player.name].lvl)
+                if (matchSettings.player.points < 25) return
+                matchSettings.player.health += (100 + 10 * classes.indexOf(characters_json[matchSettings.player.name].class)) * data.characters[matchSettings.player.name].lvl
+                matchSettings.player.points -= 25
                 if (matchSettings.player.health > document.querySelector(`div#game.match div[gameplay="player"] div.healthBar div.health`).style.getPropertyValue("--healthMax")) document.querySelector(`div#game.match div[gameplay="player"] div.healthBar div.health`).style.getPropertyValue("--healthMax")
                 document.querySelector(`div#game.match div[gameplay="player"] div.healthBar div.health`).style.setProperty("--health", matchSettings.player.health)
                 analyze()
@@ -394,7 +396,7 @@ function startMatch() {
                         document.querySelector("div#game.match").style.display = "none"
                         document.querySelector("div#game.match").innerHTML = ""
                     })
-                }, 2000)
+                }, 1000)
             })
         }, 50 * matchSettings.player.atk.length + 150)
     }, 3000)
@@ -420,12 +422,13 @@ function analyze() {
     setTimeout(() => {
         let canskip
         do {
-            let action = Math.round(Math.random() * 12)
+            let action = Math.round(Math.random() * 16)
             // console.log(action)
-            if (action == 1 || action == 0 || matchSettings.bot.health <= document.querySelector(`div#game.match div[gameplay="bot"] div.healthBar div.health`).style.getPropertyValue("--healthMax") / 2) {
-                if (matchSettings.bot.health <= document.querySelector(`div#game.match div[gameplay="bot"] div.healthBar div.health`).style.getPropertyValue("--healthMax") / 2) {
+            if (action == 1 || action == 0) {
+                if (matchSettings.bot.health <= document.querySelector(`div#game.match div[gameplay="bot"] div.healthBar div.health`).style.getPropertyValue("--healthMax") / 2 && matchSettings.bot.points >= 25) {
                     canskip = true
-                    matchSettings.bot.health += 100 * Math.pow(classes.indexOf(characters_json[matchSettings.bot.name].class), matchSettings.bot.lvl)
+                    matchSettings.bot.points -= 25
+                    matchSettings.bot.health += (100 + 10 * classes.indexOf(characters_json[matchSettings.bot.name].class)) * matchSettings.bot.lvl
                     if (matchSettings.bot.health > document.querySelector(`div#game.match div[gameplay="bot"] div.healthBar div.health`).style.getPropertyValue("--healthMax")) matchSettings.bot.health = document.querySelector(`div#game.match div[gameplay="bot"] div.healthBar div.health`).style.getPropertyValue("--healthMax")
                     document.querySelector(`div#game.match div[gameplay="bot"] div.healthBar div.health`).style.setProperty("--health", matchSettings.bot.health)
                 }
@@ -434,7 +437,7 @@ function analyze() {
                 matchSettings.bot.points += 10
             } else {
                 for (let i = characters_json[matchSettings.bot.name].battle.length-1; i > 0; i--) {
-                    console.log(matchSettings.bot.points, matchSettings.bot.points >= characters_json[matchSettings.bot.name].battle[i].points)
+                    // console.log(matchSettings.bot.points, matchSettings.bot.points >= characters_json[matchSettings.bot.name].battle[i].points)
                     if (matchSettings.bot.points >= characters_json[matchSettings.bot.name].battle[i].points) {
                         dmg("player", matchSettings.bot.atk[i])
                         matchSettings.bot.points -= characters_json[matchSettings.bot.name].battle[i].points
@@ -461,7 +464,7 @@ function analyze() {
                             <div class="emoji">👤</div>
                             <div class="info">+${xp}xp</div>
                         </div>
-                        ${ticketChange = 1 ? `<div class="card">
+                        ${ticketChange == 1 ? `<div class="card">
                             <div class="emoji">🎫</div>
                             <div class="info">1</div>
                         </div>` : ""}
@@ -470,7 +473,7 @@ function analyze() {
 
                 data.coins += Math.round(matchSettings.player.hp / Math.pow(10, data.characters[matchSettings.player.name].lvl))
                 data.xp.have += xp
-                data.tokens += ticketChange = 1
+                data.tokens += ticketChange == 1
 
                 matchSettings = {
                     player: {
@@ -539,6 +542,6 @@ function analyze() {
                 })
             }
             else document.querySelector(`div#game.match div[gameplay="player"] div.btns`).style.display = "flex"
-        }, 1500)
-    }, 1500)
+        }, 1000)
+    }, 1000)
 }

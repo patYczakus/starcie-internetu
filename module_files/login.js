@@ -4,7 +4,7 @@ import { getAuth, signInWithPopup, signOut, GoogleAuthProvider } from "https://w
 export var auth = getAuth(app)
 
 export function createForm() {
-    document.body.innerHTML = `<div execute="loginForm"><button class="loginForm">Zaloguj się przez Google</button>BETA 0.1</div>`
+    document.body.innerHTML = `<div execute="loginForm"><button class="loginForm">Zaloguj się przez Google</button>BETA 0.1.1</div>`
 
     document.querySelector("div[execute=\"loginForm\"] button.loginForm").addEventListener("click", loading)
 }
