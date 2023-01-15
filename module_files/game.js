@@ -149,7 +149,7 @@ function createHome() {
     <button id="log-out" style="width:100%;">Wyloguj</button><br /><br />
     ID: <span><button id="uid">Odkryj</button></span><br />
     Wyświetlaj tylko odblokowane postacie <button id="setting1">${data.settings.seeOnlyUnlocked ? "✅" : "❌"}</button><br />
-    Zresetuj czcionkę na podstawową <button id="setting2">${data.settings.seeOnlyUnlocked ? "✅" : "❌"}</button>`
+    Zresetuj czcionkę na podstawową <button id="setting2">${data.settings.resetFont ? "✅" : "❌"}</button>`
 
     document.querySelector("#info #chest").addEventListener("click", open_chest)
     document.querySelector("#info #match").addEventListener("click", startMatch)
