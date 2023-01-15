@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo+Play&display=swap');
 
-:not(img) {
-    font-family: 'Cairo Play', cursive;
-}
-
 @keyframes loading {
     from {
         transform: rotate(0deg);
@@ -38,6 +34,14 @@ html {
 
 body {
     margin: 0;
+}
+
+body, body :not(img) {
+    font-family: 'Cairo Play', cursive;
+}
+
+body.resetFont, body.resetFont :not(img) {
+    font-family: sans-serif;
 }
 
 div[execute="loginForm"] {

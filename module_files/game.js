@@ -2,6 +2,7 @@ import { app } from "./database.js"
 import { getDatabase, ref, child, get, onValue, set } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js"
 import { logOut } from "./login.js"
 import { chest, classes } from "./lists.js"
+import { checkSettings } from "./checkSettings.js"
 
 var data = {
     version: 1,
@@ -16,7 +17,8 @@ var data = {
         habby: { lvl: 1 },
     },
     settings: {
-        seeOnlyUnlocked: false
+        seeOnlyUnlocked: false,
+        resetFont: false,
     }
 }
 var texts = {}
@@ -52,6 +54,7 @@ export function start(uid) {
 
     function second_task() {
         get(child(ref(database), `starcie-internetu/characters`)).then((snpsht) => {
+            if (data.settings.resetFont) document.body.classList.add("resetFont")
             characters_json = snpsht.val()
             characters_list_names = Object.keys(characters_json)
 
@@ -65,6 +68,8 @@ export function start(uid) {
             index()
 
             onValue(ref(database, `starcie-internetu/data/${uid}`), (snpsht) => {
+                if (data.settings.resetFont && !document.body.classList.contains("resetFont")) document.body.classList.add("resetFont")
+                if (!data.settings.resetFont && document.body.classList.contains("resetFont")) document.body.classList.remove("resetFont")
                 data = snpsht.val()
                 if (data.xp.have >= data.xp.to_next_lvl) {
                     data.xp.have -= data.xp.to_next_lvl
@@ -89,7 +94,7 @@ export function start(uid) {
     get(child(ref(database), `starcie-internetu/data/${uid}`)).then((snapshot) => {
         if (snapshot.exists()) {
             data = snapshot.val()
-            second_task()
+            set(ref(getDatabase(app), `starcie-internetu/data/${uid}/settings`), checkSettings(data.settings).json).then(second_task)
         } else {
             set(ref(database, `starcie-internetu/data/${uid}`), data).then(() => { second_task() })
         }
@@ -143,7 +148,8 @@ function createHome() {
     <button id="save" style="width:100%;">Odśwież bazę danych</button><br />
     <button id="log-out" style="width:100%;">Wyloguj</button><br /><br />
     ID: <span><button id="uid">Odkryj</button></span><br />
-    Wyświetlaj tylko odblokowane postacie <button id="setting1">${data.settings.seeOnlyUnlocked ? "✅" : "❌"}</button>`
+    Wyświetlaj tylko odblokowane postacie <button id="setting1">${data.settings.seeOnlyUnlocked ? "✅" : "❌"}</button><br />
+    Zresetuj czcionkę na podstawową <button id="setting2">${data.settings.seeOnlyUnlocked ? "✅" : "❌"}</button>`
 
     document.querySelector("#info #chest").addEventListener("click", open_chest)
     document.querySelector("#info #match").addEventListener("click", startMatch)
@@ -160,6 +166,12 @@ function createHome() {
         if (data.settings.seeOnlyUnlocked) data.settings.seeOnlyUnlocked = false
         else data.settings.seeOnlyUnlocked = true
         document.querySelector("#info #setting1").innerText = data.settings.seeOnlyUnlocked ? "✅" : "❌"
+        save(false)
+    })
+    document.querySelector("#info #setting2").addEventListener("click", () => {
+        if (data.settings.resetFont) data.settings.resetFont = false
+        else data.settings.resetFont = true
+        document.querySelector("#info #setting2").innerText = data.settings.resetFont ? "✅" : "❌"
         save(false)
     })
     document.querySelector("div#info").classList.add("active")
