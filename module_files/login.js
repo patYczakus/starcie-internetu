@@ -16,7 +16,7 @@ function loading() {
             console.error(error)
             document.body.innerHTML = `<div execute="loginForm"><button class="loginForm">Zaloguj się przez Google</button></div>`
             document.querySelector("div[execute=\"loginForm\"] button.loginForm").addEventListener("click", loading)
-        }
+        })
     }, 500)
 }
 
