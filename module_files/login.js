@@ -11,11 +11,13 @@ export function createForm() {
 
 function loading() {
     document.body.innerHTML = `<div execute="loginForm"><div class="loading big"></div></div>`
-    signInWithPopup(auth, new GoogleAuthProvider()).catch((error) => {
-        console.error(error)
-        document.body.innerHTML = `<div execute="loginForm"><button class="loginForm">Zaloguj się przez Google</button></div>`
-        document.querySelector("div[execute=\"loginForm\"] button.loginForm").addEventListener("click", loading)
-    })
+    setTimeout(() => {
+        signInWithPopup(auth, new GoogleAuthProvider()).catch((error) => {
+            console.error(error)
+            document.body.innerHTML = `<div execute="loginForm"><button class="loginForm">Zaloguj się przez Google</button></div>`
+            document.querySelector("div[execute=\"loginForm\"] button.loginForm").addEventListener("click", loading)
+        }
+    }, 500)
 }
 
 export function logOut() {
