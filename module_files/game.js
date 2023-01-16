@@ -3,6 +3,7 @@ import { getDatabase, ref, child, get, onValue, set } from "https://www.gstatic.
 import { logOut } from "./login.js"
 import { chest, classes } from "./lists.js"
 import { checkSettings } from "./checkSettings.js"
+import { charaList } from "./characters.js"
 
 var data = {
     version: 1,
@@ -39,10 +40,9 @@ var matchSettings = {
         atk: [],
     }
 }
-var characters_json = {}
+var characters_json = charaList
 var characters_list_names = []
 var uidd
-var started = false
 var audios = {
     counting: new Audio("https://patyczakus.github.io/starcie-internetu/audios/counting.mp3"),
     start: new Audio("https://patyczakus.github.io/starcie-internetu/audios/start.mp3"),
@@ -53,41 +53,37 @@ export function start(uid) {
     uidd = uid
 
     function second_task() {
-        get(child(ref(database), `starcie-internetu/characters`)).then((snpsht) => {
-            if (data.settings.resetFont) document.body.classList.add("resetFont")
-            characters_json = snpsht.val()
-            characters_list_names = Object.keys(characters_json)
+        if (data.settings.resetFont) document.body.classList.add("resetFont")
+        characters_list_names = Object.keys(characters_json)
 
-            document.body.innerHTML = `<div id="popup_info"></div><div id="game" class="bar">🪙${data.coins}<button style="opacity: 0; width: 20px"></button>LVL ${data.lvl} (${Math.round((data.xp.have / data.xp.to_next_lvl) * 10000) / 100}%) <button id="home" style="background:gray">🏠</button></div><div id="game" class="home"></div><div id="info"><div class="t"></div><div class="o"></div></div><div id="game" class="match"></div>`
-            document.querySelector("div#info div.t").addEventListener("click", () => {
-                document.querySelector("div#info").classList.remove("active")
-            })
+        document.body.innerHTML = `<div id="popup_info"></div><div id="game" class="bar">🪙${data.coins}<button style="opacity: 0; width: 20px"></button>LVL ${data.lvl} (${Math.round((data.xp.have / data.xp.to_next_lvl) * 10000) / 100}%) <button id="home" style="background:gray">🏠</button></div><div id="game" class="home"></div><div id="info"><div class="t"></div><div class="o"></div></div><div id="game" class="match"></div>`
+        document.querySelector("div#info div.t").addEventListener("click", () => {
+            document.querySelector("div#info").classList.remove("active")
+        })
+        document.querySelector("div#game.bar #home").addEventListener("click", () => {
+            createHome()
+        })
+        index()
+
+        onValue(ref(database, `starcie-internetu/data/${uid}`), (snpsht) => {
+            if (data.settings.resetFont && !document.body.classList.contains("resetFont")) document.body.classList.add("resetFont")
+            if (!data.settings.resetFont && document.body.classList.contains("resetFont")) document.body.classList.remove("resetFont")
+            data = snpsht.val()
+            if (data.xp.have >= data.xp.to_next_lvl) {
+                data.xp.have -= data.xp.to_next_lvl
+                data.xp.to_next_lvl = data.xp.to_next_lvl * 2
+                data.lvl++
+
+                const alert = new miniAlert("Wbito kolejny poziom twojego konta!")
+                alert.show(4000)
+                return set(ref(database, `starcie-internetu/data/${uid}`), data)
+            }
+
+            document.querySelector("#game.bar").innerHTML = `🪙${data.coins}<button style="opacity: 0; width: 20px"></button>LVL ${data.lvl} (${Math.round((data.xp.have / data.xp.to_next_lvl) * 10000) / 100}%) <button id="home" style="background:gray">🏠</button>`
             document.querySelector("div#game.bar #home").addEventListener("click", () => {
                 createHome()
             })
             index()
-
-            onValue(ref(database, `starcie-internetu/data/${uid}`), (snpsht) => {
-                if (data.settings.resetFont && !document.body.classList.contains("resetFont")) document.body.classList.add("resetFont")
-                if (!data.settings.resetFont && document.body.classList.contains("resetFont")) document.body.classList.remove("resetFont")
-                data = snpsht.val()
-                if (data.xp.have >= data.xp.to_next_lvl) {
-                    data.xp.have -= data.xp.to_next_lvl
-                    data.xp.to_next_lvl = data.xp.to_next_lvl * 2
-                    data.lvl++
-
-                    const alert = new miniAlert("Wbito kolejny poziom twojego konta!")
-                    alert.show(4000)
-                    return set(ref(database, `starcie-internetu/data/${uid}`), data)
-                }
-                if (started) return
-    
-                document.querySelector("#game.bar").innerHTML = `🪙${data.coins}<button style="opacity: 0; width: 20px"></button>LVL ${data.lvl} (${Math.round((data.xp.have / data.xp.to_next_lvl) * 10000) / 100}%) <button id="home" style="background:gray">🏠</button>`
-                document.querySelector("div#game.bar #home").addEventListener("click", () => {
-                    createHome()
-                })
-                index()
-            })
         })
     }
 
@@ -96,12 +92,12 @@ export function start(uid) {
             data = snapshot.val()
             set(ref(getDatabase(app), `starcie-internetu/data/${uid}/settings`), checkSettings(data.settings).json).then(second_task)
         } else {
-            set(ref(database, `starcie-internetu/data/${uid}`), data).then(() => { second_task() })
+            set(ref(database, `starcie-internetu/data/${uid}`), data).then(second_task)
         }
     }).catch((err) => { 
         console.error(err)
         document.body.innerHTML = `<div execute="loginForm">Wyłapano błąd! Możesz spróbować połączyć się z bazą danych jeszcze raz. <button>Połącz</button></div>`
-        document.querySelector(`div[execute="loginForm"] a`).addEventListener("click", () => { start(uid) })
+        document.querySelector(`div[execute="loginForm"] button`).addEventListener("click", () => { start(uid) })
     })
 }
 
@@ -410,7 +406,7 @@ function dmg(type = String(), atk) {
         if (type2 = "player") document.querySelector(`div#game.match div[gameplay=${type2}] div.btns span#BTPNumber`).innerText = matchSettings[type2].points
     } 
     else { 
-        matchSettings[type].health -= atk * 2.5
+        matchSettings[type].health -= atk * 4
         matchSettings[type2].points += Math.round(atk / 5)
         if (type2 = "player") document.querySelector(`div#game.match div[gameplay=${type2}] div.btns span#BTPNumber`).innerText = matchSettings[type2].points
     }
@@ -419,6 +415,97 @@ function dmg(type = String(), atk) {
 
 function analyze() {
     document.querySelector(`div#game.match div[gameplay="player"] div.btns`).style.display = "none"
+    if (matchSettings.player.health <= 0) return setTimeout(() => {
+        var xp = Math.round(Math.random() * 16)
+        document.querySelector("div#game.match").innerHTML = `<div id="runCenter">
+            <div id="theBigText" style="background: rgba(252, 38, 0, 0.541)">PRZEGRANA!</div>
+            <div id="presents">
+                <div class="card">
+                    <div class="emoji">👤</div>
+                    <div class="info">+${xp}xp</div>
+                </div>
+            </div>
+        </div>`
+
+        data.xp.have += xp
+
+        matchSettings = {
+            player: {
+                points: 0,
+                name: "",
+                critChance: 100,
+                health: 0,
+                atk: [],
+            },
+            bot: {
+                points: 0,
+                lvl: 0,
+                name: "",
+                critChance: 100,
+                health: 0,
+                atk: [],
+            }
+        }
+
+        save(false).then(() => {
+            document.querySelector("div#game.match div#runCenter").innerHTML += "<button>Wyjdź</button>"
+            document.querySelector("div#game.match div#runCenter button").addEventListener("click", () => {
+                document.querySelector("div#game.match").style.display = "none"
+                document.querySelector("div#game.match").innerHTML = ""
+            })
+        })
+    }, 1000)
+    if (matchSettings.bot.health <= 0) return setTimeout(() => {
+        var ticketChange = Math.round(Math.random() * 9)
+        var xp = Math.round(Math.random() * Math.pow(classes.indexOf(characters_json[matchSettings.player.name].class)+1, data.lvl)) + classes.indexOf(characters_json[matchSettings.player.name].class) *  data.lvl
+        document.querySelector("div#game.match").innerHTML = `<div id="runCenter">
+            <div id="theBigText">WYGRANA!</div>
+            <div id="presents">
+                <div class="card">
+                    <div class="emoji">🪙</div>
+                    <div class="info">${Math.round(matchSettings.player.hp / Math.pow(10, data.characters[matchSettings.player.name].lvl))}</div>
+                </div>
+                <div class="card">
+                    <div class="emoji">👤</div>
+                    <div class="info">+${xp}xp</div>
+                </div>
+                ${ticketChange == 1 ? `<div class="card">
+                    <div class="emoji">🎫</div>
+                    <div class="info">1</div>
+                </div>` : ""}
+            </div>
+        </div>`
+
+        data.coins += Math.round(matchSettings.player.health / Math.pow(10, data.characters[matchSettings.player.name].lvl))
+        data.xp.have += xp
+        data.tokens += ticketChange == 1
+
+        matchSettings = {
+            player: {
+                points: 0,
+                name: "",
+                critChance: 100,
+                health: 0,
+                atk: [],
+            },
+            bot: {
+                points: 0,
+                lvl: 0,
+                name: "",
+                critChance: 100,
+                health: 0,
+                atk: [],
+            }
+        }
+
+        save(false).then(() => {
+            document.querySelector("div#game.match div#runCenter").innerHTML += "<button>Wyjdź</button>"
+            document.querySelector("div#game.match div#runCenter button").addEventListener("click", () => {
+                document.querySelector("div#game.match").style.display = "none"
+                document.querySelector("div#game.match").innerHTML = ""
+            })
+        })
+    }, 1000)
     setTimeout(() => {
         let canskip
         do {
@@ -450,98 +537,7 @@ function analyze() {
         } while (!canskip)
         // console.log(matchSettings.bot.points, characters_json[matchSettings.bot.name].battle)
         setTimeout(() => {
-            if (matchSettings.bot.hp <= 0) {
-                var ticketChange = Math.round(Math.random() * 9)
-                var xp = Math.round(Math.random() * Math.pow(classes.indexOf(characters_json[matchSettings.player.name].class)+1, data.characters[matchSettings.player.name].lvl)) + Math.pow(classes.indexOf(characters_json[matchSettings.player.name].class)*10, data.characters[matchSettings.player.name].lvl)
-                document.querySelector("div#game.match").innerHTML = `<div id="runCenter">
-                    <div id="theBigText">WYGRANA!</div>
-                    <div id="presents">
-                        <div class="card">
-                            <div class="emoji">🪙</div>
-                            <div class="info">${Math.round(matchSettings.player.hp / Math.pow(10, data.characters[matchSettings.player.name].lvl))}</div>
-                        </div>
-                        <div class="card">
-                            <div class="emoji">👤</div>
-                            <div class="info">+${xp}xp</div>
-                        </div>
-                        ${ticketChange == 1 ? `<div class="card">
-                            <div class="emoji">🎫</div>
-                            <div class="info">1</div>
-                        </div>` : ""}
-                    </div>
-                </div>`
-
-                data.coins += Math.round(matchSettings.player.hp / Math.pow(10, data.characters[matchSettings.player.name].lvl))
-                data.xp.have += xp
-                data.tokens += ticketChange == 1
-
-                matchSettings = {
-                    player: {
-                        points: 0,
-                        name: "",
-                        critChance: 100,
-                        health: 0,
-                        atk: [],
-                    },
-                    bot: {
-                        points: 0,
-                        lvl: 0,
-                        name: "",
-                        critChance: 100,
-                        health: 0,
-                        atk: [],
-                    }
-                }
-
-                save(false).then(() => {
-                    document.querySelector("div#game.match div#runCenter").innerHTML = "<button>Wyjdź</button>"
-                    document.querySelector("div#game.match div#runCenter button").addEventListener("click", () => {
-                        document.querySelector("div#game.match").style.display = "none"
-                        document.querySelector("div#game.match").innerHTML = ""
-                    })
-                })
-            }
-            else if (matchSettings.player.hp <= 0) {
-                var xp = Math.round(Math.random() * 16)
-                document.querySelector("div#game.match").innerHTML = `<div id="runCenter">
-                    <div id="theBigText" style="background: rgba(252, 38, 0, 0.541)">PRZEGRANA!</div>
-                    <div id="presents">
-                        <div class="card">
-                            <div class="emoji">👤</div>
-                            <div class="info">+${xp}xp</div>
-                        </div>
-                    </div>
-                </div>`
-
-                data.xp.have += xp
-
-                matchSettings = {
-                    player: {
-                        points: 0,
-                        name: "",
-                        critChance: 100,
-                        health: 0,
-                        atk: [],
-                    },
-                    bot: {
-                        points: 0,
-                        lvl: 0,
-                        name: "",
-                        critChance: 100,
-                        health: 0,
-                        atk: [],
-                    }
-                }
-
-                save(false).then(() => {
-                    document.querySelector("div#game.match div#runCenter").innerHTML += "<button>Wyjdź</button>"
-                    document.querySelector("div#game.match div#runCenter button").addEventListener("click", () => {
-                        document.querySelector("div#game.match").style.display = "none"
-                        document.querySelector("div#game.match").innerHTML = ""
-                    })
-                })
-            }
-            else document.querySelector(`div#game.match div[gameplay="player"] div.btns`).style.display = "flex"
+            document.querySelector(`div#game.match div[gameplay="player"] div.btns`).style.display = "flex"
         }, 1000)
     }, 1000)
 }
