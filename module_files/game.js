@@ -44,8 +44,8 @@ var characters_list_names = []
 var uidd
 var started = false
 var audios = {
-    counting: new Audio("../audios/counting.mp3"),
-    start: new Audio("../audios/start.mp3"),
+    counting: new Audio("https://patyczakus.github.io/starcie-internetu/audios/counting.mp3"),
+    start: new Audio("https://patyczakus.github.io/starcie-internetu/audios/start.mp3"),
 }
 
 const database = getDatabase(app)
