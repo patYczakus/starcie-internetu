@@ -466,7 +466,7 @@ function analyze() {
                 ${ticketChange == 1 ? `<div class="card">
                     <div class="emoji">🎫</div>
                     <div class="info">1</div>
-                </div>` : ""}l
+                </div>` : ""}
             </div>
         </div>`
 
