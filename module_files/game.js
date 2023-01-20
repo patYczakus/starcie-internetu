@@ -451,7 +451,7 @@ function analyze() {
     }, 1000)
     if (matchSettings.bot.health <= 0) return setTimeout(() => {
         var ticketChange = Math.round(Math.random() * 9)
-        var xp = Math.round(Math.random() * Math.pow(classes.indexOf(characters_json[matchSettings.player.name].class)+1, data.lvl)) + classes.indexOf(characters_json[matchSettings.player.name].class) *  data.lvl
+        var xp = 32 + 5 * Math.round(Math.random() * Math.pow(classes.indexOf(characters_json[matchSettings.player.name].class)+1, data.lvl)) + classes.indexOf(characters_json[matchSettings.player.name].class) *  data.lvl
         document.querySelector("div#game.match").innerHTML = `<div id="runCenter">
             <div id="theBigText">WYGRANA!</div>
             <div id="presents">
@@ -466,7 +466,7 @@ function analyze() {
                 ${ticketChange == 1 ? `<div class="card">
                     <div class="emoji">🎫</div>
                     <div class="info">1</div>
-                </div>` : ""}
+                </div>` : ""}l
             </div>
         </div>`
 
