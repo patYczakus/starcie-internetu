@@ -4,18 +4,24 @@ import { getAuth, signInWithPopup, signOut, GoogleAuthProvider } from "https://w
 export var auth = getAuth(app)
 
 export function createForm() {
-    document.body.innerHTML = `<div execute="loginForm"><button class="loginForm">Zaloguj się przez Google</button>BETA 0.2</div>`
+    document.body.innerHTML = `<div id="start">
+        <div id="header">
+            <span id="title" style="font-size: 32px; margin-right: 25px;"></span>
+            <span execute="loginForm"><button class="loginForm">Zaloguj się przez Google</button></span>
+        </div>
+        <iframe src="../ogloszenia.html"></iframe>
+    </div>`
 
-    document.querySelector("div[execute=\"loginForm\"] button.loginForm").addEventListener("click", loading)
+    document.querySelector("div#start div#header span[execute=\"loginForm\"] button.loginForm").addEventListener("click", loading)
 }
 
 function loading() {
-    document.body.innerHTML = `<div execute="loginForm"><div class="loading big"></div></div>`
+    document.querySelector("div#start div#header span[execute=\"loginForm\"]").innerHTML = `<div class="loading small"></div>`
     setTimeout(() => {
         signInWithPopup(auth, new GoogleAuthProvider()).catch((error) => {
             console.error(error)
-            document.body.innerHTML = `<div execute="loginForm">Logowanie się nie powiodło, spróbuj ponownie...<button class="loginForm">Zaloguj się przez Google</button></div>`
-            document.querySelector("div[execute=\"loginForm\"] button.loginForm").addEventListener("click", loading)
+            document.querySelector("div#start div#header span[execute=\"loginForm\"]").innerHTML = `<button class="loginForm">Zaloguj się przez Google</button>`
+            document.querySelector("div#start div#header span[execute=\"loginForm\"] button.loginForm").addEventListener("click", loading)
         })
     }, 500)
 }

@@ -44,20 +44,25 @@ body.resetFont, body.resetFont :not(img) {
     font-family: sans-serif;
 }
 
-div[execute="loginForm"] {
-    display: flex;
-    position: fixed;
-    text-align: center;
-    width: 100vw;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+div#start { 
+    padding: 10px;
+    background: linear-gradient(white 60px, transparent 80px)
+}
+div#start div#header { height: 80px; }
+div#start div#header span#title::before { 
+    content: "🌐 Starcie Internetu";
+}
+div#start iframe { 
+    border: none;
+    width: 100%;
+    height: calc(100vh - 120px);
 }
 
 button {
     background-color: antiquewhite;
     padding: 5px;
+    min-height: 15px;
+    margin-bottom: 3px;
     border: none;
     border-radius: 0.5rem;
 }
@@ -221,7 +226,7 @@ div#game.match {
     z-index: 111;
     display: none;
     background: gainsboro;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 div#game.match div.center {
@@ -233,6 +238,11 @@ div#game.match div.center {
     justify-content: center;
     align-content: center;
     height: 100vh;
+}
+
+div#game.match div.center:not(.half) {
+    animation-name: show;
+    animation-duration: 1s;
 }
 
 div#game.match div.half {
@@ -350,6 +360,11 @@ div#game.match div#gameplay div.healthBar div.health {
         background: linear-gradient(90deg, crimson, limegreen 22vw);
     }
 }
+@media (max-width: 630px) {
+    div#start div#header span#title::before { 
+        content: "🌐";
+    }
+}
 
 /*-------------------------------------------------------------------------
 ---------------------------------------------------------------------------
@@ -398,6 +413,8 @@ div#theBigText {
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
+    line-height: 8vw;
+    text-align: center;
 }
 
 div#presents {

@@ -8,7 +8,7 @@ const create = () => {
         if (!user) { createForm() }
         else { 
             start(user.uid)
-            document.body.innerHTML = `<div execute="loginForm"><div class="loading"></div></div>`
+            document.body.innerHTML = `<div class="loading" style="margin: 50px"></div>`
         }
     })
 }
