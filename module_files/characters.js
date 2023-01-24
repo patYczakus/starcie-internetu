@@ -1,13 +1,13 @@
 export const charaList = {
     "habby": {
         "battle": [
-            { "atk": 17, "name": "Piła", "points": 0 },
-            { "atk": 65, "name": "ShOcK", "points": 30 },
-            { "atk": 140, "name": "Ognista kula", "points": 100 }
+            { "atk": 20, "name": "Piła", "points": 0 },
+            { "atk": 75, "name": "ShOcK", "points": 30 },
+            { "atk": 160, "name": "Ognista kula", "points": 100 }
         ],
         "class": "common",
         "dimension": "Starcie internetu",
-        "hp": 1000,
+        "hp": 1010,
         "image": "https://cdn.discordapp.com/attachments/1047919900875825293/1047920069646233671/sketch-1669913931505.png",
         "level_up": {
             "battle": [ 2, 2, 3 ],
@@ -44,16 +44,8 @@ export const charaList = {
     },
     "rycerzOceanu": {
         "battle": [
-            {
-                "atk": 30,  
-                "name": "Zamach mieczem",
-                "points": 0
-            },
-            {
-                "atk": 85,
-                "name": "Uderzenie falowe",
-                "points": 70
-            }
+            { "atk": 30,   "name": "Zamach mieczem", "points": 0 },
+            { "atk": 85, "name": "Uderzenie falowe", "points": 70 }
         ],
         "class": "uncommon",
         "dimension": "Starcie internetu",
@@ -93,14 +85,14 @@ export const charaList = {
     },
     "trajom": {
         "battle": [
-            { "atk": 3, "name": "Ręka", "points": 0 },
-            { "atk": 57, "name": "Kula energetyczna", "points": 45 },
-            { "atk": 70, "name": "Czarna wyrwa", "points": 100 },
-            { "atk": 250, "name": "Type: kill", "points": 300 }
+            { "atk": 25, "name": "Ręka", "points": 0 },
+            { "atk": 70, "name": "Kula energetyczna", "points": 45 },
+            { "atk": 340, "name": "Czarna wyrwa", "points": 100 },
+            { "atk": 800, "name": "Type: kill", "points": 300 }
         ],
         "class": "legendary",
         "dimension": "Starcie internetu",
-        "hp": 200,
+        "hp": 800,
         "image": "https://cdn.discordapp.com/attachments/1048341996533731359/1050498063338328114/sketch-1670528511856.png",
         "level_up": {
             "battle": [ 4, 3, 4, 4 ],
@@ -125,12 +117,53 @@ export const charaList = {
             }
         }
     },
+    "kira": {
+        "battle": [
+            { "atk": 18, "name": "Uderzenie", "points": 0 },
+            { "atk": 60, "name": "Rzut świeczką", "points": 35 },
+            { "atk": 150, "name": "Demoniczny atak", "points": 90 }
+        ],
+        "dimension": "Starcie internetu",
+        "hp": 1000,
+        "class": "common",
+        "max_lvl": 22,
+        "types": {
+            "have": [
+                "Ogień",
+                "Trucizna"
+            ],
+            "strong": {
+                "def": 1000,
+                "ind": [
+                    "Duchoznactwo"
+                ]
+            },
+            "weak": {
+                "def": 1000,
+                "ind": [
+                    "Woda",
+                    "Galaktyka",
+                    "Ziemia",
+                    "Powietrze"
+                ]
+            }
+        },
+        "image": "https://cdn.discordapp.com/attachments/1047919900875825293/1066320173931442186/aatbio_com_image_export_Jan_21_2023_2.png",
+        "level_up": {
+            "hp": 2,
+            "battle": [2, 2, 2],
+            "types": {
+                "strong": 30,
+                "weak": 30
+            }
+        }
+    },
     "sylwestrowyOctane": {
         "battle": [
-            { "atk": 10, "name": "Taran", "points": 10 },
-            { "atk": 60, "name": "Taran + nitro", "points": 70 }, 
-            { "atk": 130, "name": "Dash", "points": 120 },
-            { "atk": 200, "name": "Naddźwiękowy dash", "points": 170 }
+            { "atk": 10, "name": "Taran", "points": 4 },
+            { "atk": 60, "name": "Taran + nitro", "points": 20 }, 
+            { "atk": 130, "name": "Dash", "points": 72 },
+            { "atk": 200, "name": "Naddźwiękowy dash", "points": 120 }
         ],
         "class": "epic",
         "dimension": "Rocket League",
@@ -238,7 +271,7 @@ export const charaList = {
             { "atk": 700, "name": "Armagedon", "points": 80 }
         ],
         "dimension": "Stick'y-land",
-        "hp": 2500,
+        "hp": 2000,
         "class": "dark_shop",
         "max_lvl": 10,
         "types": {
@@ -279,7 +312,7 @@ export const charaList = {
         ],
         "class": "dark_shop",
         "dimension": "Stick'y-land",
-        "hp": 1200,
+        "hp": 1500,
         "image": "https://cdn.discordapp.com/attachments/1047919900875825293/1057697620467920906/Tsc__1.png",
         "level_up": {
             "battle": [ 3, 3, 3, 4, 4 ],
@@ -296,7 +329,7 @@ export const charaList = {
                 "Ziemia"
             ],
             "strong": {
-                "def": 3000,
+                "def": 4000,
                 "ind": [
                     "Powietrze",
                     "Duchoznactwo"
@@ -311,4 +344,108 @@ export const charaList = {
             }
         }
     },
+    "havier": {
+        "battle": [
+            { "atk": 45, "name": "Strzał prochem", "points": 2 },
+            { "atk": 100, "name": "Żar ognisty", "points": 25 }
+        ],
+        "dimension": "Stick'y-land",
+        "hp": 700,
+        "class": "epic",
+        "max_lvl": 16,
+        "types": {
+            "have": [
+                "Ogień",
+                "Ziemia"
+            ],
+            "strong": {
+                "def": 2000,
+                "ind": [
+                    "Metal",
+                    "Duchoznactwo",
+                    "Trucizna"
+                ]
+            },
+            "weak": {
+                "def": 4000,
+                "ind": [
+                    "Informayka",
+                    "Galaktyka"
+                ]
+            }
+        },
+        "image": "https://cdn.discordapp.com/attachments/1047919900875825293/1067367738718290010/sketch-1674550680441.png",
+        "level_up": {
+            "hp": 3,
+            "battle": [2, 3],
+            "types": {
+                "strong": 100,
+                "weak": 400
+            }
+        }
+    },
+    "paty": {
+        "battle": [
+            { "atk": 35, "name": "Pięść", "points": 0 },
+            { "atk": 75, "name": "Atak obrotowy", "points": 10 },
+            { "atk": 120, "name": "Strzał piorunem", "points": 30 },
+            { "atk": 300, "name": "Piorunowy dash", "points": 75 }
+        ],
+        "dimension": "Stick'y-land",
+        "hp": 1000,
+        "class": "import",
+        "max_lvl": 12,
+        "types": {
+            "have": [
+                "Elektrycznosć",
+                "Chi",
+                "Powietrze"
+            ]
+        },
+        "image": "https://cdn.discordapp.com/attachments/1047919900875825293/1067367738936401920/sketch-1674550680025.png",
+        "level_up": {
+            "hp": 5,
+            "battle": [2, 2, 3, 4],
+            "types": {}
+        }
+    },
+    "pikachu": {
+        "battle": [
+            { "atk": 50, "name": "Szybki atak", "points": 5 },
+            { "atk": 100, "name": "Stalowy ogon", "points": 25 },
+            { "atk": 180, "name": "Piorun", "points": 70 }
+        ],
+        "dimension": "Pokémon",
+        "hp": 2000,
+        "class": "legendary",
+        "max_lvl": 14,
+        "types": {
+            "have": [
+                "Elektrycznosć"
+            ],
+            "strong": {
+                "def": 3000,
+                "ind": [
+                    "Powietrze",
+                    "Metal",
+                    "Elektryczność"
+                ]
+            },
+            "weak": {
+                "def": 4000,
+                "ind": [
+                    "Ziemia"
+                ]
+            }
+        },
+        "image": "https://cdn.discordapp.com/attachments/1047919900875825293/1067390387024576522/aatbio_com_image_export_Jan_24_2023.png",
+        "level_up": {
+            "hp": 3,
+            "battle": [2, 2, 3, 4],
+            "types": {
+                "strong": 70,
+                "weak": 200
+            }
+        }
+    }
 }

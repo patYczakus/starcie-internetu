@@ -52,9 +52,13 @@ div#start div#header { height: 80px; }
 div#start div#header span#title::before { 
     content: "🌐 Starcie Internetu";
 }
-div#start iframe { 
+
+iframe.reset {
     border: none;
     width: 100%;
+    height: 500px;
+}
+div#start iframe { 
     height: calc(100vh - 120px);
 }
 
@@ -276,7 +280,7 @@ div#game.match div#gameplay[gameplay="player"] div.reset div {
     margin-left: 10px
 }
 
-div#game.match button { font-size: 15px }
+div#game.match button:not(.loginForm) { font-size: 15px; }
 div#game.match div#gameplay div.healthBar {
     width: 15vw;
     height: 12px;
@@ -288,7 +292,7 @@ div#game.match div#gameplay div.healthBar {
 div#game.match div#gameplay div.healthBar div.health {
     width: calc(var(--health) / var(--healthMax) * 100%);
     height: 12px;
-    background: linear-gradient(90deg, crimson, limegreen 15vw);
+    background: rgb(calc(220 - (var(--health) / var(--healthMax) * 170)), calc(20 + (var(--health) / var(--healthMax) * 185)), calc(60 - (var(--health) / var(--healthMax) * 10)));
     border-right: 2px solid white;
 }
 
@@ -333,11 +337,12 @@ div#game.match div#gameplay div.healthBar div.health {
     div#game.match div#gameplay[gameplay="player"] div.btns {
         width: 85%;
     }
+    div#game.match div#gameplay[gameplay="player"] div.btns button {
+        width: 100% !important;
+    }
     div#game.match div#gameplay button,
     div#game.match div#gameplay[gameplay="player"] div.reset div
-    {
-        font-size: 20px;
-    }
+    { font-size: 20px; }
 
     div#game.match div#gameplay[gameplay="player"] div.reset {
         text-align: center;
@@ -397,10 +402,6 @@ div#runCenter {
 
     animation-name: showEndMatch;
     animation-duration: 2s;
-}
-
-div#runCenter button {
-    font-size: 2vw !important;
 }
 
 div#theBigText {

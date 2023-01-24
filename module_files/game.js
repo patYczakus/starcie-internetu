@@ -46,6 +46,8 @@ var uidd
 var audios = {
     counting: new Audio("https://patyczakus.github.io/starcie-internetu/audios/counting.mp3"),
     start: new Audio("https://patyczakus.github.io/starcie-internetu/audios/start.mp3"),
+    attack: new Audio("https://patyczakus.github.io/starcie-internetu/audios/attack.wav"),
+    criticalAttack: new Audio("https://patyczakus.github.io/starcie-internetu/audios/critical.wav"),
 }
 
 const database = getDatabase(app)
@@ -73,6 +75,9 @@ export function start(uid) {
                 data.xp.have -= data.xp.to_next_lvl
                 data.xp.to_next_lvl = data.xp.to_next_lvl * 2
                 data.lvl++
+                
+                data.tokens++
+                data.coins = 500 * data.lvl-1
 
                 const alert = new miniAlert("Wbito kolejny poziom twojego konta!")
                 alert.show(4000)
@@ -145,7 +150,8 @@ function createHome() {
     <button id="log-out" style="width:100%;">Wyloguj</button><br /><br />
     ID: <span><button id="uid">Odkryj</button></span><br />
     Wyświetlaj tylko odblokowane postacie <button id="setting1">${data.settings.seeOnlyUnlocked ? "✅" : "❌"}</button><br />
-    Zresetuj czcionkę na podstawową <button id="setting2">${data.settings.resetFont ? "✅" : "❌"}</button>`
+    Zresetuj czcionkę na podstawową <button id="setting2">${data.settings.resetFont ? "✅" : "❌"}</button>
+    <iframe class="reset" src="./ogloszenia.html"></iframe>`
 
     document.querySelector("#info #chest").addEventListener("click", open_chest)
     document.querySelector("#info #match").addEventListener("click", startMatch)
@@ -257,8 +263,8 @@ function startMatch() {
         matchSettings.bot.name = characters_list_names[Math.floor(Math.random() * characters_list_names.length)]
         // console.log(matchSettings.bot.name, characters_json[matchSettings.bot.name].dimension)
     } while (characters_json[matchSettings.bot.name].dimension == characters_json[matchSettings.player.name].dimension)
-    matchSettings.bot.lvl = Math.round(Math.random() * data.characters[matchSettings.player.name].lvl / 5)
-    matchSettings.bot.lvl = data.characters[matchSettings.player.name].lvl + matchSettings.bot.lvl > characters_json[matchSettings.bot.name].max_lvl ? characters_json[matchSettings.bot.name].max_lvl : data.characters[matchSettings.player.name].lvl + matchSettings.bot.lvl
+    matchSettings.bot.lvl = Math.round(Math.random() * data.characters[matchSettings.player.name].lvl / 5) - 2
+    matchSettings.bot.lvl = data.characters[matchSettings.player.name].lvl + matchSettings.bot.lvl > characters_json[matchSettings.bot.name].max_lvl ? characters_json[matchSettings.bot.name].max_lvl : data.characters[matchSettings.player.name].lvl + matchSettings.bot.lvl < 1 ? 1 : data.characters[matchSettings.player.name].lvl + matchSettings.bot.lvl
 
     for (let i = 0; i < characters_json[matchSettings.bot.name].battle.length; i++) {
         matchSettings.bot.atk[i] = characters_json[matchSettings.bot.name].battle[i].atk * Math.pow(characters_json[matchSettings.bot.name].level_up.battle[i], matchSettings.bot.lvl-1)
@@ -274,7 +280,7 @@ function startMatch() {
         if ("weak" in characters_json[matchSettings.player.name].types) if (characters_json[matchSettings.player.name].types.weak.ind.indexOf(characters_json[matchSettings.bot.name].types.have[i]) > -1) matchSettings.player.critChance += characters_json[matchSettings.player.name].types.weak.def / 100
     }
 
-    document.querySelector("div#game.match").innerHTML = `<div id="gameplay" gameplay="player" class="center half"><div class="healthBar"><div class="health" style="--health: ${matchSettings.player.health}; --healthMax: ${matchSettings.player.health};"></div></div><img draggable="false" class="${characters_json[matchSettings.player.name].class}" width="170" height="170" src="${characters_json[matchSettings.player.name].image}" /><span class="name"></span></div><div id="gameplay" gameplay="bot" class="center half"><div class="healthBar"><div class="health" style="--health: ${matchSettings.bot.health}; --healthMax: ${matchSettings.bot.health};"></div></div><img draggable="false" class="${characters_json[matchSettings.bot.name].class}" width="170" height="170" src="${characters_json[matchSettings.bot.name].image}" /><span class="name"></span></div>`
+    document.querySelector("div#game.match").innerHTML = `<div id="gameplay" gameplay="player" class="center half"><div class="healthBar"><div class="health" style="--health: ${matchSettings.player.health}; --healthMax: ${matchSettings.player.health};"></div></div><img draggable="false" class="${characters_json[matchSettings.player.name].class}" width="170" height="170" src="${characters_json[matchSettings.player.name].image}" /><span style="font-size: 35%">LVL: ${data.characters[matchSettings.player.name].lvl}</span><span class="name"></span></div><div id="gameplay" gameplay="bot" class="center half"><div class="healthBar"><div class="health" style="--health: ${matchSettings.bot.health}; --healthMax: ${matchSettings.bot.health};"></div></div><img draggable="false" class="${characters_json[matchSettings.bot.name].class}" width="170" height="170" src="${characters_json[matchSettings.bot.name].image}" /><span style="font-size: 35%">LVL: ${matchSettings.bot.lvl}</span><span class="name"></span></div>`
     document.querySelector("div#info").classList.remove("active")
     document.querySelector("div#game.match").style.display = "block"
 
@@ -298,6 +304,9 @@ function startMatch() {
         }
     }, 2000)
     setTimeout(() => {
+        audios.counting.pause()
+        audios.start.pause()
+        audios.start.currentTime = 0
         audios.start.play()
         new miniAlert(`<div style="width: calc(100vw - 60px); text-align: center;">START!</div>`).show(5000)
         document.querySelector(`div#game.match div[gameplay="player"]`).innerHTML += `<div class="btns"></div>`
@@ -308,13 +317,13 @@ function startMatch() {
             }, 50 * i)
         }
         setTimeout(() => {
-            document.querySelector(`div#game.match div[gameplay="player"] div.btns`).innerHTML += `<button id="heal" style="width: 100%; margin: 5px">Lecz się (+${(100 + 10 * classes.indexOf(characters_json[matchSettings.player.name].class)) * data.characters[matchSettings.player.name].lvl} HP, -25 BTP)</button>`
+            document.querySelector(`div#game.match div[gameplay="player"] div.btns`).innerHTML += `<button id="heal" style="width: 100%; margin: 5px">Lecz się (+${Math.pow(2, data.characters[matchSettings.player.name].lvl) * 100} HP, -25 BTP)</button>`
         }, 50 * matchSettings.player.atk.length)
         setTimeout(() => {
             document.querySelector(`div#game.match div[gameplay="player"] div.btns`).innerHTML += `<button id="whiteFlag" style="width: 100%; margin: 5px">Poddaj się</button>`
         }, 50 * matchSettings.player.atk.length + 50)
         setTimeout(() => {
-            document.querySelector(`div#game.match div[gameplay="player"] div.btns`).innerHTML += `<div class="reset"><button id="getBTP" style="width: 100px; margin: 5px">+10 points</button><div>> masz: <span id="BTPNumber">0</span></div></div>`
+            document.querySelector(`div#game.match div[gameplay="player"] div.btns`).innerHTML += `<div class="reset"><button id="getBTP" style="width: 100px; margin: 5px">+${9 + data.lvl} points</button><div>> masz: <span id="BTPNumber">0</span></div></div>`
         }, 50 * matchSettings.player.atk.length + 100)
         setTimeout(() => {
             for (let i = 0; i < matchSettings.player.atk.length; i++) {
@@ -336,24 +345,25 @@ function startMatch() {
             document.querySelector(`div#game.match div[gameplay="player"] div.btns button#heal`).addEventListener("click", () => {
                 if (matchSettings.player.health > document.querySelector(`div#game.match div[gameplay="player"] div.healthBar div.health`).style.getPropertyValue("--healthMax") / 2) return
                 if (matchSettings.player.points < 25) return
-                matchSettings.player.health += (100 + 10 * classes.indexOf(characters_json[matchSettings.player.name].class)) * data.characters[matchSettings.player.name].lvl
+                matchSettings.player.health += Math.pow(2, data.characters[matchSettings.player.name].lvl) * 100
                 matchSettings.player.points -= 25
-                if (matchSettings.player.health > document.querySelector(`div#game.match div[gameplay="player"] div.healthBar div.health`).style.getPropertyValue("--healthMax")) document.querySelector(`div#game.match div[gameplay="player"] div.healthBar div.health`).style.getPropertyValue("--healthMax")
+                if (matchSettings.player.health > document.querySelector(`div#game.match div[gameplay="player"] div.healthBar div.health`).style.getPropertyValue("--healthMax")) matchSettings.player.hp = document.querySelector(`div#game.match div[gameplay="player"] div.healthBar div.health`).style.getPropertyValue("--healthMax")
                 document.querySelector(`div#game.match div[gameplay="player"] div.healthBar div.health`).style.setProperty("--health", matchSettings.player.health)
                 analyze()
             })
             document.querySelector(`div#game.match div[gameplay="player"] div.btns button#getBTP`).addEventListener("click", () => {
-                matchSettings.player.points += 10
+                matchSettings.player.points += 9 + data.lvl
                 document.querySelector(`div#game.match div[gameplay="player"] div.btns span#BTPNumber`).innerText = matchSettings.player.points
                 analyze()
             })
             document.querySelector(`div#game.match div[gameplay="player"] div.btns button#whiteFlag`).addEventListener("click", () => {
+                if (!confirm("Czy na pewno chcesz się poddać?")) return
                 document.querySelector(`div#game.match div[gameplay="player"] div.btns`).style.display = "none"
                 
                 setTimeout(() => {
                     document.querySelector("div#game.match").innerHTML = `<div id="runCenter">
                         <div id="theBigText" style="background: rgba(252, 38, 0, 0.541)">PRZEGRANA<br />(przez poddanie)</div>
-                        <button>Wyjdź</button>
+                        <button class="loginForm">Wyjdź</button>
                     </div>`
 
                     matchSettings = {
@@ -395,13 +405,18 @@ function startMatch() {
 function dmg(type = String(), atk) {
     var type2 = type == "player" ? "bot" : "player"
     if (Math.round(Math.random() * 1000) > matchSettings[type].critChance) {
+        audios.attack.pause()
+        audios.attack.currentTime = 0
         matchSettings[type].health -= atk
         matchSettings[type2].points += Math.round(atk / 20)
+        audios.attack.play()
         if (type2 = "player") document.querySelector(`div#game.match div[gameplay=${type2}] div.btns span#BTPNumber`).innerText = matchSettings[type2].points
-    } 
-    else { 
+    } else {
+        audios.criticalAttack.pause()
+        audios.criticalAttack.currentTime = 0
         matchSettings[type].health -= atk * 4
         matchSettings[type2].points += Math.round(atk / 5)
+        audios.criticalAttack.play()
         if (type2 = "player") document.querySelector(`div#game.match div[gameplay=${type2}] div.btns span#BTPNumber`).innerText = matchSettings[type2].points
     }
     document.querySelector(`div#game.match div[gameplay="${type}"] div.healthBar div.health`).style.setProperty("--health", matchSettings[type].health)
@@ -409,46 +424,6 @@ function dmg(type = String(), atk) {
 
 function analyze() {
     document.querySelector(`div#game.match div[gameplay="player"] div.btns`).style.display = "none"
-    if (matchSettings.player.health <= 0) return setTimeout(() => {
-        var xp = Math.round(Math.random() * 16)
-        document.querySelector("div#game.match").innerHTML = `<div id="runCenter">
-            <div id="theBigText" style="background: rgba(252, 38, 0, 0.541)">PRZEGRANA!</div>
-            <div id="presents">
-                <div class="card">
-                    <div class="emoji">👤</div>
-                    <div class="info">+${xp}xp</div>
-                </div>
-            </div>
-        </div>`
-
-        data.xp.have += xp
-
-        matchSettings = {
-            player: {
-                points: 0,
-                name: "",
-                critChance: 100,
-                health: 0,
-                atk: [],
-            },
-            bot: {
-                points: 0,
-                lvl: 0,
-                name: "",
-                critChance: 100,
-                health: 0,
-                atk: [],
-            }
-        }
-
-        save(false).then(() => {
-            document.querySelector("div#game.match div#runCenter").innerHTML += "<button>Wyjdź</button>"
-            document.querySelector("div#game.match div#runCenter button").addEventListener("click", () => {
-                document.querySelector("div#game.match").style.display = "none"
-                document.querySelector("div#game.match").innerHTML = ""
-            })
-        })
-    }, 1000)
     if (matchSettings.bot.health <= 0) return setTimeout(() => {
         var ticketChange = Math.round(Math.random() * 9)
         var xp = 32 + 5 * Math.round(Math.random() * Math.pow(classes.indexOf(characters_json[matchSettings.player.name].class)+1, data.lvl)) + classes.indexOf(characters_json[matchSettings.player.name].class) *  data.lvl
@@ -457,7 +432,7 @@ function analyze() {
             <div id="presents">
                 <div class="card">
                     <div class="emoji">🪙</div>
-                    <div class="info">${Math.round(matchSettings.player.health / Math.pow(10, data.characters[matchSettings.player.name].lvl))}</div>
+                    <div class="info">${Math.round(matchSettings.player.health / Math.pow(4, data.characters[matchSettings.player.name].lvl))}</div>
                 </div>
                 <div class="card">
                     <div class="emoji">👤</div>
@@ -470,7 +445,7 @@ function analyze() {
             </div>
         </div>`
 
-        data.coins += Math.round(matchSettings.player.health / Math.pow(10, data.characters[matchSettings.player.name].lvl))
+        data.coins += Math.round(matchSettings.player.health / Math.pow(4, data.characters[matchSettings.player.name].lvl))
         data.xp.have += xp
         data.tokens += ticketChange == 1
 
@@ -509,7 +484,7 @@ function analyze() {
                 if (matchSettings.bot.health <= document.querySelector(`div#game.match div[gameplay="bot"] div.healthBar div.health`).style.getPropertyValue("--healthMax") / 2 && matchSettings.bot.points >= 25) {
                     canskip = true
                     matchSettings.bot.points -= 25
-                    matchSettings.bot.health += (100 + 10 * classes.indexOf(characters_json[matchSettings.bot.name].class)) * matchSettings.bot.lvl
+                    matchSettings.bot.health += Math.pow(2, matchSettings.bot.lvl) * 100
                     if (matchSettings.bot.health > document.querySelector(`div#game.match div[gameplay="bot"] div.healthBar div.health`).style.getPropertyValue("--healthMax")) matchSettings.bot.health = document.querySelector(`div#game.match div[gameplay="bot"] div.healthBar div.health`).style.getPropertyValue("--healthMax")
                     document.querySelector(`div#game.match div[gameplay="bot"] div.healthBar div.health`).style.setProperty("--health", matchSettings.bot.health)
                 }
@@ -530,6 +505,47 @@ function analyze() {
             }
         } while (!canskip)
         // console.log(matchSettings.bot.points, characters_json[matchSettings.bot.name].battle)
+
+        if (matchSettings.player.health <= 0) return setTimeout(() => {
+            var xp = Math.round(Math.random() * 16)
+            document.querySelector("div#game.match").innerHTML = `<div id="runCenter">
+                <div id="theBigText" style="background: rgba(252, 38, 0, 0.541)">PRZEGRANA!</div>
+                <div id="presents">
+                    <div class="card">
+                        <div class="emoji">👤</div>
+                        <div class="info">+${xp}xp</div>
+                    </div>
+                </div>
+            </div>`
+
+            data.xp.have += xp
+
+            matchSettings = {
+                player: {
+                    points: 0,
+                    name: "",
+                    critChance: 100,
+                    health: 0,
+                    atk: [],
+                },
+                bot: {
+                    points: 0,
+                    lvl: 0,
+                    name: "",
+                    critChance: 100,
+                    health: 0,
+                    atk: [],
+                }
+            }
+
+            save(false).then(() => {
+                document.querySelector("div#game.match div#runCenter").innerHTML += "<button>Wyjdź</button>"
+                document.querySelector("div#game.match div#runCenter button").addEventListener("click", () => {
+                    document.querySelector("div#game.match").style.display = "none"
+                    document.querySelector("div#game.match").innerHTML = ""
+                })
+            })
+        }, 1000)
         setTimeout(() => {
             document.querySelector(`div#game.match div[gameplay="player"] div.btns`).style.display = "flex"
         }, 1000)
