@@ -20,7 +20,7 @@ function loading() {
     setTimeout(() => {
         signInWithPopup(auth, new GoogleAuthProvider()).catch((error) => {
             console.error(error)
-            document.querySelector("div#start div#header span[execute=\"loginForm\"]").innerHTML = `<button class="loginForm">Zaloguj się przez Google</button>`
+            document.querySelector("div#start div#header span[execute=\"loginForm\"]").innerHTML = `<button class="loginForm">Zaloguj się (Google)</button>`
             document.querySelector("div#start div#header span[execute=\"loginForm\"] button.loginForm").addEventListener("click", loading)
         })
     }, 500)

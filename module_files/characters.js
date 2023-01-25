@@ -124,7 +124,7 @@ export const charaList = {
             { "atk": 150, "name": "Demoniczny atak", "points": 90 }
         ],
         "dimension": "Starcie internetu",
-        "hp": 1000,
+        "hp": 900,
         "class": "common",
         "max_lvl": 22,
         "types": {
@@ -160,10 +160,10 @@ export const charaList = {
     },
     "sylwestrowyOctane": {
         "battle": [
-            { "atk": 10, "name": "Taran", "points": 4 },
-            { "atk": 60, "name": "Taran + nitro", "points": 20 }, 
-            { "atk": 130, "name": "Dash", "points": 72 },
-            { "atk": 200, "name": "Naddźwiękowy dash", "points": 120 }
+            { "atk": 30, "name": "Taran", "points": 4 },
+            { "atk": 80, "name": "Taran + nitro", "points": 20 }, 
+            { "atk": 150, "name": "Dash", "points": 72 },
+            { "atk": 230, "name": "Naddźwiękowy dash", "points": 120 }
         ],
         "class": "epic",
         "dimension": "Rocket League",
@@ -193,16 +193,16 @@ export const charaList = {
     },
     "diamentowyDominus": {
         "battle": [
-            { "atk": 10, "name": "Dash", "points": 5},
-            { "atk": 80, "name": "Atak z powietrza", "points": 55 },
-            { "atk": 300, "name": "Pocisk naprowadzany", "points": 200}
+            { "atk": 30, "name": "Dash", "points": 5},
+            { "atk": 100, "name": "Atak z powietrza", "points": 55 },
+            { "atk": 500, "name": "Pocisk naprowadzany", "points": 130}
         ],
         "class": "import",
         "dimension": "Rocket League",
         "hp": 1000,
         "image": "https://cdn.discordapp.com/attachments/1047919900875825293/1053693870476628089/IMG_20221217_162215.png",
         "level_up": {
-            "battle": [ 2, 2, 2 ],
+            "battle": [ 2, 2, 3 ],
             "hp": 2,
             "types": {
                 "strong": 200
@@ -264,14 +264,14 @@ export const charaList = {
     },
     "theChosenOne": {
         "battle": [
-            { "atk": 30, "name": "Silne uderzenie", "points": 0 },
-            { "atk": 85, "name": "Atak ognia i lodu", "points": 5 },
+            { "atk": 20, "name": "Silne uderzenie", "points": 0 },
+            { "atk": 75, "name": "Atak ognia i lodu", "points": 5 },
             { "atk": 130, "name": "ShOcK", "points": 12 },
             { "atk": 175, "name": "Laser", "points": 17 },
             { "atk": 700, "name": "Armagedon", "points": 80 }
         ],
         "dimension": "Stick'y-land",
-        "hp": 2000,
+        "hp": 1500,
         "class": "dark_shop",
         "max_lvl": 10,
         "types": {
@@ -304,11 +304,11 @@ export const charaList = {
     },
     "theSecondComing": {
         "battle": [
-            { "atk": 10, "name": "Pięść", "points": 0 },
-            { "atk": 30, "name": "Noga", "points": 5 },
-            { "atk": 57, "name": "Miecz z diamentów (Minecraft)", "points": 15 },
-            { "atk": 100, "name": "Creative mode", "points": 35 },
-            { "atk": 600, "name": "Absolute god mode", "points": 100 }
+            { "atk": 20, "name": "Pięść", "points": 0 },
+            { "atk": 40, "name": "Noga", "points": 5 },
+            { "atk": 67, "name": "Miecz z diamentów (Minecraft)", "points": 15 },
+            { "atk": 120, "name": "Creative mode", "points": 35 },
+            { "atk": 700, "name": "Absolute god mode", "points": 100 }
         ],
         "class": "dark_shop",
         "dimension": "Stick'y-land",
@@ -346,7 +346,7 @@ export const charaList = {
     },
     "havier": {
         "battle": [
-            { "atk": 45, "name": "Strzał prochem", "points": 2 },
+            { "atk": 45, "name": "Strzał prochem", "points": 4 },
             { "atk": 100, "name": "Żar ognisty", "points": 25 }
         ],
         "dimension": "Stick'y-land",
@@ -386,7 +386,7 @@ export const charaList = {
     },
     "paty": {
         "battle": [
-            { "atk": 35, "name": "Pięść", "points": 0 },
+            { "atk": 15, "name": "Pięść", "points": 0 },
             { "atk": 75, "name": "Atak obrotowy", "points": 10 },
             { "atk": 120, "name": "Strzał piorunem", "points": 30 },
             { "atk": 300, "name": "Piorunowy dash", "points": 75 }
@@ -411,12 +411,12 @@ export const charaList = {
     },
     "pikachu": {
         "battle": [
-            { "atk": 50, "name": "Szybki atak", "points": 5 },
-            { "atk": 100, "name": "Stalowy ogon", "points": 25 },
-            { "atk": 180, "name": "Piorun", "points": 70 }
+            { "atk": 30, "name": "Szybki atak", "points": 5 },
+            { "atk": 80, "name": "Stalowy ogon", "points": 25 },
+            { "atk": 170, "name": "Piorun", "points": 70 }
         ],
         "dimension": "Pokémon",
-        "hp": 2000,
+        "hp": 1000,
         "class": "legendary",
         "max_lvl": 14,
         "types": {

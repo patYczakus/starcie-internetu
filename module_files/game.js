@@ -285,6 +285,7 @@ function startMatch() {
     document.querySelector("div#game.match").style.display = "block"
 
     document.querySelector(`div#game.match div[gameplay="player"]`).classList.add("show")
+    audios.counting.currentTime = 0
     audios.counting.play()
     setTimeout(() => {
         audios.counting.pause()
@@ -349,6 +350,7 @@ function startMatch() {
                 matchSettings.player.points -= 25
                 if (matchSettings.player.health > document.querySelector(`div#game.match div[gameplay="player"] div.healthBar div.health`).style.getPropertyValue("--healthMax")) matchSettings.player.hp = document.querySelector(`div#game.match div[gameplay="player"] div.healthBar div.health`).style.getPropertyValue("--healthMax")
                 document.querySelector(`div#game.match div[gameplay="player"] div.healthBar div.health`).style.setProperty("--health", matchSettings.player.health)
+                document.querySelector(`div#game.match div[gameplay="player"] div.btns span#BTPNumber`).innerText = matchSettings.player.points
                 analyze()
             })
             document.querySelector(`div#game.match div[gameplay="player"] div.btns button#getBTP`).addEventListener("click", () => {
@@ -408,14 +410,14 @@ function dmg(type = String(), atk) {
         audios.attack.pause()
         audios.attack.currentTime = 0
         matchSettings[type].health -= atk
-        matchSettings[type2].points += Math.round(atk / 20)
+        matchSettings[type2].points += Math.round(atk / Math.pow(20, type == "player" ? data.characters[matchSettings.player.name].lvl : matchSettings.bot.lvl))
         audios.attack.play()
         if (type2 = "player") document.querySelector(`div#game.match div[gameplay=${type2}] div.btns span#BTPNumber`).innerText = matchSettings[type2].points
     } else {
         audios.criticalAttack.pause()
         audios.criticalAttack.currentTime = 0
         matchSettings[type].health -= atk * 4
-        matchSettings[type2].points += Math.round(atk / 5)
+        matchSettings[type2].points += Math.round(atk / Math.pow(5, type == "player" ? data.characters[matchSettings.player.name].lvl : matchSettings.bot.lvl))
         audios.criticalAttack.play()
         if (type2 = "player") document.querySelector(`div#game.match div[gameplay=${type2}] div.btns span#BTPNumber`).innerText = matchSettings[type2].points
     }
