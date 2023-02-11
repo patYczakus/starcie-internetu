@@ -6,7 +6,7 @@ Postacie objęci blokadą: `diamentowyDominus (Rocket League)`, `sylwestrowyOcta
 Typ: **gra**
 Twórca główny: **Psyonix**<br />
 Wydawca: **Epic Games, Inc.**<br />
-Objęte prawa: [EULA](https://www.psyonix.com/eula/), [_Term of use_ (Warunki korzystania z serwisu)]() i [_Privacy policy_ (Polityka Prywatności)](https://www.epicgames.com/site/en-US/privacypolicy)
+Objęte prawa: [EULA](https://www.psyonix.com/eula/), [_Term of use_ (Warunki korzystania z serwisu)](https://www.psyonix.com/tou/) i [_Privacy policy_ (Polityka Prywatności)](https://www.epicgames.com/site/en-US/privacypolicy)
 
 ### AvA, AvM
 Postacie objęci blokadą: `theChosenOne (Stick'y-land)` i `theSecondComing (Stick'y-land)`<br />
