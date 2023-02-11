@@ -9,13 +9,13 @@ Wydawca: **Epic Games, Inc.**<br />
 Objęte prawa: [EULA](https://www.psyonix.com/eula/), [_Term of use_ (Warunki korzystania z serwisu)]() i [_Privacy policy_ (Polityka Prywatności)](https://www.epicgames.com/site/en-US/privacypolicy)
 
 ### AvA, AvM
-Postacie objęci blokadą: `theChosenOne (Stick'y-land)` i `theSecondComing (Stick'y-land)`
-Typ: **animacja**
+Postacie objęci blokadą: `theChosenOne (Stick'y-land)` i `theSecondComing (Stick'y-land)`<br />
+Typ: **animacja**<br />
 Twórca główny: **Alan Becker**
 
 ### Pokémon
-Postacie objęci blokadą `pikachu (Pokémon)`
-Typ: **projekt**
-Twórca główny: **Game Freak, Inc.**
-Wydawca: **Nintendo**
+Postacie objęci blokadą `pikachu (Pokémon)`<br />
+Typ: **projekt**<br />
+Twórca główny: **Game Freak, Inc.**<br />
+Wydawca: **Nintendo**<br />
 Objęte prawa:  [_Term of use_ (Warunki korzystania z serwisu)](https://www.pokemon.com/us/terms-of-use/), [_Privacy notice_ (Polityka prywatności)](https://www.pokemon.com/us/privacy-notice/) i [Licencja](https://www.pokemon.com/us/legal/)
