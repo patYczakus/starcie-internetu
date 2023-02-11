@@ -1,5 +1,5 @@
 # Prawa autorskie wykorzystane w grze "Starcie Internetu"
-Niektóre postacie pochodzą z zasobów, gdzie są bronione prawami autorskimi. To ode mnie zależy, czy chcę, aby gra toczyła się dalej bez groźb od twórców trzecich. Oto są licencje, na które postacie są objęci ze stron trzecich
+Niektóre postacie pochodzą z zasobów, gdzie są bronione prawami autorskimi. To ode mnie zależy, czy chcę, aby gra toczyła się dalej bez groźb od twórców trzecich. Oto są licencje, na które postacie są objęci ze stron trzecich.
 
 ### Rocket League
 Postacie objęci blokadą: `diamentowyDominus (Rocket League)`, `sylwestrowyOctane (Rocket League)` i `zimowyHotshot (Rocket League)` <br />
