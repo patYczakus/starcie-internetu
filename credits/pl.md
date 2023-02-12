@@ -3,7 +3,7 @@ Niektóre postacie pochodzą z zasobów, gdzie są bronione prawami autorskimi. 
 
 ### Rocket League
 Postacie objęci blokadą: `diamentowyDominus (Rocket League)`, `sylwestrowyOctane (Rocket League)` i `zimowyHotshot (Rocket League)` <br />
-Typ: **gra**
+Typ: **gra**<br />
 Twórca główny: **Psyonix**<br />
 Wydawca: **Epic Games, Inc.**<br />
 Objęte prawa: [EULA](https://www.psyonix.com/eula/), [_Term of use_ (Warunki korzystania z serwisu)](https://www.psyonix.com/tou/) i [_Privacy policy_ (Polityka Prywatności)](https://www.epicgames.com/site/en-US/privacypolicy)
