@@ -1,4 +1,5 @@
-# Prawa autorskie wykorzystane w grze "Starcie Internetu"
+# Informacje i podziękowania w grze "Starcie Internetu"
+## Prawa Autorskie
 Niektóre postacie pochodzą z zasobów, gdzie są bronione prawami autorskimi. To ode mnie zależy, czy chcę, aby gra toczyła się dalej bez groźb od twórców trzecich. Oto są licencje, na które postacie są objęci ze stron trzecich.
 
 ### Rocket League
