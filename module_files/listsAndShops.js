@@ -98,18 +98,17 @@ export const chest = [
     "import",
     "import",
     "import",
-    "dark_shop",
+    "dark_shop"
+    /* Także:
+    ** common - 50% szans
+    ** uncommon - 20% szans
+    ** rare - 13%
+    ** epic - 8%
+    ** legedary - 5%
+    ** import - 3%
+    ** dark shop - 1%
+    */
 ]
-
-/* Także:
-** common - 50% szans
-** uncommon - 20% szans
-** rare - 13%
-** epic - 8%
-** legedary - 5%
-** import - 3%
-** dark shop - 1%
-*/
 
 export const classes = [
     "limited",

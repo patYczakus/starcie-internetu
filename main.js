@@ -14,6 +14,8 @@ const create = () => {
 }
 
 window.onload = () => {
+    if (location.host == "localhost:5500") document.title = "DEWELOPERSKA WERSJA | " + document.title
+
     window.addEventListener("online", create)
     window.addEventListener("offline", () => {
         document.body.innerHTML = `<div execute="loginForm">Stracono połączenie z internetem! Łączę ponownie...<div class="loading small"></div></div>`

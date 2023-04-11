@@ -1,8 +1,32 @@
 const articles = [
     {
+        name: "Starcie Internetu 1.0",
+        date: "wtorek, 11 kwi 2023",
+        pinned: false,
+        img: "https://cdn.discordapp.com/attachments/1094716831392092261/1095312905907486782/sketch-1681213312199.png",
+        article: [
+            `<i>Kiedyś, kiedy istniał Internet, istniała grupka przyjaciół, którzy zostali odrzuceni czy zapomnieni. Przede wszystkim potrafili walczyć.<br />
+            Pewnego dnia rdzeń zaczął się dziwnie zachowywać. Przede wszystkim utworzyło dziwną strefę waleczną i zaczęło tworzyć tzw. "czerwony kod". Powodował, że inne postacie z kultowych gier zostali niespodziewanie porywani.<br />
+            Na przykład trójka osób z drużyny z <u>Rocket League</u> grała dość ważny mecz. Drużyna składała się wtedy z Octana, Dominusa oraz Hotshota. Każdy walczył jak najlepiej. Po 4 minutach piłka zamieniła się w wyrwę próbująca porywać każdą możliwą postać. Wszyscy z obecnych na arenie próbowali przetrwać tą apokalipsę - niestety wspomniana drużyna mimo starań została porwana przez tą wyrwę. Tak zakończono mecz.<br />
+            Podobnie wyrwa porwała Pikachu oraz kilku stickmanów (tych słynnych i nieznanych) i dalej próbuje znaleźć kolejne ofiary, aby stworzyć tzw. ultra bijatykę.<br />
+            I tak powstało Starcie Internetu...</i>`,
+            `Witajcie gracze w wersji 1.0 Starcia Internetu! Ta gra polega na walce między postaciami. Prosta gra z animacjami i dźwiękami.`,
+            `W tej grze możesz znaleźć ciekawe postacie zapożyczone z gier/animacji.<br />
+            - Przykładem może być theChosenOne i theSecondComing Są to postacie z serii animacji AvA/AvM. Te postacie są obdarzone potężnymi umiejętnościami.<br />
+            -- theChosenOne pochodzi z "Animator vs. Animation III", która została stworzona przez animatora. Charakteryzuje się ona niezwykłymi umiejętnościami, które pozwoliły jej stawić czoła animatorowi i jego animacji. Posiada niezwykłą siłę, umiejętności walki i manipulacji programami komputerowymi, co czyni ją bardzo groźnym przeciwnikiem. Pomimo swojej potęgi, theChosenOne wykazuje także empatię i troskę o innych, co czyni ją godną podziwu postacią.<br />
+            -- theSecondComing to postać z kontynuacji animacji "Animator vs. Animation IV", która pojawiła się po tym, jak animator pokonał oryginalnego theChosenOne. Charakteryzuje się ona podobnymi umiejętnościami co jej poprzednik, ale jest jeszcze bardziej potężna i trudniejsza do pokonania. Posiada umiejętności takie jak tworzenie wielu kopii samej siebie, kontrolowanie innych animacji i manipulacja złożonymi programami komputerowymi. Pomimo swojej potęgi, theSecondComing wykazuje także inteligencję i strategiczne myślenie, co czyni ją jeszcze bardziej niebezpieczną dla animatora.`,
+            `Od tej wersji możesz zobaczyć gwiezdne moce. Dzięki temu każda postać posiada własną specjalną umiejętność.<br />
+            Jeżeli Ci myszką trudniej, obczaj granie Gamepadem! Dzięki temu możliwe jest zwiększenie grupy graczy.<br />
+            Przydatne informacje:<br />
+            - jeżeli widzisz pasek przewijania, ruszenie prawego joysticka w górę/dół spowoduje poruszenie paska i przewijanie<br />
+            - jeżeli masz błąd ruszania joysticka, spróbuj RT + LT + Select - wykona to akcję "miękkiego resetu". Aby stworzyć "twardy reset", użyj kombinacji RT + LT + B/koło + Select<br />`,
+            `Sam się przekonaj o nowościach! Życzę wszystkim miłego dnia/miłej nocy!`
+        ]
+    },
+    {
         name: "Aktualizacja 0.3.2 + informacja, jak naprawić błąd logowania (telefon)",
         date: "środa, 25 sty 2023",
-        pinned: true,
+        pinned: false,
         img: "default",
         article: [
             `Dzień dobry. Ktoś tu jeszcze żyje?<br />
@@ -11,10 +35,10 @@ const articles = [
             Kolejna zmiana działania pod kątem zbierania punktów (przez ataki), poprawki i zmiany postaci:<br />
             > theSecondComing zostaje ulepszony pod kątem ataków,<br />
             > theChosenOne zostaje obniżony pod kątem początkowego hp i ataku,<br />
-            > diamentowyDominus zostaje ulepszony pod kątem ataku i jego mnożnika.
-            > pikachu zostaje obniżony pod kątem ataku i początkowego hp.
-            > sylwestrowyOctane zostaje podwyższony pod kątem ataku.
-            > kira zostaje obniżona pod kątem początkowego hp.`,
+            > diamentowyDominus zostaje ulepszony pod kątem ataku i jego mnożnika.<br />
+            > pikachu zostaje obniżony pod kątem ataku i początkowego hp.<br />
+            > sylwestrowyOctane zostaje podwyższony pod kątem ataku.<br />
+            > kira zostaje obniżona pod kątem początkowego hp.<br />`,
             `<u>Poradnik</u><br />
             Jeżeli zamierzasz grać na telefonie, przeszkodą może się stać logowanie - ona tworzy tzw. efekt "tunelu", polegającym na ciągłym logowaniu się. Po to jest ten <i>nawet przypięty</i> artykuł, aby grać bez przeszkód.<br />
             Pierwsze do zrobienia jest włączenie zewnętrznej przeglądarki (za wewnętrzną może odrzucić próbę logowania).<br />
