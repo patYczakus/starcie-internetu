@@ -704,7 +704,7 @@ function analyze() {
             <div id="presents">
                 <div class="card">
                     <div class="emoji"><img width="80" height="80" draggable="false" src="https://cdn.discordapp.com/attachments/1047919900875825293/1078345031812911275/ezgif.com-gif-maker.gif" alt="🪙" style="margin-top: 12px; border-radius: 0;"></div>
-                    <div class="info">${Math.round(matchSettings.player.health / Math.pow(4, data.characters[matchSettings.player.name].lvl))}</div>
+                    <div class="info">${Math.round(matchSettings.player.health / Math.pow(4 - data.beta * 0.3, data.characters[matchSettings.player.name].lvl))}</div>
                 </div>
                 <div class="card">
                     <div class="emoji">👤</div>
@@ -717,7 +717,7 @@ function analyze() {
             </div>
         </div>`
 
-        data.coins += Math.round(matchSettings.player.health * (1 + data.beta * 0.25) / Math.pow(3.2 - 1.2 * data.beta, data.characters[matchSettings.player.name].lvl))
+        data.coins += Math.round(matchSettings.player.health / Math.pow(4 - data.beta * 0.3, data.characters[matchSettings.player.name].lvl))
         data.xp += xp
         data.tokens += ticketChange == 1
 
