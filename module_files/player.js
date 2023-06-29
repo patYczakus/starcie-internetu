@@ -8,7 +8,10 @@ var playerList = [
         src: new Audio("https://cdn.discordapp.com/attachments/1047919900875825293/1070699659007381535/Motyw_Starcia_Internetu.mp3"),
         name: "Motyw Starcia Internetu",
         author: "patYczakus",
-        licenseInfo: "własności gry"
+        licenseInfo: {
+            pl: "własności gry",
+            en: "for the purposes of the game",
+        }
     },
     {
         src: new Audio("https://cdn.discordapp.com/attachments/1047919900875825293/1070709574321053756/AfterShock.mp3"),
@@ -24,13 +27,28 @@ var playerList = [
         src: new Audio("https://cdn.discordapp.com/attachments/1047919900875825293/1071111638142427176/Jim_Yosef_-_Volcano_feat._Scarlett_NCS_Release_320_kbps.mp3"),
         name: "Volcano",
         author: "Jim Yosef oraz Scarlett",
-        licenseInfo: "licencji NCS"
+        licenseInfo: {
+            pl: "licencji NCS",
+            en: "NCS licence",
+        }
     },
     {
         src: new Audio("https://cdn.discordapp.com/attachments/1047919900875825293/1071111640948408460/NOYSE__STR_-_La_Manera_De_Vivir_NCS_Release_320_kbps.mp3"),
         name: "La Manera De Vivir",
         author: "NOYSE oraz ÆSTRØ",
-        licenseInfo: "licencji NCS"
+        licenseInfo: {
+            pl: "licencji NCS",
+            en: "NCS licence",
+        }
+    },
+    {
+        src: new Audio("https://cdn.discordapp.com/attachments/1047919900875825293/1119282617091637248/John_Dee_Litil_Elle_Vee_-_Set_It_Free_Arcade_Release.mp3"),
+        name: "Set It Free",
+        author: "John Dee, Litil oraz Elle Vee",
+        licenseInfo: {
+            pl: "licencji NCS",
+            en: "NCS licence",
+        }
     },
 ]
 
@@ -47,14 +65,31 @@ export function playSound(random = String(true)) {
             playerList[i].src.currentTime = 0
             i++
             i = i % playerList.length 
+        } else if (playerList[i].src.paused) {
+            if (document.hasFocus()) playerList[i].src.play()
         }
-        else if (playerList[i].src.paused) playerList[i].src.play()
+        if (!document.hasFocus()) playerList[i].src.pause()
         playSound(false)
     }, 100)
 }
 
-export function whatIsPlayed() {
-    return played ? `Teraz grane: <u>${playerList[i].name}</u><br />autorstwa <u>${playerList[i].author}</u>${"licenseInfo" in playerList[i] ? `<br />na podstawie ${playerList[i].licenseInfo}` : ""}` : "Nic nie jest grane teraz..."
+export function whatIsPlayed(lang) {
+    var langText = {
+        true: {
+            pl: `Teraz grane: <u>${playerList[i].name}</u>
+            <br />- autorstwa <u>${playerList[i].author}</u>
+            ${"licenseInfo" in playerList[i] ? `<br />- na podstawie ${playerList[i].licenseInfo[lang]}` : ""}`,
+            en: `Now playing: <u>${playerList[i].name}</u>
+            <br />- made by <u>${playerList[i].author}</u>
+            ${"licenseInfo" in playerList[i] ? `<br />- ${playerList[i].licenseInfo[lang]}` : ""}`
+        },
+        false: {
+            pl: "Nic nie jest grane teraz...",
+            en: "Nothing is playing right now..."
+        }
+    }
+
+    return langText[String(played)][lang]
 }
 
 export function changeVolume(vol = Number(100)) {

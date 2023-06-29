@@ -37,7 +37,7 @@ body {
 }
 
 body, body :not(img) {
-    font-family: 'Audiowide', cursive;
+    font-family: 'Audiowide', monospace;
 }
 
 body.resetFont, body.resetFont :not(img) {
@@ -120,10 +120,7 @@ div#game.home {
 }
 
 div#game.home img:not(.cnsl) {
-    transition: 
-        transform 0.4s cubic-bezier(0.49, 2.5, 0.23, 0),
-        filter 0.2s linear,
-        box-shadow 0.3s ease-in-out ;
+    transition: transform 230ms cubic-bezier(0.49, 2.5, 0.23, 0) 0ms, filter 100ms linear, box-shadow 200ms ease-in-out;
     border-top-left-radius: 2rem;
     border-bottom-right-radius: 1.3rem;
     border-top-right-radius: 0.6rem;
@@ -149,7 +146,7 @@ div#info.active {
     display: block;
 }
 div#info div.t {
-    width: calc(100vw - 375px);
+    width: calc(100vw - 475px);
     height: 100vh;
     background: rgb(0, 0, 0, 0.5);
     float: left;
@@ -163,20 +160,7 @@ div#info div.o {
     box-sizing: border-box;
     padding: 12px;
     overflow-x: auto;
-    width: 375px;
-    height: 100vh;
-    float: left;
-    z-index: 3;
-    font-size: 17px;
-}
-div#info div.o {
-    right: 0px;
-    position: fixed;
-    background: rgb(255, 255, 255);
-    box-sizing: border-box;
-    padding: 12px;
-    overflow-x: hidden;
-    width: 375px;
+    width: 575px;
     height: 100vh;
     float: left;
     z-index: 3;
@@ -193,10 +177,33 @@ div#info div.o table td {
     padding: 6px;
     border: 3px solid black;
 }
-div#info div.o div.gChecked {
-    outline: 3px solid firebrick;
+
+div#info div.o div.set {
+    transition: border-left 0.3s cubic-bezier(0.47, 3, 0, -0.02),
+        padding-left 0.3s cubic-bezier(0.47, 3, 0, -0.02);
+    border-left: 0px solid rebeccapurple;
+    padding: 0px;
 }
 
+div#info div.o div.set::after {
+    transition: border-top 0.2s 0.3s ease-out,;
+
+    content: "";
+    display: block;
+    width: 150px;
+    height: 0;
+    border-left: 0px solid transparent;
+    border-right: 75px solid transparent;
+    border-top: 20px solid rgb(123, 169, 255, 0.2);
+    margin-top: -13px; 
+    margin-left: 7px; 
+    margin-bottom: 10px;
+}
+
+div#info div.o div.set.gChecked {
+    border-left: 10px solid rebeccapurple;
+    padding-left: 5px;
+}
 img.common { background: rgb(185, 185, 185) ; }
 img.uncommon { background: rgb(66, 206, 78) ; }
 img.rare { background: rgb(123, 169, 255) ; }
@@ -215,6 +222,44 @@ div#game.home img.disabled { filter: brightness(0) saturate(0) blur(2.5px); opac
 div#game.home img.gChecked { 
     filter: blur(0) saturate(1) brightness(1); 
     box-shadow: 0px 3.5px 10px 4px rgba(0,0,0,0.41);
+}
+
+span.classNameColor {
+    --fbs: 1px;
+
+    -webkit-text-stroke: var(--fbs) black;
+    font-size: 120%;
+}
+span.classNameColor.common { 
+    color: rgb(185, 185, 185);
+}
+span.classNameColor.uncommon { 
+    color: rgb(66, 206, 78); 
+}
+span.classNameColor.rare { 
+    color: rgb(123, 169, 255); 
+}
+span.classNameColor.epic { 
+    color: rgb(168, 19, 226); 
+}
+span.classNameColor.legendary { 
+    color: rgb(219, 197, 0); 
+} 
+span.classNameColor.import {
+    background: linear-gradient(175deg, cadetblue 0, cadetblue 45%, rgb(255, 165, 61) 50%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+} 
+span.classNameColor.dark_shop {
+    background: 
+        linear-gradient(217deg, rgba(150, 135, 0, 0.8), transparent 70.71%),
+        linear-gradient(127deg, rgba(96, 0, 126, 0.8), transparent 70.71%),
+        linear-gradient(336deg, rgba(123, 218, 255, 0.8), transparent 46.47%),
+        linear-gradient(127deg, transparent, rgba(96, 0, 126, 0.6) 45.43%, transparent 70.71%); 
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 div#game.bar {
@@ -264,6 +309,16 @@ div#game.match div.center {
     height: 100vh;
 }
 
+div#game.match div#movesInfo {
+    position: fixed;
+    z-index: 122;
+    bottom: 15px;
+    left: 0;
+    text-align: center;
+    width: 100vw;
+    font-size: 110%;
+}
+
 div#game.match div.center:not(.half) {
     animation-name: show;
     animation-duration: 1s;
@@ -279,7 +334,7 @@ div#game.match div#gameplay.show {
     opacity: 1;
 
     animation-name: show;
-    animation-duration: 0.7s;
+    animation-duration: 700ms;
     animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
@@ -347,7 +402,7 @@ div#game.match div#gameplay div.healthBar div.health {
 ---------------------------------------------------------------------------
 -------------------------------------------------------------------------*/
 
-@media (max-width: 500px) {
+@media (max-width: 575px) {
     div#info div.t {
         width: 100vw;
         height: 20vh;

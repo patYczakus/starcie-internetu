@@ -1,5 +1,22 @@
 const articles = [
     {
+        name: "Powitajcie Kiranę, Admina i Gabrysię, bo oto wersja 1.1 Starcia Internetu!",
+        date: "czwartek, 29 cze 2029",
+        pinned: false,
+        img: "https://cdn.discordapp.com/attachments/1047919900875825293/1123997006172524574/sketch-1688052140278.png",
+        article: [
+            `Jeżeli twierdziliście, że już to koniec, to się grubo mylicie.`,
+            `Przychodzę z wieścią, że Starcie Internetu w wersji 1.1 zostało wydane! Powiem wam, że się zmieniło nie do poznania. Mechanika została zmieniona, nowe postacie przybyły, i dodano jedną <i>mega</i> bardzo przydatne ustawienie.`,
+            `Trochę o postaciach...<br />
+            Dodano przed wszystkim 2 sławne postacie i postać związana z prawdziwym życiem.<br />
+            Kirana Yonome jest dość sławną VTuberką z ponad 10 tysiącami obserwującymi na <a href="https://www.twitch.tv/kirana_yonome">Twitchu</a>. Czemu jądro Internetu ją wybrało? Do tej pory nie poznamy odpowiedzi, poza tym, ze chcieli zrobić ją wojoniczką. Jest niestety jedyna w swoim wymiarze, ale nadejdzie chwila, że będzie miała towarzysza/towarzyszkę, tak jak było to z Pikachu.<br />
+            Spodziewaliście się administratora <a href="https://www.facebook.com/SuperSnacki">Super Snacki</a>? Tak, on też się pojawił. Przede wszystkim reklamuje kabanosy Sokołów memami i jest praktycznie w tym najlepszy! Jest idolem Gabrysi Sotoły, co dopiero zaczęła swoją przygodę w tym fanpage'u.<br />
+            Poza nimi są jeszcze 4 postacie (glalirthor, lunatone, theDarkLord i twinz), ale to już polecam wam samemu odkryć, co każdy robi.`,
+            `Te przydatne ustawienie, o którym mówiłem, jest zmiana języka! Dzięki temu możliwe, że się jakoś rozrośnie. Oczywiście tłumaczenie nie działa i nie jest zweryfikowane w 100%, ale jeszcze powinno się to zmienić <i>jakoś<i>.`,
+            `Jeżeli ktoś chce zobaczyć listę postaci, to <a href="charaList.html">ta strona</a> na to pozwala.`
+        ]
+    },
+    {
         name: "Starcie Internetu 1.0",
         date: "wtorek, 11 kwi 2023",
         pinned: false,
