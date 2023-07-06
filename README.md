@@ -9,6 +9,7 @@ I tak powstało Starcie Internetu...</i>
 
 ## Informacje projektu
 Wersja: **1.0**<br />
+Gra na podstawie licencji **MIT** (Wcześniej: **Apache 2.0**)<br />
 Autorzy:
 - patYczakus ([Strona](https://patryktopek.tk) | [GitHub](https://github.com/Patyczakus))
 
