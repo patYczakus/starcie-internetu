@@ -318,7 +318,7 @@ const spf = {
             },
             {
                 __bool: gameModify.getColab().you.hp.factor() <= 0.5,
-                heal: [ 150, 2 ]
+                heal: [ 160, 2.2 ]
             },
             {
                 __bool: true,
@@ -328,7 +328,7 @@ const spf = {
             },
             {
                 __bool: gameModify.getColab().you.hp.factor() <= 0.9,
-                heal: [ 50, 1.8 ],
+                heal: [ 80, 1.8 ],
                 atk: [ 106, "all" ],
                 def: [ 200, 55 ],
                 maxHP: 103,

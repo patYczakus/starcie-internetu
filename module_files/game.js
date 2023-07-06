@@ -419,7 +419,7 @@ function createSettings() {
     for (let i = 0; i < settingsList.length; i++) {
         if (settingsType[i][0] == "bool") document.querySelectorAll("div#info div.o .setting")[i].addEventListener("click", () => {
             data.settings[settingsList[i].flag] = !data.settings[settingsList[i].flag]
-            document.querySelectorAll("div#info div.o button.setting")[i].innerText = data.settings[settingsList[i].flag] ? "✅" : "❌"
+            document.querySelectorAll("div#info div.o .setting")[i].innerText = data.settings[settingsList[i].flag] ? "✅" : "❌"
             save(false)
         })
         if (settingsType[i][0] == "num") document.querySelectorAll("div#info div.o .setting")[i].addEventListener("click", () => {
@@ -661,42 +661,7 @@ function startMatch() {
             })
             if (data.characters[matchSettings.player.name].sp) document.querySelector(`div#game.match div[gameplay="player"] div.btns button#sp`).addEventListener("click", () => { starPover("player") })
             document.querySelector(`div#game.match div[gameplay="player"] div.btns button#whiteFlag`).addEventListener("click", () => {
-                if (!confirm(checkLanguage(langText.fight.surSure, data.settings.lang))) return
-                document.querySelector(`div#game.match div[gameplay="player"] div.btns`).style.display = "none"
-                
-                setTimeout(() => {
-                    document.querySelector("div#game.match").innerHTML = `<div id="runCenter">
-                        <div id="theBigText" style="background: rgba(252, 38, 0, 0.541)">PRZEGRANA<br />(przez poddanie)</div>
-                        <button class="loginForm">Wyjdź <img class="cnsl" draggable="false" width="15" height="15" src="https://cdn.discordapp.com/attachments/1047919900875825293/1071343617031032852/sketch-1675498411625.png"></button>
-                    </div>`
-
-                    matchSettings = {
-                        player: {
-                            points: 0,
-                            name: "",
-                            critChance: 100,
-                            health: 0,
-                            atk: [],
-                            spUses: 0
-                        },
-                        bot: {
-                            points: 0,
-                            lvl: 0,
-                            spHave: false,
-                            name: "",
-                            critChance: 100,
-                            health: 0,
-                            atk: [],
-                            spUses: 0
-                        }
-                    }
-
-                    document.querySelector("div#game.match div#runCenter button").addEventListener("click", () => {
-                        document.querySelector("div#game.match").style.display = "none"
-                        document.querySelector("div#game.match").innerHTML = ""
-                        changeVolume(70)
-                    })
-                }, 1000)
+                if (confirm(checkLanguage(langText.fight.surSure, data.settings.lang))) endGame(2)
             })
         }, 50 * (matchSettings.player.atk.length + data.characters[matchSettings.player.name].sp) + 200)
     }, 3000)
@@ -708,8 +673,10 @@ function startMatch() {
  */
 function endGame(type) {
     showedCheck = false
+    gBlock = true
     document.querySelector(`div#game.match div[gameplay="player"] div.btns`).style.display = "none"
     setTimeout(() => {
+        gBlock = false
         if (type == 0) {
             gType = "endScreen"
             var ticketChange = Math.round(Math.random() * 9)

@@ -1,7 +1,18 @@
 const articles = [
     {
+        name: "<i>Ultradźwiękowo szybkie</i> poprawki z wersji 1.1",
+        date: "czwartek, 6 lip 2023",
+        pinned: false,
+        img: "default",
+        article: [
+            `Dopiero teraz zdałem sobie sprawę, że wersja 1.1 miała dosyć błędów na stabilne funkcjonowanie. Jedynie, co poprawiłem, to ustawienia oraz tłumaczenie tekstu poddawania się. Takie głupie błędy nie zauważyć...`,
+            `Ja tak jeszcze czytałem te postanowienia, które pisałem...<br />
+            Szczerze mogę powiedzieć, że nic nie działałem w tym kierunku, ale tylko dlatego, że nie mam jeszcze odpowiednich umiejętności, jak i samych możliwości. Czy uda się zrealizować je? Może tak...`
+        ]
+    },
+    {
         name: "Powitajcie Kiranę, Admina i Gabrysię, bo oto wersja 1.1 Starcia Internetu!",
-        date: "czwartek, 29 cze 2029",
+        date: "czwartek, 29 cze 2023",
         pinned: false,
         img: "https://cdn.discordapp.com/attachments/1047919900875825293/1123997006172524574/sketch-1688052140278.png",
         article: [
