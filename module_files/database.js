@@ -7,14 +7,14 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.14.0/firebase
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDIeQ_6T0i7Wu8-c2c71Vk64KWIAxoF_ws",
-  authDomain: "patygames-rpg.firebaseapp.com",
-  databaseURL: "https://patygames-rpg-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "patygames-rpg",
-  storageBucket: "patygames-rpg.appspot.com",
-  messagingSenderId: "855829252577",
-  appId: "1:855829252577:web:f0071e25c2151505b42aa0",
-  measurementId: "G-17SEKGCQ74"
+    apiKey: "AIzaSyDIeQ_6T0i7Wu8-c2c71Vk64KWIAxoF_ws",
+    authDomain: "patygames-rpg.firebaseapp.com",
+    databaseURL: "https://patygames-rpg-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "patygames-rpg",
+    storageBucket: "patygames-rpg.appspot.com",
+    messagingSenderId: "855829252577",
+    appId: "1:855829252577:web:f0071e25c2151505b42aa0",
+    measurementId: "G-17SEKGCQ74",
 }
 
 // Initialize Firebase

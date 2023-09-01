@@ -1,31 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
 
 @keyframes loading {
     from {
         transform: rotate(0deg);
         border-top-color: gray;
         border-bottom-color: gray;
-    } 25% {
+    }
+    25% {
         transform: rotate(90deg);
         border-top-color: gray;
         border-bottom-color: blue;
-    } 50% {
+    }
+    50% {
         transform: rotate(180deg);
         border-top-color: blue;
         border-bottom-color: blue;
-    } 75% {
+    }
+    75% {
         transform: rotate(270deg);
         border-top-color: blue;
         border-bottom-color: gray;
-    } to {
+    }
+    to {
         transform: rotate(360deg);
         border-top-color: gray;
         border-bottom-color: gray;
     }
 }
 @keyframes show {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 html {
@@ -36,11 +44,13 @@ body {
     margin: 0;
 }
 
-body, body :not(img) {
-    font-family: 'Audiowide', monospace;
+body,
+body :not(img) {
+    font-family: "Audiowide", monospace;
 }
 
-body.resetFont, body.resetFont :not(img) {
+body.resetFont,
+body.resetFont :not(img) {
     font-family: sans-serif;
 }
 
@@ -54,12 +64,14 @@ body .autoSelectable {
     user-select: all;
 }
 
-div#start { 
+div#start {
     padding: 10px;
-    background: linear-gradient(white 60px, transparent 80px)
+    background: linear-gradient(white 60px, transparent 80px);
 }
-div#start div#header { height: 80px; }
-div#start div#header span#title::before { 
+div#start div#header {
+    height: 80px;
+}
+div#start div#header span#title::before {
     content: "Starcie 🌐 Internetu";
 }
 
@@ -68,7 +80,7 @@ iframe.reset {
     width: 100%;
     height: 500px;
 }
-div#start iframe { 
+div#start iframe {
     height: calc(100vh - 120px);
 }
 
@@ -83,14 +95,14 @@ button {
 
 button.loginForm {
     padding: 12px;
-    font-size: 27px
+    font-size: 27px;
 }
 
 div.loading {
     animation-name: loading;
     animation-duration: 2s;
     animation-iteration-count: infinite;
-    animation-timing-function: cubic-bezier(.55,2,.4,-0.97);
+    animation-timing-function: cubic-bezier(0.55, 2, 0.4, -0.97);
     font-size: 0;
     cursor: wait;
     border: 5px solid transparent;
@@ -119,21 +131,18 @@ div#game.home {
     height: calc(100vh - 70px);
 }
 
-div#game.home img:not(.cnsl) {
-    transition: transform 230ms cubic-bezier(0.49, 2.5, 0.23, 0) 0ms, filter 100ms linear, box-shadow 200ms ease-in-out;
+img.character {
     border-top-left-radius: 2rem;
     border-bottom-right-radius: 1.3rem;
     border-top-right-radius: 0.6rem;
+}
+
+div#game.home img.character {
+    transition: transform 230ms cubic-bezier(0.49, 2.5, 0.23, 0) 0ms, filter 100ms linear, box-shadow 200ms ease-in-out;
     margin-right: 13px;
     margin-bottom: 13px;
     filter: blur(1px) saturate(0) brightness(0.85);
     box-shadow: 0px 0px 0px 0px transparent;
-}
-
-div#game.match img:not(.cnsl) {
-    border-top-left-radius: 2rem;
-    border-bottom-right-radius: 1.3rem;
-    border-top-right-radius: 0.6rem;
 }
 
 div#info {
@@ -170,7 +179,8 @@ div#info div.o span {
     overflow-x: scroll;
 }
 
-div#info div.o ol, div#info div.o ul {
+div#info div.o ol,
+div#info div.o ul {
     margin: 0;
 }
 div#info div.o table td {
@@ -179,14 +189,13 @@ div#info div.o table td {
 }
 
 div#info div.o div.set {
-    transition: border-left 0.3s cubic-bezier(0.47, 3, 0, -0.02),
-        padding-left 0.3s cubic-bezier(0.47, 3, 0, -0.02);
+    transition: border-left 0.3s cubic-bezier(0.47, 3, 0, -0.02), padding-left 0.3s cubic-bezier(0.47, 3, 0, -0.02);
     border-left: 0px solid rebeccapurple;
     padding: 0px;
 }
 
 div#info div.o div.set::after {
-    transition: border-top 0.2s 0.3s ease-out,;
+    transition: border-top 0.2s 0.3s ease-out;
 
     content: "";
     display: block;
@@ -195,8 +204,8 @@ div#info div.o div.set::after {
     border-left: 0px solid transparent;
     border-right: 75px solid transparent;
     border-top: 20px solid rgb(123, 169, 255, 0.2);
-    margin-top: -13px; 
-    margin-left: 7px; 
+    margin-top: -13px;
+    margin-left: 7px;
     margin-bottom: 10px;
 }
 
@@ -204,24 +213,41 @@ div#info div.o div.set.gChecked {
     border-left: 10px solid rebeccapurple;
     padding-left: 5px;
 }
-img.common { background: rgb(185, 185, 185) ; }
-img.uncommon { background: rgb(66, 206, 78) ; }
-img.rare { background: rgb(123, 169, 255) ; }
-img.epic { background: rgb(168, 19, 226) ; }
-img.legendary { background: rgb(219, 197, 0) ; } 
-img.import { background: linear-gradient(159deg, cadetblue 0, cadetblue 30px, rgb(255, 165, 61) 35px); } 
+img.common {
+    background: rgb(185, 185, 185);
+}
+img.uncommon {
+    background: rgb(66, 206, 78);
+}
+img.rare {
+    background: rgb(123, 169, 255);
+}
+img.epic {
+    background: rgb(168, 19, 226);
+}
+img.legendary {
+    background: rgb(219, 197, 0);
+}
+img.import {
+    background: linear-gradient(159deg, cadetblue 0, cadetblue 30px, rgb(255, 165, 61) 35px);
+}
 img.dark_shop {
-    background: 
-        linear-gradient(217deg, rgba(150, 135, 0, 0.8), transparent 70.71%),
+    background: linear-gradient(217deg, rgba(150, 135, 0, 0.8), transparent 70.71%),
         linear-gradient(127deg, rgba(96, 0, 126, 0.8), transparent 70.71%),
         linear-gradient(336deg, rgba(123, 218, 255, 0.8), transparent 46.47%),
-        linear-gradient(127deg, transparent, rgba(96, 0, 126, 0.6) 45.43%, transparent 70.71%); 
+        linear-gradient(127deg, transparent, rgba(96, 0, 126, 0.6) 45.43%, transparent 70.71%);
 }
-div#game.home img:not(.disabled):not(.cnsl):hover { transform: scale(1.12); filter: blur(0) saturate(1) brightness(1); }
-div#game.home img.disabled { filter: brightness(0) saturate(0) blur(2.5px); opacity: 0.3; }
-div#game.home img.gChecked { 
-    filter: blur(0) saturate(1) brightness(1); 
-    box-shadow: 0px 3.5px 10px 4px rgba(0,0,0,0.41);
+div#game.home img:not(.disabled):not(.cnsl):hover {
+    transform: scale(1.12);
+    filter: blur(0) saturate(1) brightness(1);
+}
+div#game.home img.disabled {
+    filter: brightness(0) saturate(0) blur(2.5px);
+    opacity: 0.3;
+}
+div#game.home img.gChecked {
+    filter: blur(0) saturate(1) brightness(1);
+    box-shadow: 0px 3.5px 10px 4px rgba(0, 0, 0, 0.41);
 }
 
 span.classNameColor {
@@ -230,33 +256,32 @@ span.classNameColor {
     -webkit-text-stroke: var(--fbs) black;
     font-size: 120%;
 }
-span.classNameColor.common { 
+span.classNameColor.common {
     color: rgb(185, 185, 185);
 }
-span.classNameColor.uncommon { 
-    color: rgb(66, 206, 78); 
+span.classNameColor.uncommon {
+    color: rgb(66, 206, 78);
 }
-span.classNameColor.rare { 
-    color: rgb(123, 169, 255); 
+span.classNameColor.rare {
+    color: rgb(123, 169, 255);
 }
-span.classNameColor.epic { 
-    color: rgb(168, 19, 226); 
+span.classNameColor.epic {
+    color: rgb(168, 19, 226);
 }
-span.classNameColor.legendary { 
-    color: rgb(219, 197, 0); 
-} 
+span.classNameColor.legendary {
+    color: rgb(219, 197, 0);
+}
 span.classNameColor.import {
     background: linear-gradient(175deg, cadetblue 0, cadetblue 45%, rgb(255, 165, 61) 50%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-} 
+}
 span.classNameColor.dark_shop {
-    background: 
-        linear-gradient(217deg, rgba(150, 135, 0, 0.8), transparent 70.71%),
+    background: linear-gradient(217deg, rgba(150, 135, 0, 0.8), transparent 70.71%),
         linear-gradient(127deg, rgba(96, 0, 126, 0.8), transparent 70.71%),
         linear-gradient(336deg, rgba(123, 218, 255, 0.8), transparent 46.47%),
-        linear-gradient(127deg, transparent, rgba(96, 0, 126, 0.6) 45.43%, transparent 70.71%); 
+        linear-gradient(127deg, transparent, rgba(96, 0, 126, 0.6) 45.43%, transparent 70.71%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -286,7 +311,9 @@ div#game.bar button#home {
     display: none;
 }
 
-#popup_info.active {display: inline-block}
+#popup_info.active {
+    display: inline-block;
+}
 
 div#game.match {
     padding: 0;
@@ -329,7 +356,9 @@ div#game.match div.half {
     float: left;
 }
 
-div#game.match div#gameplay { opacity: 0; }
+div#game.match div#gameplay {
+    opacity: 0;
+}
 div#game.match div#gameplay.show {
     opacity: 1;
 
@@ -370,10 +399,17 @@ div#game.match div#gameplay[gameplay="player"] div.resetAndHide {
 
 div#game.match div#gameplay[gameplay="player"] div.reset div {
     display: inline-block;
-    margin-left: 10px
+    margin-left: 10px;
 }
 
-div#game.match button:not(.loginForm) { font-size: 15px; }
+div#game.match button:not(.loginForm) {
+    font-size: 15px;
+}
+div#game.match div#gameplay div.healthInfo {
+    width: 15vw;
+    text-align: center;
+    font-size: 25%;
+}
 div#game.match div#gameplay div.healthBar {
     width: 15vw;
     height: 12px;
@@ -385,11 +421,13 @@ div#game.match div#gameplay div.healthBar {
 div#game.match div#gameplay div.healthBar div.health {
     width: calc(var(--health) / var(--healthMax) * 100%);
     height: 12px;
-    background: rgb(calc(220 - (var(--health) / var(--healthMax) * 170)), calc(20 + (var(--health) / var(--healthMax) * 185)), calc(60 - (var(--health) / var(--healthMax) * 10)));
+    background: rgb(
+        calc(220 - (var(--health) / var(--healthMax) * 170)),
+        calc(20 + (var(--health) / var(--healthMax) * 185)),
+        calc(60 - (var(--health) / var(--healthMax) * 10))
+    );
     border-right: 2px solid white;
-    transition: 
-        background 0.7s cubic-bezier(.18,.77,.17,1.01),
-        width 0.7s cubic-bezier(.18,.77,.17,1.01);
+    transition: background 0.7s cubic-bezier(0.18, 0.77, 0.17, 1.01), width 0.7s cubic-bezier(0.18, 0.77, 0.17, 1.01);
 }
 
 /*-------------------------------------------------------------------------
@@ -444,8 +482,9 @@ div#game.match div#gameplay div.healthBar div.health {
         width: 100% !important;
     }
     div#game.match div#gameplay button,
-    div#game.match div#gameplay[gameplay="player"] div.reset div
-    { font-size: 20px; }
+    div#game.match div#gameplay[gameplay="player"] div.reset div {
+        font-size: 20px;
+    }
 
     div#game.match div#gameplay[gameplay="player"] div.reset {
         text-align: center;
@@ -458,17 +497,20 @@ div#game.match div#gameplay div.healthBar div.health {
         margin-left: 0;
         width: 100%;
     }
+    div#game.match div#gameplay div.healthInfo {
+        width: 22vw;
+    }
     div#game.match div#gameplay div.healthBar {
         width: 22vw;
         height: 15px;
     }
-    
+
     div#game.match div#gameplay div.healthBar div.health {
         height: 15px;
     }
 }
 @media (max-width: 729.9px) {
-    div#start div#header span#title::before { 
+    div#start div#header span#title::before {
         content: "🌐";
     }
 }
@@ -487,7 +529,8 @@ div#game.match div#gameplay div.healthBar div.health {
     from {
         transform: scale(1.2);
         opacity: 0;
-    } to {
+    }
+    to {
         transform: scale(1);
         opacity: 1;
     }

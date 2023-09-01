@@ -1,5 +1,15 @@
 const articles = [
     {
+        name: "Szkoła się zaczyna, pora nauki, nie imprezowania",
+        date: "piątek, 1 wrz 2023",
+        pinned: true,
+        img: "default",
+        article: [
+            `To już koniec, będzie trzeba zmykać się do swoich szkół, zostawić te pieruńsko ważne projekty, i się zajmować nauką - niestety takie chore życie uczniów. Ale spokojnie, wypuszczam małą wersję 1.1.1. Dodaje ona lepsze poruszanie suwakami przez Gamepad, i kilka ustawień. Ulepsza też wizualnie parę dodatków i trochę poprawia postć lunatone (propozycja od kolegi)`,
+            `Btw, <a href="https://discord.gg/v3w6bbtGy9" target="_blank">ten link</a> poprowadzi do serwera Discord, gdzie będzie można dać propozycje na temat postaci, czy zgłaszać błędy różnego rodzaju`,
+        ],
+    },
+    {
         name: "<i>Ultradźwiękowo szybkie</i> poprawki z wersji 1.1",
         date: "czwartek, 6 lip 2023",
         pinned: false,
@@ -7,8 +17,8 @@ const articles = [
         article: [
             `Dopiero teraz zdałem sobie sprawę, że wersja 1.1 miała dosyć błędów na stabilne funkcjonowanie. Jedynie, co poprawiłem, to ustawienia oraz tłumaczenie tekstu poddawania się. Takie głupie błędy nie zauważyć...`,
             `Ja tak jeszcze czytałem te postanowienia, które pisałem...<br />
-            Szczerze mogę powiedzieć, że nic nie działałem w tym kierunku, ale tylko dlatego, że nie mam jeszcze odpowiednich umiejętności, jak i samych możliwości. Czy uda się zrealizować je? Może tak...`
-        ]
+            Szczerze mogę powiedzieć, że nic nie działałem w tym kierunku, ale tylko dlatego, że nie mam jeszcze odpowiednich umiejętności, jak i samych możliwości. Czy uda się zrealizować je? Może tak...`,
+        ],
     },
     {
         name: "Powitajcie Kiranę, Admina i Gabrysię, bo oto wersja 1.1 Starcia Internetu!",
@@ -24,8 +34,8 @@ const articles = [
             Spodziewaliście się administratora <a href="https://www.facebook.com/SuperSnacki">Super Snacki</a>? Tak, on też się pojawił. Przede wszystkim reklamuje kabanosy Sokołów memami i jest praktycznie w tym najlepszy! Jest idolem Gabrysi Sotoły, co dopiero zaczęła swoją przygodę w tym fanpage'u.<br />
             Poza nimi są jeszcze 4 postacie (glalirthor, lunatone, theDarkLord i twinz), ale to już polecam wam samemu odkryć, co każdy robi.`,
             `Te przydatne ustawienie, o którym mówiłem, jest zmiana języka! Dzięki temu możliwe, że się jakoś rozrośnie. Oczywiście tłumaczenie nie działa i nie jest zweryfikowane w 100%, ale jeszcze powinno się to zmienić <i>jakoś<i>.`,
-            `Jeżeli ktoś chce zobaczyć listę postaci, to <a href="charaList.html">ta strona</a> na to pozwala.`
-        ]
+            `Jeżeli ktoś chce zobaczyć listę postaci, to <a href="charaList.html">ta strona</a> na to pozwala.`,
+        ],
     },
     {
         name: "Starcie Internetu 1.0",
@@ -48,8 +58,8 @@ const articles = [
             Przydatne informacje:<br />
             - jeżeli widzisz pasek przewijania, ruszenie prawego joysticka w górę/dół spowoduje poruszenie paska i przewijanie<br />
             - jeżeli masz błąd ruszania joysticka, spróbuj RT + LT + Select - wykona to akcję "miękkiego resetu". Aby stworzyć "twardy reset", użyj kombinacji RT + LT + B/koło + Select<br />`,
-            `Sam się przekonaj o nowościach! Życzę wszystkim miłego dnia/miłej nocy!`
-        ]
+            `Sam się przekonaj o nowościach! Życzę wszystkim miłego dnia/miłej nocy!`,
+        ],
     },
     {
         name: "Aktualizacja 0.3.2 + informacja, jak naprawić błąd logowania (telefon)",
@@ -72,8 +82,8 @@ const articles = [
             Pierwsze do zrobienia jest włączenie zewnętrznej przeglądarki (za wewnętrzną może odrzucić próbę logowania).<br />
             Kolejnym jest włączenie trybu komputerowego i się zalogowanie przez Google.<br />
             Potem, po zalogowaniu, możecie się przełączyć na mobilną wersję i grać!`,
-            `Miłego dnia!`
-        ]
+            `Miłego dnia!`,
+        ],
     },
     {
         name: "Aktualizacja 0.3.1, czyli pogaduszki o postaciach",
@@ -105,8 +115,8 @@ const articles = [
             `Prócz tego mechanika się zmieniła. Zamiast gradientu pojawiło się zmieniające się tło. Do tego się zmienił system leczenia.<br />
             + można pokazać nowe audiosy:<br />
             Atak<br /><audio controls src="https://patyczakus.github.io/starcie-internetu/audios/attack.wav"></audio><br />
-            Ktytyczny cios<br /><audio controls src="https://patyczakus.github.io/starcie-internetu/audios/critical.wav"></audio>`
-        ]
+            Ktytyczny cios<br /><audio controls src="https://patyczakus.github.io/starcie-internetu/audios/critical.wav"></audio>`,
+        ],
     },
     {
         name: "Pierwszy artykuł do wersji 0.3",
@@ -124,27 +134,44 @@ const articles = [
             > Jak zwykle dużo postaci<BR />
             > Klany, gildie, kluby, gangi - jak zwał, tak zwał<BR />
             > Misje<BR />
-            > Sklep`
-        ]
-    }
+            > Sklep`,
+        ],
+    },
 ]
 
 function create() {
     document.body.innerHTML = `<span style="font-size: 32px;">Ogłoszenia</span>`
     for (let i = 0; i < articles.length - 1; i++) {
-        if (!articles[i].pinned) document.body.innerHTML += `<div id="article">
-        <div class="header"><img src="${articles[i].img == "default" ? "https://cdn.discordapp.com/attachments/1047919900875825293/1064986147643740223/sketch-1673982624892.png" : articles[i].img}" /><span>${articles[i].name}<div style="font-size: 50%">${articles[i].date}</div></span></div>
+        if (!articles[i].pinned)
+            document.body.innerHTML += `<div id="article">
+        <div class="header"><img src="${
+            articles[i].img == "default"
+                ? "https://cdn.discordapp.com/attachments/1047919900875825293/1064986147643740223/sketch-1673982624892.png"
+                : articles[i].img
+        }" /><span>${articles[i].name}<div style="font-size: 50%">${articles[i].date}</div></span></div>
         <div><p>${articles[i].article.join("</p><p>")}</p></div>
         </div>
         <hr />`
-        else document.body.innerHTML = `<div id="article">
-        <div class="header"><img src="${articles[i].img == "default" ? "https://cdn.discordapp.com/attachments/1047919900875825293/1064986147643740223/sketch-1673982624892.png" : articles[i].img}" /><span>📌 ${articles[i].name}<div style="font-size: 50%">${articles[i].date}</div></span></div>
+        else
+            document.body.innerHTML =
+                `<div id="article">
+        <div class="header"><img src="${
+            articles[i].img == "default"
+                ? "https://cdn.discordapp.com/attachments/1047919900875825293/1064986147643740223/sketch-1673982624892.png"
+                : articles[i].img
+        }" /><span>📌 ${articles[i].name}<div style="font-size: 50%">${articles[i].date}</div></span></div>
         <div><p>${articles[i].article.join("</p><p>")}</p></div>
         </div>
         <hr />` + document.body.innerHTML
     }
     document.body.innerHTML += `<div id="article">
-    <div class="header"><img src="${articles[articles.length - 1].img == "default" ? "https://cdn.discordapp.com/attachments/1047919900875825293/1064986147643740223/sketch-1673982624892.png" : articles[articles.length - 1].img}" /><span>${articles[articles.length - 1].name}<div style="font-size: 50%">${articles[articles.length - 1].date}</div></span></div>
+    <div class="header"><img src="${
+        articles[articles.length - 1].img == "default"
+            ? "https://cdn.discordapp.com/attachments/1047919900875825293/1064986147643740223/sketch-1673982624892.png"
+            : articles[articles.length - 1].img
+    }" /><span>${articles[articles.length - 1].name}<div style="font-size: 50%">${
+        articles[articles.length - 1].date
+    }</div></span></div>
     <div><p>${articles[articles.length - 1].article.join("</p><p>")}</p></div>
     </div>`
 }
