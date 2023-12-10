@@ -5,7 +5,7 @@ const articles = [
         pinned: false,
         img: "default",
         article: [
-            `Te głoszenia tracą swoją moc na rzecz serwera support. Tam też można skontaktować się z działem wsparcia.<br />Tym razem usunąłem wszystkie dane kont, a nie je podmieniłem, także każdy ma podmienione dane na start!`,
+            `Te głoszenia tracą swoją moc na rzecz <a href="https://discord.gg/7S3P2DUwAm" target="_blank">serwera support</a>. Tam też można skontaktować się z działem wsparcia.<br />Tym razem usunąłem wszystkie dane kont, a nie je podmieniłem, także każdy ma podmienione dane na start!`,
             `<iframe src="https://discord.com/widget?id=1173722642004574359&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>`,
         ],
     },
