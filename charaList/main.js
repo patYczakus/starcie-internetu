@@ -1,9 +1,11 @@
 import { charaList } from "../module_files/characters.js"
-import { app } from "../module_files/database.js"
 import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js"
+import * as _jk from "https://patyczakus.github.io/javakit/module.js"
+import { app } from "../module_files/database.js"
+const JK = _jk.default
 
 window.onload = () => {
-    setTimeout(() => {
+    JK.HTMLFunctions.loadImages(Object.values(charaList).map((x) => x.image)).then(() => {
         var __root__ = document.createElement("div")
         var __navi__ = document.createElement("div")
         document.body.innerHTML = ""
@@ -91,9 +93,20 @@ window.onload = () => {
         document.body.appendChild(__navi__)
         document.body.appendChild(__root__)
 
-        get(ref(getDatabase(), `starcie-internetu/followersApiInfo`)).then((snpsht) => {
+        get(ref(getDatabase(app), `starcie-internetu/followersApiInfo`)).then((snpsht) => {
             document.body.innerHTML = document.body.innerHTML.replace(/{desc\.yk}/g, snpsht.val().ky)
         })
-    }, 1000)
-    document.body.innerHTML = "Czekaj..."
+
+        setTimeout(() => {
+            if (location.hash !== "" && location.hash !== "#") {
+                var x = location.hash
+                location.hash = "#"
+                setTimeout(() => {
+                    location.hash = x
+                }, 100)
+            }
+        }, 300)
+    })
+    document.body.style.padding = "5px"
+    document.body.innerHTML = "Czekaj, ładuję zdjęcia..."
 }

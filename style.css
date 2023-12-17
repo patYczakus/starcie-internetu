@@ -85,12 +85,19 @@ div#start iframe {
 }
 
 button {
-    background-color: antiquewhite;
+    background: antiquewhite;
+    display: inline-flex;
     padding: 5px;
     min-height: 15px;
     margin-bottom: 3px;
     border: none;
     border-radius: 0.5rem;
+    transition: background 0.1s ease-in-out;
+    align-items: center;
+    justify-content: center;
+}
+button:hover {
+    background: #a1ffc8;
 }
 
 button.loginForm {
@@ -232,10 +239,8 @@ img.import {
     background: linear-gradient(159deg, cadetblue 0, cadetblue 30px, rgb(255, 165, 61) 35px);
 }
 img.dark_shop {
-    background: linear-gradient(217deg, rgba(150, 135, 0, 0.8), transparent 70.71%),
-        linear-gradient(127deg, rgba(96, 0, 126, 0.8), transparent 70.71%),
-        linear-gradient(336deg, rgba(123, 218, 255, 0.8), transparent 46.47%),
-        linear-gradient(127deg, transparent, rgba(96, 0, 126, 0.6) 45.43%, transparent 70.71%);
+    background: linear-gradient(217deg, rgba(150, 135, 0, 0.8), transparent 70.71%), linear-gradient(127deg, rgba(96, 0, 126, 0.8), transparent 70.71%),
+        linear-gradient(336deg, rgba(123, 218, 255, 0.8), transparent 46.47%), linear-gradient(127deg, transparent, rgba(96, 0, 126, 0.6) 45.43%, transparent 70.71%);
 }
 div#game.home img:not(.disabled):not(.cnsl):hover {
     transform: scale(1.12);
@@ -278,10 +283,8 @@ span.classNameColor.import {
     -webkit-text-fill-color: transparent;
 }
 span.classNameColor.dark_shop {
-    background: linear-gradient(217deg, rgba(150, 135, 0, 0.8), transparent 70.71%),
-        linear-gradient(127deg, rgba(96, 0, 126, 0.8), transparent 70.71%),
-        linear-gradient(336deg, rgba(123, 218, 255, 0.8), transparent 46.47%),
-        linear-gradient(127deg, transparent, rgba(96, 0, 126, 0.6) 45.43%, transparent 70.71%);
+    background: linear-gradient(217deg, rgba(150, 135, 0, 0.8), transparent 70.71%), linear-gradient(127deg, rgba(96, 0, 126, 0.8), transparent 70.71%),
+        linear-gradient(336deg, rgba(123, 218, 255, 0.8), transparent 46.47%), linear-gradient(127deg, transparent, rgba(96, 0, 126, 0.6) 45.43%, transparent 70.71%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -289,8 +292,13 @@ span.classNameColor.dark_shop {
 
 div#game.bar {
     height: 70px;
+    box-sizing: border-box;
     background: linear-gradient(rgba(255, 255, 255, 0.4) 0 80%, transparent);
     font-size: 24px;
+    animation-iteration-count: infinite;
+    display: flex;
+    align-items: center;
+    padding-bottom: 24px;
 }
 
 div#game.bar button#home {
@@ -309,6 +317,9 @@ div#game.bar button#home {
     font-size: 17.5px;
     z-index: 112;
     display: none;
+}
+#popup_info.musicPlayer {
+    background: #d1d1ff;
 }
 
 #popup_info.active {
@@ -421,13 +432,15 @@ div#game.match div#gameplay div.healthBar {
 div#game.match div#gameplay div.healthBar div.health {
     width: calc(var(--health) / var(--healthMax) * 100%);
     height: 12px;
-    background: rgb(
-        calc(220 - (var(--health) / var(--healthMax) * 170)),
-        calc(20 + (var(--health) / var(--healthMax) * 185)),
-        calc(60 - (var(--health) / var(--healthMax) * 10))
-    );
+    background: rgb(calc(220 - (var(--health) / var(--healthMax) * 170)), calc(20 + (var(--health) / var(--healthMax) * 185)), calc(60 - (var(--health) / var(--healthMax) * 10)));
     border-right: 2px solid white;
     transition: background 0.7s cubic-bezier(0.18, 0.77, 0.17, 1.01), width 0.7s cubic-bezier(0.18, 0.77, 0.17, 1.01);
+}
+
+br[small] {
+    display: block;
+    content: "";
+    height: 7px;
 }
 
 /*-------------------------------------------------------------------------
@@ -459,6 +472,11 @@ div#game.match div#gameplay div.healthBar div.health {
         clear: both;
         font-size: 24px;
     }
+    #popup_info.musicPlayer {
+        bottom: 15px;
+        top: auto;
+        right: 20px;
+    }
 }
 @media (max-width: 682px) {
     div#game.match div#gameplay span.name {
@@ -467,11 +485,11 @@ div#game.match div#gameplay div.healthBar div.health {
     div#game.match div#gameplay[gameplay="player"] div.resetAndHide {
         display: none;
     }
-    div#game.match div#gameplay img:not(.cnsl) {
+    div#game.match div#gameplay img.character {
         width: 110px;
         height: 110px;
     }
-    div#game.match div#gameplay img.cnsl {
+    div#game.match div#gameplay img:not(.character) {
         width: 20px;
         height: 20px;
     }
@@ -513,6 +531,12 @@ div#game.match div#gameplay div.healthBar div.health {
     div#start div#header span#title::before {
         content: "🌐";
     }
+}
+
+button#skipThisSong {
+    padding: 0 20px 3px 20px;
+    font-size: 110%;
+    background: #a1a1ff;
 }
 
 /*-------------------------------------------------------------------------

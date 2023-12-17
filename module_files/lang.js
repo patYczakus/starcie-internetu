@@ -40,9 +40,14 @@ export var langText = {
         core: {
             pl: `<span style="display: block; font-size: 200%; padding: 25px 0">{ch_name}<br />(LVL {ch_lvl}/{ch_lvl.max})</span>
             {ch_desc}<br />
-            <u>Wymiar</u> {ch_dim}<br />
-            <u>HP</u> {ch_hp}
-            <ul><u>Moce</u>
+            <ul>
+                <u>Wymiar</u> 
+                <li>{ch_dim}</li><br small />
+                <u>HP</u>
+                <li>{ch_hp}</li><br small />
+                <u>Atrybuty</u>
+                {ch_attr}<br small />
+                <u>Moce</u>
                 <li>Posiadające<div style="font-size: 75%">{ch_powers.have}</div></li>
                 <li>Odporne na:{ch_powers.strong}</li>
                 <li>Osłabione na:{ch_powers.weak}</li>
@@ -55,9 +60,12 @@ export var langText = {
             {upgradeBTN}`,
             en: `<span style="display: block; font-size: 200%; padding: 25px 0">{ch_name}<br />(LVL {ch_lvl}/{ch_lvl.max})</span>
             {ch_desc}<br />
-            <u>Dimension</u> {ch_dim}<br />
-            <u>HP</u> {ch_hp}
-            <ul><u>Powers</u>
+            <ul>
+                <u>Dimension</u> {ch_dim}<br small />
+                <u>HP</u> {ch_hp}<br small />
+                <u>Attributes</u>
+                {ch_attr}<br small />
+                <u>Powers</u>
                 <li>Having<div style="font-size: 75%">{ch_powers.have}</div></li>
                 <li>Resistant to:{ch_powers.strong}</li>
                 <li>Weakened at:{ch_powers.weak}</li>
@@ -104,6 +112,24 @@ export var langText = {
         maxlvl: {
             pl: "Wbito maksymalny poziom; spowoduje to premię <u>+{xfl}xp</u> do twojego konta po wylosowaniu go ze skrzyni.",
             en: "The maximum level has been hit; this will result in a <u>+{xfl}xp</u> bonus to your account when drawn from the chest.",
+        },
+        tags: {
+            sochr: {
+                pl: "<b>Startowa ochrona</b> - początkowa szansa krytyczna jest zmniejszona do 50.",
+                en: "<b>Start protection</b> - the initial critical chance is reduced to 50",
+            },
+            toks: {
+                pl: "<b>Toksyna</b> - każdy atak w przeciwnika powoduje dla niego truciznę zadająca 4% wartości ataku przez 2 rundy.",
+                en: "<b>Toxin</b> - each attack on an opponent causes a special effect on the opponent inflicting 4% of the attack value for 2 rounds.",
+            },
+            btpwa: {
+                pl: "<b>Odszkodowanie wojenne</b> - każde uderzenie od przeciwnika powoduje dodanie BTP (10% BTP dla przeciwnika).",
+                en: "<b>Odszkodowanie wojenne</b> - każde uderzenie od przeciwnika powoduje dodanie BTP (10% BTP dla przeciwnika).",
+            },
+            atkback: {
+                pl: "<b>Sprzężenie zwrotne</b> - każdy atak od przeciwnika powoduje oddanie dla niego 5% wartości ataku",
+                en: "<b>Return message</b> - each attack from an opponent results in 5% of the attack value being given back to the opponent",
+            },
         },
     },
     infoOnCharaList: {
@@ -160,6 +186,10 @@ export var langText = {
         },
     },
     chest: {
+        noMoney: {
+            pl: "Brak posiadanych środków! Skrzynka kosztuje 1200{moneyImg}",
+            en: "You haven't enough money to buy this item. You must have 1000{moneyImg}",
+        },
         core: {
             pl: "Wylosowano: {charaName}",
             en: "{charaName} has been drafted!",

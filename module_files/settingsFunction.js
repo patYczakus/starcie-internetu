@@ -1,12 +1,15 @@
 export function checkSettings(accual) {
     var checked = 0
+    var newJson = {}
     for (let i = 0; i < settingsList.length; i++)
-        if (!(settingsList[i].flag in accual)) {
-            accual[settingsList[i].flag] = settingsList[i].defaultOption
+        if (settingsList[i].flag in accual) {
+            newJson[settingsList[i].flag] = accual[settingsList[i].flag]
+        } else {
+            newJson[settingsList[i].flag] = settingsList[i].defaultOption
             checked++
         }
 
-    return { json: accual, notHave: checked != 0 }
+    return { json: newJson, notHave: checked != 0 }
 }
 
 export var settingsList = [
@@ -16,6 +19,15 @@ export var settingsList = [
         type: `option:Polski (Polski / Polish)=pl:English (Angielski / English)=en`,
         description: {
             pl: "[ PL ] Zmienia język gry.<br />[ EN ] Changes the game's language.",
+        },
+    },
+    {
+        flag: "forcedLang",
+        defaultOption: false,
+        type: `bool`,
+        description: {
+            pl: "Wymusza tłumaczenie reszty interfejsu na wybrany język.",
+            en: "Forces translation of the rest of the interface into the chosen language.",
         },
     },
     {
@@ -37,12 +49,21 @@ export var settingsList = [
         },
     },
     {
-        flag: "playerOn",
+        flag: "musicPlayerOn",
         defaultOption: true,
         type: "bool",
         description: {
             pl: "Włącza/wyłącza muzykę w grze. Po ustawieniu należy odświeżyć ponownie stronę, aby zadziałało!",
             en: "Turns on/off the music in the game. Once set, refresh the page again for it to work!",
+        },
+    },
+    {
+        flag: "musicPlayerAlwaysPlaying",
+        defaultOption: false,
+        type: "bool",
+        description: {
+            pl: "Muzyka w grze jest grana niezależnie od przejścia na inną stronę lub zminimalizowania przeglądarki.",
+            en: "In-game music is always playing independently of the game in focus.",
         },
     },
     {

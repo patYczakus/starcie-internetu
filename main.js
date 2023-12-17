@@ -3,7 +3,7 @@ import { auth, createForm } from "./module_files/login.js"
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js"
 import { start } from "./module_files/game.js"
 
-export var playableRightNow = false
+export const playableRightNow = true
 
 const create = () => {
     onAuthStateChanged(auth, (user) => {
@@ -21,7 +21,6 @@ window.onload = () => {
     if (location.host == "localhost:5500") {
         document.title = "DEWELOPERSKA WERSJA | " + document.title
         console.log("[DEBUG] Starcie Internetu działa na lokalnym hostingu.")
-        // playableRightNow = true
     } else warning()
 
     window.addEventListener("online", create)

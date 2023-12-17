@@ -132,25 +132,38 @@ export const classes = [
 export function shortNumber(number, langCode = String("--auto")) {
     if (langCode == "--auto") langCode = getSettingData().lang
     var prefixes = {
+        hundred: {
+            pl: " tys.",
+            en: "k",
+        },
         million: {
-            pl: "mln",
+            pl: " mln.",
             en: "M",
         },
         milliard: {
-            pl: "mld",
+            pl: " mld.",
             en: "B",
         },
     }
 
     if (!getSettingData().shorterNumbers) return String(number)
-    if (!number) return console.error(new Error("Brak argumentu number"))
-    if (isNaN(number) || !isFinite(number)) return console.error(new Error("Argument number jest niepoprawny"))
+    if (!number) {
+        console.error(new Error("Brak argumentu number"))
+        return NaN
+    }
+    if (isNaN(number) || !isFinite(number)) {
+        console.error(new Error("Argument number jest niepoprawny"))
+        return NaN
+    }
     if (number >= Math.pow(10, 9)) {
         number = Math.round(number / Math.pow(10, 8)) / 10
         number = `${String(number)}${prefixes.milliard[langCode]}`
     } else if (number >= Math.pow(10, 6)) {
         number = Math.round(number / Math.pow(10, 5)) / 10
         number = `${String(number)}${prefixes.million[langCode]}`
+    } else if (number >= Math.pow(10, 4)) {
+        number = Math.round(number / Math.pow(10, 3))
+        number = `${String(number)}${prefixes.hundred[langCode]}`
     } else number = String(number)
 
     return number
