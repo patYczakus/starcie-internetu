@@ -983,7 +983,7 @@ export const charaList = {
                 ind: ["Powietrze", "Galaktyka"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1177880327872598026/sketch-1700898904244.png?ex=6586928a&is=65741d8a&hm=6a270351a435531c0ed7fe8ddab737c01d981562a58d28ee2a3d1eea686f7aa8&",
+        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1177880328149405786/sketch-1700898904766.png?ex=658fcd0a&is=657d580a&hm=1521c3f7cf2be8b7e49d79844ace11f1d3fa5e21d41f53e256d2129a0c37272f&",
         level_up: {
             hp: 2.3,
             battle: [2.2, 3],
