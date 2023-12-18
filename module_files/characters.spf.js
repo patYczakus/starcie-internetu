@@ -12,8 +12,9 @@ const spf = {
         let hpCh = gameModify.getColab().you.hp.setPrectange(90, true)
 
         for (let i = 0; i < gameModify.getColab().you.atk.getLenght(); i++) {
-            gameModify.getColab().you.atk.setValue(gameModify.getColab().you.atk.getValue(i) - hpCh / 2, i)
+            gameModify.getColab().you.atk.setValue(gameModify.getColab().you.atk.getValue(i) - (hpCh / 2) * i, i)
         }
+        console.log("[DEBUG/game/habby] Wartości ataków: ", gameModify.getColab().you.atk.getValue("all"))
 
         gameModify.spSounds.magic.currentTime = 0
         gameModify.spSounds.magic.play()

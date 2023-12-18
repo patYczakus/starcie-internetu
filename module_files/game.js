@@ -11,7 +11,7 @@ import * as _jk from "https://patyczakus.github.io/javakit/module.js"
 const JK = _jk.default
 
 var data = {
-        version: 2,
+        version: 3,
         coins: 1000,
         lvl: 1,
         tokens: 1,
@@ -43,7 +43,7 @@ var data = {
         },
         moves: 0,
     },
-    accualVersion = 0,
+    accualVersion = 3,
     characters_list_names = [],
     uidd,
     msBefore = {},
@@ -97,7 +97,7 @@ var data = {
 const database = getDatabase(app),
     characterDataVars = {
         name: ["lvl", "sp"],
-        classes: [Number, Boolean],
+        type: ["number", "boolean"],
     },
     atkFromBtp = (btp) => Math.ceil(btp * Math.pow(btp, 0.25) + 20 - Math.min(btp, 15))
 
@@ -244,8 +244,21 @@ export function start(uid) {
                 console.log(`[DEBUG/datachange/${name}] Wykryto ${data.characters[name].length} wartości`)
                 var helpVar = {}
                 for (let i = 0; i < data.characters[name].length; i++) {
-                    console.log(`[DEBUG/datachange/${name}/${i}] ${characterDataVars.name[i]} =`, characterDataVars.classes[i](data.characters[name][i]))
-                    helpVar[characterDataVars.name[i]] = characterDataVars.classes[i](data.characters[name][i])
+                    switch (characterDataVars.type[i]) {
+                        case "number": {
+                            helpVar[characterDataVars.name[i]] = Number(data.characters[name][i])
+                            break
+                        }
+                        case "boolean": {
+                            if (data.characters[name][i] === "true") helpVar[characterDataVars.name[i]] = true
+                            else if (data.characters[name][i] === "false") helpVar[characterDataVars.name[i]] = false
+                            else helpVar[characterDataVars.name[i]] = null
+                            break
+                        }
+                        default: {
+                            helpVar[characterDataVars.name[i]] = data.characters[name][i]
+                        }
+                    }
                 }
                 _chara[name] = helpVar
             })
@@ -282,21 +295,23 @@ export function start(uid) {
         .then((snapshot) => {
             if (snapshot.exists()) {
                 if (snapshot.val().version == accualVersion) data = snapshot.val()
+                else {
+                    data.lvl = snapshot.val().lvl
+                    data.xp = snapshot.val().xp
+                }
 
                 //nagrody
-                // if (snapshot.val().version < accualVersion) {
-                //     data.tokens = 7
-                //     data.coins = 2500
-                //     data.characters.habby.sp = true
-                //     data.characters.sylwestrowyOctane = { lvl: 1, sp: false }
-                //     data.lvl = 2
-                // }
+                if (snapshot.val().version < accualVersion) {
+                    data.tokens = 5
+                    data.coins = 1300
+                    data.characters.sylwestrowyOctane = "2|false"
+                }
 
                 data.version = accualVersion
 
-                if (data.settings.musicPlayerOn) playSound(true)
+                if (snapshot.val().settings.musicPlayerOn) playSound(true)
 
-                data.settings = checkSettings(data.settings).json
+                data.settings = checkSettings(snapshot.val().settings).json
                 frameBlock = data.settings.numberOfBlockFrames
             } else {
                 data.settings = checkSettings(data.settings).json
@@ -701,7 +716,14 @@ function openChest() {
     changeVolume(40)
     gType = "chest"
 
-    if (data.tokens == 0 && data.coins < 1200) return new miniAlert(checkLanguage(langText.chest.noMoney, data.settings.lang).replace("{moneyImg}"), "error").show(5000)
+    if (data.tokens == 0 && data.coins < 1200)
+        return new miniAlert(
+            checkLanguage(langText.chest.noMoney, data.settings.lang).replace(
+                "{moneyImg}",
+                `<img width="23" height="23" draggable="false" src="${interfaceImages.money}" alt="🪙" />`
+            ),
+            "error"
+        ).show(5000)
     if (data.tokens > 0) data.tokens--
     else data.coins -= 1200
 
@@ -1048,12 +1070,12 @@ function startMatch() {
                 })
             }
             document.querySelector(`div#game.match div[gameplay="player"] div.btns button#heal`).addEventListener("click", () => {
-                if (gameModify.getColab("player").you.hp.factor > 0.75) return
+                if (gameModify.getColab("player").you.hp.factor() > 0.75) return
                 if (matchSettings.player.points < 25) return
                 matchSettings.player.points -= 25
                 audios.heal.currentTime = 0
                 audios.heal.play()
-                gameModify.getColab("player").you.hp.setValue(Math.pow(2, data.characters[matchSettings.player.name].lvl) * 100, false)
+                gameModify.getColab("player").you.hp.setValue(gameModify.getColab().you.hp.get() + Math.pow(2, data.characters[matchSettings.player.name].lvl) * 100, false)
 
                 updateHP("player")
                 analyze()
@@ -1092,7 +1114,7 @@ function updateHP(type) {
 
 /**
  * Kończy grę i wyświetla zakończenie rundy
- * @param {number} type Typ zakończenia: 0 - wygrana, 1 - przegrana, 2 - przegrana przez poddanie
+ * @param {0 | 1 | 2} type Typ zakończenia: 0 - wygrana, 1 - przegrana, 2 - przegrana przez poddanie
  * @tags #GameEnd #EndMatch
  */
 function endGame(type) {
@@ -1108,20 +1130,13 @@ function endGame(type) {
         if (type == 0) {
             gType = "endScreen"
             var ticketChange = Math.round(Math.random() * 9)
-            var xp = Math.round(
-                (32 +
-                    0.8 * Math.random() * Math.pow(classes.indexOf(characters_json[matchSettings.player.name].class) + 1, 5) +
-                    classes.indexOf(characters_json[matchSettings.player.name].class) * 7) /
-                    50
-            )
-            var mon = Math.round(
-                (matchSettings.player.health / Math.pow(characters_json[matchSettings.player.name].level_up.hp, data.characters[matchSettings.player.name].lvl)) *
-                    (0.9 + matchSettings.moves - 10 / 10) *
-                    factorNumber >
-                    0.8
-                    ? 0.1
-                    : (1 - factorNumber) * 0.8
-            )
+            var xp = Math.round(Math.random() * 50 + Math.log10(matchSettings.player.health) * matchSettings.moves) + 32
+
+            var mon =
+                Math.round(
+                    Math.pow(Math.log10(matchSettings.player.health), 2) * (1 + Math.max(matchSettings.moves - 10, 0) / 10) +
+                        Math.max(matchSettings.moves - 10, 0) * Math.max(1 - factorNumber, 0.25)
+                ) * 2
             document.querySelector("div#game.match").innerHTML = `<div id="runCenter">
                 <div id="theBigText">${checkLanguage(langText.endgameMessages.win, data.settings.lang)}</div>
                 <div id="presents">
@@ -1405,7 +1420,7 @@ function analyze() {
     document.querySelector(`div#game.match div[gameplay="player"] div.btns`).style.display = "none"
     if (matchSettings.bot.health <= 0) return endGame(0)
     setTimeout(() => {
-        let canskip
+        let canskip = false
         do {
             let action = Math.round(Math.random() * 16)
             // console.log(action)
@@ -1648,23 +1663,15 @@ function framer() {
                 }
             } else if (gc.buttons[3].pressed) {
                 if (gType == "match") {
-                    if (
-                        matchSettings.player.health <=
-                        document.querySelector(`div#game.match div[gameplay="player"] div.healthBar div.health`).style.getPropertyValue("--healthMax") / 2
-                    ) {
+                    if (gameModify.getColab().you.hp.factor() <= 0.75) {
                         if (matchSettings.player.points >= 25) {
                             matchSettings.player.health += Math.pow(2, data.characters[matchSettings.player.name].lvl) * 100
                             matchSettings.player.points -= 25
                             audios.heal.currentTime = 0
                             audios.heal.play()
-                            if (
-                                matchSettings.player.health >
-                                document.querySelector(`div#game.match div[gameplay="player"] div.healthBar div.health`).style.getPropertyValue("--healthMax")
-                            )
-                                matchSettings.player.hp = document
-                                    .querySelector(`div#game.match div[gameplay="player"] div.healthBar div.health`)
-                                    .style.getPropertyValue("--healthMax")
-                            document.querySelector(`div#game.match div[gameplay="player"] div.btns span#BTPNumber`).innerText = matchSettings.player.points
+                            gameModify
+                                .getColab("player")
+                                .you.hp.setValue(gameModify.getColab().you.hp.get() + Math.pow(2, data.characters[matchSettings.player.name].lvl) * 100, false)
 
                             if (showedCheck) document.querySelector(`div#game.match div[gameplay="player"] div.btns button.atk.gChecked`).classList.remove("gChecked")
                             showedCheck = false
@@ -1759,6 +1766,19 @@ function framer() {
             spDurationFunction = spDurationFunction.filter(
                 (data) => data.moves.ended > changedValue.moves || ((data.type == 0 || data.type == "end") && data.moves.ended == changedValue.moves)
             )
+        }
+
+        if (gType == "match") {
+            matchSettings.player.health = Math.min(
+                matchSettings.player.health,
+                Number(document.querySelector(`div#game.match div[gameplay="player"] div.healthBar div.health`).style.getPropertyValue("--healthMax"))
+            )
+            updateHP("player")
+            matchSettings.bot.health = Math.min(
+                matchSettings.bot.health,
+                Number(document.querySelector(`div#game.match div[gameplay="bot"] div.healthBar div.health`).style.getPropertyValue("--healthMax"))
+            )
+            updateHP("bot")
         }
 
         console.log(`[DEBUG] Zmiana: OK (ruch ${matchSettings.moves})`, Object.keys(changedValue))

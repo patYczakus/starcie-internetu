@@ -14,7 +14,7 @@ export function createForm() {
             <div id="ann">
                 Announcements isn't supported in your language right now.
                 <a href="#">Show anyway</a><br /><br />
-                Last update (version <u>1.1.1</u>) released <u>1 Sept. 2023</u>.
+                Last update (version <u>1.5.1</u>) released <u>18 Dec 2023</u>.
             </div>
         </div>`
     } else
