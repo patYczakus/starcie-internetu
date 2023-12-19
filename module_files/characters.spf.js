@@ -114,7 +114,7 @@ const spf = {
                 if (gameModify.getColab().analyzeTheEnd()) gameModify.getColab().endSP()
             }, 1000)
     },
-    diamentowyDominus: function () {
+    platynowyDominus: function () {
         gameModify.getColab().you.atk.setPrectange(110, "all")
         gameModify.getColab().you.JSON.change({ critChance: 0 })
         gameModify.getColab().enemy.crit.change(gameModify.getColab().enemy.crit.get * 1.25)

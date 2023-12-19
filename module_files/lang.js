@@ -53,7 +53,9 @@ export var langText = {
                 <li>Osłabione na:{ch_powers.weak}</li>
             </ul><br />
             <u>Ataki</u>
+            <div style="overflow-x: scroll"> 
             <table><tbody>{ch_atk}</tbody></table>
+            </div>
             <br /><hr style="height: 5px; width: calc(100% - 35px);" />
             <span style="display: block; font-size: 150%; padding: 25px 0">Gwiezdna moc (SP)<br />{ch_sp_name}</span>
             {starpover_bulid}<br />
@@ -71,7 +73,9 @@ export var langText = {
                 <li>Weakened at:{ch_powers.weak}</li>
             </ul><br />
             <u>Attacks</u>
+            <div style="overflow-x: scroll"> 
             <table><tbody>{ch_atk}</tbody></table>
+            </div>
             <br /><hr style="height: 5px; width: calc(100% - 35px);" />
             <span style="display: block; font-size: 150%; padding: 25px 0">Star Power (SP)<br />{ch_sp_name}</span>
             {starpover_bulid}<br /><br />
@@ -127,8 +131,12 @@ export var langText = {
                 en: "<b>Odszkodowanie wojenne</b> - każde uderzenie od przeciwnika powoduje dodanie BTP (10% BTP dla przeciwnika).",
             },
             atkback: {
-                pl: "<b>Sprzężenie zwrotne</b> - każdy atak od przeciwnika powoduje oddanie dla niego 5% wartości ataku",
-                en: "<b>Return message</b> - each attack from an opponent results in 5% of the attack value being given back to the opponent",
+                pl: "<b>Sprzężenie zwrotne</b> - każdy atak od przeciwnika powoduje oddanie dla niego 5% wartości ataku.",
+                en: "<b>Return message</b> - each attack from an opponent results in 5% of the attack value being given back to the opponent.",
+            },
+            double: {
+                pl: "<b>Atk x2</b> - każdy atak postaci zostaje podwojona.",
+                en: "<b>Atk x2</b> - each character attack doubles up.",
             },
         },
     },

@@ -36,3 +36,8 @@ function warning() {
     )
     setTimeout(warning, 60000)
 }
+
+export const projectInfo = {
+    version: "1.5.2",
+    date: [19, 12, 2023],
+}

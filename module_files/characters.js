@@ -150,7 +150,7 @@ export const charaList = {
             },
             maxUses: 1,
         },
-        tags: [],
+        tags: ["double"],
     },
     trajom: {
         class: "legendary",

@@ -99,7 +99,7 @@ const database = getDatabase(app),
         name: ["lvl", "sp"],
         type: ["number", "boolean"],
     },
-    atkFromBtp = (btp) => Math.ceil(btp * Math.pow(btp, 0.25) + 20 - Math.min(btp, 15))
+    atkFromBtp = (btp) => Math.ceil(btp * Math.pow(btp, 0.45) + 20 - Math.min(btp, 15))
 
 /**
  * Dostaje kod ustawień
@@ -206,6 +206,8 @@ playedMiniAlert = new miniAlert("", "musicPlayer")
  * @tags #core
  */
 export function start(uid) {
+    console.log("[DEBUG/user] ID użytkownika: ", uid)
+
     uidd = uid
 
     function second_task() {
@@ -216,7 +218,7 @@ export function start(uid) {
         <div id="popup_info"></div><div id="game" class="bar">
             <img width="23" height="23" draggable="false" src="${interfaceImages.money}" alt="🪙">
             ${data.coins}
-            <button style="opacity: 0; width: 20px"></button>LVL ${data.lvl} (${Math.round(data.xp * 2) / 100}%) 
+            <button style="opacity: 0; width: 20px"></button>LVL: ?
             <button id="home" style="background:gray">
                 🏠 
                 <img draggable="false" width="20" height="20" src="${interfaceImages.Gamepad_Start}">
@@ -265,8 +267,8 @@ export function start(uid) {
             console.log(`[DEBUG/datachange] Zmieniony kod JSON:`, _chara)
             data.characters = _chara
 
-            if (data.xp >= 5000) {
-                data.xp -= 5000
+            if (data.xp >= 10000) {
+                data.xp -= 10000
                 data.lvl++
 
                 data.tokens++
@@ -277,11 +279,9 @@ export function start(uid) {
                 return set(ref(database, `starcie-internetu/data/${uid}`), data)
             }
 
-            document.querySelector("#game.bar").innerHTML = `<img width="23" height="23" draggable="false" src="${interfaceImages.money}" alt="🪙"> ${
-                data.coins
-            }<button style="opacity: 0; width: 20px"></button>LVL ${data.lvl} (${
-                Math.round(data.xp * 2) / 100
-            }%) <button id="home" style="background:gray">🏠 <img  draggable="false" width="20" height="20" src="${interfaceImages.Gamepad_Start}"></button>`
+            document.querySelector(
+                "#game.bar"
+            ).innerHTML = `<img width="23" height="23" draggable="false" src="${interfaceImages.money}" alt="🪙"> ${data.coins}<button style="opacity: 0; width: 20px"></button>LVL ${data.lvl}<button style="opacity: 0; width: 5px"></button><span style="font-size: 60%">XP: ${data.xp}/10000</span> <button id="home" style="background:gray">🏠 <img  draggable="false" width="20" height="20" src="${interfaceImages.Gamepad_Start}"></button>`
             document.querySelector("div#game.bar #home").addEventListener("click", () => {
                 createHome()
             })
@@ -612,8 +612,7 @@ function createHome() {
         ${checkLanguage(langText.home.logout, data.settings.lang)} 
         <img draggable="false" width="15" height="15" src="${interfaceImages.Gamepad_LEFT}">
     </button><br /><br />
-    ID: <span class="autoSelectable"><button id="uid">${checkLanguage(langText.home.idt, data.settings.lang)}</button></span><br />
-    <iframe class="reset" src="./ogloszenia"></iframe>`
+    ID: <span class="autoSelectable"><button id="uid">${checkLanguage(langText.home.idt, data.settings.lang)}</button></span><br />`
 
     document.querySelector("#info #chest").addEventListener("click", openChest)
     document.querySelector("#info #match").addEventListener("click", startMatch)
@@ -786,6 +785,36 @@ function openChest() {
     })
 }
 
+var fightFunctions = {
+    attack: function (id) {
+        if (document.querySelector(`div#game.match div[gameplay="player"] div.btns button.atk.gChecked`) != null)
+            document.querySelector(`div#game.match div[gameplay="player"] div.btns button.atk.gChecked`).classList.remove("gChecked")
+        if (matchSettings.player.points < characters_json[matchSettings.player.name].battle[id].points) return
+        dmg("bot", matchSettings.player.atk[id])
+        matchSettings.player.points -= characters_json[matchSettings.player.name].battle[id].points
+        document.querySelector(`div#game.match div[gameplay="player"] div.btns span#BTPNumber`).innerText = matchSettings.player.points
+        analyze()
+    },
+    heal: function () {
+        if (gameModify.getColab("player").you.hp.factor() > 0.75) return
+        if (matchSettings.player.points < 25) return
+        gameModify.getColab("player").you.hp.setValue(gameModify.getColab("player").you.hp.get() + Math.pow(2, data.characters[matchSettings.player.name].lvl) * 500, false)
+        matchSettings.player.points -= 25
+        audios.heal.currentTime = 0
+        audios.heal.play()
+
+        updateHP("player")
+        analyze()
+    },
+    getBTP: function () {
+        matchSettings.player.points += 9 + data.lvl
+        document.querySelector(`div#game.match div[gameplay="player"] div.btns span#BTPNumber`).innerText = matchSettings.player.points
+        audios.punkty.currentTime = 0
+        audios.punkty.play()
+        analyze()
+    },
+}
+
 /**
  * Rozpoczyna mecz z botem
  * @tags #StartGame #StartMatch
@@ -846,6 +875,7 @@ function startMatch() {
             characters_json[matchSettings.player.name].level_up.battle[i],
             data.characters[matchSettings.player.name].lvl
         )
+        if (characters_json[matchSettings.player.name].tags.includes("double")) matchSettings.player.atk[i] *= 2
         if (typeof characters_json[matchSettings.player.name].battle[i].name == "object") {
             textesTranslated.atk[i] = data.settings.forcedLang
                 ? checkLanguage(characters_json[matchSettings.player.name].battle[i].name, data.settings.lang)
@@ -902,6 +932,7 @@ function startMatch() {
             characters_json[matchSettings.bot.name].level_up.battle[i],
             matchSettings.bot.lvl
         )
+        if (characters_json[matchSettings.bot.name].tags.includes("double")) matchSettings.player.atk[i] *= 2
     }
     matchSettings.bot.health = gameModify.calc(0, characters_json[matchSettings.bot.name].hp, characters_json[matchSettings.bot.name].level_up.hp, matchSettings.bot.lvl)
 
@@ -1020,7 +1051,7 @@ function startMatch() {
             document.querySelector(`div#game.match div[gameplay="player"] div.btns`).innerHTML += `<button id="heal" style="width: 100%; margin: 5px">${checkLanguage(
                 langText.fight.healBTN,
                 data.settings.lang
-            )} (+${Math.pow(2, data.characters[matchSettings.player.name].lvl) * 100} HP, -25 BTP) <img draggable="false" width="15" height="15" src="${
+            )} (+${Math.pow(2, data.characters[matchSettings.player.name].lvl) * 500} HP, -25 BTP) <img draggable="false" width="15" height="15" src="${
                 interfaceImages.Gamepad_Trójkąt_Y
             }"></button>`
         }, 50 * matchSettings.player.atk.length)
@@ -1062,30 +1093,14 @@ function startMatch() {
                     document.querySelectorAll(`div#game.match div[gameplay="player"] div.btns button`)[i].innerHTML = textesTranslated.atk[i]
                 })
                 document.querySelectorAll(`div#game.match div[gameplay="player"] div.btns button`)[i].addEventListener("click", () => {
-                    if (matchSettings.player.points < characters_json[matchSettings.player.name].battle[i].points) return
-                    dmg("bot", matchSettings.player.atk[i])
-                    matchSettings.player.points -= characters_json[matchSettings.player.name].battle[i].points
-                    document.querySelector(`div#game.match div[gameplay="player"] div.btns span#BTPNumber`).innerText = matchSettings.player.points
-                    analyze()
+                    fightFunctions.attack(i)
                 })
             }
             document.querySelector(`div#game.match div[gameplay="player"] div.btns button#heal`).addEventListener("click", () => {
-                if (gameModify.getColab("player").you.hp.factor() > 0.75) return
-                if (matchSettings.player.points < 25) return
-                matchSettings.player.points -= 25
-                audios.heal.currentTime = 0
-                audios.heal.play()
-                gameModify.getColab("player").you.hp.setValue(gameModify.getColab().you.hp.get() + Math.pow(2, data.characters[matchSettings.player.name].lvl) * 100, false)
-
-                updateHP("player")
-                analyze()
+                fightFunctions.heal()
             })
             document.querySelector(`div#game.match div[gameplay="player"] div.btns button#getBTP`).addEventListener("click", () => {
-                matchSettings.player.points += 9 + data.lvl
-                document.querySelector(`div#game.match div[gameplay="player"] div.btns span#BTPNumber`).innerText = matchSettings.player.points
-                audios.punkty.currentTime = 0
-                audios.punkty.play()
-                analyze()
+                fightFunctions.getBTP()
             })
             if (data.characters[matchSettings.player.name].sp)
                 document.querySelector(`div#game.match div[gameplay="player"] div.btns button#sp`).addEventListener("click", () => {
@@ -1309,7 +1324,10 @@ function regenerate(type, keepMaxHP) {
             })
         }
         document.querySelector(`div#game.match div[gameplay="player"] div.btns button#heal`).addEventListener("click", () => {
-            if (matchSettings.player.health > document.querySelector(`div#game.match div[gameplay="player"] div.healthBar div.health`).style.getPropertyValue("--healthMax") / 2)
+            if (
+                matchSettings.player.health >
+                (document.querySelector(`div#game.match div[gameplay="player"] div.healthBar div.health`).style.getPropertyValue("--healthMax") / 4) * 3
+            )
                 return
             if (matchSettings.player.points < 25) return
             matchSettings.player.health += Math.pow(2, data.characters[matchSettings.player.name].lvl) * 100
@@ -1381,11 +1399,11 @@ function dmg(type, atk, returns = Boolean(false)) {
         matchSettings[type2].points += Math.round(d_btp)
         audios.attack.play()
     } else {
-        d_btp *= 8
+        d_btp *= 12
 
         audios.criticalAttack.pause()
         audios.criticalAttack.currentTime = 0
-        matchSettings[type].health -= atk * 4
+        matchSettings[type].health -= atk * 6
         matchSettings[type2].points += Math.round(d_btp)
         audios.criticalAttack.play()
     }
@@ -1628,24 +1646,13 @@ function framer() {
                 }
                 if (gType == "match") {
                     if (showedCheck && matchSettings.player.points >= characters_json[matchSettings.player.name].battle[gCheckedNum.match].points) {
-                        matchSettings.player.points -= characters_json[matchSettings.player.name].battle[gCheckedNum.match].points
-                        dmg("bot", matchSettings.player.atk[gCheckedNum.match])
-                        document.querySelector(`div#game.match div[gameplay="player"] div.btns button.atk.gChecked`).classList.remove("gChecked")
-                        document.querySelector(`div#game.match div[gameplay="player"] div.btns span#BTPNumber`).innerText = matchSettings.player.points
-                        analyze()
+                        fightFunctions.attack(gCheckedNum.match)
                     }
                 }
             } else if (gc.buttons[2].pressed) {
                 if (gType == "match") {
                     if (showedCheck) document.querySelector(`div#game.match div[gameplay="player"] div.btns button.atk.gChecked`).classList.remove("gChecked")
-                    showedCheck = false
-                    gCheckedNum.match = -1
-
-                    matchSettings.player.points += 9 + data.lvl
-                    document.querySelector(`div#game.match div[gameplay="player"] div.btns span#BTPNumber`).innerText = matchSettings.player.points
-                    audios.punkty.currentTime = 0
-                    audios.punkty.play()
-                    analyze()
+                    fightFunctions.getBTP()
                 }
                 if (gType == "charaInfo") {
                     let name = document.querySelector(`div#info div.o input#nameInfo`).value
@@ -1665,20 +1672,10 @@ function framer() {
                 if (gType == "match") {
                     if (gameModify.getColab().you.hp.factor() <= 0.75) {
                         if (matchSettings.player.points >= 25) {
-                            matchSettings.player.health += Math.pow(2, data.characters[matchSettings.player.name].lvl) * 100
-                            matchSettings.player.points -= 25
-                            audios.heal.currentTime = 0
-                            audios.heal.play()
-                            gameModify
-                                .getColab("player")
-                                .you.hp.setValue(gameModify.getColab().you.hp.get() + Math.pow(2, data.characters[matchSettings.player.name].lvl) * 100, false)
-
+                            fightFunctions.heal()
                             if (showedCheck) document.querySelector(`div#game.match div[gameplay="player"] div.btns button.atk.gChecked`).classList.remove("gChecked")
                             showedCheck = false
                             gCheckedNum.match = -1
-
-                            updateHP("player")
-                            analyze()
                         }
                     }
                 }
