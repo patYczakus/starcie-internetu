@@ -127,8 +127,8 @@ export var langText = {
                 en: "<b>Toxin</b> - each attack on an opponent causes a special effect on the opponent inflicting 4% of the attack value for 2 rounds.",
             },
             btpwa: {
-                pl: "<b>Odszkodowanie wojenne</b> - każde uderzenie od przeciwnika powoduje dodanie BTP (10% BTP dla przeciwnika).",
-                en: "<b>Odszkodowanie wojenne</b> - każde uderzenie od przeciwnika powoduje dodanie BTP (10% BTP dla przeciwnika).",
+                pl: "<b>Odszkodowanie wojenne</b> - każde uderzenie od przeciwnika powoduje dodanie BTP (20% z BTP dla przeciwnika).",
+                en: "<b>War compensation</b> - each hit from an opponent adds BTP (20% from BTP for the opponent).",
             },
             atkback: {
                 pl: "<b>Sprzężenie zwrotne</b> - każdy atak od przeciwnika powoduje oddanie dla niego 5% wartości ataku.",

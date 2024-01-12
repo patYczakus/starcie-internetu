@@ -275,7 +275,7 @@ export const charaList = {
             { name: "/powervolt", points: 100 },
         ],
         dimension: "Starcie internetu",
-        hp: 7500,
+        hp: 7000,
         class: "dark_shop",
         max_lvl: 10,
         types: {
@@ -291,22 +291,22 @@ export const charaList = {
         },
         image: "https://cdn.discordapp.com/attachments/1177876489421738014/1177880327587369010/sketch-1700898905906.png?ex=6586928a&is=65741d8a&hm=3cc7efbe29dd42711063e34604fdf61ea937dcf66db9b06dfed2dba234bfff49&",
         level_up: {
-            hp: 2.1,
-            battle: [2.366, 3.5],
+            hp: 2.05,
+            battle: [2.2, 3.5],
             types: {
                 strong: -100,
                 weak: 50,
             },
         },
         sp: {
-            name: "haker1000@stin:~$ cp ../$ENEMY/sp ._",
+            name: "$ cp ../$ENEMY ._",
             description: {
-                pl: "haker1000 kopiuje te same SP co przeciwnik, ograniczone do jednego ruchu.",
-                en: "hacker1000 copies the same Star Power as the opponent, limited to one move.",
+                pl: "haker1000 kopiuje te same SP co przeciwnik, tracąc przy tym trochę HP. Możliwe też, że będzie miał te same statystyki co przeciwnik!",
+                en: "haker1000 copies the same Star Power as the opponent. It is also possible that he will have the same stats as his opponent!",
             },
-            maxUses: 1,
+            maxUses: Infinity,
         },
-        tags: ["btpwa"],
+        tags: ["btpwa", "atkback", "double"],
     },
 
     // Rocket League
@@ -921,7 +921,7 @@ export const charaList = {
             en: "A flesh and blood farmer with an interest in cryptology. One day while driving a powerful tractor he was out of control and suddenly fell asleep. Upon waking up, he realised that he felt like he was in VR because of his appearance and his surroundings. As a brave peasant, still remembering the Middle Ages from history, he manages quite well. He is not outstanding at it, but if he concentrates, he can win.",
         },
         dimension: "Stick'y-land",
-        hp: 8800,
+        hp: 8400,
         class: "rare",
         max_lvl: 18,
         types: {
@@ -938,7 +938,7 @@ export const charaList = {
         image: "https://cdn.discordapp.com/attachments/1177876489421738014/1177880327289589831/sketch-1700898905341.png?ex=65741d89&is=6561a889&hm=b392ce985d244fbe4408e6d0611ca1ee6c7be438bef7613875fc4bbae2eb47d8&",
         level_up: {
             hp: 2.55,
-            battle: [2.05, 2.8, 3.35],
+            battle: [2, 2.7, 3.35],
             types: {
                 strong: 120,
                 weak: 210,
@@ -950,8 +950,8 @@ export const charaList = {
                 en: "With the tractor via the Internet",
             },
             description: {
-                pl: "Przez całą rundę ciągnik szymkaDymka powoduje regenerację oraz dodatkowe BTP. Zwiększa także atak <i>Ciągnikowy ruch</i> o 20%.",
-                en: "Throughout the entire round, the szymekDymek's tractor causes regeneration and additional BTP. It also increases <i>Tractor load</i> attack by 20%.",
+                pl: "Przez całą rundę ciągnik szymkaDymka powoduje regenerację, dodatkowe BTP oraz 30% szansy na mały atak w postaci spalin ze silnika. Zwiększa także jednorazowo atak <i>Ciągnikowy ruch</i> o 15%.",
+                en: "Throughout the entire round, the szymekDymek's tractor causes regeneration, additional BTP and 30% chance of a small attack in the form of exhaust fumes from the engine. It also increases once <i>Tractor load</i> attack by 15%.",
             },
             maxUses: 1,
         },
@@ -1111,7 +1111,7 @@ export const charaList = {
             },
             maxUses: 9,
         },
-        tags: [],
+        tags: ["toks"],
     },
 
     // Pokemon
@@ -1307,7 +1307,7 @@ export const charaList = {
                 ind: ["Chi", "Ogień"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1047919900875825293/1119307614866657380/sketch-1686934121062.png",
+        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1194706073119117312/sketch-1704910473103.png?ex=65b153bc&is=659edebc&hm=61b0e938b7a95ec3071463b77262e73530d7bd2b960da975e1746b736d13ae6f&",
         level_up: {
             hp: 2.75,
             battle: [3, 4.5, 5.5],
@@ -1363,7 +1363,7 @@ export const charaList = {
                 ind: ["Trucizna", "Ogień", "Woda", "Lód"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1047919900875825293/1123879023307657296/sketch-1687978196316.png",
+        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1194706073534341260/sketch-1704910472268.png?ex=65b153bc&is=659edebc&hm=228aeb04085a41b3be9ae5c6fd7b7ab606509d97a1beb7fcdd3e3755d1b5e762&",
         level_up: {
             hp: 3.1,
             battle: [2, 3.1, 3.9],

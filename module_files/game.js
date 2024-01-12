@@ -43,6 +43,7 @@ var data = {
         },
         moves: 0,
     },
+    gmx = 0,
     accualVersion = 3,
     characters_list_names = [],
     uidd,
@@ -62,9 +63,12 @@ var data = {
             miss: new Audio("https://patyczakus.github.io/starcie-internetu/audios/miss.mp3"),
             num_num_num: new Audio("https://patyczakus.github.io/starcie-internetu/audios/numnumnum.mp3"),
             regen: new Audio("https://patyczakus.github.io/starcie-internetu/audios/regen.mp3"),
-            tractorStart: new Audio("https://patyczakus.github.io/starcie-internetu/audios/starting-a-tractor.mp3"),
+            tractor: {
+                start: new Audio("https://patyczakus.github.io/starcie-internetu/audios/starting-a-tractor.mp3"),
+                horn: new Audio("https://patyczakus.github.io/starcie-internetu/audios/car-horn.mp3"),
+            },
             discord: {
-                userMoved: new Audio("https://patyczakus.github.io/starcie-internetu/audios/starting-a-tractor.mp3"),
+                userMoved: new Audio("https://patyczakus.github.io/starcie-internetu/audios/DiscordUM.mp3"),
             },
         },
     },
@@ -100,6 +104,12 @@ const database = getDatabase(app),
         type: ["number", "boolean"],
     },
     atkFromBtp = (btp) => Math.ceil(btp * Math.pow(btp, 0.45) + 20 - Math.min(btp, 15))
+
+function closeInfo() {
+    document.querySelector("div#info").classList.remove("active")
+    document.querySelector("div#info").classList.add("deactive")
+    gType = "home"
+}
 
 /**
  * Dostaje kod ustawień
@@ -227,10 +237,7 @@ export function start(uid) {
         <div id="game" class="home"></div>
         <div id="info"><div class="t"></div><div class="o"></div></div>
         <div id="game" class="match"></div>`
-        document.querySelector("div#info div.t").addEventListener("click", () => {
-            document.querySelector("div#info").classList.remove("active")
-            gType = "home"
-        })
+        document.querySelector("div#info div.t").addEventListener("click", closeInfo)
         document.querySelector("div#game.bar #home").addEventListener("click", () => {
             createHome()
         })
@@ -472,7 +479,7 @@ function createCharacterInfo(name) {
         .replace("{ch_attr}", () => {
             if (characters_json[name].tags.length == 0) return `<br />[ ${checkLanguage(langText.characterInfo.nopow, data.settings.lang)} ]`
 
-            return characters_json[name].tags.map((tag) => `<li>${checkLanguage(langText.characterInfo.tags[tag], data.settings.lang)}</li>`)
+            return characters_json[name].tags.map((tag) => `<li>${checkLanguage(langText.characterInfo.tags[tag], data.settings.lang)}</li>`).join("")
         })
         .replace("{ch_powers.strong}", () => {
             if ("strong" in characters_json[name].types)
@@ -504,7 +511,7 @@ function createCharacterInfo(name) {
         .replace("{starpover_bulid}", () => {
             if (data.characters[name].sp)
                 return `${checkLanguage(characters_json[name].sp.description, data.settings.lang)}<br />
-            <u>${checkLanguage(langText.characterInfo.mu, data.settings.lang)} ${characters_json[name].sp.maxUses}</u>`
+            <u>${checkLanguage(langText.characterInfo.mu, data.settings.lang)} ${isFinite(characters_json[name].sp.maxUses) ? characters_json[name].sp.maxUses : "\u221E"}</u>`
             else return checkLanguage(langText.characterInfo.nosp, data.settings.lang)
         })
         .replace("{upgradeBTN}", () => {
@@ -528,10 +535,9 @@ function createCharacterInfo(name) {
                 </div>`
         })
 
+    document.querySelector("div#info").classList.remove("deactive")
     document.querySelector("div#info").classList.add("active")
-    document.querySelector(`div#info div.o button#close`).addEventListener("click", () => {
-        document.querySelector("div#info").classList.remove("active")
-    })
+    document.querySelector(`div#info div.o button#close`).addEventListener("click", closeInfo)
 
     if (!data.characters[name].sp)
         document.querySelector("div#info div.o button#buySP").addEventListener("click", () => {
@@ -622,11 +628,9 @@ function createHome() {
     document.querySelector("#info #uid").addEventListener("click", () => {
         document.querySelector("div#info div.o span").innerHTML = uidd
     })
-    document.querySelector("#info #leave").addEventListener("click", () => {
-        gType = "home"
-        document.querySelector("div#info").classList.remove("active")
-    })
+    document.querySelector("#info #leave").addEventListener("click", closeInfo)
     document.querySelector("#info #settings").addEventListener("click", createSettings)
+    document.querySelector("div#info").classList.remove("deactive")
     document.querySelector("div#info").classList.add("active")
 }
 
@@ -804,6 +808,7 @@ var fightFunctions = {
         audios.heal.play()
 
         updateHP("player")
+        document.querySelector(`div#game.match div[gameplay="player"] div.btns span#BTPNumber`).innerText = matchSettings.player.points
         analyze()
     },
     getBTP: function () {
@@ -1133,6 +1138,7 @@ function updateHP(type) {
  * @tags #GameEnd #EndMatch
  */
 function endGame(type) {
+    gmx = 0
     playerSPUser = "player"
     var factorNumber = gameModify.getColab().you.hp.factor()
     spDurationFunction = []
@@ -1270,12 +1276,12 @@ function regenerate(type, keepMaxHP) {
     if (type == "player") {
         document.querySelector(`div#game.match div[gameplay="player"]`).innerHTML += `<div class="btns"></div>`
         for (let i = 0; i < matchSettings[type].atk.length; i++) {
-            if (typeof characters_json[matchSettings[type].name].battle[i].name == "object") {
+            if (typeof characters_json[matchSettings[type].name].battle[i].name === "string") {
+                textesTranslated.atk[i] = characters_json[matchSettings[type].name].battle[i].name
+            } else {
                 textesTranslated.atk[i] = data.settings.forcedLang
                     ? checkLanguage(characters_json[matchSettings[type].name].battle[i].name, data.settings.lang)
                     : characters_json[matchSettings[type].name].battle[i].name.pl
-            } else {
-                textesTranslated.atk[i] = characters_json[matchSettings[type].name].battle[i].name
             }
 
             document.querySelector(
@@ -1313,39 +1319,17 @@ function regenerate(type, keepMaxHP) {
                 } BPT`
             })
             document.querySelectorAll(`div#game.match div[gameplay="player"] div.btns button`)[i].addEventListener("mouseout", () => {
-                document.querySelectorAll(`div#game.match div[gameplay="player"] div.btns button`)[i].innerHTML = characters_json[matchSettings.player.name].battle[i].name
+                document.querySelectorAll(`div#game.match div[gameplay="player"] div.btns button`)[i].innerHTML = textesTranslated.atk[i]
             })
             document.querySelectorAll(`div#game.match div[gameplay="player"] div.btns button`)[i].addEventListener("click", () => {
-                if (matchSettings.player.points < characters_json[matchSettings.player.name].battle[i].points) return
-                dmg("bot", matchSettings.player.atk[i])
-                matchSettings.player.points -= characters_json[matchSettings.player.name].battle[i].points
-                document.querySelector(`div#game.match div[gameplay="player"] div.btns span#BTPNumber`).innerText = matchSettings.player.points
-                analyze()
+                fightFunctions.attack(i)
             })
         }
         document.querySelector(`div#game.match div[gameplay="player"] div.btns button#heal`).addEventListener("click", () => {
-            if (
-                matchSettings.player.health >
-                (document.querySelector(`div#game.match div[gameplay="player"] div.healthBar div.health`).style.getPropertyValue("--healthMax") / 4) * 3
-            )
-                return
-            if (matchSettings.player.points < 25) return
-            matchSettings.player.health += Math.pow(2, data.characters[matchSettings.player.name].lvl) * 100
-            matchSettings.player.points -= 25
-            audios.heal.currentTime = 0
-            audios.heal.play()
-            if (matchSettings.player.health > document.querySelector(`div#game.match div[gameplay="player"] div.healthBar div.health`).style.getPropertyValue("--healthMax"))
-                matchSettings.player.hp = document.querySelector(`div#game.match div[gameplay="player"] div.healthBar div.health`).style.getPropertyValue("--healthMax")
-            document.querySelector(`div#game.match div[gameplay="player"] div.healthBar div.health`).style.setProperty("--health", matchSettings.player.health)
-            document.querySelector(`div#game.match div[gameplay="player"] div.btns span#BTPNumber`).innerText = matchSettings.player.points
-            analyze()
+            fightFunctions.heal()
         })
         document.querySelector(`div#game.match div[gameplay="player"] div.btns button#getBTP`).addEventListener("click", () => {
-            matchSettings.player.points += 9 + data.lvl
-            document.querySelector(`div#game.match div[gameplay="player"] div.btns span#BTPNumber`).innerText = matchSettings.player.points
-            audios.punkty.currentTime = 0
-            audios.punkty.play()
-            analyze()
+            fightFunctions.getBTP()
         })
         if (data.characters[matchSettings.player.name].sp)
             document.querySelector(`div#game.match div[gameplay="player"] div.btns button#sp`).addEventListener("click", () => {
@@ -1391,7 +1375,7 @@ function dmg(type, atk, returns = Boolean(false)) {
     var type2 = type == "player" ? "bot" : "player"
     var lvl = type2 == "player" ? data.characters[matchSettings.player.name].lvl : matchSettings.bot.lvl
     var crit = Math.round(Math.random() * 1000) > matchSettings[type].critChance * (0.9 + rand / 4)
-    var d_btp = Math.log10(atk) * 2 * (1 + 0.001 * data.lvl) * (1 + 0.002 * lvl) * (1 + 0.0001 * String(atk).length)
+    var d_btp = Math.log10(atk) * (2 + 0.05 * String(atk).length)
     if (crit) {
         audios.attack.pause()
         audios.attack.currentTime = 0
@@ -1411,7 +1395,7 @@ function dmg(type, atk, returns = Boolean(false)) {
 
     updateHP(type)
     if (characters_json[matchSettings[type].name].tags.includes("btpwa")) {
-        matchSettings[type].points += Math.round(d_btp / 10)
+        matchSettings[type].points += Math.round(d_btp * 0.2)
         if (type == "player") document.querySelector(`div#game.match div[gameplay="player"] div.btns span#BTPNumber`).innerText = matchSettings[type].points
     }
 
@@ -1757,14 +1741,14 @@ function framer() {
         if (Object.keys(changedValue).includes("moves")) {
             spDurationFunction.forEach((data) => {
                 if (data.type == 1 || data.type == "each") data.function(data.whichMove, matchSettings.moves - data.moves.started)
-                if ((data.type == 0 || data.type == "end") && data.moves.ended < changedValue.moves) data.function(data.whichMove)
+                if ((data.type == 0 || data.type == "end") && data.moves.ended == changedValue.moves) data.function(data.whichMove)
             })
-
             spDurationFunction = spDurationFunction.filter(
-                (data) => data.moves.ended > changedValue.moves || ((data.type == 0 || data.type == "end") && data.moves.ended == changedValue.moves)
+                (data) =>
+                    ((data.type == 1 || data.type == "each") && isFinite(data.moves.ended) ? data.moves.ended < changedValue.moves : true) ||
+                    ((data.type == 0 || data.type == "end") && data.moves.ended <= changedValue.moves && isFinite(data.moves.ended))
             )
         }
-
         if (gType == "match") {
             matchSettings.player.health = Math.min(
                 matchSettings.player.health,
@@ -1777,9 +1761,7 @@ function framer() {
             )
             updateHP("bot")
         }
-
         console.log(`[DEBUG] Zmiana: OK (ruch ${matchSettings.moves})`, Object.keys(changedValue))
-
         msBefore = Object.assign(msBefore, changedValue)
     }
 
@@ -1834,14 +1816,18 @@ function framer() {
 ----------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------
 */
-
 /**
  * Zmienna dot. gwiezdnych mocy (modyfikacji gier)
  */
 var gameModify = {
-    getColab: function (playerSPUType = "--ds") {
-        console.log(`[DEBUG] Użycie po stronie "${playerSPUser}" ("${playerSPUser}" dla parametru; ruch nr. ${matchSettings.moves})`)
-        if (playerSPUType == "--ds") playerSPUType = playerSPUser
+    getColab: function (playerSPUseArgument = "--ds") {
+        if (playerSPUseArgument == "--ds") var playerSPUType = playerSPUser + ""
+        else var playerSPUType = playerSPUseArgument + ""
+        console.log(
+            `[DEBUG] Użycie po stronie "${playerSPUType}" ("${playerSPUseArgument}" dla parametru, dla zmiennej "${playerSPUType}"; ruch nr. ${
+                matchSettings.moves
+            }; ${++gmx} użycie)`
+        )
 
         return {
             /** Typ gracza */

@@ -38,6 +38,6 @@ function warning() {
 }
 
 export const projectInfo = {
-    version: "1.5.2",
-    date: [19, 12, 2023],
+    version: "1.5.3",
+    date: [12, 1, 2024],
 }

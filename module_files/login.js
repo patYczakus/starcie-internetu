@@ -24,7 +24,7 @@ export function createForm() {
         </div>
         <i>⚠️ Hi, English person! If you don't understand Polish language, <a href="?lang=en">this link</a> makes the English interface.</i>
         <br /><br />
-        Ostatnia aktualizacja (wersja <u>${projectInfo.version}</u>) wydana została <u>${projectInfo.date.join(".")} roku</u><br />
+        Ostatnia aktualizacja (wersja <u>${projectInfo.version}</u>) wydana została <u>${projectInfo.date.map((x) => (x < 10 ? "0" + x : x)).join(".")} roku</u><br />
         Inne linki: <br />
         - <a href="./charaList">Lista z postaciami</a><br />
         - <a href="https://www.patreon.com/user/membership?u=102227103" target="_blank">Patreon</a> (jeżeli czujesz, że robię dobrą robotę i chcesz mnie wynagrodzić)<br />

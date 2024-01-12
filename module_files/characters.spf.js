@@ -32,6 +32,8 @@ const spf = {
         gameModify.getColab().endSP()
     },
     trajom: function () {
+        const atkFromBtp = (btp) => Math.ceil(btp * Math.pow(btp, 0.45) + 20 - Math.min(btp, 15))
+
         gameModify.getColab().enemy.attack(gameModify.getColab().you.atk.getValue(0))
         setTimeout(() => {
             gameModify.getColab().enemy.attack(gameModify.getColab().you.atk.getValue(0))
@@ -49,10 +51,10 @@ const spf = {
                     critChance: gameModify.calcCritChance("trajom", LVL, gameModify.getColab().enemy.name()),
                     health: gameModify.calc(0, 1000, 2.15, LVL),
                     atk: [
-                        gameModify.calc(0, charaList.trajom.battle[0], charaList.trajom.level_up.battle[0], LVL),
-                        gameModify.calc(0, charaList.trajom.battle[1], charaList.trajom.level_up.battle[1], LVL),
-                        gameModify.calc(0, charaList.trajom.battle[2], charaList.trajom.level_up.battle[2], LVL),
-                        gameModify.calc(0, charaList.trajom.battle[3], charaList.trajom.level_up.battle[3], LVL),
+                        gameModify.calc(0, atkFromBtp(charaList.trajom.battle[0].points), charaList.trajom.level_up.battle[0], LVL),
+                        gameModify.calc(0, atkFromBtp(charaList.trajom.battle[1].points), charaList.trajom.level_up.battle[1], LVL),
+                        gameModify.calc(0, atkFromBtp(charaList.trajom.battle[2].points), charaList.trajom.level_up.battle[2], LVL),
+                        gameModify.calc(0, atkFromBtp(charaList.trajom.battle[3].points), charaList.trajom.level_up.battle[3], LVL),
                     ],
                     spUses: 2,
                 })
@@ -63,10 +65,10 @@ const spf = {
                     critChance: gameModify.calcCritChance("trajom", LVL, gameModify.getColab().enemy.name()),
                     health: gameModify.calc(0, 1000, 2.15, LVL),
                     atk: [
-                        gameModify.calc(0, charaList.trajom.battle[0], charaList.trajom.level_up.battle[0], LVL),
-                        gameModify.calc(0, charaList.trajom.battle[1], charaList.trajom.level_up.battle[1], LVL),
-                        gameModify.calc(0, charaList.trajom.battle[2], charaList.trajom.level_up.battle[2], LVL),
-                        gameModify.calc(0, charaList.trajom.battle[3], charaList.trajom.level_up.battle[3], LVL),
+                        gameModify.calc(0, atkFromBtp(charaList.trajom.battle[0].points), charaList.trajom.level_up.battle[0], LVL),
+                        gameModify.calc(0, atkFromBtp(charaList.trajom.battle[1].points), charaList.trajom.level_up.battle[1], LVL),
+                        gameModify.calc(0, atkFromBtp(charaList.trajom.battle[2].points), charaList.trajom.level_up.battle[2], LVL),
+                        gameModify.calc(0, atkFromBtp(charaList.trajom.battle[3].points), charaList.trajom.level_up.battle[3], LVL),
                     ],
                     spUses: 2,
                     lvl: gameModify.getColab().you.JSON.get("lvl"),
@@ -90,7 +92,16 @@ const spf = {
         gameModify.getColab().endSP()
     },
     haker1000: function () {
-        this[gameModify.getColab().enemy.name()]()
+        console.log(`[DEBUG/game/haker1000] Sprawdzanie nazwy: ${gameModify.getColab().enemy.name()}\n    Typ: ${typeof spf[gameModify.getColab().enemy.name()]}`)
+        gameModify.getColab().you.hp.setValue(gameModify.getColab().you.hp.get() - gameModify.calc(0, 100, 2.3, gameModify.getColab().you.getLevel()))
+        spf[gameModify.getColab().enemy.name()]()
+        if (gameModify.getColab().you.JSON.get("spUses") >= charaList[gameModify.getColab().enemy.name()].sp.maxUses) {
+            gameModify.getColab().setTimeoutInMoves("end", 1, (type) => {
+                gameModify.getColab(type).you.JSON.change({ spUses: Infinity })
+                gameModify.spSounds.magic.currentTime = 0
+                gameModify.spSounds.magic.play()
+            })
+        }
     },
 
     // rl
@@ -111,7 +122,7 @@ const spf = {
                 gameModify.spSounds.miss.currentTime = 0
                 gameModify.spSounds.miss.play()
                 gameModify.getColab().you.hp.setValue(gameModify.getColab().you.hp.get() - atk * 0.25, false)
-                if (gameModify.getColab().analyzeTheEnd()) gameModify.getColab().endSP()
+                gameModify.getColab().endSP()
             }, 1000)
     },
     platynowyDominus: function () {
@@ -260,21 +271,32 @@ const spf = {
         }, 1000)
     },
     szymekDymek: function () {
-        gameModify.getColab().you.atk.setPrectange(120, "last")
+        gameModify.getColab().you.atk.setPrectange(115, "last")
         gameModify.getColab().setTimeoutInMoves("each", Infinity, (type, rm) => {
             gameModify
                 .getColab(type)
-                .you.hp.setValue(gameModify.getColab(type).you.hp.get() + gameModify.calc(0, Math.abs(Math.sin(rm * 5) * rm), 2, gameModify.getColab(type).you.getLevel()))
-            gameModify.getColab(type).you.JSON.change({ points: gameModify.getColab(type).you.JSON.get("points") + Math.abs(Math.sin(rm * 10)) })
+                .you.hp.setValue(
+                    gameModify.getColab(type).you.hp.get() + gameModify.calc(0, 40 + Math.sin(rm) * 30, 1.5 + Math.sin(rm / 4) * 0.5, gameModify.getColab(type).you.getLevel())
+                )
+            gameModify.getColab(type).you.JSON.change({ points: gameModify.getColab(type).you.JSON.get("points") + Math.round(Math.abs(Math.sin(rm * 5) * 15)) })
+
+            var chance = Math.round(Math.random() * 99) + 1
+            console.log(`[DEBUG/game/szymekDymek] Szansa postaci wynosi ${chance}%`)
+            if (chance >= 70) {
+                gameModify.spSounds.tractor.horn.currentTime = 0
+                gameModify.spSounds.tractor.horn.play()
+                gameModify.getColab(type).enemy.attack(gameModify.calc(0, 50, 2, gameModify.getColab(type).you.getLevel()))
+            }
         })
 
-        gameModify.spSounds.tractorStart.volume = 1
-        gameModify.spSounds.tractorStart.currentTime = 0
-        gameModify.spSounds.tractorStart.play()
+        gameModify.spSounds.tractor.start.volume = 1
+        gameModify.spSounds.tractor.start.currentTime = 0
+        gameModify.spSounds.tractor.start.play().then(() => {
+            setTimeout(() => {
+                gameModify.spSounds.tractor.start.volume = 0.2
+            }, 3000)
+        })
         gameModify.getColab().endSP()
-        setTimeout(() => {
-            gameModify.spSounds.tractorStart.volume = 0.4
-        }, 3000)
     },
     młody: function () {
         gameModify.spSounds.magic.currentTime = 0
