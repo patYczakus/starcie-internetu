@@ -1282,8 +1282,8 @@ export const charaList = {
             },
         ],
         description: {
-            pl: "Chyba nie trzeba tłumaczyć każdemu, że pikachu to pokémon-mysz z umiejętnościami elektrycznymi. Dostał się tam jako jedna z ofiar jądra Internetu. Pierwszy przedstawiciel własnego wymiaru.",
-            en: "It probably doesn't need to be explained to everyone that pikachu is a Pokémon-mouse with electrical abilities. It got there as one of the victims of the Internet core. The first representative of its own dimension.",
+            pl: "Chyba nie trzeba tłumaczyć każdemu, że {{charaName.pikachu}} to pokémon-mysz z umiejętnościami elektrycznymi. Dostał się tam jako jedna z ofiar jądra Internetu. Pierwszy przedstawiciel własnego wymiaru.",
+            en: "It probably doesn't need to be explained to everyone that {{charaName.pikachu}} is a Pokémon-mouse with electrical abilities. It got there as one of the victims of the Internet core. The first representative of its own dimension.",
         },
         dimension: "Pokémon",
         hp: 7450,
