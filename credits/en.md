@@ -6,7 +6,7 @@ Some characters are derived from resources that are protected by copyright. It i
 
 ### Rocket League
 
-Other-licenced characters: `diamentowyDominus (Rocket League)`, `sylwestrowyOctane (Rocket League)`, and `zimowyHotshot (Rocket League)`<br />
+Other-licenced characters: `diamentowyDominus (Rocket League)`, `sylwestrowyOctane (Rocket League)`, `zimowyHotshot (Rocket League)` and `galaktycznyManasume (Rocket League)`<br />
 Type: **game**<br />
 Main Creator: **Psyonix**<br />
 Publisher: **Epic Games, Inc.**<br />
@@ -14,13 +14,13 @@ Rights: [EULA](https://www.psyonix.com/eula/), [Terms of Use](https://www.psyoni
 
 ### AvA/AvM
 
-Other-licenced characters: `theChosenOne (Stick'y-land)`, `theDarkLord (Stick'y-land)`, and `theSecondComing (Stick'y-land)`<br />
+Other-licenced characters: `theChosenOne (Stick'y-land)`, `theDarkLord (Stick'y-land)` and `theSecondComing (Stick'y-land)`<br />
 Type: **animation**<br />
 Main Creator: **Alan Becker**
 
 ### Pokémon
 
-Other-licenced characters: `pikachu (Pokémon)` and `lunatone (Pokémon)`<br />
+Other-licenced characters: `pikachu (Pokémon)`, `lunatone (Pokémon)` and `snorlax (Pokémon)`<br />
 Type: **project**<br />
 Main Creator: **Game Freak, Inc.**<br />
 Publisher: **Nintendo**<br />
@@ -40,8 +40,16 @@ Type: **game**<br />
 Main Creator and Publisher: **miHoYo Co., Ltd.**<br />
 Rights: [Privacy Policy](https://account.hoyoverse.com/#/about/privacy) i [Terms of Service](https://account.hoyoverse.com/#/about/userAgreement)
 
+### Honkai: Star Rail
+
+Other-licenced characters: `topazAndNumby (HoYoverse)`<br />
+Type: **game**<br />
+Main Creator and Publisher: **miHoYo Co., Ltd.**<br />
+Rights: [Privacy Policy](https://account.hoyoverse.com/#/about/privacy) i [Terms of Service](https://account.hoyoverse.com/#/about/userAgreement)
+
 ## Acknowledgements
 
 I would like to express my gratitude to:
 
--   Gabrysia (the one found in the game) for her assistance in creating the characters for the _Gang Sokołów_ dimension.
+-   Gabrysia (character as `gabrysiaSotoła`) for her assistance in creating the characters for the _Gang Sokołów_ dimension.
+-   Ewa (character as `starlight`) for her help in creating the character `topazAndNumby`.

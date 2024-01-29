@@ -6,7 +6,7 @@ Niektóre postacie pochodzą z zasobów, gdzie są bronione prawami autorskimi. 
 
 ### Rocket League
 
-Postacie z innymi licencjami: `diamentowyDominus (Rocket League)`, `sylwestrowyOctane (Rocket League)` i `zimowyHotshot (Rocket League)`<br />
+Postacie z innymi licencjami: `diamentowyDominus (Rocket League)`, `sylwestrowyOctane (Rocket League)`, `zimowyHotshot (Rocket League)` i `galaktycznyManasume (Rocket League)`<br />
 Typ: **gra**<br />
 Twórca główny: **Psyonix**<br />
 Wydawca: **Epic Games, Inc.**<br />
@@ -20,7 +20,7 @@ Twórca główny: **Alan Becker**
 
 ### Pokémon
 
-Potacje z innymi licencjami: `pikachu (Pokémon)` i `lunatone (Pokémon)`<br />
+Potacje z innymi licencjami: `pikachu (Pokémon)`, `lunatone (Pokémon)` i `snorlax (Pokémon)`<br />
 Typ: **projekt**<br />
 Twórca główny: **Game Freak, Inc.**<br />
 Wydawca: **Nintendo**<br />
@@ -40,8 +40,16 @@ Typ: **gra**<br />
 Twórca główny i wydawca: **miHoYo Co., Ltd.**<br />
 Objęte prawa: [_Privacy Policy_ (Polityka prywatności)](https://account.hoyoverse.com/#/about/privacy) i [_Terms of Service_ (Warunki korzystania z serwisu)](https://account.hoyoverse.com/#/about/userAgreement)
 
+### Honkai: Star Rail
+
+Potacje z innymi licencjami: `topazAndNumby (HoYoverse)`<br />
+Typ: **gra**<br />
+Twórca główny i wydawca: **miHoYo Co., Ltd.**<br />
+Objęte prawa: [_Privacy Policy_ (Polityka prywatności)](https://account.hoyoverse.com/#/about/privacy) i [_Terms of Service_ (Warunki korzystania z serwisu)](https://account.hoyoverse.com/#/about/userAgreement)
+
 ## Podziękowania
 
 Podziękowania chciałbym nadać dla:
 
--   Gabrysi (tej, której się znajduje w grze) za pomoc w realizacji postaci do wymiaru _Gang Sokołów_
+-   Gabrysi (postać jako `gabrysiaSotoła`) za pomoc w realizacji postaci do wymiaru _Gang Sokołów_.
+-   Ewie (postać jako `starlight`) za pomoc w utworzeniu postaci `topazAndNumby`.
