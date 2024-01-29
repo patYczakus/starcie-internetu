@@ -9,7 +9,23 @@ window.onload = () => {
         var __root__ = document.createElement("div")
         var __navi__ = document.createElement("div")
         document.body.innerHTML = ""
-        Object.keys(charaList).forEach((characterName) => {
+        var info = document.createElement("div")
+        info.innerHTML =
+            "Ilość postaci: {{charaCount.*}} ({{charaCount.common}}/{{charaCount.uncommon}}/{{charaCount.rare}}/{{charaCount.epic}}/{{charaCount.legendary}}/{{charaCount.import}}/{{charaCount.dark_shop}})".replace(
+                /{{charaCount\.(\w+|\*)}}/g,
+                (match, arg) => {
+                    switch (arg) {
+                        case "*": {
+                            return `<span class="classNameColor">${Object.keys(charaList).length}</span>`
+                        }
+                        default: {
+                            return `<span class="classNameColor ${arg}">${Object.values(charaList).filter((info) => info.class === arg).length}</span>`
+                        }
+                    }
+                }
+            )
+        __navi__.appendChild(info)
+        Object.keys(charaList).forEach((characterName, i) => {
             var characterInfo = charaList[characterName]
             //<hr />
             var hr = document.createElement("hr")
@@ -81,7 +97,10 @@ window.onload = () => {
             __root__.appendChild(characterRoot)
 
             var charaLink = document.createElement("a")
-            var br = document.createElement("br")
+            var br = document.createElement("span")
+            br.style.width = "30px"
+            br.style.display = "inline-block"
+            if ((i + 1) % 4 === 0) br = document.createElement("br")
             charaLink.href = `#CH:${characterName}`
             charaLink.innerText = `> ${characterName}`
             charaLink.style.color = `black`
@@ -94,7 +113,19 @@ window.onload = () => {
         document.body.appendChild(__root__)
 
         get(ref(getDatabase(app), `starcie-internetu/followersApiInfo`)).then((snpsht) => {
-            document.body.innerHTML = document.body.innerHTML.replace(/{desc\.yk}/g, snpsht.val().ky)
+            document.body.innerHTML = document.body.innerHTML
+                .replace(/{{desc\.db\.(\w+)}}/g, (match, arg) => snpsht.val()[arg])
+                .replace(/{{charaName\.([\węółżźćń]+)}}|{{charaName\.([\węółżźćń]+)\|([^{}|]+)}}/g, (match, arg1, arg2, arg3) => {
+                    if (arg1) {
+                        return Object.keys(charaList).includes(arg1)
+                            ? `<span class="classNameColor ${charaList[arg1].class}" style="font-size: 100%; --fbs: 0.5px">${arg1}</span>`
+                            : `<span class="classNameColor" style="font-size: 100%; --fbs: 1px">${arg1}</span>`
+                    } else {
+                        return Object.keys(charaList).includes(arg2)
+                            ? `<span class="classNameColor ${charaList[arg2].class}" style="font-size: 100%; --fbs: 0.5px">${arg3}</span>`
+                            : `<span class="classNameColor" style="font-size: 100%; --fbs: 1px">${arg3}</span>`
+                    }
+                })
         })
 
         setTimeout(() => {

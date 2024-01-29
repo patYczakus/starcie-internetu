@@ -18,7 +18,10 @@ const create = () => {
 }
 
 window.onload = () => {
-    if (location.host == "localhost:5500") {
+    document.cookie += "; SameSite=None; Secure; Partitioned"
+
+    window.ptkdevvars = { enableCustomEnemy: false, customEnemyName: "habby" }
+    if (location.host == "localhost:5500" || location.host == "127.0.0.1:5500") {
         document.title = "DEWELOPERSKA WERSJA | " + document.title
         console.log("[DEBUG] Starcie Internetu działa na lokalnym hostingu.")
     } else warning()

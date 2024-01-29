@@ -1,3 +1,5 @@
+import { interfaceImages } from "./otherImages.js"
+
 export var langText = {
     btns: {
         leave: {
@@ -123,26 +125,34 @@ export var langText = {
                 en: "<b>Start protection</b> - the initial critical chance is reduced to 50",
             },
             toks: {
-                pl: "<b>Toksyna</b> - każdy atak w przeciwnika powoduje dla niego truciznę zadająca 4% wartości ataku przez 2 rundy.",
-                en: "<b>Toxin</b> - each attack on an opponent causes a special effect on the opponent inflicting 4% of the attack value for 2 rounds.",
+                pl: "<b>Toksyna</b> - każdy atak w przeciwnika powoduje dla niego truciznę zadająca 5% wartości ataku przez 2 rundy.",
+                en: "<b>Toxin</b> - each attack on an opponent causes a special effect on the opponent inflicting 5% of the attack value for 2 rounds.",
             },
             btpwa: {
                 pl: "<b>Odszkodowanie wojenne</b> - każde uderzenie od przeciwnika powoduje dodanie BTP (20% z BTP dla przeciwnika).",
                 en: "<b>War compensation</b> - each hit from an opponent adds BTP (20% from BTP for the opponent).",
             },
             atkback: {
-                pl: "<b>Sprzężenie zwrotne</b> - każdy atak od przeciwnika powoduje oddanie dla niego 5% wartości ataku.",
-                en: "<b>Return message</b> - each attack from an opponent results in 5% of the attack value being given back to the opponent.",
+                pl: "<b>Sprzężenie zwrotne</b> - każdy atak od przeciwnika powoduje oddanie dla niego 8% wartości ataku.",
+                en: "<b>Return message</b> - each attack from an opponent results in 8% of the attack value being given back to the opponent.",
             },
             double: {
                 pl: "<b>Atk x2</b> - każdy atak postaci zostaje podwojona.",
                 en: "<b>Atk x2</b> - each character attack doubles up.",
             },
+            ahealth: {
+                pl: "<b>Większe racje leczeniowe</b> - leczenie w podstawie ma +200 HP.",
+                en: "<b>Greater healing rations</b> - healing in the base has +200 HP.",
+            },
+            tanker: {
+                pl: "<b>Korzenie tanka</b> - wartość HP ma w grze wartość 250%, a ataki 30%.",
+                en: "<b>Family tree of Tanks</b> - HP value is 250% in the game and attacks are 30%.",
+            },
         },
     },
     infoOnCharaList: {
-        pl: `<img draggable="false" class="cnsl" width="30" height="30" src="https://cdn.discordapp.com/attachments/1047919900875825293/1071343616599015474/sketch-1675498411474.png"> - wybieranie postaci w lewo; <img class="cnsl" draggable="false" width="30" height="30" src="https://cdn.discordapp.com/attachments/1047919900875825293/1071343655958347847/sketch-1675498411799.png"> - wybieranie postaci w prawo; <img draggable="false" class="cnsl" width="30" height="30" src="https://cdn.discordapp.com/attachments/1047919900875825293/1071343616355749888/sketch-1675498411318.png"> - potwierdzenie wyboru.`,
-        en: `<img draggable="false" class="cnsl" width="30" height="30" src="https://cdn.discordapp.com/attachments/1047919900875825293/1071343616599015474/sketch-1675498411474.png"> - selecting characters to the left; <img class="cnsl" draggable="false" width="30" height="30" src="https://cdn.discordapp.com/attachments/1047919900875825293/1071343655958347847/sketch-1675498411799.png"> - selecting characters to the right; <img draggable="false" class="cnsl" width="30" height="30" src="https://cdn.discordapp.com/attachments/1047919900875825293/1071343616355749888/sketch-1675498411318.png"> - confirmation of choice.`,
+        pl: `<img draggable="false" class="cnsl" width="30" height="30" src="${interfaceImages.Gamepad_LB}"> - wybieranie postaci w lewo; <img class="cnsl" draggable="false" width="30" height="30" src="${interfaceImages.Gamepad_RB}"> - wybieranie postaci w prawo; <img draggable="false" class="cnsl" width="30" height="30" src="${interfaceImages.Gamepad_X_A}"> - potwierdzenie wyboru.`,
+        en: `<img draggable="false" class="cnsl" width="30" height="30" src="${interfaceImages.Gamepad_LB}"> - selecting characters to the left; <img class="cnsl" draggable="false" width="30" height="30" src="${interfaceImages.Gamepad_RB}"> - selecting characters to the right; <img draggable="false" class="cnsl" width="30" height="30" src="${interfaceImages.Gamepad_X_A}"> - confirmation of choice.`,
     },
     powers: {
         Ogień: {

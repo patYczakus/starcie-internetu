@@ -98,8 +98,17 @@ export var settingsList = [
         defaultOption: false,
         type: "bool",
         description: {
-            pl: "Precyzyjniej steruje paskiem przewijania w ustawieniach przez Gamepad",
-            en: "More precise control of the scroll bar in the settings with Gamepad",
+            pl: "Precyzyjniej steruje paskiem przewijania w ustawieniach przez Gamepad.",
+            en: "More precise control of the scroll bar in the settings with Gamepad.",
+        },
+    },
+    {
+        flag: "useGamepad",
+        defaultOption: true,
+        type: "bool",
+        description: {
+            pl: "Włącza możliwość grania Gamepadem.",
+            en: "Turn on Gamepad in this game.",
         },
     },
 ]

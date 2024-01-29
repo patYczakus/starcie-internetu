@@ -165,6 +165,5 @@ export function shortNumber(number, langCode = String("--auto")) {
         number = Math.round(number / Math.pow(10, 3))
         number = `${String(number)}${prefixes.hundred[langCode]}`
     } else number = String(number)
-
     return number
 }

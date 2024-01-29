@@ -4,6 +4,15 @@ import { gameModify } from "./game.js"
 import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js"
 
 /**
+ *
+ * @param {HTMLAudioElement} audio
+ * @returns {boolean}
+ */
+var isPlaying = function (audio) {
+    return audio && audio.currentTime > 0 && !audio.paused && !audio.ended && audio.readyState > 2
+}
+
+/**
  * Cała lista Gwiezdnych Mocy
  */
 const spf = {
@@ -17,7 +26,7 @@ const spf = {
         console.log("[DEBUG/game/habby] Wartości ataków: ", gameModify.getColab().you.atk.getValue("all"))
 
         gameModify.spSounds.magic.currentTime = 0
-        gameModify.spSounds.magic.play()
+        if (!isPlaying(gameModify.spSounds.magic)) gameModify.spSounds.magic.play()
         gameModify.getColab().endSP()
     },
     rycerzOceanu: function () {
@@ -28,7 +37,7 @@ const spf = {
         gameModify.getColab().you.atk.setPrectange(120, "random")
 
         gameModify.spSounds.magic.currentTime = 0
-        gameModify.spSounds.magic.play()
+        if (!isPlaying(gameModify.spSounds.magic)) gameModify.spSounds.magic.play()
         gameModify.getColab().endSP()
     },
     trajom: function () {
@@ -76,7 +85,7 @@ const spf = {
                 })
 
             gameModify.spSounds.vanish.currentTime = 0
-            gameModify.spSounds.vanish.play()
+            if (!isPlaying(gameModify.spSounds.vanish)) gameModify.spSounds.vanish.play()
 
             gameModify.getColab().endSP()
         }, 1000)
@@ -88,54 +97,138 @@ const spf = {
     glalirthor: function () {
         gameModify.getColab().you.atk.setPrectange(210, "all")
         gameModify.spSounds.magic.currentTime = 0
-        gameModify.spSounds.magic.play()
+        if (!isPlaying(gameModify.spSounds.magic)) gameModify.spSounds.magic.play()
         gameModify.getColab().endSP()
     },
     haker1000: function () {
         console.log(`[DEBUG/game/haker1000] Sprawdzanie nazwy: ${gameModify.getColab().enemy.name()}\n    Typ: ${typeof spf[gameModify.getColab().enemy.name()]}`)
         gameModify.getColab().you.hp.setValue(gameModify.getColab().you.hp.get() - gameModify.calc(0, 100, 2.3, gameModify.getColab().you.getLevel()))
         spf[gameModify.getColab().enemy.name()]()
+        if (Math.round() < 0.1) {
+            const maxHP = Number(
+                element.document
+                    .querySelector(`div#game.match div[gameplay="${gameModify.getColab().type == "player" ? "bot" : "player"}"] div.healthBar div.health`)
+                    .getPropertyValue("--healthMax")
+            )
+            const aHP = gameModify.getColab().you.hp.get()
+
+            gameModify.getColab().you.hp.set(maxHP, true)
+            gameModify.getColab().you.hp.set(aHP, false)
+        }
         if (gameModify.getColab().you.JSON.get("spUses") >= charaList[gameModify.getColab().enemy.name()].sp.maxUses) {
             gameModify.getColab().setTimeoutInMoves("end", 1, (type) => {
                 gameModify.getColab(type).you.JSON.change({ spUses: Infinity })
                 gameModify.spSounds.magic.currentTime = 0
-                gameModify.spSounds.magic.play()
+                if (!isPlaying(gameModify.spSounds.magic)) gameModify.spSounds.magic.play()
             })
         }
+    },
+    starlight: function () {
+        const BTP = Math.min(gameModify.getColab().you.JSON.get("points"), 500)
+        const stats = {
+            hpAdd: gameModify.calc(0, BTP * 2, 2.3, gameModify.getColab().you.getLevel()),
+            atkPrecSet: 10 + (BTP - 200) * 0.3,
+            atkTO: gameModify.calc(0, 250, 1.8532, gameModify.getColab().you.getLevel()),
+        }
+        if (charaList[gameModify.getColab().enemy.name()].dimension === "Gang Sokołów") var multiplier = 1.3
+        else if (charaList[gameModify.getColab().enemy.name()].dimension === "HoYoverse") var multiplier = 0.8
+        else var multiplier = 1
+
+        gameModify.getColab().setTimeoutInMoves("each", Infinity, (type, rm) => {
+            var playsound = false
+            if (rm % (3 + Math.floor(BTP / 60)) === 0) {
+                gameModify.getColab(type).you.hp.setValue(gameModify.getColab(type).you.hp.get() + Math.round(stats.hpAdd * multiplier))
+                playsound = true
+            }
+            if (BTP >= 200 && rm % 5 === 0) {
+                gameModify.getColab(type).you.atk.setPrectange(100 + Math.round(stats.atkPrecSet * multiplier), "random")
+                playsound = true
+            }
+            if (BTP === 500 && Math.random() > 0.3) {
+                gameModify.getColab(type).enemy.attack(Math.round(stats.atkTO * multiplier))
+                playsound = true
+            }
+
+            if (playsound) {
+                gameModify.spSounds.galaxyMagic.currentTime = 0
+                if (!isPlaying(gameModify.spSounds.galaxyMagic)) gameModify.spSounds.galaxyMagic.play()
+            }
+        })
+
+        gameModify.getColab().you.JSON.change({ points: gameModify.getColab().you.JSON.get("points") - BTP })
+
+        gameModify.spSounds.alarm.currentTime = 0
+        if (!isPlaying(gameModify.spSounds.alarm)) gameModify.spSounds.alarm.play()
+
+        gameModify.getColab().endSP()
     },
 
     // rl
     sylwestrowyOctane: function () {
-        var atk = gameModify.calc(0, Math.round(Math.random() * 18) * 500 + 3500, Math.round(Math.random() * 50) / 10 + 1, gameModify.getColab().you.getLevel())
+        var atk = gameModify.calc(0, Math.round(Math.random() * 25) * 500 + 5000, Math.round(Math.random() * 50) / 10 + 1.3, gameModify.getColab().you.getLevel())
         gameModify.spSounds.alarm.currentTime = 0
-        gameModify.spSounds.alarm.play()
+        if (!isPlaying(gameModify.spSounds.alarm)) gameModify.spSounds.alarm.play()
 
         if (Math.floor(Math.random() * 10) < 4)
             setTimeout(() => {
                 gameModify.spSounds.uAttack.currentTime = 0
-                gameModify.spSounds.uAttack.play()
+                if (!isPlaying(gameModify.spSounds.uAttack)) gameModify.spSounds.uAttack.play()
                 gameModify.getColab().enemy.attack(atk)
                 gameModify.getColab().endSP()
             }, 500)
         else
             setTimeout(() => {
                 gameModify.spSounds.miss.currentTime = 0
-                gameModify.spSounds.miss.play()
+                if (!isPlaying(gameModify.spSounds.miss)) gameModify.spSounds.miss.play()
                 gameModify.getColab().you.hp.setValue(gameModify.getColab().you.hp.get() - atk * 0.25, false)
                 gameModify.getColab().endSP()
             }, 1000)
     },
     platynowyDominus: function () {
-        gameModify.getColab().you.atk.setPrectange(110, "all")
+        gameModify.getColab().you.atk.setPrectange(116, "all")
         gameModify.getColab().you.JSON.change({ critChance: 0 })
-        gameModify.getColab().enemy.crit.change(gameModify.getColab().enemy.crit.get * 1.25)
+        gameModify.getColab().enemy.crit.change(gameModify.getColab().enemy.crit.get * 1.27)
 
         gameModify.spSounds.alarm.currentTime = 0
-        gameModify.spSounds.alarm.play()
+        if (!isPlaying(gameModify.spSounds.alarm)) gameModify.spSounds.alarm.play()
         gameModify.getColab().endSP()
     },
     zimowyHotshot: function () {
-        gameModify.getColab().enemy.attack(gameModify.calc(0, 300, 1.85, gameModify.getColab().you.getLevel()))
+        gameModify.getColab().enemy.attack(gameModify.calc(0, 500, 1.85, gameModify.getColab().you.getLevel()))
+        gameModify.getColab().endSP()
+    },
+    galaktycznyMasamune: function () {
+        var atk = gameModify.calc(0, 692, 2.312, gameModify.getColab().you.getLevel())
+        if (gameModify.getColab().you.JSON.get("spUses") == 3) {
+            atk *= 2
+        }
+        const atkInfo = gameModify.getColab().enemy.attack(atk)
+
+        gameModify.getColab().you.atk.setPrectange(175, "all")
+        gameModify.getColab().setTimeoutInMoves("end", 2, () => {
+            gameModify.getColab().you.atk.setPrectange(100 / 1.75, "all")
+
+            gameModify.spSounds.vanish.currentTime = 0
+            if (!isPlaying(gameModify.spSounds.vanish)) gameModify.spSounds.vanish.play()
+        })
+        if (gameModify.getColab().you.JSON.get("spUses") == 1) {
+            const a = gameModify.getColab().you.JSON.get("critChance")
+            gameModify.getColab().you.JSON.change({ critChance: 0 })
+            gameModify.getColab().setTimeoutInMoves("end", 5, () => {
+                gameModify.getColab().you.JSON.change({ critChance: a })
+
+                gameModify.spSounds.magic.currentTime = 0
+                if (!isPlaying(gameModify.spSounds.magic)) gameModify.spSounds.magic.play()
+            })
+        }
+        if (gameModify.getColab().you.JSON.get("spUses") == 2) {
+            gameModify.getColab().you.JSON.change({ points: Math.round(atkInfo.atk * 0.1) })
+            gameModify.getColab().you.hp.setValue(gameModify.getColab().you.hp.get() + Math.round(atkInfo.atk * 0.12), false)
+        }
+
+        gameModify.spSounds.uAttack.currentTime = 0
+        if (!isPlaying(gameModify.spSounds.uAttack)) gameModify.spSounds.uAttack.play()
+
         gameModify.getColab().endSP()
     },
 
@@ -147,11 +240,11 @@ const spf = {
                 gameModify
                     .getColab(type)
                     .you.hp.setValue(
-                        gameModify.getColab(type).you.hp.get() + gameModify.getColab(type).enemy.attack(gameModify.calc(0, 50, 2.5, gameModify.getColab(type).you.getLevel())).atk,
+                        gameModify.getColab(type).you.hp.get() + gameModify.getColab(type).enemy.attack(gameModify.calc(0, 100, 2.5, gameModify.getColab(type).you.getLevel())).atk,
                         false
                     )
                 gameModify.spSounds.regen.currentTime = 0
-                gameModify.spSounds.regen.play()
+                if (!isPlaying(gameModify.spSounds.regen)) gameModify.spSounds.regen.play()
             })
         } else if (gameModify.getColab().you.JSON.get("spUses") == 2) {
             //2. Zwiększa swoje ataki o 20%;
@@ -167,7 +260,7 @@ const spf = {
             gameModify.getColab().you.hp.setPrectange(50, true)
         }
         gameModify.spSounds.magic.currentTime = 0
-        gameModify.spSounds.magic.play()
+        if (!isPlaying(gameModify.spSounds.magic)) gameModify.spSounds.magic.play()
 
         gameModify.getColab().endSP()
     },
@@ -185,7 +278,7 @@ const spf = {
         }
 
         gameModify.spSounds.magic.currentTime = 0
-        gameModify.spSounds.magic.play()
+        if (!isPlaying(gameModify.spSounds.magic)) gameModify.spSounds.magic.play()
         setTimeout(() => {
             for (var i = 0; i < conf.maxS * conf.atkPerSec; i++)
                 setTimeout(() => {
@@ -198,23 +291,40 @@ const spf = {
     },
     theSecondComing: function () {
         gameModify.spSounds.magic.currentTime = 0
-        gameModify.spSounds.magic.play()
+        if (!isPlaying(gameModify.spSounds.magic)) gameModify.spSounds.magic.play()
         setTimeout(() => {
             gameModify.spSounds.alarm.currentTime = 0
-            gameModify.spSounds.alarm.play()
+            if (!isPlaying(gameModify.spSounds.alarm)) gameModify.spSounds.alarm.play()
         }, 2000)
         setTimeout(() => {
             gameModify.spSounds.uAttack.currentTime = 0
-            gameModify.spSounds.uAttack.play()
-            gameModify.getColab().enemy.attack(gameModify.calc(0, 1000, 2, gameModify.getColab().you.getLevel()))
+            if (!isPlaying(gameModify.spSounds.uAttack)) gameModify.spSounds.uAttack.play()
+            gameModify.getColab().enemy.attack(gameModify.calc(0, 3000, 3.65, gameModify.getColab().you.getLevel()))
             gameModify.getColab().endSP()
         }, 3000)
     },
     havier: function () {
-        gameModify.getColab().enemy.crit.change(500)
+        gameModify.getColab().enemy.attack(gameModify.calc(0, 500, 3, gameModify.getColab().you.getLevel()))
+        gameModify.getColab().enemy.crit.change(1000)
+        gameModify.getColab().setTimeoutInMoves("end", 2, (t) => {
+            if (!(gameModify.getColab().enemy.name() === "trajom" && gameModify.getColab().enemy.JSON.get("spUses") > 0)) {
+                gameModify.getColab(t).enemy.crit.change(750)
+
+                gameModify.spSounds.regen.currentTime = 0
+                if (!isPlaying(gameModify.spSounds.regen)) gameModify.spSounds.regen.play()
+            }
+        })
+        gameModify.getColab().setTimeoutInMoves("end", 5, (t) => {
+            if (!(gameModify.getColab().enemy.name() === "trajom" && gameModify.getColab().enemy.JSON.get("spUses") > 0)) {
+                gameModify.getColab(t).enemy.crit.change(500)
+
+                gameModify.spSounds.regen.currentTime = 0
+                if (!isPlaying(gameModify.spSounds.regen)) gameModify.spSounds.regen.play()
+            }
+        })
 
         gameModify.spSounds.uAttack.currentTime = 0
-        gameModify.spSounds.uAttack.play()
+        if (!isPlaying(gameModify.spSounds.uAttack)) gameModify.spSounds.uAttack.play()
         gameModify.getColab().endSP()
     },
     paty: function () {
@@ -225,10 +335,10 @@ const spf = {
         }
         setTimeout(() => {
             gameModify.spSounds.uAttack.currentTime = 0
-            gameModify.spSounds.uAttack.play()
+            if (!isPlaying(gameModify.spSounds.uAttack)) gameModify.spSounds.uAttack.play()
 
-            gameModify.getColab().enemy.attack(gameModify.calc(0, 1800, 4.253, gameModify.getColab().you.getLevel()))
-            gameModify.getColab().you.hp.setPrectange(70, false)
+            gameModify.getColab().enemy.attack(gameModify.getColab().you.hp.get() * 1.21)
+            gameModify.getColab().you.hp.setPrectange(100 / 1.21, false)
         }, 1300)
         setTimeout(() => {
             gameModify.getColab().endSP()
@@ -237,11 +347,7 @@ const spf = {
     chromo: function () {
         gameModify.getColab().you.atk.setPrectange(175, "all")
         gameModify.spSounds.magic.currentTime = 0
-        gameModify.spSounds.magic.play()
-        setTimeout(() => {
-            gameModify.getColab().enemy.attack(gameModify.getColab().you.atk.getValue(2))
-            gameModify.getColab().endSP()
-        }, 1000)
+        if (!isPlaying(gameModify.spSounds.magic)) gameModify.spSounds.magic.play()
     },
     twinz: function () {
         function a(x) {
@@ -252,22 +358,23 @@ const spf = {
             c: Math.round(Math.random() * 4) + 1 <= 2,
         }
         var orange = {
-            a: gameModify.calc(0, 1500, 4.1, a(2)),
+            a: gameModify.calc(0, 1500, 4.1, a(1)),
             c: Math.round(Math.random() * 11) + 1 <= 5,
         }
 
         gameModify.spSounds.alarm.currentTime = 0
-        gameModify.spSounds.alarm.play()
+        if (!isPlaying(gameModify.spSounds.alarm)) gameModify.spSounds.alarm.play()
         setTimeout(() => {
             gameModify.getColab().enemy.attack(blue.a * blue.c + orange.a * orange.c)
-            gameModify.getColab().endSP()
+
             if (blue.c || orange.c) {
                 gameModify.spSounds.uAttack.currentTime = 0
-                gameModify.spSounds.uAttack.play()
+                if (!isPlaying(gameModify.spSounds.uAttack)) gameModify.spSounds.uAttack.play()
             } else {
                 gameModify.spSounds.miss.currentTime = 0
-                gameModify.spSounds.miss.play()
+                if (!isPlaying(gameModify.spSounds.miss)) gameModify.spSounds.miss.play()
             }
+            gameModify.getColab().endSP()
         }, 1000)
     },
     szymekDymek: function () {
@@ -282,37 +389,38 @@ const spf = {
 
             var chance = Math.round(Math.random() * 99) + 1
             console.log(`[DEBUG/game/szymekDymek] Szansa postaci wynosi ${chance}%`)
-            if (chance >= 70) {
+            if (chance >= 90) {
                 gameModify.spSounds.tractor.horn.currentTime = 0
-                gameModify.spSounds.tractor.horn.play()
-                gameModify.getColab(type).enemy.attack(gameModify.calc(0, 50, 2, gameModify.getColab(type).you.getLevel()))
+                if (!isPlaying(gameModify.spSounds.tractor.horn)) gameModify.spSounds.tractor.horn.play()
+                gameModify.getColab(type).enemy.attack(gameModify.calc(0, 75, 1.95, gameModify.getColab(type).you.getLevel()))
             }
         })
 
         gameModify.spSounds.tractor.start.volume = 1
         gameModify.spSounds.tractor.start.currentTime = 0
-        gameModify.spSounds.tractor.start.play().then(() => {
-            setTimeout(() => {
-                gameModify.spSounds.tractor.start.volume = 0.2
-            }, 3000)
-        })
+        if (!isPlaying(gameModify.spSounds.tractor.start))
+            gameModify.spSounds.tractor.start.play().then(() => {
+                setTimeout(() => {
+                    gameModify.spSounds.tractor.start.volume = 0.2
+                }, 3000)
+            })
         gameModify.getColab().endSP()
     },
     młody: function () {
         gameModify.spSounds.magic.currentTime = 0
-        gameModify.spSounds.magic.play()
-        gameModify.getColab().you.atk.setPrectange(108, "all")
+        if (!isPlaying(gameModify.spSounds.magic)) gameModify.spSounds.magic.play()
+        gameModify.getColab().you.atk.setPrectange(116, "all")
         if (gameModify.getColab(type).you.JSON.get("spUses") == 1) {
             setTimeout(() => {
                 const card = Math.round(gameModify.getColab().you.atk.getValue(0) * 1.3)
                 const num = Math.round(Math.random() * 3)
                 if (num == 0) {
                     gameModify.spSounds.miss.currentTime = 0
-                    gameModify.spSounds.miss.play()
+                    if (!isPlaying(gameModify.spSounds.miss)) gameModify.spSounds.miss.play()
                 } else {
                     if (num == 3) {
                         gameModify.spSounds.uAttack.currentTime = 0
-                        gameModify.spSounds.uAttack.play()
+                        if (!isPlaying(gameModify.spSounds.uAttack)) gameModify.spSounds.uAttack.play()
                     }
                     gameModify.getColab().enemy.attack(card * num)
                 }
@@ -330,7 +438,7 @@ const spf = {
                 gameModify.getColab().setTimeoutInMoves("end", 3, (type) => {
                     if (gameModify.getColab(type).you.JSON.get("spUses") == 1) {
                         gameModify.spSounds.magic.currentTime = 0
-                        gameModify.spSounds.magic.play()
+                        if (!isPlaying(gameModify.spSounds.magic)) gameModify.spSounds.magic.play()
                         gameModify.getColab(type).you.JSON.change({
                             spUses: 2,
                             points: gameModify.getColab(type).you.JSON.get("points") + Math.round(energy * 0.2),
@@ -341,11 +449,11 @@ const spf = {
             }, 500)
         } else {
             const catEnergyCost = gameModify.calc(0, 1.5, 2.2, gameModify.getColab().you.getLevel())
-            const catPower = () => gameModify.calc(0, Math.random() * 5, 2, gameModify.getColab().you.getLevel() + 2)
+            const catPower = () => gameModify.calc(0, Math.random() * 5 + 1, 2, gameModify.getColab().you.getLevel() + 2)
             const wsciekliznaBlocks = ["snackowyAdmin", "kiranaYonome"]
 
             gameModify.spSounds.alarm.currentTime = 0
-            gameModify.spSounds.alarm.play()
+            if (!isPlaying(gameModify.spSounds.alarm)) gameModify.spSounds.alarm.play()
             gameModify.getColab().setTimeoutInMoves("each", Math.floor(energy / catEnergyCost / 4), (type) => {
                 for (let i = 1; i <= 4; i++) {
                     const _cp = catPower()
@@ -381,10 +489,39 @@ const spf = {
     },
     botek: function () {
         gameModify.spSounds.discord.userMoved.currentTime = 0
-        gameModify.spSounds.discord.userMoved.play()
+        if (!isPlaying(gameModify.spSounds.discord.userMoved)) gameModify.spSounds.discord.userMoved.play()
         gameModify.getColab().you.hp.setValue(gameModify.getColab().you.hp.get() + gameModify.calc(0, 50, 2, gameModify.getColab().you.getLevel()))
         gameModify.getColab().you.atk.setPrectange(103, "all")
         gameModify.getColab().you.JSON.change({ points: gameModify.getColab().you.JSON.get("points") + 10 })
+
+        gameModify.getColab().endSP()
+    },
+    agatea: function () {
+        var womanCharacters = ["kira", "starlight", "kiranaYonome", "ayandaRisu", "ameliaWatson", "gabrysiaSotoła", "topazAndNumby"]
+
+        gameModify.spSounds.alarm.currentTime = 0
+        if (!isPlaying(gameModify.spSounds.alarm)) gameModify.spSounds.alarm.play()
+
+        setTimeout(() => {
+            gameModify.getColab().enemy.attack(gameModify.calc(0, 2000, 4, gameModify.getColab().you.getLevel()))
+            gameModify.spSounds.uAttack.currentTime = 0
+            if (!isPlaying(gameModify.spSounds.uAttack)) gameModify.spSounds.uAttack.play()
+
+            if (!womanCharacters.includes(gameModify.getColab().enemy.name())) {
+                const shurikensAmount = Math.floor(Math.random() * 3) + 2
+                for (var i = 0; i < shurikensAmount; i++) {
+                    setTimeout(() => {
+                        gameModify.getColab().enemy.attack(gameModify.calc(0, 300, 2.4612, gameModify.getColab().you.getLevel()))
+                        gameModify.getColab().enemy.crit.change(gameModify.getColab().enemy.crit.get() + 25)
+                    }, i * 100 + 500)
+                }
+                setTimeout(() => {
+                    gameModify.getColab().endSP()
+                }, shurikensAmount * 100 + 500)
+            } else {
+                gameModify.getColab().endSP()
+            }
+        }, 1000)
     },
 
     // pokemon
@@ -397,44 +534,53 @@ const spf = {
         gameModify.getColab().you.hp.setPrectange(50, false)
 
         gameModify.spSounds.magic.currentTime = 0
-        gameModify.spSounds.magic.play()
+        if (!isPlaying(gameModify.spSounds.magic)) gameModify.spSounds.magic.play()
         gameModify.getColab().endSP()
     },
     lunatone: function () {
         gameModify.spSounds.alarm.currentTime = 0
-        gameModify.spSounds.alarm.play()
+        if (!isPlaying(gameModify.spSounds.alarm)) gameModify.spSounds.alarm.play()
         setTimeout(() => {
             gameModify.spSounds.alarm.currentTime = 0
-            gameModify.spSounds.alarm.play()
+            if (!isPlaying(gameModify.spSounds.alarm)) gameModify.spSounds.alarm.play()
         }, 1000)
         setTimeout(() => {
             gameModify.spSounds.alarm.currentTime = 0
-            gameModify.spSounds.alarm.play()
+            if (!isPlaying(gameModify.spSounds.alarm)) gameModify.spSounds.alarm.play()
         }, 2000)
         setTimeout(() => {
             gameModify.getColab().you.hp.setPrectange(107, true)
             gameModify.getColab().you.atk.setPrectange(104, "all")
 
-            gameModify.getColab().enemy.attack(gameModify.calc(0, 400, 3, gameModify.getColab().you.getLevel()))
+            gameModify.getColab().enemy.attack(gameModify.calc(0, 1100, 3.43, gameModify.getColab().you.getLevel()))
 
             gameModify.spSounds.uAttack.currentTime = 0
-            gameModify.spSounds.uAttack.play()
-            gameModify.spSounds.magic.currentTime = 0
-            gameModify.spSounds.magic.play()
+            if (!isPlaying(gameModify.spSounds.uAttack)) gameModify.spSounds.uAttack.play()
 
             gameModify.getColab().endSP()
         }, 3000)
+    },
+    snorlax: function () {
+        gameModify.getColab().you.atk.setPrectange(300, "all")
+        gameModify.getColab().you.JSON.change({ points: gameModify.getColab().you.JSON.get("points") + 150 })
+        gameModify.getColab().you.hp.setValue(gameModify.getColab().you.hp.get() + gameModify.calc(0, 500, 2.4, gameModify.getColab().you.getLevel()), false)
+
+        gameModify.spSounds.alarm.currentTime = 0
+        if (!isPlaying(gameModify.spSounds.alarm)) gameModify.spSounds.alarm.play()
+
+        gameModify.getColab().endSP()
     },
 
     // vtuberzy
     kiranaYonome: function () {
         get(ref(getDatabase(app), `starcie-internetu/followersApiInfo/ky`)).then((snpsht) => {
             var attack = () => {
-                return gameModify.calc(0, Math.round(Math.random() * 4) + 1, 2.7, gameModify.getColab().you.getLevel())
+                return gameModify.calc(0, Math.round(Math.random() * 4) + 6, 2.7, gameModify.getColab().you.getLevel())
             }
+            console.log(`[DEBUG/game/kiranaYonome] Ilość obserwujących: ${snpsht.val()}, przewidywana ilość ruchów: ${Math.floor(snpsht.val() / 5)}`)
 
             gameModify.spSounds.alarm.currentTime = 0
-            gameModify.spSounds.alarm.play()
+            if (!isPlaying(gameModify.spSounds.alarm)) gameModify.spSounds.alarm.play()
             gameModify.getColab().setTimeoutInMoves("each", Math.floor(snpsht.val() / 5), (type) => {
                 for (let i = 0; i < 5; i++)
                     setTimeout(() => {
@@ -442,7 +588,7 @@ const spf = {
                     }, i * 100)
                 gameModify.getColab(type).analyzeTheEnd()
             })
-            gameModify.getColab().setTimeoutInMoves("end", Math.floor(snpsht.val() / String(snpsht.val()).length), (type) => {
+            gameModify.getColab().setTimeoutInMoves("end", Math.floor(snpsht.val() / 5), (type) => {
                 for (let i = 0; i < snpsht.val() % 5; i++)
                     setTimeout(() => {
                         gameModify.getColab(type).enemy.attack(attack())
@@ -451,6 +597,114 @@ const spf = {
             })
             gameModify.getColab().endSP()
         })
+    },
+    ayandaRisu: function () {
+        gameModify.getColab().setTimeoutInMoves("each", Infinity, (type, rm) => {
+            if (gameModify.getColab(type).you.hp.factor() < 0.07 || (rm % 2 === 0 && gameModify.getColab(type).enemy.JSON.get("points") * Math.random() > 60)) {
+                gameModify
+                    .getColab(type)
+                    .you.hp.setValue(
+                        gameModify.getColab(type).you.hp.get() +
+                            Math.round(gameModify.getColab(type).enemy.attack(gameModify.calc(0, 750, 3, gameModify.getColab(type).you.getLevel())).atk * 0.05),
+                        true
+                    )
+                gameModify.getColab(type).setTimeoutInMoves("end", 1, () => {
+                    gameModify.getColab(type).enemy.attack(gameModify.calc(0, 50, 1.5, gameModify.getColab(type).you.getLevel()))
+                })
+
+                gameModify.spSounds.uAttack.currentTime = 0
+                if (!isPlaying(gameModify.spSounds.uAttack)) gameModify.spSounds.uAttack.play()
+            }
+        })
+
+        gameModify.spSounds.alarm.currentTime = 0
+        if (!isPlaying(gameModify.spSounds.alarm)) gameModify.spSounds.alarm.play()
+        gameModify.getColab().endSP()
+    },
+    ameliaWatson: function () {
+        Promise.all(
+            ["tokyo", "new+york", "jakarta"].map(async (x) => {
+                var test = await (await fetch(`http://api.weatherapi.com/v1/current.json?key=571cdb4aa8ae48a2a1e173255232509&q=${x}&aqi=no`)).json()
+                const val = Math.round((test.current.temp_f - Math.max(test.current.temp_c * 0.8, 0)) * (100 - test.current.cloud))
+                console.log(`[DEBUG/game/ameliaWatson] Pobrano z argumentem q=${x}, wartość ataku: ${val}`)
+                return val
+            })
+        ).then((data) => {
+            var maxAtkValue = Math.max(...data)
+
+            gameModify.spSounds.magic.currentTime = 0
+            if (!isPlaying(gameModify.spSounds.magic)) gameModify.spSounds.magic.play()
+            setTimeout(() => {
+                var before = gameModify.getColab().enemy.crit.get()
+                gameModify.getColab().enemy.crit.change(Math.max(before, 750))
+                gameModify.getColab().enemy.attack(gameModify.calc(0, maxAtkValue, 2.532496, gameModify.getColab().you.getLevel()))
+
+                gameModify.spSounds.uAttack.currentTime = 0
+                if (!isPlaying(gameModify.spSounds.uAttack)) gameModify.spSounds.uAttack.play()
+                gameModify.getColab().enemy.crit.change(before)
+
+                gameModify.getColab().endSP()
+            }, 1500)
+        })
+    },
+    gawrGura: function () {
+        if (gameModify.getColab().you.JSON.get("spUses") == 1) {
+            gameModify.getColab().you.JSON.change({ points: gameModify.getColab().you.JSON.get("points") + gameModify.getColab().enemy.JSON.get("points") })
+            gameModify.getColab().enemy.JSON.change({ points: 0 })
+        } else {
+            gameModify.getColab().enemy.attack(gameModify.getColab().you.atk.getValue("last"))
+        }
+        gameModify.spSounds.gg_a.currentTime = 0
+        if (!isPlaying(gameModify.spSounds.gg_a))
+            gameModify.spSounds.gg_a.play().then(() =>
+                setTimeout(() => {
+                    gameModify.getColab().endSP()
+                }, gameModify.spSounds.gg_a.duration)
+            )
+    },
+
+    // celebryci
+    elsiAdajew: function () {
+        if (Math.round() <= 0.25 || gameModify.getColab().you.JSON.get("spUses") % 5 === 0) {
+            gameModify.getColab().you.JSON.change({ points: gameModify.getColab().you.JSON.get("points") + 20 })
+        }
+        const HP = Math.round(Math.pow(1.8, gameModify.getColab().you.getLevel()) * 340)
+        gameModify.getColab().you.hp.setValue(gameModify.getColab().you.hp.get() + HP)
+        gameModify.spSounds.num_num_num.currentTime = 0
+        if (!isPlaying(gameModify.spSounds.num_num_num)) gameModify.spSounds.num_num_num.play()
+
+        gameModify.getColab().endSP()
+    },
+    kacperRietz: function () {
+        var atk = gameModify.calc(0, 500, 2.805, gameModify.getColab().you.getLevel())
+        gameModify.getColab().enemy.attack(atk)
+        gameModify.spSounds.uAttack.currentTime = 0
+        if (!isPlaying(gameModify.spSounds.uAttack)) gameModify.spSounds.uAttack.play()
+
+        gameModify.getColab().setTimeoutInMoves("each", 15, (type, move) => {
+            const index = [
+                null,
+                atk * 0.9,
+                atk * 0.9,
+                atk * 0.5,
+                atk * 0.5,
+                atk * 0.5,
+                atk * 0.5,
+                atk * 0.5,
+                atk * 0.2,
+                atk * 0.2,
+                atk * 0.2,
+                atk * 0.2,
+                atk * 0.2,
+                atk * 0.2,
+                atk * 0.2,
+                atk * 0.2,
+            ]
+
+            gameModify.getColab().enemy.attack(Math.ceil(index[move]))
+        })
+
+        gameModify.getColab().endSP()
     },
 
     // sokołów
@@ -461,28 +715,28 @@ const spf = {
             gameModify.getColab().you.hp.setPrectange(90, true)
 
             gameModify.spSounds.magic.currentTime = 0
-            gameModify.spSounds.magic.play()
+            if (!isPlaying(gameModify.spSounds.magic)) gameModify.spSounds.magic.play()
             gameModify.getColab().endSP()
         } else {
             gameModify.getColab().you.atk.setPrectange(80, "all")
 
             setTimeout(() => {
                 gameModify.spSounds.alarm.currentTime = 0
-                gameModify.spSounds.alarm.play()
+                if (!isPlaying(gameModify.spSounds.alarm)) gameModify.spSounds.alarm.play()
             }, 2000)
             setTimeout(() => {
                 gameModify.spSounds.alarm.currentTime = 0
-                gameModify.spSounds.alarm.play()
+                if (!isPlaying(gameModify.spSounds.alarm)) gameModify.spSounds.alarm.play()
             }, 3000)
             setTimeout(() => {
                 gameModify.spSounds.alarm.currentTime = 0
-                gameModify.spSounds.alarm.play()
+                if (!isPlaying(gameModify.spSounds.alarm)) gameModify.spSounds.alarm.play()
             }, 4000)
             setTimeout(() => {
                 gameModify.getColab().enemy.attack(gameModify.calc(0, 350, 5, gameModify.getColab().you.getLevel()) * (Math.round(Math.random() * 11) + 1))
 
                 gameModify.spSounds.uAttack.currentTime = 0
-                gameModify.spSounds.uAttack.play()
+                if (!isPlaying(gameModify.spSounds.uAttack)) gameModify.spSounds.uAttack.play()
                 gameModify.getColab().endSP()
             }, 5000)
         }
@@ -571,10 +825,10 @@ const spf = {
                 gameModify.getColab().you.JSON.change(JSONN)
             }
             gameModify.spSounds.num_num_num.currentTime = 0
-            gameModify.spSounds.num_num_num.play()
+            if (!isPlaying(gameModify.spSounds.num_num_num)) gameModify.spSounds.num_num_num.play()
         } else {
             gameModify.spSounds.miss.currentTime = 0
-            gameModify.spSounds.miss.play()
+            if (!isPlaying(gameModify.spSounds.miss)) gameModify.spSounds.miss.play()
         }
         gameModify.getColab().endSP()
     },
@@ -594,18 +848,44 @@ const spf = {
         gameModify.getColab().you.JSON.change({ critChance: beforeUsed.critChance / 2 })
         gameModify.getColab().you.atk.setPrectange(113.5, "all")
         gameModify.spSounds.magic.currentTime = 0
-        gameModify.spSounds.magic.play()
+        if (!isPlaying(gameModify.spSounds.magic)) gameModify.spSounds.magic.play()
 
         gameModify.getColab().setTimeoutInMoves(1, 5, (type) => {
             gameModify.spSounds.regen.currentTime = 0
-            gameModify.spSounds.regen.play()
+            if (!isPlaying(gameModify.spSounds.regen)) gameModify.spSounds.regen.play()
             gameModify.getColab(type).you.hp.setValue(gameModify.getColab(type).you.hp.get() + gameModify.calc(0, 30, 1.95, gameModify.getColab(type).you.getLevel()))
         })
         gameModify.getColab().setTimeoutInMoves(0, 5, (type) => {
             gameModify.spSounds.miss.currentTime = 0
-            gameModify.spSounds.miss.play()
+            if (!isPlaying(gameModify.spSounds.miss)) gameModify.spSounds.miss.play()
             gameModify.getColab(type).you.JSON.change(beforeUsed)
         })
+        gameModify.getColab().endSP()
+    },
+    topazAndNumby: function () {
+        const atk_minmax = [10 + gameModify.getColab().you.getLevel(), 40 + (gameModify.getColab().you.getLevel() - 1) * 2]
+        const atkprec = Math.round(Math.random() * atk_minmax[1] - atk_minmax[0]) + atk_minmax[0]
+        console.log(`[DEBUG/game/topazAndNumby] Procent ataków: ${atkprec} (przedział ${atk_minmax.join("-")}%)`)
+
+        gameModify.getColab().you.atk.setPrectange(100 + atkprec, "all")
+        gameModify.getColab().enemy.crit.change(gameModify.getColab().enemy.crit.get() * 2)
+
+        gameModify.getColab().setTimeoutInMoves("end", 5, (type) => {
+            gameModify.getColab(type).you.atk.setPrectange(11000 / (100 + atkprec), "all")
+            if (
+                charaList[gameModify.getColab(type).enemy.name()].types.have.includes("Metal") ||
+                charaList[gameModify.getColab(type).enemy.name()].types.have.includes("Informatyka")
+            ) {
+                gameModify.getColab(type).enemy.attack(gameModify.calc(0, 400, 3.1, gameModify.getColab(type).you.getLevel()))
+            } else {
+                gameModify.spSounds.miss.currentTime = 0
+                if (!isPlaying(gameModify.spSounds.miss)) gameModify.spSounds.miss.play()
+            }
+        })
+
+        gameModify.spSounds.magic.currentTime = 0
+        if (!isPlaying(gameModify.spSounds.magic)) gameModify.spSounds.magic.play()
+
         gameModify.getColab().endSP()
     },
 }
@@ -615,6 +895,7 @@ const spf = {
  * @returns Kompletna lista postaci
  */
 export const createCharacterWithSPFunctions = function () {
+    console.log(`[DEBUG] Ilość postaci: ${Object.keys(charaList).length}`)
     var CharaList_func = charaList
     Object.keys(charaList).forEach((key) => {
         CharaList_func[key].sp.function = spf[key]

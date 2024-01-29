@@ -6,31 +6,37 @@
         border-top-color: gray;
         border-bottom-color: gray;
     }
+
     25% {
         transform: rotate(90deg);
         border-top-color: gray;
         border-bottom-color: blue;
     }
+
     50% {
         transform: rotate(180deg);
         border-top-color: blue;
         border-bottom-color: blue;
     }
+
     75% {
         transform: rotate(270deg);
         border-top-color: blue;
         border-bottom-color: gray;
     }
+
     to {
         transform: rotate(360deg);
         border-top-color: gray;
         border-bottom-color: gray;
     }
 }
+
 @keyframes show {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -38,25 +44,47 @@
 
 @keyframes showInfo {
     from {
-        opacity: 0;
-        transform: scaleY(0);
+        transform: translateX(-100vw);
     }
+
     to {
-        opacity: 1;
-        transform: scaleY(1);
+        transform: translateX(0);
     }
 }
+
+@keyframes showInfoDouble {
+    from {
+        opacity: 0;
+        transform: translateX(-50vw) scale(0.6);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes showInfoDoublePhone {
+    from {
+        opacity: 0;
+        transform: translateY(-50vh) scale(0.4);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
 @keyframes hideInfo {
     from {
-        opacity: 1;
-        transform: scaleY(1) translateY(0);
         display: block;
+        transform: translateX(0);
     }
-    90%,
+
     to {
-        opacity: 0;
-        transform: scaleY(0) translateY(300vh);
         display: block;
+        transform: translateX(-100vw);
     }
 }
 
@@ -66,6 +94,7 @@ html {
 
 body {
     margin: 0;
+    overflow-x: hidden;
 }
 
 body,
@@ -92,9 +121,11 @@ div#start {
     padding: 10px;
     background: linear-gradient(white 60px, transparent 80px);
 }
+
 div#start div#header {
     height: 80px;
 }
+
 div#start div#header span#title::before {
     content: "Starcie 🌐 Internetu";
 }
@@ -115,6 +146,7 @@ button {
     align-items: center;
     justify-content: center;
 }
+
 button:hover {
     background: #a1ffc8;
 }
@@ -176,30 +208,34 @@ div#info {
     top: 0;
     left: 0;
 }
+
 div#info.active {
     display: block;
     animation-name: showInfo;
-    animation-duration: 1s;
+    animation-duration: 0.7s;
     animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
+
 div#info.active .o {
     display: block;
-    animation-name: show;
-    animation-delay: 1.2s;
+    animation-name: showInfoDouble;
+    animation-delay: 0.7s;
     animation-fill-mode: backwards;
-    animation-duration: 0.6s;
-    animation-timing-function: linear;
+    animation-duration: 0.7s;
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
+
 div#info.deactive,
 div#info:not(.active):not(.deactive) {
     display: none;
 }
+
 div#info.deactive {
-    transform: translateY(100vh);
     animation-name: hideInfo;
-    animation-duration: 0.4s;
+    animation-duration: 0.7s;
     animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
+
 div#info div.t {
     width: 100vw;
     height: 100vh;
@@ -208,6 +244,7 @@ div#info div.t {
     z-index: 2;
     position: fixed;
 }
+
 div#info div.o {
     right: 0px;
     position: fixed;
@@ -221,6 +258,7 @@ div#info div.o {
     z-index: 3;
     font-size: 17px;
 }
+
 div#info div.o span {
     overflow-x: scroll;
 }
@@ -229,6 +267,7 @@ div#info div.o ol,
 div#info div.o ul {
     margin: 0;
 }
+
 div#info div.o table td {
     padding: 6px;
     border: 3px solid black;
@@ -259,36 +298,46 @@ div#info div.o div.set.gChecked {
     border-left: 10px solid rebeccapurple;
     padding-left: 5px;
 }
+
 img.common {
     background: rgb(185, 185, 185);
 }
+
 img.uncommon {
     background: rgb(66, 206, 78);
 }
+
 img.rare {
     background: rgb(123, 169, 255);
 }
+
 img.epic {
-    background: rgb(168, 19, 226);
+    background: rgb(150, 0, 180);
 }
+
 img.legendary {
     background: rgb(219, 197, 0);
 }
+
 img.import {
     background: linear-gradient(159deg, cadetblue 0, cadetblue 30px, rgb(255, 165, 61) 35px);
 }
+
 img.dark_shop {
     background: linear-gradient(217deg, rgba(150, 135, 0, 0.8), transparent 70.71%), linear-gradient(127deg, rgba(96, 0, 126, 0.8), transparent 70.71%),
         linear-gradient(336deg, rgba(123, 218, 255, 0.8), transparent 46.47%), linear-gradient(127deg, transparent, rgba(96, 0, 126, 0.6) 45.43%, transparent 70.71%);
 }
-div#game.home img:not(.disabled):not(.cnsl):hover {
+
+div#game.home img.character:not(.disabled):hover {
     transform: scale(1.12);
     filter: blur(0) saturate(1) brightness(1);
 }
-div#game.home img.disabled {
+
+div#game.home img.character.disabled {
     filter: brightness(0) saturate(0) blur(2.5px);
     opacity: 0.3;
 }
+
 div#game.home img.gChecked {
     filter: blur(0) saturate(1) brightness(1);
     box-shadow: 0px 3.5px 10px 4px rgba(0, 0, 0, 0.41);
@@ -300,27 +349,40 @@ span.classNameColor {
     -webkit-text-stroke: var(--fbs) black;
     font-size: 120%;
 }
+
+#descriptionxD span.classNameColor:not(:hover),
+#spDescription span.classNameColor:not(:hover) {
+    -webkit-text-stroke: 0.5px black;
+    font-size: 110%;
+}
+
 span.classNameColor.common {
     color: rgb(185, 185, 185);
 }
+
 span.classNameColor.uncommon {
     color: rgb(66, 206, 78);
 }
+
 span.classNameColor.rare {
     color: rgb(123, 169, 255);
 }
+
 span.classNameColor.epic {
-    color: rgb(168, 19, 226);
+    color: rgb(150, 0, 180);
 }
+
 span.classNameColor.legendary {
     color: rgb(219, 197, 0);
 }
+
 span.classNameColor.import {
     background: linear-gradient(175deg, cadetblue 0, cadetblue 45%, rgb(255, 165, 61) 50%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
 span.classNameColor.dark_shop {
     background: linear-gradient(217deg, rgba(150, 135, 0, 0.8), transparent 70.71%), linear-gradient(127deg, rgba(96, 0, 126, 0.8), transparent 70.71%),
         linear-gradient(336deg, rgba(123, 218, 255, 0.8), transparent 46.47%), linear-gradient(127deg, transparent, rgba(96, 0, 126, 0.6) 45.43%, transparent 70.71%);
@@ -357,6 +419,7 @@ div#game.bar button#home {
     z-index: 112;
     display: none;
 }
+
 #popup_info.musicPlayer {
     background: #d1d1ff;
 }
@@ -409,6 +472,7 @@ div#game.match div.half {
 div#game.match div#gameplay {
     opacity: 0;
 }
+
 div#game.match div#gameplay.show {
     opacity: 1;
 
@@ -433,6 +497,7 @@ div#game.match div#gameplay img[matchsp] {
 div#game.match div#gameplay[gameplay="player"] div.btns button.gChecked {
     transform: rotate(-5deg) scale(1.1);
 }
+
 div#game.match div#gameplay[gameplay="player"] div.reset {
     display: flex;
     font-size: 15px;
@@ -455,11 +520,13 @@ div#game.match div#gameplay[gameplay="player"] div.reset div {
 div#game.match button:not(.loginForm) {
     font-size: 15px;
 }
+
 div#game.match div#gameplay div.healthInfo {
     width: 15vw;
     text-align: center;
     font-size: 25%;
 }
+
 div#game.match div#gameplay div.healthBar {
     width: 15vw;
     height: 12px;
@@ -492,15 +559,74 @@ br[small] {
 ---------------------------------------------------------------------------
 -------------------------------------------------------------------------*/
 
+@keyframes animationTagToks {
+    5% {
+        filter: hue-rotate(90deg) drop-shadow(0 0 5px lime);
+    }
+
+    from,
+    to {
+        filter: hue-rotate(0) drop-shadow(0 0 0 transparent);
+    }
+}
+
+img.animateTagToks {
+    animation-name: animationTagToks;
+    animation-timing-function: linear;
+    animation-duration: 0.75s;
+}
+
+@keyframes animationTagAtkback {
+    5% {
+        filter: hue-rotate(-90deg) drop-shadow(0 0 5px rgb(255, 121, 143));
+    }
+
+    from,
+    to {
+        filter: hue-rotate(0) drop-shadow(0 0 0 transparent);
+    }
+}
+
+img.animateTagAtkback {
+    animation-name: animationTagAtkback;
+    animation-timing-function: linear;
+    animation-duration: 0.5s;
+}
+
+/*-------------------------------------------------------------------------
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+-------------------------------------------------------------------------*/
+
 @media (max-width: 575px) {
+
+    div#info.active,
+    div#info.deactive {
+        animation: none !important;
+    }
+
     div#info div.t {
         width: 100vw;
-        height: 20vh;
+        height: 100vh;
         background: rgb(0, 0, 0, 0.5);
         z-index: 29;
         clear: both;
         bottom: 0;
     }
+
+    div#info.active div.t {
+        animation-name: show;
+        animation-delay: 0;
+        animation-fill-mode: backwards;
+        animation-duration: 0.7s;
+        animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+
     div#info div.o {
         box-sizing: border-box;
         padding: 12px;
@@ -511,33 +637,53 @@ br[small] {
         clear: both;
         font-size: 24px;
     }
+
+    div#info.active div.o {
+        animation-name: showInfoDoublePhone;
+        animation-delay: 0;
+        animation-fill-mode: backwards;
+        animation-duration: 0.7s;
+        animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+
     #popup_info.musicPlayer {
         bottom: 15px;
         top: auto;
         right: 20px;
     }
 }
+
 @media (max-width: 682px) {
     div#game.match div#gameplay span.name {
         display: none;
     }
+
     div#game.match div#gameplay[gameplay="player"] div.resetAndHide {
         display: none;
     }
+
     div#game.match div#gameplay img.character {
         width: 110px;
         height: 110px;
     }
+
     div#game.match div#gameplay img:not(.character) {
         width: 20px;
         height: 20px;
     }
+
     div#game.match div#gameplay[gameplay="player"] div.btns {
         width: 85%;
     }
-    div#game.match div#gameplay[gameplay="player"] div.btns button {
+
+    div#game.match div#gameplay[gameplay="player"] div.btns button:not(#getBTP) {
         width: 100% !important;
     }
+
+    div#game.match div#gameplay[gameplay="player"] div.btns button#getBTP {
+        width: 95% !important;
+    }
+
     div#game.match div#gameplay button,
     div#game.match div#gameplay[gameplay="player"] div.reset div {
         font-size: 20px;
@@ -547,16 +693,20 @@ br[small] {
         text-align: center;
         display: block;
     }
+
     div#game.match div#gameplay[gameplay="player"] div.reset button {
         width: 100% !important;
     }
+
     div#game.match div#gameplay[gameplay="player"] div.reset div {
         margin-left: 0;
         width: 100%;
     }
+
     div#game.match div#gameplay div.healthInfo {
         width: 22vw;
     }
+
     div#game.match div#gameplay div.healthBar {
         width: 22vw;
         height: 15px;
@@ -566,6 +716,7 @@ br[small] {
         height: 15px;
     }
 }
+
 @media (max-width: 729.9px) {
     div#start div#header span#title::before {
         content: "🌐";
@@ -593,6 +744,7 @@ button#skipThisSong {
         transform: scale(1.2);
         opacity: 0;
     }
+
     to {
         transform: scale(1);
         opacity: 1;
@@ -640,6 +792,7 @@ div#presents div.card {
     margin: 0 5px;
     border-radius: 0.2rem;
 }
+
 div#presents div.card div.emoji {
     font-size: 73px;
     text-align: center;
@@ -647,6 +800,7 @@ div#presents div.card div.emoji {
     text-shadow: 0px 0px 10px black;
     margin-top: -12px;
 }
+
 div#presents div.card div.info {
     margin-top: 12px;
     font-size: 20px;

@@ -8,10 +8,17 @@ import { langText } from "./lang.js"
 import { createCharacterWithSPFunctions } from "./characters.spf.js"
 import { interfaceImages } from "./otherImages.js"
 import * as _jk from "https://patyczakus.github.io/javakit/module.js"
-const JK = _jk.default
+const JK = _jk.default,
+    accualVersion = 2,
+    database = getDatabase(app),
+    characterDataVars = {
+        name: ["lvl", "sp"],
+        type: ["number", "boolean"],
+    },
+    atkFromBtp = (btp) => Math.ceil(btp * Math.pow(btp, 0.45) + 20 - Math.min(btp, 15))
 
 var data = {
-        version: 3,
+        version: accualVersion,
         coins: 1000,
         lvl: 1,
         tokens: 1,
@@ -25,6 +32,8 @@ var data = {
     matchSettings = {
         player: {
             points: 0,
+            lvl: 0,
+            spHave: false,
             name: "",
             critChance: 100,
             health: 0,
@@ -44,7 +53,6 @@ var data = {
         moves: 0,
     },
     gmx = 0,
-    accualVersion = 3,
     characters_list_names = [],
     uidd,
     msBefore = {},
@@ -55,6 +63,7 @@ var data = {
         criticalAttack: new Audio("https://patyczakus.github.io/starcie-internetu/audios/critical.wav"),
         punkty: new Audio("https://patyczakus.github.io/starcie-internetu/audios/exp.mp3"),
         heal: new Audio("https://patyczakus.github.io/starcie-internetu/audios/heal.mp3"),
+        burza: new Audio("https://cdn.discordapp.com/attachments/1177876489421738014/1201259145895088238/BeepBox-Song_1_mp3cut.net.mp3"),
         sp: {
             magic: new Audio("https://patyczakus.github.io/starcie-internetu/audios/sp1.wav"),
             vanish: new Audio("https://patyczakus.github.io/starcie-internetu/audios/vanish.mp3"),
@@ -70,6 +79,8 @@ var data = {
             discord: {
                 userMoved: new Audio("https://patyczakus.github.io/starcie-internetu/audios/DiscordUM.mp3"),
             },
+            galaxyMagic: new Audio("https://cdn.discordapp.com/attachments/1177876489421738014/1197985182918123580/magic-6976.mp3"),
+            gg_a: new Audio("https://cdn.discordapp.com/attachments/1177876489421738014/1200161061194715136/Gawr_Gura_a_mp3cut.net.mp3"),
         },
     },
     gType = "home",
@@ -96,19 +107,221 @@ var data = {
         addedClickEvent: false,
         whatIsPlayed: "",
     },
-    _forcePlay = false
-
-const database = getDatabase(app),
-    characterDataVars = {
-        name: ["lvl", "sp"],
-        type: ["number", "boolean"],
-    },
-    atkFromBtp = (btp) => Math.ceil(btp * Math.pow(btp, 0.45) + 20 - Math.min(btp, 15))
+    _forcePlay = false,
+    gamepadMain = () => {}
 
 function closeInfo() {
     document.querySelector("div#info").classList.remove("active")
     document.querySelector("div#info").classList.add("deactive")
     gType = "home"
+}
+
+function $saveFunction(gc) {
+    if (frameBlock < 0 && !gBlock) {
+        if (gc.buttons[9].pressed) {
+            if (gType == "home") {
+                createHome()
+                if (showedCheck) document.querySelector("div#game.home img.canViewInfo.gChecked").classList.remove("gChecked")
+                gType = "homeScreen"
+            } else if (gType == "match") {
+                gWhiteFlag.clicks++
+                if (!gWhiteFlag.want) {
+                    gWhiteFlag.want = true
+                    setTimeout(() => {
+                        gWhiteFlag.want = false
+                        gWhiteFlag.clicks = 0
+                    }, 1000)
+                } else if (gWhiteFlag.clicks >= 3) endGame(2)
+            }
+        } else if (gc.buttons[5].pressed) {
+            if (gType == "home") {
+                gCheckedNum.home++
+                gCheckedNum.home = gCheckedNum.home % document.querySelectorAll("div#game.home img.canViewInfo").length
+                if (showedCheck) document.querySelector("div#game.home img.canViewInfo.gChecked").classList.remove("gChecked")
+                document.querySelectorAll("div#game.home img.canViewInfo")[gCheckedNum.home].classList.add("gChecked")
+                showedCheck = true
+            }
+            if (gType == "settings") {
+                gCheckedNum.settings++
+                gCheckedNum.settings = gCheckedNum.settings % document.querySelectorAll("div#info div.o div.set").length
+                if (showedCheck) document.querySelector("div#info div.o div.set.gChecked").classList.remove("gChecked")
+                document.querySelectorAll("div#info div.o div.set")[gCheckedNum.settings].classList.add("gChecked")
+                showedCheck = true
+            }
+            if (gType == "match") {
+                gCheckedNum.match++
+                gCheckedNum.match = gCheckedNum.match % matchSettings.player.atk.length
+                if (showedCheck) document.querySelector(`div#game.match div[gameplay="player"] button.atk.gChecked`).classList.remove("gChecked")
+                document.querySelectorAll(`div#game.match div[gameplay="player"] button.atk`)[gCheckedNum.match].classList.add("gChecked")
+                showedCheck = true
+            }
+        } else if (gc.buttons[4].pressed) {
+            if (gType == "home") {
+                gCheckedNum.home--
+                if (gCheckedNum.home < 0) gCheckedNum.home = document.querySelectorAll("div#game.home img.canViewInfo").length - 1
+                if (showedCheck) document.querySelector("div#game.home img.canViewInfo.gChecked").classList.remove("gChecked")
+                document.querySelectorAll("div#game.home img.canViewInfo")[gCheckedNum.home].classList.add("gChecked")
+                showedCheck = true
+            }
+            if (gType == "settings") {
+                gCheckedNum.settings--
+                if (gCheckedNum.settings < 0) gCheckedNum.settings = document.querySelectorAll("div#info div.o div.set").length - 1
+                if (showedCheck) document.querySelector("div#info div.o div.gChecked").classList.remove("gChecked")
+                document.querySelectorAll("div#info div.o div.set")[gCheckedNum.settings].classList.add("gChecked")
+                showedCheck = true
+            }
+            if (gType == "match") {
+                gCheckedNum.match--
+                if (gCheckedNum.match < 0) gCheckedNum.match = matchSettings.player.atk.length - 1
+                if (showedCheck) document.querySelector(`div#game.match div[gameplay="player"] button.atk.gChecked`).classList.remove("gChecked")
+                document.querySelectorAll(`div#game.match div[gameplay="player"] button.atk`)[gCheckedNum.match].classList.add("gChecked")
+                showedCheck = true
+            }
+        } else if (gc.buttons[0].pressed) {
+            if (gType == "home") {
+                if (showedCheck) {
+                    createCharacterInfo(document.querySelectorAll("div#game.home img.canViewInfo")[gCheckedNum.home].id)
+                    document.querySelector("div#game.home img.canViewInfo.gChecked").classList.remove("gChecked")
+                    showedCheck = false
+                    gType = "charaInfo"
+                }
+            }
+            if (gType == "settings") {
+                if (showedCheck) {
+                    if (document.querySelectorAll("div#info div.o .settingType")[gCheckedNum.settings].value == "bool") {
+                        data.settings[settingsList[gCheckedNum.settings].flag] = !data.settings[settingsList[gCheckedNum.settings].flag]
+                        document.querySelectorAll("div#info div.o .setting")[gCheckedNum.settings].innerText = data.settings[settingsList[gCheckedNum.settings].flag] ? "✅" : "❌"
+                        save(false)
+                    }
+                }
+            }
+            if (gType == "match") {
+                if (matchSettings.player.spUses < characters_json[matchSettings.player.name].sp.maxUses && data.characters[matchSettings.player.name].sp) {
+                    starPover("player")
+                    if (showedCheck) document.querySelector(`div#game.match div[gameplay="player"] button.atk.gChecked`).classList.remove("gChecked")
+                    showedCheck = false
+                    gCheckedNum.match = -1
+                }
+            }
+        } else if (gc.buttons[1].pressed) {
+            if (gType == "charaInfo" || gType == "homeScreen") {
+                document.querySelector("div#info").classList.remove("active")
+                document.querySelector("div#info").classList.add("deactive")
+                gType = "home"
+            }
+            if (gType == "settings") {
+                createHome()
+                showedCheck = false
+                gType = "homeScreen"
+            }
+            if (gType == "chest") {
+                document.querySelector("div#game.match").style.display = "none"
+                changeVolume(70)
+                gType = "homeScreen"
+            }
+            if (gType == "endScreen") {
+                document.querySelector("div#game.match").style.display = "none"
+                changeVolume(70)
+                gType = "home"
+            }
+            if (gType == "match") {
+                if (showedCheck && matchSettings.player.points >= characters_json[matchSettings.player.name].battle[gCheckedNum.match].points) {
+                    fightFunctions.attack(gCheckedNum.match)
+                }
+            }
+        } else if (gc.buttons[2].pressed) {
+            if (gType == "match") {
+                if (showedCheck) document.querySelector(`div#game.match div[gameplay="player"] div.btns button.atk.gChecked`).classList.remove("gChecked")
+                fightFunctions.getBTP()
+            }
+            if (gType == "charaInfo") {
+                let name = document.querySelector(`div#info div.o input#nameInfo`).value
+                if (data.coins >= 5000 && !data.characters[name].sp) {
+                    data.characters[name].sp = true
+                    data.coins -= 5000
+                    document.querySelector("div#info div.o").innerHTML = '<div class="loading small" style="margin: 30px"></div>'
+                    save(false).then(() => {
+                        if (document.querySelector("div#info").classList.contains("active")) createCharacterInfo(name)
+                        audios.punkty.currentTime = 0
+                        audios.punkty.play()
+                        new miniAlert(checkLanguage(langText.characterInfo.buy.sp, data.settings.lang)).show(2000)
+                    })
+                }
+            }
+        } else if (gc.buttons[3].pressed) {
+            if (gType == "match") {
+                if (gameModify.getColab("player").you.hp.factor() <= 0.75) {
+                    if (matchSettings.player.points >= 25) {
+                        fightFunctions.heal()
+                        if (showedCheck) document.querySelector(`div#game.match div[gameplay="player"] div.btns button.atk.gChecked`).classList.remove("gChecked")
+                        showedCheck = false
+                        gCheckedNum.match = -1
+                    }
+                }
+            }
+            if (gType == "charaInfo") {
+                let name = document.querySelector(`div#info div.o input#nameInfo`).value
+                if (data.coins >= 1800 + classes.indexOf(characters_json[name].class) * 200 && data.characters[name].lvl < characters_json[name].max_lvl) {
+                    data.characters[name].lvl++
+                    data.coins -= 1800 + classes.indexOf(characters_json[name].class) * 200
+                    document.querySelector("div#info div.o").innerHTML = '<div class="loading small" style="margin: 30px"></div>'
+                    save(false).then(() => {
+                        if (document.querySelector("div#info").classList.contains("active")) createCharacterInfo(name)
+                        audios.punkty.currentTime = 0
+                        audios.punkty.play()
+                        new miniAlert(checkLanguage(langText.characterInfo.buy.lvl, data.settings.lang).replace("{charaLVL}", data.characters[name].lvl)).show(4500)
+                    })
+                }
+            }
+        } else if (gc.buttons[12].pressed) {
+            if (gType == "homeScreen") startMatch()
+        } else if (gc.buttons[13].pressed) {
+            if (gType == "homeScreen") createSettings()
+        } else if (gc.buttons[14].pressed) {
+            if (gType == "homeScreen") openChest()
+        } else if (gc.buttons[15].pressed) {
+            if (gType == "homeScreen") {
+                logOut()
+                gType = "home"
+            }
+        }
+        if (gc.axes[3] >= 0.2 || gc.axes[3] <= -0.2) {
+            if (gType == "charaInfo" || gType == "settings") {
+                document.querySelector("div#info div.o").scroll({
+                    top: document.querySelector("div#info div.o").scrollTop + gc.axes[3] * data.settings.scrollSpeed,
+                })
+            }
+        }
+        if (gc.axes[2] >= 0.2 || gc.axes[2] <= -0.2) {
+            if (showedCheck)
+                if (gType == "settings") {
+                    if (document.querySelectorAll("div#info div.o .settingType")[gCheckedNum.settings].value.startsWith("num")) {
+                        var step = data.settings.stepByStep ? 1 : Number(document.querySelectorAll("div#info div.o .settingType")[gCheckedNum.settings].value.split(/:/g)[3])
+                        console.log(step + 0.1)
+
+                        document.querySelectorAll("div#info div.o .setting")[gCheckedNum.settings].value =
+                            Number(document.querySelectorAll("div#info div.o .setting")[gCheckedNum.settings].value) + Math.floor(gc.axes[2] / Math.abs(gc.axes[2])) * step
+                        data.settings[settingsList[gCheckedNum.settings].flag] = Number(document.querySelectorAll("div#info div.o .setting")[gCheckedNum.settings].value)
+                        save(false)
+                    }
+                }
+        }
+        if (gc.buttons[6].pressed && gc.buttons[7].pressed && gc.buttons[8].pressed && !gc.buttons[1].pressed) {
+            gType = "home"
+            new miniAlert(
+                `Zresetowano lokalizację pada do głównego panelu (zbiór postaci). Staraj się przenieść myszką, jeżeli to możliwe.<br />Twardy reset zrobisz podobnie z przyciskiem <img  draggable="false" width="15" height="15" src="${interfaceImages.Gamepad_O_B}">`
+            ).show(7000)
+        }
+        if (gc.buttons[6].pressed && gc.buttons[7].pressed && gc.buttons[8].pressed && gc.buttons[1].pressed) {
+            document.body.innerHTML = '<div style="font-size: 200%; margin: 30px;">Przygotowanie do twardego resetu...<br /><div class="loading"></div></div>'
+            save(false).then(() => {
+                location.reload()
+            })
+        }
+        frameBlock = data.settings.numberOfBlockFrames
+    } else {
+        frameBlock--
+    }
 }
 
 /**
@@ -193,7 +406,7 @@ function checkLanguage(JSON, language) {
         if (typeof JSON == "undefined") {
             new miniAlert("[PL] Podczas analizy językowej wystąpił błąd<br />[EN] An error occurred during language analysis<br />#2DC1", "error").show(5000)
             console.error(`[DEBUG] Kod błędu: #2DC1\nKategoria: Błąd z kodem JSON języka\nArgumenty: typeof=undefined`)
-            return "[err#2CD]"
+            return "[err#2DC]"
         } else {
             console.warn(`[DEBUG] Kod błędu: #2DC0\nKategoria: Błąd z kodem JSON języka\nArgumenty: typeof=${typeof JSON} json=${JSON}`)
             return JSON
@@ -245,6 +458,20 @@ export function start(uid) {
         onValue(ref(database, `starcie-internetu/data/${uid}`), (snpsht) => {
             if (data.settings.resetFont && !document.body.classList.contains("resetFont")) document.body.classList.add("resetFont")
             if (!data.settings.resetFont && document.body.classList.contains("resetFont")) document.body.classList.remove("resetFont")
+            if (data.settings.useGamepad) gamepadMain = $saveFunction
+            else gamepadMain = () => {}
+
+            if (data.xp >= 10000) {
+                data.xp -= 10000
+                data.lvl++
+
+                data.tokens++
+                data.coins += 750 * Math.floor(data.lvl / 3)
+
+                const alert = new miniAlert("Wbito kolejny poziom twojego konta!")
+                alert.show(4000)
+                return set(ref(database, `starcie-internetu/data/${uid}`), data)
+            }
 
             data = snpsht.val()
             var _chara = {}
@@ -271,20 +498,8 @@ export function start(uid) {
                 }
                 _chara[name] = helpVar
             })
-            console.log(`[DEBUG/datachange] Zmieniony kod JSON:`, _chara)
+            console.log(`[DEBUG/datachange] Zmieniono na kod JSON!`)
             data.characters = _chara
-
-            if (data.xp >= 10000) {
-                data.xp -= 10000
-                data.lvl++
-
-                data.tokens++
-                data.coins += 750 * Math.floor(data.lvl / 3)
-
-                const alert = new miniAlert("Wbito kolejny poziom twojego konta!")
-                alert.show(4000)
-                return set(ref(database, `starcie-internetu/data/${uid}`), data)
-            }
 
             document.querySelector(
                 "#game.bar"
@@ -305,13 +520,21 @@ export function start(uid) {
                 else {
                     data.lvl = snapshot.val().lvl
                     data.xp = snapshot.val().xp
-                }
 
-                //nagrody
-                if (snapshot.val().version < accualVersion) {
-                    data.tokens = 5
-                    data.coins = 1300
-                    data.characters.sylwestrowyOctane = "2|false"
+                    var nJ = {
+                        habby: "1|true",
+                    }
+                    Object.entries(snapshot.val().characters).forEach(([key]) => {
+                        if (classes.indexOf(characters_json[key].class) >= 5) {
+                            nJ[key] = "1|false"
+                            if (snapshot.val().characters[key].endsWith("true")) data.coins += 5500
+                        } else if (key != "habby") {
+                            data.tokens++
+                            if (snapshot.val().characters[key].endsWith("true")) data.coins += 4000
+                        }
+                    })
+
+                    data.characters = nJ
                 }
 
                 data.version = accualVersion
@@ -379,7 +602,9 @@ export function start(uid) {
 
 /** Buduje podstawowy panel z postaciami */
 function index() {
-    document.querySelector("div#game.home").innerHTML = `<span style="font-size: 180%">${checkLanguage(langText.infoOnCharaList, data.settings.lang)}</span><br />`
+    if (data.settings.useGamepad)
+        document.querySelector("div#game.home").innerHTML = `<span style="font-size: 180%">${checkLanguage(langText.infoOnCharaList, data.settings.lang)}</span><br />`
+    else document.querySelector("div#game.home").innerHTML = ``
     var text = ""
     var characters_have_list_names = Object.keys(data.characters)
 
@@ -510,7 +735,7 @@ function createCharacterInfo(name) {
         })
         .replace("{starpover_bulid}", () => {
             if (data.characters[name].sp)
-                return `${checkLanguage(characters_json[name].sp.description, data.settings.lang)}<br />
+                return `<div id="spDescription">${checkLanguage(characters_json[name].sp.description, data.settings.lang)}</div>
             <u>${checkLanguage(langText.characterInfo.mu, data.settings.lang)} ${isFinite(characters_json[name].sp.maxUses) ? characters_json[name].sp.maxUses : "\u221E"}</u>`
             else return checkLanguage(langText.characterInfo.nosp, data.settings.lang)
         })
@@ -569,8 +794,31 @@ function createCharacterInfo(name) {
     console.log(`[DEBUG] Ogarnięto profil (2/3)`)
 
     get(ref(database, `starcie-internetu/followersApiInfo`)).then((snpsht) => {
+        var desc = {
+            c: document.querySelector("#info .o #descriptionxD").innerHTML,
+            sp: document.querySelector("#info .o #spDescription") == null ? null : document.querySelector("#info .o #spDescription").innerHTML,
+        }
+        Object.entries(desc).forEach(([key, descr]) => {
+            if (desc[key] != null)
+                desc[key] = descr
+                    .replace(/{{desc\.db\.(\w+)}}/g, (match, arg) => snpsht.val()[arg])
+                    .replace(/{{charaName\.([\węółżźćń]+)}}|{{charaName\.([\węółżźćń]+)\|([^{}|]+)}}/g, (match, arg1, arg2, arg3) => {
+                        console.log("[DEBUG/descChanger/tag:charaName] Typ arg1: " + typeof arg1)
+                        if (arg1) {
+                            return characters_list_names.includes(arg1)
+                                ? `<span class="classNameColor ${characters_json[arg1].class}">${arg1}</span>`
+                                : `<span class="classNameColor">${arg1}</span>`
+                        } else {
+                            return characters_list_names.includes(arg2)
+                                ? `<span class="classNameColor ${characters_json[arg2].class}">${arg3}</span>`
+                                : `<span class="classNameColor">${arg3}</span>`
+                        }
+                    })
+        })
         console.log(`[DEBUG/database] Pobrano dane ~/followersApiInfo`)
-        document.querySelector("#info .o #descriptionxD").innerHTML = document.querySelector("#info .o #descriptionxD").innerHTML.replace("{desc.yk}", snpsht.val().ky)
+        document.querySelector("#info .o #descriptionxD").innerHTML = desc.c
+        if (desc.sp != null) document.querySelector("#info .o #spDescription").innerHTML = desc.sp
+
         console.log(`[DEBUG] Ogarnięto profil (3/3)`)
     })
 }
@@ -802,7 +1050,13 @@ var fightFunctions = {
     heal: function () {
         if (gameModify.getColab("player").you.hp.factor() > 0.75) return
         if (matchSettings.player.points < 25) return
-        gameModify.getColab("player").you.hp.setValue(gameModify.getColab("player").you.hp.get() + Math.pow(2, data.characters[matchSettings.player.name].lvl) * 500, false)
+        gameModify
+            .getColab("player")
+            .you.hp.setValue(
+                gameModify.getColab("player").you.hp.get() +
+                    Math.pow(2, data.characters[matchSettings.player.name].lvl) * (500 + 200 * characters_json[matchSettings.player.name].tags.includes("ahealth")),
+                false
+            )
         matchSettings.player.points -= 25
         audios.heal.currentTime = 0
         audios.heal.play()
@@ -832,6 +1086,8 @@ function startMatch() {
     matchSettings = {
         player: {
             points: 0,
+            lvl: 0,
+            spHave: false,
             name: "",
             critChance: 100,
             health: 0,
@@ -880,7 +1136,8 @@ function startMatch() {
             characters_json[matchSettings.player.name].level_up.battle[i],
             data.characters[matchSettings.player.name].lvl
         )
-        if (characters_json[matchSettings.player.name].tags.includes("double")) matchSettings.player.atk[i] *= 2
+        matchSettings.player.atk[i] = Math.round(matchSettings.player.atk[i] * (1 - 0.7 * characters_json[matchSettings.player.name].tags.includes("tanker")))
+        matchSettings.player.atk[i] *= 1 + characters_json[matchSettings.player.name].tags.includes("double")
         if (typeof characters_json[matchSettings.player.name].battle[i].name == "object") {
             textesTranslated.atk[i] = data.settings.forcedLang
                 ? checkLanguage(characters_json[matchSettings.player.name].battle[i].name, data.settings.lang)
@@ -895,6 +1152,9 @@ function startMatch() {
         characters_json[matchSettings.player.name].level_up.hp,
         data.characters[matchSettings.player.name].lvl
     )
+    matchSettings.player.health = Math.round(matchSettings.player.health * (1 + 1.5 * characters_json[matchSettings.player.name].tags.includes("tanker")))
+    matchSettings.player.lvl = data.characters[matchSettings.player.name].lvl
+    matchSettings.player.spHave = data.characters[matchSettings.player.name].sp
     if (typeof characters_json[matchSettings.player.name].sp.name == "object") {
         textesTranslated.sp = data.settings.forcedLang
             ? checkLanguage(characters_json[matchSettings.player.name].sp.name, data.settings.lang)
@@ -918,7 +1178,7 @@ function startMatch() {
     matchSettings.bot.lvl = Math.round(Math.random() * (characters_json[matchSettings.bot.name].max_lvl * prec))
 
     // dla testów
-    //if (location.host == "localhost:5500") matchSettings.bot.name = "snackowyAdmin"
+    if ((location.host == "localhost:5500" || location.host == "127.0.0.1:5500") && window.ptkdevvars.enableCustomEnemy) matchSettings.bot.name = window.ptkdevvars.customEnemyName
 
     matchSettings.bot.lvl =
         matchSettings.bot.lvl > characters_json[matchSettings.bot.name].max_lvl
@@ -937,9 +1197,11 @@ function startMatch() {
             characters_json[matchSettings.bot.name].level_up.battle[i],
             matchSettings.bot.lvl
         )
-        if (characters_json[matchSettings.bot.name].tags.includes("double")) matchSettings.player.atk[i] *= 2
+        matchSettings.bot.atk[i] = Math.round(matchSettings.bot.atk[i] * (1 - 0.7 * characters_json[matchSettings.bot.name].tags.includes("tanker")))
+        matchSettings.bot.atk[i] *= 1 + characters_json[matchSettings.bot.name].tags.includes("double")
     }
     matchSettings.bot.health = gameModify.calc(0, characters_json[matchSettings.bot.name].hp, characters_json[matchSettings.bot.name].level_up.hp, matchSettings.bot.lvl)
+    matchSettings.bot.health = Math.round(matchSettings.bot.health * (1 + 1.3 * characters_json[matchSettings.bot.name].tags.includes("tanker")))
 
     matchSettings.player.critChance = gameModify.calcCritChance(matchSettings.player.name, data.characters[matchSettings.player.name].lvl, matchSettings.bot.name)
     matchSettings.bot.critChance = gameModify.calcCritChance(matchSettings.bot.name, matchSettings.bot.lvl, matchSettings.player.name)
@@ -1012,6 +1274,27 @@ function startMatch() {
     document.querySelector("div#info").classList.remove("active")
     document.querySelector("div#game.match").style.display = "block"
 
+    window.ptkdevvars.addMoves = (x) => (matchSettings.moves += x)
+    // atak od strony jądra, gdy już za długo grają
+    /**
+     * @param {"player" | "bot"} type
+     */
+    function _$attack(type) {
+        const a = (lvl) => Math.abs(Math.floor(matchSettings.moves * (lvl + matchSettings.moves / 200) * (lvl + 1)))
+        if ((matchSettings.moves >= 50 && matchSettings.moves % 10 === 0) || (matchSettings.moves >= 100 && matchSettings.moves % 2 === 0)) {
+            matchSettings[type].health -= a(matchSettings[type].lvl)
+            updateHP(type)
+
+            if (type === "player") {
+                audios.burza.currentTime = 0
+                audios.burza.play()
+            }
+        }
+    }
+
+    gameModify.getColab("player").setTimeoutInMoves("each", Infinity, _$attack)
+    gameModify.getColab("bot").setTimeoutInMoves("each", Infinity, _$attack)
+
     // odliczanie
     console.log(`[DEBUG] Rozpoczynanie odliczania`)
     document.querySelector(`div#game.match div[gameplay="player"]`).classList.add("show")
@@ -1056,9 +1339,9 @@ function startMatch() {
             document.querySelector(`div#game.match div[gameplay="player"] div.btns`).innerHTML += `<button id="heal" style="width: 100%; margin: 5px">${checkLanguage(
                 langText.fight.healBTN,
                 data.settings.lang
-            )} (+${Math.pow(2, data.characters[matchSettings.player.name].lvl) * 500} HP, -25 BTP) <img draggable="false" width="15" height="15" src="${
-                interfaceImages.Gamepad_Trójkąt_Y
-            }"></button>`
+            )} (+${
+                Math.pow(2, data.characters[matchSettings.player.name].lvl) * (500 + 200 * characters_json[matchSettings.player.name].tags.includes("ahealth"))
+            } HP, -25 BTP) <img draggable="false" width="15" height="15" src="${interfaceImages.Gamepad_Trójkąt_Y}"></button>`
         }, 50 * matchSettings.player.atk.length)
         setTimeout(() => {
             document.querySelector(`div#game.match div[gameplay="player"] div.btns`).innerHTML += `<button id="whiteFlag" style="width: 100%; margin: 5px">${checkLanguage(
@@ -1080,11 +1363,13 @@ function startMatch() {
                     `div#game.match div[gameplay="player"] div.btns`
                 ).innerHTML += `<button id="sp" style="width: 100%; margin: 5px; background: gold">SP - ${textesTranslated.sp} <img draggable="false" width="15" height="15" src="${interfaceImages.Gamepad_X_A}"></button>`
             }, 50 * matchSettings.player.atk.length + 150)
+
         setTimeout(() => {
-            document.querySelector(`div#game.match div[gameplay="player"] div.btns`).innerHTML += `<div class="resetAndHide">
+            if (data.settings.useGamepad)
+                document.querySelector(`div#game.match div[gameplay="player"] div.btns`).innerHTML += `<div class="resetAndHide">
             ${checkLanguage(langText.fight.PadInfo, data.settings.lang)}
             </div>`
-            document.querySelector(`div#game.match div#movesInfo`).innerText += checkLanguage(langText.fight.movefalse, data.settings.lang).replace("{num}", 1)
+            document.querySelector(`div#game.match div#movesInfo`).innerText = checkLanguage(langText.fight.movefalse, data.settings.lang).replace("{num}", 1)
         }, 50 * (matchSettings.player.atk.length + data.characters[matchSettings.player.name].sp) + 150)
         setTimeout(() => {
             for (let i = 0; i < matchSettings.player.atk.length; i++) {
@@ -1260,7 +1545,7 @@ function regenerate(type, keepMaxHP) {
     }
 
     var maxHP = keepMaxHP
-        ? document.querySelector(`div#game.match div[gameplay="player"] div.healthBar div.health`).style.getPropertyValue("--healthMax")
+        ? document.querySelector(`div#game.match div[gameplay="${type}"] div.healthBar div.health`).style.getPropertyValue("--healthMax")
         : matchSettings[type].health
 
     document.querySelector(`div#game.match div[gameplay="${type}"]`).innerHTML = `<div class="healthInfo">
@@ -1291,9 +1576,9 @@ function regenerate(type, keepMaxHP) {
         document.querySelector(`div#game.match div[gameplay="player"] div.btns`).innerHTML += `<button id="heal" style="width: 100%; margin: 5px">${checkLanguage(
             langText.fight.healBTN,
             data.settings.lang
-        )} (+${Math.pow(2, data.characters[matchSettings.player.name].lvl) * 100} HP, -25 BTP) <img draggable="false" width="15" height="15" src="${
-            interfaceImages.Gamepad_Trójkąt_Y
-        }"></button>`
+        )} (+${
+            Math.pow(2, data.characters[matchSettings.player.name].lvl) * 500 + 200 * characters_json[matchSettings.player.name].tags.includes("ahealth")
+        } HP, -25 BTP) <img draggable="false" width="15" height="15" src="${interfaceImages.Gamepad_Trójkąt_Y}"></button>`
         document.querySelector(`div#game.match div[gameplay="player"] div.btns`).innerHTML += `<button id="whiteFlag" style="width: 100%; margin: 5px">${checkLanguage(
             langText.fight.surBTN,
             data.settings.lang
@@ -1308,7 +1593,8 @@ function regenerate(type, keepMaxHP) {
             document.querySelector(
                 `div#game.match div[gameplay="player"] div.btns`
             ).innerHTML += `<button id="sp" style="width: 100%; margin: 5px; background: gold">SP - ${textesTranslated.sp} <img  draggable="false" width="15" height="15" src="${interfaceImages.Gamepad_X_A}"></button>`
-        document.querySelector(`div#game.match div[gameplay="player"] div.btns`).innerHTML += `<div class="resetAndHide">
+        if (data.settings.useGamepad)
+            document.querySelector(`div#game.match div[gameplay="player"] div.btns`).innerHTML += `<div class="resetAndHide">
         ${checkLanguage(langText.fight.PadInfo, data.settings.lang)}
         </div>`
         for (let i = 0; i < matchSettings.player.atk.length; i++) {
@@ -1403,13 +1689,22 @@ function dmg(type, atk, returns = Boolean(false)) {
 
     if (characters_json[matchSettings[type2].name].tags.includes("toks")) {
         gameModify.getColab(type2).setTimeoutInMoves("each", 2, (colabed) => {
-            gameModify.getColab(colabed).enemy.attack(Math.round(atk * (4 - crit * 3) * 0.04))
+            gameModify.getColab(colabed).enemy.attack(Math.round(atk * (4 - crit * 3) * 0.05))
+
+            document.querySelector(`div#game.match div[gameplay="${colabed == "player" ? "bot" : "player"}"] img.character`).classList.add("animateTagToks")
+            setTimeout(() => {
+                document.querySelector(`div#game.match div[gameplay="${colabed == "player" ? "bot" : "player"}"] img.character`).classList.remove("animateTagToks")
+            }, 760)
         })
     }
     if (characters_json[matchSettings[type].name].tags.includes("atkback")) {
         setTimeout(() => {
-            gameModify.getColab(type).enemy.attack(Math.round(atk * (4 - crit * 3) * 0.05))
-        }, 200)
+            gameModify.getColab(type).enemy.attack(Math.round(atk * (4 - crit * 3) * 0.08))
+            document.querySelector(`div#game.match div[gameplay="${type2}"] img.character`).classList.add("animateTagAtkback")
+            setTimeout(() => {
+                document.querySelector(`div#game.match div[gameplay="${type2}"] img.character`).classList.remove("animateTagAtkback")
+            }, 510)
+        }, 130)
     }
 }
 
@@ -1427,17 +1722,12 @@ function analyze() {
             let action = Math.round(Math.random() * 16)
             // console.log(action)
             if (action == 0 || action == 1) {
-                if (
-                    matchSettings.bot.health <= document.querySelector(`div#game.match div[gameplay="bot"] div.healthBar div.health`).style.getPropertyValue("--healthMax") / 2 &&
-                    matchSettings.bot.points >= 25
-                ) {
+                if (gameModify.getColab("bot").you.hp.factor() < 0.75 && matchSettings.bot.points >= 25) {
                     canskip = true
                     matchSettings.bot.points -= 25
-                    matchSettings.bot.health += Math.pow(2, matchSettings.bot.lvl) * 100
+                    matchSettings.bot.health += Math.pow(2, matchSettings.bot.lvl) * (500 + 200 * characters_json[matchSettings.bot.name].tags.includes("ahealth"))
                     audios.heal.currentTime = 0
                     audios.heal.play()
-                    if (matchSettings.bot.health > document.querySelector(`div#game.match div[gameplay="bot"] div.healthBar div.health`).style.getPropertyValue("--healthMax"))
-                        matchSettings.bot.health = document.querySelector(`div#game.match div[gameplay="bot"] div.healthBar div.health`).style.getPropertyValue("--healthMax")
 
                     updateHP("bot")
                 }
@@ -1519,213 +1809,7 @@ function analyze() {
 /** Akcje konsoli */
 function framer() {
     let [gc] = navigator.getGamepads()
-    if (gc != null)
-        if (frameBlock < 0 && !gBlock) {
-            if (gc.buttons[9].pressed) {
-                if (gType == "home") {
-                    createHome()
-                    if (showedCheck) document.querySelector("div#game.home img.canViewInfo.gChecked").classList.remove("gChecked")
-                    gType = "homeScreen"
-                } else if (gType == "match") {
-                    gWhiteFlag.clicks++
-                    if (!gWhiteFlag.want) {
-                        gWhiteFlag.want = true
-                        setTimeout(() => {
-                            gWhiteFlag.want = false
-                            gWhiteFlag.clicks = 0
-                        }, 1000)
-                    } else if (gWhiteFlag.clicks >= 3) endGame(2)
-                }
-            } else if (gc.buttons[5].pressed) {
-                if (gType == "home") {
-                    gCheckedNum.home++
-                    gCheckedNum.home = gCheckedNum.home % document.querySelectorAll("div#game.home img.canViewInfo").length
-                    if (showedCheck) document.querySelector("div#game.home img.canViewInfo.gChecked").classList.remove("gChecked")
-                    document.querySelectorAll("div#game.home img.canViewInfo")[gCheckedNum.home].classList.add("gChecked")
-                    showedCheck = true
-                }
-                if (gType == "settings") {
-                    gCheckedNum.settings++
-                    gCheckedNum.settings = gCheckedNum.settings % document.querySelectorAll("div#info div.o div.set").length
-                    if (showedCheck) document.querySelector("div#info div.o div.set.gChecked").classList.remove("gChecked")
-                    document.querySelectorAll("div#info div.o div.set")[gCheckedNum.settings].classList.add("gChecked")
-                    showedCheck = true
-                }
-                if (gType == "match") {
-                    gCheckedNum.match++
-                    gCheckedNum.match = gCheckedNum.match % matchSettings.player.atk.length
-                    if (showedCheck) document.querySelector(`div#game.match div[gameplay="player"] button.atk.gChecked`).classList.remove("gChecked")
-                    document.querySelectorAll(`div#game.match div[gameplay="player"] button.atk`)[gCheckedNum.match].classList.add("gChecked")
-                    showedCheck = true
-                }
-            } else if (gc.buttons[4].pressed) {
-                if (gType == "home") {
-                    gCheckedNum.home--
-                    if (gCheckedNum.home < 0) gCheckedNum.home = document.querySelectorAll("div#game.home img.canViewInfo").length - 1
-                    if (showedCheck) document.querySelector("div#game.home img.canViewInfo.gChecked").classList.remove("gChecked")
-                    document.querySelectorAll("div#game.home img.canViewInfo")[gCheckedNum.home].classList.add("gChecked")
-                    showedCheck = true
-                }
-                if (gType == "settings") {
-                    gCheckedNum.settings--
-                    if (gCheckedNum.settings < 0) gCheckedNum.settings = document.querySelectorAll("div#info div.o div.set").length - 1
-                    if (showedCheck) document.querySelector("div#info div.o div.gChecked").classList.remove("gChecked")
-                    document.querySelectorAll("div#info div.o div.set")[gCheckedNum.settings].classList.add("gChecked")
-                    showedCheck = true
-                }
-                if (gType == "match") {
-                    gCheckedNum.match--
-                    if (gCheckedNum.match < 0) gCheckedNum.match = matchSettings.player.atk.length - 1
-                    if (showedCheck) document.querySelector(`div#game.match div[gameplay="player"] button.atk.gChecked`).classList.remove("gChecked")
-                    document.querySelectorAll(`div#game.match div[gameplay="player"] button.atk`)[gCheckedNum.match].classList.add("gChecked")
-                    showedCheck = true
-                }
-            } else if (gc.buttons[0].pressed) {
-                if (gType == "home") {
-                    if (showedCheck) {
-                        createCharacterInfo(document.querySelectorAll("div#game.home img.canViewInfo")[gCheckedNum.home].id)
-                        document.querySelector("div#game.home img.canViewInfo.gChecked").classList.remove("gChecked")
-                        showedCheck = false
-                        gType = "charaInfo"
-                    }
-                }
-                if (gType == "settings") {
-                    if (showedCheck) {
-                        if (document.querySelectorAll("div#info div.o .settingType")[gCheckedNum.settings].value == "bool") {
-                            data.settings[settingsList[gCheckedNum.settings].flag] = !data.settings[settingsList[gCheckedNum.settings].flag]
-                            document.querySelectorAll("div#info div.o .setting")[gCheckedNum.settings].innerText = data.settings[settingsList[gCheckedNum.settings].flag]
-                                ? "✅"
-                                : "❌"
-                            save(false)
-                        }
-                    }
-                }
-                if (gType == "match") {
-                    if (matchSettings.player.spUses < characters_json[matchSettings.player.name].sp.maxUses && data.characters[matchSettings.player.name].sp) {
-                        starPover("player")
-                        if (showedCheck) document.querySelector(`div#game.match div[gameplay="player"] button.atk.gChecked`).classList.remove("gChecked")
-                        showedCheck = false
-                        gCheckedNum.match = -1
-                    }
-                }
-            } else if (gc.buttons[1].pressed) {
-                if (gType == "charaInfo" || gType == "homeScreen") {
-                    document.querySelector("div#info").classList.remove("active")
-                    gType = "home"
-                }
-                if (gType == "settings") {
-                    createHome()
-                    showedCheck = false
-                    gType = "homeScreen"
-                }
-                if (gType == "chest") {
-                    document.querySelector("div#game.match").style.display = "none"
-                    changeVolume(70)
-                    gType = "homeScreen"
-                }
-                if (gType == "endScreen") {
-                    document.querySelector("div#game.match").style.display = "none"
-                    changeVolume(70)
-                    gType = "home"
-                }
-                if (gType == "match") {
-                    if (showedCheck && matchSettings.player.points >= characters_json[matchSettings.player.name].battle[gCheckedNum.match].points) {
-                        fightFunctions.attack(gCheckedNum.match)
-                    }
-                }
-            } else if (gc.buttons[2].pressed) {
-                if (gType == "match") {
-                    if (showedCheck) document.querySelector(`div#game.match div[gameplay="player"] div.btns button.atk.gChecked`).classList.remove("gChecked")
-                    fightFunctions.getBTP()
-                }
-                if (gType == "charaInfo") {
-                    let name = document.querySelector(`div#info div.o input#nameInfo`).value
-                    if (data.coins >= 5000 && !data.characters[name].sp) {
-                        data.characters[name].sp = true
-                        data.coins -= 5000
-                        document.querySelector("div#info div.o").innerHTML = '<div class="loading small" style="margin: 30px"></div>'
-                        save(false).then(() => {
-                            if (document.querySelector("div#info").classList.contains("active")) createCharacterInfo(name)
-                            audios.punkty.currentTime = 0
-                            audios.punkty.play()
-                            new miniAlert(checkLanguage(langText.characterInfo.buy.sp, data.settings.lang)).show(2000)
-                        })
-                    }
-                }
-            } else if (gc.buttons[3].pressed) {
-                if (gType == "match") {
-                    if (gameModify.getColab().you.hp.factor() <= 0.75) {
-                        if (matchSettings.player.points >= 25) {
-                            fightFunctions.heal()
-                            if (showedCheck) document.querySelector(`div#game.match div[gameplay="player"] div.btns button.atk.gChecked`).classList.remove("gChecked")
-                            showedCheck = false
-                            gCheckedNum.match = -1
-                        }
-                    }
-                }
-                if (gType == "charaInfo") {
-                    let name = document.querySelector(`div#info div.o input#nameInfo`).value
-                    if (data.coins >= 1800 + classes.indexOf(characters_json[name].class) * 200 && data.characters[name].lvl < characters_json[name].max_lvl) {
-                        data.characters[name].lvl++
-                        data.coins -= 1800 + classes.indexOf(characters_json[name].class) * 200
-                        document.querySelector("div#info div.o").innerHTML = '<div class="loading small" style="margin: 30px"></div>'
-                        save(false).then(() => {
-                            if (document.querySelector("div#info").classList.contains("active")) createCharacterInfo(name)
-                            audios.punkty.currentTime = 0
-                            audios.punkty.play()
-                            new miniAlert(checkLanguage(langText.characterInfo.buy.lvl, data.settings.lang).replace("{charaLVL}", data.characters[name].lvl)).show(4500)
-                        })
-                    }
-                }
-            } else if (gc.buttons[12].pressed) {
-                if (gType == "homeScreen") startMatch()
-            } else if (gc.buttons[13].pressed) {
-                if (gType == "homeScreen") createSettings()
-            } else if (gc.buttons[14].pressed) {
-                if (gType == "homeScreen") openChest()
-            } else if (gc.buttons[15].pressed) {
-                if (gType == "homeScreen") {
-                    logOut()
-                    gType = "home"
-                }
-            }
-            if (gc.axes[3] >= 0.2 || gc.axes[3] <= -0.2) {
-                if (gType == "charaInfo" || gType == "settings") {
-                    document.querySelector("div#info div.o").scroll({
-                        top: document.querySelector("div#info div.o").scrollTop + gc.axes[3] * data.settings.scrollSpeed,
-                    })
-                }
-            }
-            if (gc.axes[2] >= 0.2 || gc.axes[2] <= -0.2) {
-                if (showedCheck)
-                    if (gType == "settings") {
-                        if (document.querySelectorAll("div#info div.o .settingType")[gCheckedNum.settings].value.startsWith("num")) {
-                            var step = data.settings.stepByStep ? 1 : Number(document.querySelectorAll("div#info div.o .settingType")[gCheckedNum.settings].value.split(/:/g)[3])
-                            console.log(step + 0.1)
-
-                            document.querySelectorAll("div#info div.o .setting")[gCheckedNum.settings].value =
-                                Number(document.querySelectorAll("div#info div.o .setting")[gCheckedNum.settings].value) + Math.floor(gc.axes[2] / Math.abs(gc.axes[2])) * step
-                            data.settings[settingsList[gCheckedNum.settings].flag] = Number(document.querySelectorAll("div#info div.o .setting")[gCheckedNum.settings].value)
-                            save(false)
-                        }
-                    }
-            }
-            if (gc.buttons[6].pressed && gc.buttons[7].pressed && gc.buttons[8].pressed && !gc.buttons[1].pressed) {
-                gType = "home"
-                new miniAlert(
-                    `Zresetowano lokalizację pada do głównego panelu (zbiór postaci). Staraj się przenieść myszką, jeżeli to możliwe.<br />Twardy reset zrobisz podobnie z przyciskiem <img  draggable="false" width="15" height="15" src="${interfaceImages.Gamepad_O_B}">`
-                ).show(7000)
-            }
-            if (gc.buttons[6].pressed && gc.buttons[7].pressed && gc.buttons[8].pressed && gc.buttons[1].pressed) {
-                document.body.innerHTML = '<div style="font-size: 200%; margin: 30px;">Przygotowanie do twardego resetu...<br /><div class="loading"></div></div>'
-                save(false).then(() => {
-                    location.reload()
-                })
-            }
-            frameBlock = data.settings.numberOfBlockFrames
-        } else {
-            frameBlock--
-        }
+    if (gc != null) gamepadMain(gc)
 
     //statystyka zmian
     var changedValue = {}
@@ -1745,8 +1829,8 @@ function framer() {
             })
             spDurationFunction = spDurationFunction.filter(
                 (data) =>
-                    ((data.type == 1 || data.type == "each") && isFinite(data.moves.ended) ? data.moves.ended < changedValue.moves : true) ||
-                    ((data.type == 0 || data.type == "end") && data.moves.ended <= changedValue.moves && isFinite(data.moves.ended))
+                    ((data.type == 1 || data.type == "each") && isFinite(data.moves.ended) ? changedValue.moves < data.moves.ended : true) ||
+                    ((data.type == 0 || data.type == "end") && changedValue.moves <= data.moves.ended && isFinite(data.moves.ended))
             )
         }
         if (gType == "match") {
@@ -1783,6 +1867,11 @@ function framer() {
         playedMiniAlertInfo.addedClickEvent = false
         playedMiniAlert.hide()
     }
+
+    document.querySelectorAll("div#game.home img.character").forEach((element) => {
+        element.width = 110 + (window.innerWidth % 120) / Math.floor((window.innerWidth - 24) / 120)
+        element.height = element.width
+    })
 
     // console.log(gType)
 
@@ -1830,7 +1919,9 @@ var gameModify = {
         )
 
         return {
-            /** Typ gracza */
+            /** Typ gracza
+             * @type {"player" | "bot"}
+             */
             type: playerSPUType,
             /**
              * Zwraca aktualny poziom konta
@@ -1997,15 +2088,15 @@ var gameModify = {
                      * @example gameModify.getColab().JSON.get("spUses")
                      * // => 3
                      *
-                     * gameModify.getColab().JSON.get("atk")
+                     * gameModify.getColab().you.JSON.get("atk")
                      * // => [ 200, 59033, 432534, ... ]
                      * gameModify.getColab().JSON.get("atk")[0] == gameModify.getColab().JSON.get("atk.0")
                      * // => true
                      *
-                     * gameModify.getColab().JSON.get("name")
+                     * gameModify.getColab().you.JSON.get("name")
                      * // => "habby"
                      *
-                     * gameModify.getColab("player").JSON.get("lvl")
+                     * gameModify.getColab().you.JSON.get("variables.notDefined")
                      * // => undefined
                      */
                     get: function (keys = String("")) {
@@ -2029,6 +2120,11 @@ var gameModify = {
                 },
             },
             enemy: {
+                /**
+                 * Atakuje przeciwnika
+                 * @param {number} value
+                 * @returns {{ atk: number, btp: number }}
+                 */
                 attack: function (value) {
                     return dmg(playerSPUType == "bot" ? "player" : "bot", value, true)
                 },
@@ -2068,13 +2164,15 @@ var gameModify = {
                         regenerate(playerSPUType == "player" ? "bot" : "player", false)
                     },
                     change: function (JSON) {
+                        var type = playerSPUType == "player" ? "bot" : "player"
                         let JSON_keys = Object.keys(JSON)
 
-                        for (let i = 0; i < JSON_keys.length; i++) matchSettings[playerSPUType == "player" ? "bot" : "player"][JSON_keys[i]] = JSON[JSON_keys[i]]
-                        regenerate(playerSPUType == "player" ? "bot" : "player", true)
+                        for (let i = 0; i < JSON_keys.length; i++) matchSettings[type][JSON_keys[i]] = JSON[JSON_keys[i]]
+                        regenerate(type, true)
                     },
                     get: function (keys = String("")) {
-                        var JSONKey = matchSettings[playerSPUType == "player" ? "bot" : "player"]
+                        const x = matchSettings[playerSPUType == "player" ? "bot" : "player"]
+                        var JSONKey = x
                         if (keys != "") {
                             keys = keys.split(".")
                             for (let i = 0; i < keys.length; i++) {

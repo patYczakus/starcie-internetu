@@ -1,5 +1,5 @@
 export const charaList = {
-    // Starcie Internetu
+    // Starcie internetu
     habby: {
         battle: [
             {
@@ -42,12 +42,12 @@ export const charaList = {
         },
         sp: {
             name: {
-                pl: "Zmień tryb na...",
-                en: "Change mode to...",
+                pl: "Zmień tryb na…",
+                en: "Change mode to…",
             },
             description: {
-                pl: "Dzięki luźnym kablom, habby potrafi przekształcić miejsce zarezerwowane dla HP miejscem na ataki.",
-                en: "With loose cables, habby is able to transform the space reserved for HP into a place for attacks.",
+                pl: "Dzięki luźnym kablom {{charaName.habby}} potrafi przekształcić miejsce zarezerwowane dla HP miejscem na ataki.",
+                en: "With loose cables {{charaName.habby}} is able to transform the space reserved for HP into a place for attacks.",
             },
             maxUses: 2,
         },
@@ -70,11 +70,11 @@ export const charaList = {
         },
         class: "common",
         dimension: "Starcie internetu",
-        hp: 8000,
+        hp: 8700,
         image: "https://cdn.discordapp.com/attachments/1047919900875825293/1059455609642164304/sketch-1672645955461.png",
         level_up: {
             battle: [1.8, 2.2],
-            hp: 2,
+            hp: 2.4,
             types: {
                 strong: 80,
                 weak: 40,
@@ -98,8 +98,8 @@ export const charaList = {
                 en: "Man made of water",
             },
             description: {
-                pl: "Nie po to rycerzOceanu ukończył najlepszą szkołę magii, aby nie używać czarów! Tworzy sobie specjalną osłonę redukującą szansę na krytyczny cios o 15%, zwiększa swoje HP o 17% oraz losowy atak o 20%.",
-                en: "This is not why rycerzOceanu graduated from the best school of magic not to use spells! He creates a special shield for himself that reduces the chance of a critical blow by 15%, increases his HP by 17% and his random attack by 20%.",
+                pl: "Nie po to {{charaName.rycerzOceanu}} ukończył najlepszą szkołę magii, aby nie używać czarów! Tworzy sobie specjalną osłonę redukującą szansę na krytyczny cios o 15%, zwiększa swoje HP o 17% oraz losowy atak o 20%.",
+                en: "This is not why {{charaName.rycerzOceanu}} graduated from the best school of magic not to use spells! He creates a special shield for himself that reduces the chance of a critical blow by 15%, increases his HP by 17% and his random attack by 20%.",
             },
             maxUses: 1,
         },
@@ -117,7 +117,7 @@ export const charaList = {
         battle: [
             {
                 name: { pl: "Nożyk", en: "Knife" },
-                points: 2,
+                points: 4,
             },
             {
                 name: { pl: "Galaktyczna piła", en: "Galaxy saw" },
@@ -127,7 +127,7 @@ export const charaList = {
         level_up: {
             hp: 2.8,
             types: {
-                strong: 75,
+                weak: 50,
             },
             battle: [2, 3.5],
         },
@@ -135,7 +135,7 @@ export const charaList = {
         types: {
             have: ["Galaktyka"],
             weak: {
-                def: 3000,
+                def: 2300,
                 ind: ["Ogień", "Powietrze", "Informatyka", "Elektryczność", "Trucizna"],
             },
         },
@@ -145,8 +145,8 @@ export const charaList = {
                 en: "Galaxy crystal of live",
             },
             description: {
-                pl: "glalirthor tworzy pokazowy kryształ, co powoduje zwiększenie ataków o 110%.",
-                en: "glalirthor creates a show crystal, resulting in an 110% increase in attacks.",
+                pl: "{{charaName.glalirthor}} tworzy pokazowy kryształ, co powoduje zwiększenie ataków o 110%.",
+                en: "{{charaName.glalirthor}} creates a show crystal, resulting in an 110% increase in attacks.",
             },
             maxUses: 1,
         },
@@ -159,7 +159,7 @@ export const charaList = {
             en: "Looking like a cute levitating animal with pixelated hands can unleash a veritable viral inferno. Small, but deadly. Not durable, but strong. Looking the weakest, in reality - powerful.",
         },
         dimension: "Starcie internetu",
-        hp: 10000,
+        hp: 9000,
         image: "https://cdn.discordapp.com/attachments/1048341996533731359/1050498063338328114/sketch-1670528511856.png",
         battle: [
             {
@@ -177,7 +177,7 @@ export const charaList = {
             { name: "/kill", points: 250 },
         ],
         level_up: {
-            hp: 3.15,
+            hp: 3,
             types: {
                 weak: 50,
                 strong: 100,
@@ -202,8 +202,8 @@ export const charaList = {
                 en: "Second live",
             },
             description: {
-                pl: "trajom, w sytuacji zagrożenia, atakuje trzy razy pięścią, po czym resetuje swoje informacje zredukowanej do połowy poziomu. Dodatkowo posiada 30 BTP po resecie.",
-                en: "trajom, in a threatening situation, attacks three times with his fist, after which he resets his information reduced to half a level. Additionally, it has 30 BTP after the reset.",
+                pl: "{{charaName.trajom}}, w sytuacji zagrożenia, atakuje trzy razy pięścią, po czym resetuje swoje informacje zredukowanej do połowy poziomu. Dodatkowo posiada 30 BTP po resecie.",
+                en: "{{charaName.trajom}}, in a threatening situation, attacks three times with his fist, after which he resets his information reduced to half a level. Additionally, it has 30 BTP after the reset.",
             },
             maxUses: 1,
         },
@@ -229,7 +229,7 @@ export const charaList = {
             },
         ],
         dimension: "Starcie internetu",
-        hp: 9500,
+        hp: 10000,
         class: "uncommon",
         max_lvl: 20,
         types: {
@@ -245,7 +245,7 @@ export const charaList = {
         },
         image: "https://cdn.discordapp.com/attachments/1047919900875825293/1066320173931442186/aatbio_com_image_export_Jan_21_2023_2.png",
         level_up: {
-            hp: 2,
+            hp: 2.163,
             battle: [2.8, 3, 3.125],
             types: {
                 strong: 55,
@@ -258,8 +258,8 @@ export const charaList = {
                 en: "The Vampire Girl",
             },
             description: {
-                pl: "kira „zabiera” zdrowie dla przeciwnika i nadaje sobie za pomocą uderzenia.",
-                en: "the kira „takes away” the health for the opponent and imparts to itself with a strike.",
+                pl: "{{charaName.kira}} „zabiera” zdrowie dla przeciwnika i nadaje sobie za pomocą uderzenia.",
+                en: "{{charaName.kira}} „takes away” the health for the opponent and imparts to itself with a strike.",
             },
             maxUses: 10,
         },
@@ -291,7 +291,7 @@ export const charaList = {
         },
         image: "https://cdn.discordapp.com/attachments/1177876489421738014/1177880327587369010/sketch-1700898905906.png?ex=6586928a&is=65741d8a&hm=3cc7efbe29dd42711063e34604fdf61ea937dcf66db9b06dfed2dba234bfff49&",
         level_up: {
-            hp: 2.05,
+            hp: 3.813479,
             battle: [2.2, 3.5],
             types: {
                 strong: -100,
@@ -301,12 +301,55 @@ export const charaList = {
         sp: {
             name: "$ cp ../$ENEMY ._",
             description: {
-                pl: "haker1000 kopiuje te same SP co przeciwnik, tracąc przy tym trochę HP. Możliwe też, że będzie miał te same statystyki co przeciwnik!",
-                en: "haker1000 copies the same Star Power as the opponent. It is also possible that he will have the same stats as his opponent!",
+                pl: "{{charaName.haker1000}} kopiuje te same SP co przeciwnik, tracąc przy tym trochę HP. Możliwe też, że będzie miał te same statystyki co przeciwnik!",
+                en: "{{charaName.haker1000}} copies the same Star Power as the opponent. It is also possible that he will have the same stats as his opponent!",
             },
             maxUses: Infinity,
         },
         tags: ["btpwa", "atkback", "double"],
+    },
+    starlight: {
+        description: {
+            pl: "Zamknięta w sobie i tajemnicza dziewczyna, powstała z mitycznej gwiazdy stworzonej w tym samym czasie co pierwszy atom, z innej czasoprzestrzeni. Ma niezwykłą pasję na punkcie astronomii i układem kosmicznym - widzi w tym idealizm i harmonię; utożsamia się ze wspomnianymi wcześniej gwiazdami tłumacząc, że one potrafią wskazać drogę do jakiegokolwiek miejsca. Jest też fanką wymiaru HoYoverse - ba, sama by chciała tam być jako oficjalna postać, lecz niestety może tylko pomarzyć…",
+            en: "A closed-off and mysterious girl, she was created from a mythical star created at the same time as the first atom, from another space-time. She has an unusual passion for astronomy and the cosmic system - she sees idealism and harmony in it; she identifies with the aforementioned stars, explaining that they can show the way to any place. She is also a fan of the HoYoverse dimension - in fact, she would like to be there herself as an official character, but unfortunately she can only dream…",
+        },
+        battle: [
+            { name: { pl: "Mała fala galaktyczna", en: "Little Galactic Wave" }, points: 0 },
+            { name: { pl: "Grawitacyjny miecz", en: "Gravitional sword" }, points: 20 },
+            { name: { pl: "Strzał gwiazdką", en: "StarShooter" }, points: 100 },
+            { name: "<i>MeteoHynnon</i>", points: 330 },
+        ],
+        dimension: "Starcie internetu",
+        hp: 8765,
+        class: "legendary",
+        max_lvl: 14,
+        types: {
+            have: ["Galaktyka", "Ziemia", "Chi", "Elektryczność"],
+            weak: {
+                def: 3500,
+                ind: ["Duchoznactwo", "Informatyka"],
+            },
+        },
+        image: "https://cdn.discordapp.com/attachments/1177934284342964306/1196084111371161672/Untitled33_20240114142846.png?ex=65b65722&is=65a3e222&hm=e109210b9930b19a4758d2eef4dc256ee49617b05f40484b6964f5147254b864&",
+        level_up: {
+            hp: 3.030174,
+            battle: [2.34, 2.8, 3.3, 4.3],
+            types: {
+                weak: 0,
+            },
+        },
+        sp: {
+            name: {
+                pl: "Galaktyczny rozłam wzmocnienia",
+                en: "Galactic disruption of reinforcement",
+            },
+            description: {
+                pl: "{{charaName.starlight}}, w zależności od BTP (maks. 500) tworzy galaktyczną wyrwę, która:<br />- leczy ją co 3 ruch, gdy HP spadnie do 50% (1 BTP = 2 HP, po 60 oczekiwany ruch się zwiększa o 1);<br />- co 5 ruch powoduje, że jej losowy atak zostaje zwiększony do pewnego procenta (od 200 BTP zaczyna o 10%, każdy kolejny BTP - +0,3%);<br />- atakuje przeciwnika (szansa 30% w każdym ruchu; min. 500 BTP).<br />Statystki się zwiększają o 30% dla wymiaru Gang Sokołów, a dla HoYoverse się zmniejszają o 20%.",
+                en: "{{charaName.starlight}}, depending on BTP (max 500) creates a galactic rift that:<br />- heals her every 3rd move when HP drops to 50% (1 BTP = 2 HP, after 60 the expected move increases by 1);<br />- every 5th move causes the her random attack to be increased to a certain percentage (from 200 BTP it starts at 10%, each additional BTP - +0.3%);<br />- attacks the opponent (30% chance in every move; min. 500 BTP).<br />Stats increase by 30% for the Gang Sokołów dimension, and decrease by 20% for the HoYoverse.",
+            },
+            maxUses: 1,
+        },
+        tags: ["ahealth", "atkback"],
     },
 
     // Rocket League
@@ -330,18 +373,18 @@ export const charaList = {
             pl: "Ta postać jest najbardziej imprezową postacią w grze. Ryzykowanie? To jego natura. Nie zna strachu, więc często szuka zaczepki i powoduje walki.",
             en: "This character is the most party character in the game. Taking risks? That's his nature. He doesn't know fear, so he often looks for a hook and causes fights.",
         },
-        class: "epic",
+        class: "legendary",
         dimension: "Rocket League",
         hp: 9000,
         image: "https://cdn.discordapp.com/attachments/1047919900875825293/1053693870111731813/IMG_20221217_162158.png",
         level_up: {
             battle: [2, 2.5, 3, 4],
-            hp: 3,
+            hp: 2.862,
             types: {
                 strong: 200,
             },
         },
-        max_lvl: 16,
+        max_lvl: 14,
         types: {
             have: ["Metal", "Informatyka"],
             strong: {
@@ -352,8 +395,8 @@ export const charaList = {
         sp: {
             name: "«Pa tera!»",
             description: {
-                pl: "Tak, nazwa mówi sama za siebie. sylwestrowyOctane już wsiąknął niekoniecznie legalne środki odurzające, i pokazuje, na co jego stać. Atak inny niż wszystkie, zadaje naprawdę dużo, ale właśnie - skoro już wsiąknął, to niekoniecznie musi trafić. Szansa na trafienie wynosi 40% i albo uderzy w przeciwnika, albo sam oberwie tym atakiem (25% wartości ataku).",
-                en: "The Polish SP name does not mean something specific to a foreigner, but when translated it already gives food for thought. sylwestrowyOctane has already soaked up the not necessarily legal drugs, and is showing what he can do. An attack unlike any other, it inflicts a really big amount, but precisely - since it has already soaked in, it doesn't necessarily hit. The chance of hitting is 40%, and he will either hit his opponent or get hit himself with this attack (25% of the attack value).",
+                pl: "Tak, nazwa mówi sama za siebie. {{charaName.sylwestrowyOctane}} już wsiąknął niekoniecznie legalne środki odurzające, i pokazuje, na co jego stać. Atak inny niż wszystkie, zadaje naprawdę dużo, ale właśnie - skoro już wsiąknął, to niekoniecznie musi trafić. Szansa na trafienie wynosi 40% i albo uderzy w przeciwnika, albo sam oberwie tym atakiem (25% wartości ataku).",
+                en: "The Polish SP name does not mean something specific to a foreigner, but when translated it already gives food for thought. {{charaName.sylwestrowyOctane}} has already soaked up the not necessarily legal drugs, and is showing what he can do. An attack unlike any other, it inflicts a really big amount, but precisely - since it has already soaked in, it doesn't necessarily hit. The chance of hitting is 40%, and he will either hit his opponent or get hit himself with this attack (25% of the attack value).",
             },
             maxUses: 3,
         },
@@ -373,7 +416,7 @@ export const charaList = {
         ],
         description: {
             pl: "Można zaryzykować stwierdzeniem, że jest jednym z „mędrców” Internetu. Umie planować w trakcie walki, a co za tym idzie, wygrywa także większość rozegranych bitew. Nieugięty, silny i obdarzony Pociskiem Naprowadzanym. Uważaj, jeśli go napotkasz!",
-            en: "One could venture to say that he is one of the 'sages' of the Internet. He knows how to plan during a battle and consequently also wins most of the battles he plays. Relentless, strong and gifted with a Heatseeker. Watch out if you encounter him!",
+            en: "One could venture to say that he is one of the „sages” of the Internet. He knows how to plan during a battle and consequently also wins most of the battles he plays. Relentless, strong and gifted with a Heatseeker. Watch out if you encounter him!",
         },
         class: "import",
         dimension: "Rocket League",
@@ -381,7 +424,7 @@ export const charaList = {
         image: "https://cdn.discordapp.com/attachments/1047919900875825293/1053693870476628089/IMG_20221217_162215.png",
         level_up: {
             battle: [1.9, 3.3, 4.1],
-            hp: 3.43,
+            hp: 3.25,
             types: {
                 strong: 200,
             },
@@ -397,8 +440,8 @@ export const charaList = {
         sp: {
             name: "«Podnieca cię „What a save!”?»",
             description: {
-                pl: "Jak to wkurza diamentowegoDominusa, gdy ktoś poniża lepszego gracza wymienionym tekstem („What a save!”). Zwiększa każdy atak o 10%, ogranicza zadanie crita do 0 i zwiększa przeciwnikowi crita o 25%",
-                en: "How it annoys diamentowyDominus when someone humiliates a better player with the text „What a save!”. Increases each attack by 10%, limits the crit task to 0 and increases the opponent's crit by 25%",
+                pl: "Jak to wkurza {{charaName.platynowyDominus|platynowegoDominusa}}, gdy ktoś poniża lepszego gracza wymienionym tekstem („What a save!”). Zwiększa każdy atak o 16%, ogranicza zadanie crita do 0 i zwiększa przeciwnikowi crita o 27%",
+                en: "How it annoys {{charaName.platynowyDominus}} when someone humiliates a better player with the text „What a save!”. Increases each attack by 16%, limits the crit task to 0 and increases the opponent's crit by 27%",
             },
             maxUses: 1,
         },
@@ -412,9 +455,9 @@ export const charaList = {
             },
             {
                 name: { pl: "Mróz", en: "Frost" },
-                points: 12,
+                points: 18,
             },
-            { name: "Power Hitter", points: 30 },
+            { name: "Power Hitter", points: 40 },
         ],
         description: {
             pl: "Pojazd, który bardzo lubi zimno; wychowywany w lodowisku. Obdarzony trzema mocami z Rumble. Na pewno polega na szczęściu i potrafi wygrać walkę.",
@@ -422,7 +465,7 @@ export const charaList = {
         },
         class: "rare",
         dimension: "Rocket League",
-        hp: 7000,
+        hp: 8800,
         image: "https://cdn.discordapp.com/attachments/1047919900875825293/1053693870875091035/IMG_20221217_162240.png",
         level_up: {
             battle: [2, 2.1, 2.4],
@@ -450,10 +493,66 @@ export const charaList = {
                 en: "Puck attack",
             },
             description: {
-                pl: "zimowyHotshot atakuje rozpędzonym krążkiem hokejowym. Może i nie zadaje dużo, ale jest darmowy!",
-                en: "zimowyHotshot attacks with a rushing hockey puck. It may not inflict much, but it's free!",
+                pl: "{{charaName.zimowyHotshot}} atakuje rozpędzonym krążkiem hokejowym. Może i nie zadaje dużo, ale jest darmowy!",
+                en: "{{charaName.zimowyHotshot}} attacks with a rushing hockey puck. It may not inflict much, but it's free!",
             },
             maxUses: 7,
+        },
+        tags: [],
+    },
+    galaktycznyMasamune: {
+        battle: [
+            {
+                name: { pl: "Uderzenie", en: "Hit" },
+                points: 5,
+            },
+            {
+                name: { pl: "Rzut o podłogę", en: "Throw to the floor" },
+                points: 50,
+            },
+            {
+                name: { pl: "Naddźwiękowy dash", en: "Supersonic dash" },
+                points: 110,
+            },
+        ],
+        description: {
+            pl: "Postać, która podwyższyła znaczenie swojego wymiaru. Sprytny, chciwy wygranej i pełen energii. Nauczył się tylko grać w tryb Knockout - nie bez powodu i tutaj nieźle poddymia. Uwielbia motywy galaktyczne podobnie jak {{charaName.starlight}} i też często szuka zaczepki jak {{charaName.sylwestrowyOctane}}.",
+            en: "A character who has elevated the importance of his dimension. Clever, greedy to win and full of energy. He has only learnt to play Knockout mode - for good reason, here he also subdues quite well. Loves galactic themes just as much as {{charaName.starlight}} and also often looks for a hook like {{charaName.sylwestrowyOctane}}.",
+        },
+        class: "epic",
+        dimension: "Rocket League",
+        hp: 7750,
+        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1201477057390051380/ms.png?ex=65c9f5b4&is=65b780b4&hm=f3b73b0c8047dbc2196e98635747f86647c235297d7918708d00a0e5a436be13&",
+        level_up: {
+            battle: [1.9, 2.4, 3.1],
+            hp: 2.75,
+            types: {
+                strong: 200,
+                weak: 30,
+            },
+        },
+        max_lvl: 16,
+        types: {
+            have: ["Galaktyka", "Informatyka", "Metal"],
+            strong: {
+                def: 2000,
+                ind: ["Powietrze", "Woda"],
+            },
+            weak: {
+                def: 4000,
+                ind: ["Chi"],
+            },
+        },
+        sp: {
+            name: {
+                pl: "Galaktyczne wyładowanie",
+                en: "Galactic charge",
+            },
+            description: {
+                pl: "To, że tylko gra w jeden tryb, wcale nie oznacza to, że {{charaName.galaktycznyMasamune}} nie może używać czegoś nowego. Używa kombinacji ruchów, gdzie dzięki nich może odpalić wyładowanie. W każdym ruchu zadaje obrażenia i zwiększa ataki o 75% przez 2 ruchy, ale każdy ruch ma także własną funkcję:<br />1) zanika u {{charaName.galaktycznyMasamune|galaktycznegoMasamuna}} cios krytyczny przez 5 ruchów;<br />2) z ataku 10% idzie na BTP, a 12% na HP;<br />3) atak staje się podwojony.",
+                en: "Just because he only plays one mode, it doesn't at all mean that {{charaName.galaktycznyMasamune}} can't use something new. He uses a combination of moves where he can fire off a discharge through them. Each move deals damage and increases attacks by 75% for 2 moves, but each move also has its own function:<br />1) fades {{charaName.galaktycznyMasamune|galaktycznyMasamune's}} critical blow for 5 moves;<br />2) of the attack, 10% goes to BTP and 12% goes to HP;<br />3) the attack becomes doubled.",
+            },
+            maxUses: 3,
         },
         tags: [],
     },
@@ -475,11 +574,11 @@ export const charaList = {
             },
         ],
         description: {
-            pl: "<i>nikolixia -<br />Zmienia się jak internet:<br />Śmieje się i płacze...</i><br />Pierwsza bogini w swoim wymiarze. Gorąca i troskliwa dla przyjaciół w jej wymiarze, zimna i bezwzględna dla swoich wrogów. Jest ciekawa świata internetowego i lubi eksperymentować z różnymi możliwościami. Ma też unikalne poczucie humoru, co powoduje dla swoich przyjaciół ukazywanie swojej niewinności.",
+            pl: "<i>nikolixia -<br />Zmienia się jak internet:<br />Śmieje się i płacze…</i><br />Pierwsza bogini w swoim wymiarze. Gorąca i troskliwa dla przyjaciół w jej wymiarze, zimna i bezwzględna dla swoich wrogów. Jest ciekawa świata internetowego i lubi eksperymentować z różnymi możliwościami. Ma też unikalne poczucie humoru, co powoduje dla swoich przyjaciół ukazywanie swojej niewinności.",
             en: "<i>Friends from her dimension<br />nikolixia protects them;<br />She gives no chance to foes!</i><br />The first goddess in her dimension. Warm and caring to friends in her dimension, cold and ruthless to her enemies. She is curious about the online world and likes to experiment with different possibilities. She also has a unique sense of humour, which causes her friends to show their harmlessness.",
         },
         dimension: "Stick'y-land",
-        hp: 20000,
+        hp: 10000,
         class: "dark_shop",
         max_lvl: 10,
         types: {
@@ -493,15 +592,14 @@ export const charaList = {
                 ind: ["Galaktyka", "Duchoznactwo", "Chi", "Powietrze"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1177880326958219264/sketch-1700898906294.png?ex=65741d89&is=6561a889&hm=510ccd0816b505e1c71acb5b2f0ff478285a46ce4b91a6a00c5dbfed20f47be5&", // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1177880326958219264/sketch-1700898906294.png?ex=65741d89&is=6561a889&hm=510ccd0816b505e1c71acb5b2f0ff478285a46ce4b91a6a00c5dbfed20f47be5&",
         level_up: {
-            hp: 3.1203,
+            hp: 2.86201,
             battle: [1.8, 2.5, 4],
             types: {
-                strong: -20,
+                strong: -100,
                 weak: -200,
             },
-            cost: "10000",
         },
         sp: {
             name: {
@@ -509,12 +607,12 @@ export const charaList = {
                 en: "Doom",
             },
             description: {
-                pl: "<i>Potępienie - dar:<br />nikolixia nim włada.<br />Cztery stany ma!</i><br />nikolixia posiada cztery stany potępienia, z czego każdy staje się silniejszy:<br />1. Przez 20 ruchów „zabiera” HP przeciwnikowi;<br />2. Zwiększa swoje ataki o 20%;<br />3. Używa „pierścienia niebiańskiego”, zwiększając szansę krytycznego ciosu przeciwnika o 50%;<br />4. Przestaje już być tą troskliwą boginią i się zamienia w piekielne trudnego szatana. Zwiększa swoje ataki o 50% i szansa krytycznego ciosu u niej spada do całkowitego zera, a przeciwnikowi do 100%, ale jej HP zwykłe, jak i maksymalne spadają aż do 50%!",
-                en: "<i>Nikolixia - god.<br />Kind to friends, cruel to foes;<br />Doom is her power.</i><br />nikolixia has four states of condemnation, each of which becomes stronger:<br />1. for 20 moves, „takes away” HP from the opponent;<br />2. increases its attacks by 20%;<br />3. she uses the „celestial ring”, causing her opponent's critical strike chance to increase by 75%;<br />4. stops being that caring goddess anymore and turns into a hellishly difficult fiend. She increases her attacks by 50% and her opponent's critical strike chance drops to completely zero, and her opponent's to 100%, but her normal HP as well as her maximum HP drops by up to 50%!",
+                pl: "<i>Potępienie - dar:<br />nikolixia nim włada.<br />Cztery stany ma!</i><br />{{charaName.nikolixia}} posiada cztery stany potępienia, z czego każdy staje się silniejszy:<br />1. Przez 20 ruchów „zabiera” HP przeciwnikowi;<br />2. Zwiększa swoje ataki o 20%;<br />3. Używa „pierścienia niebiańskiego”, zwiększając szansę krytycznego ciosu przeciwnika o 50%;<br />4. Przestaje już być tą troskliwą boginią i się zamienia w piekielne trudnego szatana. Zwiększa swoje ataki o 50% i szansa krytycznego ciosu u niej spada do całkowitego zera, a przeciwnikowi do 100%, ale jej HP zwykłe, jak i maksymalne spadają aż do 50%!",
+                en: "<i>nikolixia - god.<br />Kind to friends, cruel to foes;<br />Doom is her power.</i><br />{{charaName.nikolixia}} has four states of condemnation, each of which becomes stronger:<br />1. for 20 moves, „takes away” HP from the opponent;<br />2. increases its attacks by 20%;<br />3. she uses the „celestial ring”, causing her opponent's critical strike chance to increase by 75%;<br />4. stops being that caring goddess anymore and turns into a hellishly difficult fiend. She increases her attacks by 50% and her opponent's critical strike chance drops to completely zero, and her opponent's to 100%, but her normal HP as well as her maximum HP drops by up to 50%!",
             },
             maxUses: 4,
         },
-        tags: ["sochr", "atkback"],
+        tags: ["sochr", "atkback", "tanker", "double"],
     },
     theChosenOne: {
         battle: [
@@ -528,15 +626,15 @@ export const charaList = {
             },
             {
                 name: { pl: "Atak ognia", en: "Fire attack" },
-                points: 6,
+                points: 10,
             },
             {
                 name: "ShOcK",
-                points: 15,
+                points: 20,
             },
             {
                 name: { pl: "Laser" },
-                points: 20,
+                points: 30,
             },
             {
                 name: { pl: "Armagedon" },
@@ -545,10 +643,10 @@ export const charaList = {
         ],
         description: {
             pl: "To ten Stickman, który zaatakował swojego twórcę - noogai3. Posiada niewyobrażalnie dużo mocy typu tornado, teleportacja, ogień, laser w oczach… czyli naprawdę postać postać dość porównywalna do boga.",
-            en: "This is the Stickman who attacked his creator - noogai3. He has unimaginable powers like tornado, teleportation, fire, laser in his eyes... which is really a character quite comparable to a god.",
+            en: "This is the Stickman who attacked his creator - noogai3. He has unimaginable powers like tornado, teleportation, fire, laser in his eyes… which is really a character quite comparable to a god.",
         },
         dimension: "Stick'y-land",
-        hp: 15050,
+        hp: 10000,
         class: "dark_shop",
         max_lvl: 10,
         types: {
@@ -560,7 +658,7 @@ export const charaList = {
         },
         image: "https://cdn.discordapp.com/attachments/1047919900875825293/1057697621159968858/The_Chosen_One1.png",
         level_up: {
-            hp: 4.5,
+            hp: 3.6,
             battle: [2.5, 2.5, 2.65, 3.2, 3.2, 4.2],
             types: {
                 weak: 10,
@@ -572,8 +670,8 @@ export const charaList = {
                 en: "Series of illegal attacks",
             },
             description: {
-                pl: "Aby wyeliminować finalnie przeciwnika, theChosenOne łamie zasady Starcia Internetu, i atakuje przeciwnika losowymi atakami (poza Armagedonem) aż 20 razy, bez utraty BTP!",
-                en: "To eliminate the final opponent, theChosenOne breaks the rules of Starcie Internetu, and attacks the opponent with random attacks (except Armagedon) as many as 20 times, without losing his BTP!",
+                pl: "Aby wyeliminować finalnie przeciwnika, {{charaName.theChosenOne}} łamie zasady Starcia Internetu, i atakuje przeciwnika losowymi atakami (poza Armagedonem) aż 20 razy, bez utraty BTP!",
+                en: "To eliminate the final opponent, {{charaName.theChosenOne}} breaks the rules of Starcie Internetu, and attacks the opponent with random attacks (except Armagedon) as many as 20 times, without losing his BTP!",
             },
             maxUses: 1,
         },
@@ -587,27 +685,27 @@ export const charaList = {
             },
             {
                 name: { pl: "Odrzut powietrzny", en: "Air knockback" },
-                points: 10,
+                points: 20,
             },
-            { name: "Vira-Blade", points: 45 },
+            { name: "Vira-Blade", points: 60 },
         ],
         description: {
-            pl: "Ten stickman też ujawniający się z osobą noogai3 stał się czarnym charakterem z powodu, że jego twórca go olał w walce przeciwko theChosenOne grając w Pasjansa. Finalnie został wyeliminowany przez theSecondComing. Jądro Internetu postanowiło go przywrócić do żywych z takim samym charakterem, choć pod pewnymi warunkami. Na początku dochodziło do spięć ze stron theChosenOne i theSecondComing, ale po pewnym czasie to złagodzono i stał się pełnoprawnym stickmanem w tym wymiarze.",
-            en: "This stickman also revealing himself with the person of noogai3 became a villain due to his creator pouncing on him in a fight against theChosenOne playing Solitaire. He was eventually eliminated by theSecondComing. Internet nucleus decided to bring him back to life with the same character, albeit with certain conditions. In the beginning there were disputes on the part of theChosenOne and theSecondComing, but after a while this was mitigated and he became a full-fledged stickman in this dimension.",
+            pl: "Ten stickman też ujawniający się z osobą noogai3 stał się czarnym charakterem z powodu, że jego twórca go olał w walce przeciwko {{charaName.theChosenOne}} grając w Pasjansa. Finalnie został wyeliminowany przez {{charaName.theSecondComing}}. Jądro Internetu postanowiło go przywrócić do żywych z takim samym charakterem, choć pod pewnymi warunkami. Na początku dochodziło do spięć ze stron {{charaName.theChosenOne}} i {{charaName.theSecondComing}}, ale po pewnym czasie to złagodzono i stał się pełnoprawnym stickmanem w tym wymiarze.",
+            en: "This stickman also revealing himself with the person of noogai3 became a villain due to his creator pouncing on him in a fight against {{charaName.theChosenOne}} playing Solitaire. He was eventually eliminated by {{charaName.theSecondComing}}. The Internet core decided to bring him back to life with the same character, albeit with certain conditions. In the beginning there were disputes on the part of {{charaName.theChosenOne}} and {{charaName.theSecondComing}}, but after a while this was mitigated and he became a full-fledged stickman in this dimension.",
         },
-        class: "dark_shop",
+        class: "import",
         dimension: "Stick'y-land",
-        hp: 12000,
+        hp: 10000,
         image: "https://cdn.discordapp.com/attachments/1047919900875825293/1120025997337694228/The_Dark_Lord1.png",
         level_up: {
             battle: [2, 3, 4],
-            hp: 4.75,
+            hp: 3.25,
             types: {
                 strong: 0,
                 weak: 100,
             },
         },
-        max_lvl: 10,
+        max_lvl: 12,
         types: {
             have: ["Informatyka", "Powietrze", "Elektryczność", "Ogień"],
             strong: {
@@ -622,8 +720,8 @@ export const charaList = {
         sp: {
             name: "ViraBots",
             description: {
-                pl: "theDarkLord też był związany ze stworzeniem wirusa. Dzięki takiej hordzie wykonuje serię ataków przez 3 sekundy, 15 co sekundę.",
-                en: "TheDarkLord was also associated with the creation of the virus. With a horde like this, it performs a series of attacks for 3 seconds, 15 every second.",
+                pl: "{{charaName.theDarkLord}} też był związany ze stworzeniem wirusa. Dzięki takiej hordzie wykonuje serię ataków przez 3 sekundy, 15 co sekundę.",
+                en: "{{charaName.theDarkLord}} was also associated with the creation of the virus. With a horde like this, it performs a series of attacks for 3 seconds, 15 every second.",
             },
             maxUses: 1,
         },
@@ -641,22 +739,22 @@ export const charaList = {
             },
             {
                 name: { pl: "Miecz z diamentów (Minecraft)", en: "Diamond sword (Minecraft)" },
-                points: 15,
+                points: 25,
             },
-            { name: "Creative mode (Minecraft)", points: 35 },
-            { name: "Awakened", points: 100 },
+            { name: "Creative mode (Minecraft)", points: 75 },
+            { name: "Awakened", points: 150 },
         ],
         description: {
-            pl: "Druga wersja theChosenOne; też związany z atakiem na noogai3, ale nie spowodował krytycznych szkód. Ma nietypowy styl walki; posiada możliwość użycia „ostatecznej siły”, co pokazuje jego potęgę w walce.",
-            en: "Second version of theChosenOne; also involved in an attack on noogai3, but did not cause critical damage. He has an unusual fighting style; he has the ability to use „ultimate force”, which shows his power in combat.",
+            pl: "Druga wersja {{charaName.theChosenOne}}; też związany z atakiem na noogai3, ale nie spowodował krytycznych szkód. Ma nietypowy styl walki; posiada możliwość użycia „ostatecznej siły”, co pokazuje jego potęgę w walce.",
+            en: "Second version of {{charaName.theChosenOne}}; also involved in an attack on noogai3, but did not cause critical damage. He has an unusual fighting style; he has the ability to use „ultimate force”, which shows his power in combat.",
         },
         class: "dark_shop",
         dimension: "Stick'y-land",
-        hp: 15000,
+        hp: 10000,
         image: "https://cdn.discordapp.com/attachments/1047919900875825293/1057697620467920906/Tsc__1.png",
         level_up: {
-            battle: [2.7, 3.3, 3.3, 4.5, 4.5],
-            hp: 4.3,
+            battle: [2, 2.7, 3.3, 4, 4.57],
+            hp: 3.605,
             types: {
                 strong: 200,
                 weak: 30,
@@ -677,8 +775,8 @@ export const charaList = {
         sp: {
             name: "«You need to die…»",
             description: {
-                pl: "Gdyby porównać theSecongComing do najszybszego komputera świata, to jest najpotężniejszy w szybkości wykonywania kodu. Także dzięki tej możliwości tworzy tymczasowe własne jądro (o wiele wiele słabsze od głównego) oraz z jego mocą uderza atakiem o potężnej wartości.",
-                en: "If one were to compare theSecongComing to the world's fastest computer, it is the most powerful in the speed of code execution. Also due to this ability, it creates a temporary kernel of its own (much much weaker than the main one) and with its power it hits with an attack of powerful value.",
+                pl: "Gdyby porównać {{charaName.theSecondComing}} do najszybszego komputera świata, to jest najpotężniejszy w szybkości wykonywania kodu. Także dzięki tej możliwości tworzy tymczasowe własne jądro (o wiele wiele słabsze od głównego) oraz z jego mocą uderza atakiem o potężnej wartości.",
+                en: "If one were to compare {{charaName.theSecondComing}} to the world's fastest computer, it is the most powerful in the speed of code execution. Also due to this ability, it creates a temporary core of its own (much much weaker than the main one) and with its power it hits with an attack of powerful value.",
             },
             maxUses: 1,
         },
@@ -687,23 +785,21 @@ export const charaList = {
     havier: {
         battle: [
             {
-                atk: 50,
                 name: { pl: "Strzał prochem", en: "Gunpowder shot" },
-                points: 6,
+                points: 5,
             },
             {
-                atk: 120,
                 name: { pl: "Żar ognisty", en: "Fiery embers" },
-                points: 30,
+                points: 35,
             },
         ],
         description: {
             pl: "Postać, gdzie jego składnikiem jest proch. Strzela prochem, porusza się prochem… więc gdy potrzebujesz „trochę” wybuchów, on jest w tym najlepszy!",
-            en: "A character where his ingredient is gunpowder. He shoots gunpowder, he moves with gunpowder... so when you need „some” explosions, he's the best at it!",
+            en: "A character where his ingredient is gunpowder. He shoots gunpowder, he moves with gunpowder… so when you need „some” explosions, he's the best at it!",
         },
         dimension: "Stick'y-land",
         hp: 8000,
-        class: "epic",
+        class: "legendary",
         max_lvl: 16,
         types: {
             have: ["Ogień", "Ziemia"],
@@ -718,18 +814,21 @@ export const charaList = {
         },
         image: "https://cdn.discordapp.com/attachments/1047919900875825293/1067367738718290010/sketch-1674550680441.png",
         level_up: {
-            hp: 3.6,
-            battle: [2.6, 3.2],
+            hp: 2.8,
+            battle: [2.8, 3.5],
             types: {
                 strong: 150,
                 weak: 200,
             },
         },
         sp: {
-            name: "Porwanie ochrony",
+            name: {
+                pl: "Totalna kasacja przeciwnika",
+                en: "Total critical massacre",
+            },
             description: {
-                pl: "havier torturuje przeciwnika w taki sposób, że jego podatność na krytyczny cios jest równa 40%.",
-                en: "havier tortures his opponent in such a way that his susceptibility to a critical blow is equal to 40%.",
+                pl: "{{charaName.havier}} uderza tak mocno, że zadaje dostateczną ilość DMG oraz cios krytyczny zmniejszający się u przeciwnika z czasem - świeżo po użyciu wynosi 100%, po 2 ruchach zmniejsza się do 75%, a po 5 - do 50%.",
+                en: "{{charaName.havier}} hits so hard that it deals a enough DMG and a critical damage that decreases in the opponent over time - freshly after use it is 100%, after 2 moves it decreases to 75% and after 5 moves - to 50%.",
             },
             maxUses: 1,
         },
@@ -768,7 +867,7 @@ export const charaList = {
         },
         image: "https://cdn.discordapp.com/attachments/1047919900875825293/1067367738936401920/sketch-1674550680025.png",
         level_up: {
-            hp: 5.93,
+            hp: 3.274,
             battle: [1.9, 2.4, 3.2, 3.447],
             types: {
                 weak: 0,
@@ -777,8 +876,8 @@ export const charaList = {
         sp: {
             name: "Lightnin'gedon",
             description: {
-                pl: "W końcu trzeba wykończyć przeciwnika! paty wykonuje masę dashów z ostatecznym ruchem zwanym <i>Piorunowy laser śmierci</i>. Traci też 30% posiadanego HP.",
-                en: "Finally, the opponent must be finished! Paty performs a ton of dashing with the ultimate move called <i>Lightning laser of death</i>. He also loses 30% of his HP.",
+                pl: "W końcu trzeba wykończyć przeciwnika! {{charaName.paty}} wykonuje masę dashów z ostatecznym ruchem zwanym <i>Piorunowy laser śmierci</i>, zależne od jego HP (x1,21). Na szkodę traci też pewien procent HP.",
+                en: "Finally, the opponent must be finished! {{charaName.paty}} performs a ton of dashing with the ultimate move called <i>Lightning death laser</i>, dependent on his HP (x1,21). He also loses a percentage of his HP.",
             },
             maxUses: 1,
         },
@@ -810,7 +909,7 @@ export const charaList = {
             en: "The first character to adapt to the background. Has telepathic attacks, can additionally attack with both air and poison. Thanks to her blue and red chrome, she can strike from a distance. She loves new friendships, but doesn't forget to fight in this corner of the Internet.",
         },
         max_lvl: 16,
-        hp: 7500,
+        hp: 5000,
         image: "https://cdn.discordapp.com/attachments/1047919900875825293/1095259942119800882/sketch-1681199825931.png",
         types: {
             have: ["Powietrze", "Informatyka", "Trucizna"],
@@ -825,7 +924,7 @@ export const charaList = {
         },
         level_up: {
             battle: [2.7, 2.9, 3.1, 3.2],
-            hp: 3.1,
+            hp: 2.8,
             types: { strong: 300, weak: 110 },
         },
         sp: {
@@ -834,8 +933,8 @@ export const charaList = {
                 en: "Networks type-X",
             },
             description: {
-                pl: "chromo ukazuje nową generację sieci! Oczywiście do wyniszczenia postaci... Zwiększa ataki niemiłosiernie o 75% i po sekundzie atakuje Falą telepatyczną.",
-                en: "chromo reveals a new generation of networks! Obviously to the destruction of the character... Increases attacks mercilessly by 75% and attacks with a attack called „Fale Telepatyczne” after a second.",
+                pl: "{{charaName.chromo}} ukazuje nową generację sieci! Oczywiście do wyniszczenia postaci… Zwiększa ataki niemiłosiernie o 75%.",
+                en: "{{charaName.chromo}} reveals a new generation of networks! Obviously to the destruction of the character… Increases attacks mercilessly by 75%.",
             },
             maxUses: 2,
         },
@@ -866,11 +965,11 @@ export const charaList = {
             },
         ],
         description: {
-            pl: "Dwie osobowości uwięzione w jednym charakterze. Jeden z nich, blueTwinzer, ma opanowane Ogień i Wodę, a drugi, orangeTwinzer - Informatykę i Galaktykę. Nie znoszą jednak jednej mocy - Chi. To ona powoduje, że osobowości się rujnują.",
-            en: "Two personalities trapped in one character. One, the blueTwinzer, has Fire and Water mastered, and the other, the orangeTwinzer, IT and Galaxy. However, they can't stand one power - Chi. It is she who causes the personalities to ruin each other.",
+            pl: "Dwie osobowości uwięzione w jednym charakterze. Jeden z nich, {{charaName.blueTwinzer}}, ma opanowane Ogień i Wodę, a drugi, {{charaName.orangeTwinzer}} - Informatykę i Galaktykę. Nie znoszą jednak jednej mocy - Chi. To ona powoduje, że osobowości się rujnują.",
+            en: "Two personalities trapped in one character. One, the {{charaName.blueTwinzer}}, has Fire and Water mastered, and the other, the {{charaName.orangeTwinzer}}, IT and Galaxy. However, they can't stand one power - Chi. It is she who causes the personalities to ruin each other.",
         },
         dimension: "Stick'y-land",
-        hp: 13000,
+        hp: 6000,
         class: "import",
         max_lvl: 12,
         types: {
@@ -882,7 +981,7 @@ export const charaList = {
         },
         image: "https://cdn.discordapp.com/attachments/1047919900875825293/1116783654602014790/sketch-1686332309796.png",
         level_up: {
-            hp: 4.2,
+            hp: 3.5,
             battle: [2.5, 2.5, 3.25, 3.25, 4, 4],
             types: {
                 weak: 30,
@@ -894,8 +993,8 @@ export const charaList = {
                 en: "Attack from two sides",
             },
             description: {
-                pl: "Oba osobowości dzielą się, aby zaatakaować przeciwnika. Szansa na uderzenie od blueTwinzera wynosi 40%, a od orangeTwinzera - <sup>5</sup>/<sub>12</sub>.",
-                en: "Both personalities split to attack the opponent. The chance of a hit from a blueTwinzer is 40% and from an orangeTwinzer is <sup>5</sup>/<sub>12</sub>.",
+                pl: "Oba osobowości dzielą się, aby zaatakaować przeciwnika. Szansa na uderzenie od {{charaName.blueTwinzera}} wynosi 40%, a od {{charaName.orangeTwinzera}} - <sup>5</sup>/<sub>12</sub>.",
+                en: "Both personalities split to attack the opponent. The chance of a hit from a {{charaName.blueTwinzer}} is 40% and from an {{charaName.orangeTwinzer}} is <sup>5</sup>/<sub>12</sub>.",
             },
             maxUses: 7,
         },
@@ -950,8 +1049,8 @@ export const charaList = {
                 en: "With the tractor via the Internet",
             },
             description: {
-                pl: "Przez całą rundę ciągnik szymkaDymka powoduje regenerację, dodatkowe BTP oraz 30% szansy na mały atak w postaci spalin ze silnika. Zwiększa także jednorazowo atak <i>Ciągnikowy ruch</i> o 15%.",
-                en: "Throughout the entire round, the szymekDymek's tractor causes regeneration, additional BTP and 30% chance of a small attack in the form of exhaust fumes from the engine. It also increases once <i>Tractor load</i> attack by 15%.",
+                pl: "Przez całą rundę ciągnik {{charaName.szymekDymek|szymkaDymka}} powoduje regenerację, dodatkowe BTP oraz 10% szansy na mały atak w postaci spalin ze silnika. Zwiększa także jednorazowo atak <i>Ciągnikowy ruch</i> o 15%.",
+                en: "Throughout the entire round, the {{charaName.szymekDymek|szymekDymek's}} tractor causes regeneration, additional BTP and 10% chance of a small attack in the form of exhaust fumes from the engine. It also increases once <i>Tractor load</i> attack by 15%.",
             },
             maxUses: 1,
         },
@@ -969,11 +1068,11 @@ export const charaList = {
             },
         ],
         description: {
-            pl: "Pierwszy Stickman z wyglądem zwierzęcym, dodatkowo jako płeć żeńska. Cicha, introwertyczna i zamknięta w sobie. Lubi dobre bity muzyczne, ale też dobrą zabawę. Też jest zwierzęciem nikolixii, bogini Stickmanów - ma obsesję na punkcie kotów, i traktuje je jak swoje (troska, głaskanie - tego typu sprawy).",
-            en: "The first Stickman with an animal appearance. In addition, as a female gender. Quiet, introverted and closed-minded. She likes good music beats, but also a good time. She's also a pet of Nicolixia, the goddess of Stickman - she's obsessed with cats, and treats them as her own (care, patting - that sort of thing).",
+            pl: "Największy hazardzista na wojowniczym zakątku Internetu, jak i kanciarz podczas gry karcianej. Dla całego wymiaru wmawia, że wygrał na mistrzostwach zaszczyt bycia tutaj, lecz prawda jest zupełnie inna, gdzie do tej pory jest niewiadome, jak się on tutaj dostał - jeżeli się zastanawiasz, czy ktoś uwierzył, to tak: {{charaName.havier}}, {{charaName.szymekDymek}}, {{charaName.kremola}} i {{charaName.theSecondComing}}.",
+            en: "The biggest gambler on the warrior corner of the internet, as well as a scumbag during the card game. For all the dimension he tells you that he won the honour of being here at the championship, but the truth is quite different, where it is still unknown how he got here - if you wonder if anyone believed him, the answer is yes: {{charaName.havier}}, {{charaName.szymekDymek}}, {{charaName.kremola}} and {{charaName.theSecondComing}}.",
         },
         dimension: "Stick'y-land",
-        hp: 7500,
+        hp: 7570,
         class: "epic",
         max_lvl: 16,
         types: {
@@ -994,8 +1093,8 @@ export const charaList = {
         sp: {
             name: "Ostre jak brzytwa karty",
             description: {
-                pl: "młody zaczyna robić ostre końce w kartach, tym samym zwiększając ataki o 8%. W drugim ruchu dodatkowo rzuca trzema płonącymi kartami - jest szansa, że mogą wcale nie uderzyć przeciwnika, a mogą uderzyć wszystkie trzy!",
-                en: "młody starts making sharp ends in the cards, thus increasing the attacks by 8%. On his second move, he additionally throws three burning cards - there is a chance that they may not hit the opponent at all, and they may hit all three!",
+                pl: "{{charaName.młody}} zaczyna robić ostre końce w kartach, tym samym zwiększając ataki o 16%. W drugim ruchu dodatkowo rzuca trzema płonącymi kartami - jest szansa, że mogą wcale nie uderzyć przeciwnika, a mogą uderzyć wszystkie trzy!",
+                en: "{{charaName.młody}} starts making sharp ends in the cards, thus increasing the attacks by 16%. On his second move, he additionally throws three burning cards - there is a chance that they may not hit the opponent at all, and they may hit all three!",
             },
             maxUses: 2,
         },
@@ -1017,11 +1116,11 @@ export const charaList = {
             },
         ],
         description: {
-            pl: "Pierwszy Stickman z wyglądem zwierzęcym, dodatkowo jako płeć żeńska. Cicha, introwertyczna i zamknięta w sobie. Lubi dobre bity muzyczne, ale też dobrą zabawę. Też jest zwierzęciem nikolixii, bogini Stickmanów - ma obsesję na punkcie kotów, i traktuje je jak swoje (troska, głaskanie - tego typu sprawy).",
-            en: "The first Stickman with an animal appearance. In addition, as a female gender. Quiet, introverted and closed-minded. She likes good music beats, but also a good time. She's also a pet of Nicolixia, the goddess of Stickman - she's obsessed with cats, and treats them as her own (care, patting - that sort of thing).",
+            pl: "Pierwszy Stickman z wyglądem zwierzęcym, dodatkowo jako płeć żeńska. Cicha, introwertyczna i zamknięta w sobie. Lubi dobre bity muzyczne, ale też dobrą zabawę. Też jest zwierzęciem {{charaName.nikolixia|nikolixii}}, bogini Stickmanów - ma obsesję na punkcie kotów, i traktuje je jak swoje (troska, głaskanie - tego typu sprawy).",
+            en: "The first Stickman with an animal appearance. In addition, as a female gender. Quiet, introverted and closed-minded. She likes good music beats, but also a good time. She's also a {{charaName.nikolixia|nikolixia's}} pet, the goddess of Stickman - she's obsessed with cats, and treats them as her own (care, patting - that sort of thing).",
         },
         dimension: "Stick'y-land",
-        hp: 6000,
+        hp: 5600,
         class: "rare",
         max_lvl: 18,
         types: {
@@ -1047,8 +1146,8 @@ export const charaList = {
         sp: {
             name: "«Miauuu-łeś szansę przetrwać!»",
             description: {
-                pl: "kremola atakuje podwójnie pazurami, i zyskuje w ten sposób kocią energię. Jeżeli nie wykorzysta energii przez trzy ruchy, energia ta jest przekształcana w BTP i HP (traci się też możliwość wykonania ponownie SP). W przeciwnym razie poprzez energię tworzy hordę kotów, gdzie każdy kot ma 10% szansy na danie wścieklizny - to powoduje też dodatkowe trzy ruchy trucizny. Maksymalnie może atakować 4 kotów na ruch.<br />[  Wścieklizna nie działa na snackowegoAdmina i kiranęYonome. ]",
-                en: "kremola attacks twice with its claws, and gains feline energy in the process. If he does not use the energy for three moves, the energy is converted into BTP and HP (the ability to perform SP again is also lost). Otherwise, he creates a horde of cats through energy, where each cat has a 10% chance of giving rabies - this also causes an additional three moves of poison. He can attack a maximum of 4 cats per move.<br />[ Rabies does not work on snackowyAdmin and kiranaYonome. ]",
+                pl: "{{charaName.kremola}} atakuje podwójnie pazurami, i zyskuje w ten sposób kocią energię. Jeżeli nie wykorzysta energii przez trzy ruchy, energia ta jest przekształcana w BTP i HP (traci się też możliwość wykonania ponownie SP). W przeciwnym razie poprzez energię tworzy hordę kotów, gdzie każdy kot ma 10% szansy na danie wścieklizny - to powoduje też dodatkowe trzy ruchy trucizny. Maksymalnie może atakować 4 kotów na ruch.<br />[  Wścieklizna nie działa na {{charaName.snackowyAdmin|snackowegoAdmina}} i {{charaName.kiranaYonome|kiranęYonome}}. ]",
+                en: "{{charaName.kremola}} attacks twice with its claws, and gains feline energy in the process. If he does not use the energy for three moves, the energy is converted into BTP and HP (the ability to perform SP again is also lost). Otherwise, he creates a horde of cats through energy, where each cat has a 10% chance of giving rabies - this also causes an additional three moves of poison. He can attack a maximum of 4 cats per move.<br />[ Rabies doesn't work on {{charaName.snackowyAdmin}} and {{charaName.kiranaYonome}}. ]",
             },
             maxUses: 2,
         },
@@ -1078,11 +1177,11 @@ export const charaList = {
             },
         ],
         description: {
-            pl: "Jedyny w swoim rodzaju Polak i Anglik oraz dziwne połączenie kilku postaci. Potrafi korzystać z piorunów cienkich jak zaostrzone końce kart młodego i zimne jak lód theChosenOne. Jak paty, przebywanie samemu nie stanowi dla niego problemu, ale gdy nadejdzie okazja spotkania, od razu do niej dołącza.",
-            en: "A unique Polish and British man and a strange combination of several characters. He can use lightning bolts as thin as the sharpened ends of a młody's cards and as cold as theChosenOne's ice. Like paty, being alone is not a problem for him, but when the opportunity to meet arrives, he immediately joins it.",
+            pl: "Jedyny w swoim rodzaju Polak i Anglik oraz dziwne połączenie kilku postaci. Potrafi korzystać z piorunów cienkich jak zaostrzone końce kart {{charaName.młody|młodego}} i zimne jak lód {{charaName.theChosenOne}}. Jak {{charaName.paty}}, przebywanie samemu nie stanowi dla niego problemu, ale gdy nadejdzie okazja spotkania, od razu do niej dołącza.",
+            en: "A unique Polish and British man and a strange combination of several characters. He can use lightning bolts as thin as the sharpened ends of a {{charaName.młody|młody's}} cards and as cold as {{charaName.theChosenOne|theChosenOne's}} ice. Like {{charaName.paty}}, being alone is not a problem for him, but when the opportunity to meet arrives, he immediately joins it.",
         },
         dimension: "Stick'y-land",
-        hp: 13000,
+        hp: 7400,
         class: "import",
         max_lvl: 12,
         types: {
@@ -1094,7 +1193,7 @@ export const charaList = {
         },
         image: "https://cdn.discordapp.com/attachments/1177876489421738014/1185653831325995008/sketch-1702752107595.png?ex=6590652d&is=657df02d&hm=cb29215a6e2cd2352eafe5e3b441df26e90abdd32f66f22dc6d033dfc49c1a00&",
         level_up: {
-            hp: 5.87,
+            hp: 3.5,
             battle: [1.85, 2.4, 2.8, 3.05, 3.474],
             types: {
                 weak: 100,
@@ -1106,12 +1205,64 @@ export const charaList = {
                 en: "Discord Nitro as an opportunity to be even better",
             },
             description: {
-                pl: "Discord Nitro pozwala botekowi uleczyć się, zwiększyć ataki o 3% i dodać +10 BTP.",
-                en: "Discord Nitro allows botek to heal itself, increase attacks by 3% and add +10 BTP.",
+                pl: "Discord Nitro pozwala {{charaName.botek|botekowi}} uleczyć się, zwiększyć ataki o 3% i dodać +10 BTP.",
+                en: "Discord Nitro allows {{charaName.botek}} to heal itself, increase attacks by 3% and add +10 BTP.",
             },
             maxUses: 9,
         },
         tags: ["toks"],
+    },
+    agatea: {
+        battle: [
+            {
+                name: { pl: "Lodowa pięść", en: "Ice fist" },
+                points: 10,
+            },
+            {
+                name: { pl: "Śnieżno-huraganowe pole rażenia", en: "Snow-hurricane field of fire" },
+                points: 150,
+            },
+        ],
+        description: {
+            pl: "„Rodzynka” w swojej specjalistycznej klasie - jako jedyna od samego początku jest w niej i nie miała chęci jej opuścić. Niestety nie zna swoich ulubionych umiejętności, także ciężko dowiedzieć się o niej cokolwiek; jedynie co wiadomo to że lubi zabawy zimowe i czuje atmosferę świąteczną cały czas. Kiedy musi, przywali tak twardym lodem, że nie ma mowy o zaniknięciu urazu!",
+            en: "„Raisin” in her specialist class - she is the only one who has been in it from the very beginning and had no desire to leave it. Unfortunately, she doesn't know her favourite skills, so it's hard to find out anything about her; all that is known is that she enjoys winter games and feels the festive atmosphere all the time. When she has to, she'll hit the ice so hard that there's no way the injury will fade!",
+        },
+        dimension: "Stick'y-land",
+        hp: 5000,
+        class: "epic",
+        max_lvl: 16,
+        types: {
+            have: ["Lód", "Chi", "Powietrze", "Woda"],
+            strong: {
+                def: 1000,
+                ind: ["Powietrze", "Woda", "Duchoznactwo", "Chi"],
+            },
+            weak: {
+                def: 3400,
+                ind: ["Trucizna", "Ogień"],
+            },
+        },
+        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1198399146613284924/sketch-1705790788892.png?ex=65bec32d&is=65ac4e2d&hm=9e371f8e4e4cd30418cd2e1bc2b6e441c6aa9c171e94d4341e69f3022237ff55&",
+        level_up: {
+            hp: 3,
+            battle: [2, 3.1821951],
+            types: {
+                strong: 10,
+                weak: 70,
+            },
+        },
+        sp: {
+            name: {
+                pl: "Lodowe spinjitzu",
+                en: "Ice spinjitzu",
+            },
+            description: {
+                pl: "Przez całą sekundę {{charaName.agatea}}, wirując się, zbiera wilgoć i tworzy wokół siebie osłonę w rodzaju ogromnego shurikena, najeżdżając później w przeciwnika. Jeżeli nie jest to żeńska postać, dodatkowo rzuca małym shurikenami, zwiększając szansę krytycznego ciosu przeciwnika i jego raniąc.",
+                en: "For a full second, {{charaName.agatea}}, spinning, gathers moisture and forms a shield around herself in a kind of huge shuriken, invading the opponent later. If it is not a female character, she additionally throws small shurikens, increasing the chance of the opponent's critical blow and injuring them.",
+            },
+            maxUses: 1,
+        },
+        tags: ["double"],
     },
 
     // Pokemon
@@ -1135,7 +1286,7 @@ export const charaList = {
             en: "It probably doesn't need to be explained to everyone that pikachu is a Pokémon-mouse with electrical abilities. It got there as one of the victims of the Internet core. The first representative of its own dimension.",
         },
         dimension: "Pokémon",
-        hp: 8000,
+        hp: 7450,
         class: "legendary",
         max_lvl: 14,
         types: {
@@ -1164,8 +1315,8 @@ export const charaList = {
                 en: "DevEvolution",
             },
             description: {
-                pl: "Jeżeli ktoś jest fanem Pokémonów, ten wie, że istnieją wspomagacze specjalne jak MegaEwolucja czy Ruch-Z. A co jeżeli powiem, że jądro Internetu nie pozwoliło na zewnętrzne wspomagacze, a nadał dla pikachu własny wspomagacz? Dzięki niemu ta mysz posiada podwojoną ilość maksymalnego HP (nie wpływa na posiadane) oraz o 25% zwiększone 2 losowe ataki (lub jeden o 56,25%).",
-                en: "If anyone is a Pokémon fan, they know that there are special boosters like MegaEvolution or Movement-Z. But what if I said that the Internet kernel didn't allow external boosters, and gave Pikachu its own booster? With it, this mouse has double the maximum HP (does not affect his possession) and a 25% increase in 2 random attacks (or one of 56.25%).",
+                pl: "Jeżeli ktoś jest fanem Pokémonów, ten wie, że istnieją wspomagacze specjalne jak MegaEwolucja czy Ruch-Z. A co jeżeli powiem, że jądro Internetu nie pozwoliło na zewnętrzne wspomagacze, a nadał dla {{charaName.pikachu}} własny wspomagacz? Dzięki niemu ta mysz posiada podwojoną ilość maksymalnego HP (nie wpływa na posiadane) oraz o 25% zwiększone 2 losowe ataki (lub jeden o 56,25%).",
+                en: "If anyone is a Pokémon fan, they know that there are special boosters like MegaEvolution or Movement-Z. But what if I said that the Internet core didn't allow external boosters, and gave {{charaName.pikachu}} its own booster? With it, this mouse has double the maximum HP (does not affect his possession) and a 25% increase in 2 random attacks (or one of 56.25%).",
             },
             maxUses: 1,
         },
@@ -1180,8 +1331,8 @@ export const charaList = {
             { name: "Moonblast", points: 30 },
         ],
         description: {
-            pl: "Rogalikowy Pokémon, stworzony z kamienia oraz posiadający moc Chi. Według Pokédexa, faza księżyca wpływa na jego moc. Aby pikachu nie czuł się samotny, nadano jemu przyjaciela w postaci niego. Był zadowolony!",
-            en: "A horned Pokémon, created from stone and possessing the power of Chi. According to Pokédex, the phase of the moon affects its power. To make sure Pikachu didn't feel lonely, a friend was given in the form of him. He was happy!",
+            pl: "Rogalikowy Pokémon, stworzony z kamienia oraz posiadający moc Chi. Według Pokédexa, faza księżyca wpływa na jego moc. Aby {{charaName.pikachu}} nie czuł się samotny, nadano jemu przyjaciela w postaci niego. Był zadowolony!",
+            en: "A horned Pokémon, created from stone and possessing the power of Chi. According to Pokédex, the phase of the moon affects its power. To make sure {{charaName.pikachu}} didn't feel lonely, a friend was given in the form of him. He was happy!",
         },
         dimension: "Pokémon",
         hp: 7500,
@@ -1200,7 +1351,7 @@ export const charaList = {
         },
         image: "https://cdn.discordapp.com/attachments/1047919900875825293/1112680164887904336/R_3.png",
         level_up: {
-            hp: 2.8,
+            hp: 2.525,
             battle: [1.9, 3],
             types: {
                 strong: 50,
@@ -1213,12 +1364,53 @@ export const charaList = {
                 en: "Laser made of dirt",
             },
             description: {
-                pl: "lunatone atakuje przeciwnika po sekundzie od użycia, jednocześnie zwiększając jego HP o 7% i ataki o 4%.",
-                en: "lunatone attacks an opponent a second after use, while increasing their HP by 7% and attacks by 4%.",
+                pl: "{{charaName.lunatone}} atakuje przeciwnika po sekundzie od użycia, jednocześnie zwiększając jego HP o 7% i ataki o 4%.",
+                en: "{{charaName.lunatone}} attacks an opponent a second after use, while increasing their HP by 7% and attacks by 4%.",
             },
             maxUses: 5,
         },
         tags: [],
+    },
+    snorlax: {
+        battle: [
+            {
+                name: { pl: "Ziewny ryk", en: "Yawn roar" },
+                points: 7,
+            },
+            { name: "Giga Impact", points: 70 },
+        ],
+        description: {
+            pl: "Pokémon, gdzie jego nieodłączną rutyną jest spanie… choć dobra informacja jest taka, że to pierwsza postać z umiejętnością tanka.",
+            en: "A Pokémon where its inherent routine is to sleep… although the good news is that it is the first character with a tank skill.",
+        },
+        dimension: "Pokémon",
+        hp: 10000,
+        class: "common",
+        max_lvl: 22,
+        types: {
+            have: ["Ziemia", "Powietrze"],
+        },
+        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1198014162303975586/pngfind.com-snorlax-png-875272.png?ex=65bd5ca2&is=65aae7a2&hm=7ad9495be0dfe3bd57f9cd4e2627e76eeca6101bbdaeb09e4986582bb7ff1db7&",
+        level_up: {
+            hp: 2.3,
+            battle: [1.7, 2.1],
+            types: {
+                strong: 50,
+                weak: 100,
+            },
+        },
+        sp: {
+            name: {
+                pl: "Przebudzenie",
+                en: "Resurrection",
+            },
+            description: {
+                pl: "Widziałeś kiedyś, graczu, przebudzonego {{charaName.snorlax|snorlaxa}}? Legendy mówią, że z powodu złości zwiększa ataki trzykrotnie, nadaje sobie dużo BTP oraz leczy się.",
+                en: "Have you ever, player, seen an awakened {{charaName.snorlax}}? Legends say that due to anger it increases attacks tree times and gives itself big amount of BTP and some HP.",
+            },
+            maxUses: 1,
+        },
+        tags: ["ahealth", "tanker"],
     },
 
     // VTuberzy, do ataku!
@@ -1236,8 +1428,8 @@ export const charaList = {
             { name: "> byteblast", points: 110 },
         ],
         description: {
-            pl: `Energiczna, pełna radości i pociech VTuberka, która zaczęła swoją działalność w sierpniu 2022 roku. Posiada aktualnie {desc.yk} obserwujących na Twitchu. Została poddana próbie stania się wojowniczką, jak narazie dobrze jej idzie...`,
-            en: `An energetic, fun and cheerful VTuber who started her work in August 2022. She currently has {desc.yk} followers on Twitch. She has been challenged to become a fighter, so far she is doing well...`,
+            pl: `Energiczna, pełna radości i pociech VTuberka, która zaczęła swoją działalność w sierpniu 2022 roku. Posiada aktualnie {{desc.db.yk}} obserwujących na Twitchu. Została poddana próbie stania się wojowniczką, jak narazie dobrze jej idzie…`,
+            en: `An energetic, fun and cheerful VTuber who started her work in August 2022. She currently has {{desc.db.yk}} followers on Twitch. She has been challenged to become a fighter, so far she is doing well…`,
         },
         dimension: "VTuberzy, do ataku!",
         hp: 9000,
@@ -1252,7 +1444,7 @@ export const charaList = {
         },
         image: "https://cdn.discordapp.com/attachments/1047919900875825293/1115728294076227705/aatbio_com_image_export_Jun_6_2023.png",
         level_up: {
-            hp: 4,
+            hp: 3.599908,
             battle: [2.01, 2.5, 3, 4.2],
             types: {
                 weak: 125,
@@ -1264,12 +1456,259 @@ export const charaList = {
                 en: "The assault from fans",
             },
             description: {
-                pl: "Dzięki zaaganżowaniu swoich fanów, kiranaYonome ich używa, aby zaatakować przeciwnika. Co każdu ruch wysyła 5 swoich fanów, aż jej się skończą...",
-                en: "Thanks to the enagagement of her fans, kiranaYonome uses them to attack her opponent. Every move she sends 5 of her fans until she runs out of them...",
+                pl: "Dzięki zaaganżowaniu swoich fanów, {{charaName.kiranaYonome}} ich używa, aby zaatakować przeciwnika. Co każdu ruch wysyła 5 swoich fanów, aż jej się skończą…",
+                en: "Thanks to the enagagement of her fans, {{charaName.kiranaYonome}} uses them to attack her opponent. Every move she sends 5 of her fans until she runs out of them…",
             },
             maxUses: 1,
         },
         tags: ["atkback"],
+    },
+    ayandaRisu: {
+        battle: [
+            {
+                name: { pl: "Wiewiórczy ogon", en: "Squirrel tail" },
+                points: 1,
+            },
+            {
+                name: { pl: "Sprej przeciw robactwu", en: "Anti-worm spray" },
+                points: 55,
+            },
+        ],
+        description: {
+            pl: `Wiewiórcza VTuberka z magicznego lasu. Jedna z przedstawicielek hololive, zagubiona w ludzkim wymiarze. Żartobliwa, opiekuńcza oraz uparta w dążeniu do celu, choć czasem z rozdwojeniem jaźni - to nagle zacznie narzekać, to nagle głupota przyjdzie na myśl, to albo zacznie być dziecinna, albo poważnie dorosła. Dzięki temu przeciwnik nie jest w stanie przewidzieć jej ruchu - nawet {{charaName.paty}}, znany z czujności i sprytu, miał problemy z unikaniem bez użycia SP!`,
+            en: `A squirrelly VTuber from the magic forest. One of the representatives of the hololive, lost in the human dimension. Playful, caring and stubborn in the pursuit of her goals, although sometimes with a split ego - it is suddenly that she will start complaining, it is suddenly that stupidity will come to mind, it is either that she will start being childish or seriously adult. This makes it impossible for an opponent to predict her movement - even {{charaName.paty}}, known for his alertness and cunning, had trouble dodging without using SP!`,
+        },
+        dimension: "VTuberzy, do ataku!",
+        hp: 8050,
+        class: "uncommon",
+        max_lvl: 20,
+        types: {
+            have: ["Ziemia", "Trucizna", "Ogień"],
+            strong: {
+                def: 1300,
+                ind: ["Woda", "Chi"],
+            },
+            weak: {
+                def: 2500,
+                ind: ["Galaktyka", "Trucizna"],
+            },
+        },
+        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1199684765738086400/Ayunda_Risu_-_Portrait_convert.io.png?ex=65c37081&is=65b0fb81&hm=2f9246365d015cfb55285a4bbcdf5b4ce0c91a5ffacf8ae1e2c371bba1e88845&",
+        level_up: {
+            hp: 2.38,
+            battle: [1.92, 1.92],
+            types: {
+                strong: 100,
+                weak: 50,
+            },
+        },
+        sp: {
+            name: "«We are nut the same.»",
+            description: {
+                pl: "Mimo ciekawości działania ludzkiego wymiaru, {{charaName.ayandaRisu}} nie przepada, gdy ktoś każe robić cokolwiek schematowo. Kiedy jej HP spadnie do 7% lub kiedy wyczuje co drugi ruch, że BTP przeciwnika wynosi ponad 60 (może nie wyczuć wcale, może też wyczuć połowę faktycznej wartości albo faktyczną ilość), podpala duży orzech i rzuca w przeciwnika ogonem, powodując dodatkowo podpalenie i zwrot HP z 5% DMG.",
+                en: "Despite her curiosity about the workings of the human dimension, {{charaName.ayandaRisu}} is not fond of being told to do anything schematically. When her HP drops to 7%, or when she senses every other move that an opponent's BTP is greater than 60 (she may not sense it at all, or she may sense half the actual value or the actual amount), she lights a large nut on fire and throws her tail at the opponent, further causing them to catch fire and return HP with 5% DMG.",
+            },
+            maxUses: 1,
+        },
+        tags: [],
+    },
+    ameliaWatson: {
+        battle: [
+            {
+                name: { pl: "Zastrzyk wyniszczający organizm", en: "Body-destroying injection" },
+                points: 8,
+            },
+            {
+                name: { pl: "Kula makaronowa", en: "NoodlyBall" },
+                points: 60,
+            },
+            {
+                name: { pl: "Mityczny wir", en: "Mythical Maelstrom" },
+                points: 120,
+            },
+        ],
+        description: {
+            pl: `Uważana osobiście jako detektyw nr. 1 w hololive. Aktywna fizycznie i umysłowo - rozwiąże Tobie nawet najtrudniejszą zagadkę w mniej niż minutę. Chciałaby mieć moc cofania się w czasie z zegarkiem kieszonkowym w tym bojowym zakątku, ale jądro Internetu nie pozwoliło na to - za to dało w nim specjalną funkcję…`,
+            en: `Considered personally as the No. 1 detective in hololive. Physically and mentally active - she will solve even the most difficult mystery for you in less than a minute. She would have liked to have had the power to go back in time with her pocket watch in this combat place, but the Internet core didn't allow this - instead it gave her a special function…`,
+        },
+        dimension: "VTuberzy, do ataku!",
+        hp: 9000,
+        class: "epic",
+        max_lvl: 16,
+        types: {
+            have: ["Metal", "Trucizna", "Powietrze"],
+            weak: {
+                def: 300,
+                ind: ["Galaktyka", "Trucizna"],
+            },
+        },
+        image: "https://cdn.discordapp.com/attachments/1177934284342964306/1198731357048815666/800px-Watson_Amelia_-_Portrait_01.png?ex=65bff892&is=65ad8392&hm=4f0df403a880caf98e0acb9c7e409926160fd775e5b92c9c419b9faf2600aef4&",
+        level_up: {
+            hp: 2.38,
+            battle: [2, 2.4, 3],
+            types: {
+                weak: 5,
+            },
+        },
+        sp: {
+            name: {
+                pl: "Przeciwnik spalony żywcem",
+                en: "Opponent burned alive",
+            },
+            description: {
+                pl: "{{charaName.ameliaWatson}} sprawdza warunki pogodowe w trzech miejscach, wybierając spośród nich najmniejsze zachmurzenie i wysoką temperaturę. Dzięki takiej informacji używa zmodyfikowanego zegarka (tego wspomniano), aby ogromne szkło powiększające się pojawiło w celu ataku na przeciwnika. Szansa na krytyczny cios od przeciwnika podczas ataku jest ustawiana na 75% (jeżeli w meczu ma mniejszą szansę od wymienionej powyżej), a potem wraca do normy.",
+                en: "{{charaName.ameliaWatson}} checks the weather conditions at three locations, selecting the least cloud cover and high temperature from among them. With this information, he uses a modified clock (the one mentioned) to make a huge zoom glass appear to attack the opponent. The chance of a critical hit from an opponent during an attack is set to 75% (if in a match it has a lower chance than the one mentioned above), and then returns to normal.",
+            },
+            maxUses: 1,
+        },
+        tags: ["toks"],
+    },
+    gawrGura: {
+        battle: [
+            {
+                name: { pl: "Ukąszenie", en: "Bite" },
+                points: 0,
+            },
+            {
+                name: { pl: "Trójząb", en: "Trident" },
+                points: 42,
+            },
+            {
+                name: { pl: "Naddźwiękowy balon wodny", en: "Supersonic water balloon" },
+                points: 100,
+            },
+        ],
+        description: {
+            pl: `Wzrostem mała, ale sercem wielka VTuberka uwielbiająca wszystkie morskie stworzenia - nie bez powodu ubrała strój rekina. Jedna z przedstawicielek hololive pierwszej generacji. Dla każdego wiek podaje ok. 9000 lat (sama ma problemy z zapamiętaniem), choć obliczenia od tych, którzy się tego podjęli, stwierdzają nieco inaczej - {{charaName.habby}} wskazał na wiek równemu roku powstania Internetu (± 25 lat), {{charaName.haker1000}} obliczył wiek ok. 100000 lat, a {{charaName.theSecondComing}} stwierdził, że nie może mieć więcej niż 300 lat. Na pytanie jak odpowiedź nie jest jasna…`,
+            en: `Small in height but big in heart VTuber who loves all sea creatures - there's a reason she wore a shark outfit. One of the representatives of the hololive first generation. For each, she gives an age of around 9,000 years (she herself has trouble remembering), although calculations from those who have taken the plunge state slightly differently - {{charaName.habby}} indicated an age equal to the year the internet was created (± 25 years), {{charaName.haker1000}} calculated an age of around 100,000 years, and {{charaName.theSecondComing}} said it couldn't be more than 300 years old. The answer to the question of how is not obvious…`,
+        },
+        dimension: "VTuberzy, do ataku!",
+        hp: 9642,
+        class: "epic",
+        max_lvl: 16,
+        types: {
+            have: ["Woda", "Chi"],
+            strong: {
+                def: 1000,
+                ind: ["Ogień"],
+            },
+            weak: {
+                def: 2000,
+                ind: ["Lód"],
+            },
+        },
+        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1200162600307134594/Gawr_Gura_Full_body.png?ex=65c52d85&is=65b2b885&hm=fec0e8215e466d0a345e1564b4d22eb47c3895f56cab7d087650b82dd75e758f&",
+        level_up: {
+            hp: 2.75,
+            battle: [1.8, 2.2, 2.72],
+            types: {
+                strong: 0,
+                weak: 80,
+            },
+        },
+        sp: {
+            name: "a.",
+            description: {
+                pl: "Ten pewny film od {{charaName.gawrGura|gawrGury}} sprawił, że fani zrobili z tego religię. Jądro Internetu więc kreatywnie podeszło do tworzenia SP dla niej. Dzięki jej krzyku pierwszej litery zabiera w pierwszym ruchu całe BTP przeciwnika, a w drugim atakuje ostatnim atakiem.",
+                en: "This certain video from {{charaName.gawrGura}} made fans a religion. Internet core, therefore, took a creative approach to making SP for her. With her first letter shout, she takes out her opponent's entire BTP on the first move and attacks with her last attack on the second.",
+            },
+            maxUses: 2,
+        },
+        tags: ["atkback"],
+    },
+
+    // Bojowe nastawienie celebrytów
+    kacperRietz: {
+        battle: [
+            {
+                name: { pl: "Pięść", en: "Fist" },
+                points: 2,
+            },
+            { name: "GBS-ik", points: 20 },
+            {
+                name: { pl: "Wyrzutnia memów", en: "Meme launcher" },
+                points: 69,
+            },
+        ],
+        description: {
+            pl: `Jedyny w swoim rodzaju YouTuber, kojarzony z uwagami szkolnymi, photoshopem, januszami marketingu oraz przede wszystkim sponsorami i demonetyzacją. Wszyscy w tym zakątku są przekonani, że jest umięśniony, a nie jak widzowie, że twierdzą o jego dużej ilości tłuszczu…`,
+            en: `A one-of-a-kind YouTuber, associated with schoolyard remarks, photoshop, marketing janissaries and most importantly sponsorship and demonetisation. Everyone in this corner is convinced he's muscular, rather than viewers making claims about his large amount of fat…`,
+        },
+        dimension: "Bojowe nastawienie celebrytów",
+        hp: 7000,
+        class: "import",
+        max_lvl: 12,
+        types: {
+            have: ["Ogień", "Elektryczność", "Informatyka"],
+            weak: {
+                def: 800,
+                ind: ["Duchoznactwo", "Trucizna"],
+            },
+        },
+        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1200866827983654992/request__fire_cutie_mark_by_1mbean_d6e7133-fullview.png?ex=65c7bd62&is=65b54862&hm=efc1db970290f3e02db5c9e34d725540e27f365e7e73fb2121a9f76ce34e923d&",
+        level_up: {
+            hp: 3.32501,
+            battle: [2, 2.5, 3],
+            types: {
+                weak: 0,
+            },
+        },
+        sp: {
+            name: {
+                pl: "Ryk smoka",
+                en: "Dragon's roar",
+            },
+            description: {
+                pl: "{{charaName.kacperRietz}} w końcu nie wytrzymuje i zieje potężnym ogniem, gdzie w 15 ruchach powoduje dodatkowe szkody - w ciągu 2 pierwszych ruchach przeciwnik dostaje obrażenia o wartości 90% ataku, od 3 do 7 ruchu o wartości 50%, a reszta - o wartości 20%.",
+                en: "In the end, {{charaName.kacperRietz}} can't take it and breathes a powerful fire, where it causes collateral damage in 15 moves - within the first 2 moves the opponent gets 90% attack damage, from the 3rd to the 7th move 50%, and the rest 20%.",
+            },
+            maxUses: 1,
+        },
+        tags: ["sochr"],
+    },
+    elsiAdajew: {
+        battle: [
+            {
+                name: { pl: "Suchar", en: "Toast" },
+                points: 0,
+            },
+            {
+                name: { pl: "Kawa", en: "Coffee" },
+                points: 25,
+            },
+            {
+                name: "📸",
+                points: 72,
+            },
+        ],
+        description: {
+            pl: `Człowiek pełen sucharów pod ręką; czasem są takie suche, że przeciwnik nie może się pozbierać po nim! Ale poza nimi jeszcze lubi fotografie, pandy i majonez kielecki. Gdyby mógł, by chciał przeżyć z chęcią podróż z {{charaName.asterixem}} i {{charaName.obelixem}}!`,
+            en: `A man full of jokes at hand; sometimes they are so dry that his opponent can't pick up after him! But outside of them he still likes photographs, pandas and Kielce mayonnaise. If he could, he would love to experience a trip with {{charaName.asterix}} and {{charaName.obelix}}!`,
+        },
+        dimension: "Bojowe nastawienie celebrytów",
+        hp: 6000,
+        class: "rare",
+        max_lvl: 18,
+        types: {
+            have: ["Informatyka", "Trucizna"],
+        },
+        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1201490318638452736/72124301_545695042843805_1419594415274933299_n-ai-brush-removebg-7w34xvr5.png?ex=65ca020e&is=65b78d0e&hm=f0aea019d81af364ee56429b22b4d253df99f2af2029e96c6d6f748065e8e12f&",
+        level_up: {
+            hp: 2.9,
+            battle: [3, 3, 3],
+        },
+        sp: {
+            name: {
+                pl: "Użyteczniejszy majonez",
+                en: "More useful mayonaise",
+            },
+            description: {
+                pl: "Majonez kielecki w tym zakątku dostał ciekawe właściwości. Po zjedzeniu jednej porcji {{charaName.elsiAdajew}} zostaje leczony i ma możliwość naładowania sobie BTP (25% lub co 5 użycie).",
+                en: "The Kielce mayonnaise in this place gets interesting properties. After eating one portion {{charaName.elsiAdajew}} is healed and has the ability to recharge his BTP (25% or every 5 uses).",
+            },
+            maxUses: 15,
+        },
+        tags: [],
     },
 
     // Gang Sokołów
@@ -1293,7 +1732,7 @@ export const charaList = {
             en: "A girl just starting out on her big adventure following the Super Snacki fanpage. As well as snacks, she also loves motoring - there's a reason why the halo looks like explosions from the exhaust after parts. As this character comes from a non-internet dimension, an alternative programming version had to be made. And it was done, without the face and with the devil's horns and halo partly related to the exhaust fires.",
         },
         dimension: "Gang Sokołów",
-        hp: 5100,
+        hp: 5500,
         class: "legendary",
         max_lvl: 14,
         types: {
@@ -1309,7 +1748,7 @@ export const charaList = {
         },
         image: "https://cdn.discordapp.com/attachments/1177876489421738014/1194706073119117312/sketch-1704910473103.png?ex=65b153bc&is=659edebc&hm=61b0e938b7a95ec3071463b77262e73530d7bd2b960da975e1746b736d13ae6f&",
         level_up: {
-            hp: 2.75,
+            hp: 2.85,
             battle: [3, 4.5, 5.5],
             types: {
                 strong: 30,
@@ -1322,12 +1761,12 @@ export const charaList = {
                 en: "Fiery salamis as Lamborghinis",
             },
             description: {
-                pl: "Pierwsze użycie powoduje, że rozgrzewa do czerwoności wirtualny silnik samochodowy, czyli zwiększa wszystkie ataki o 25% i zmniejsza HP o 10%. Drugie użycie, kosztem zmniejszenia ataków do 80% ich wartości, już uruchamia reakcję łańcuchową i po 5 sekundach gabrysiaSotoła strzela 12 salamitkami, które płoną! Nie każda uderzy, ale spokojnie - przynajmniej jedna salamitka trafi.",
-                en: "The first use heats up the virtual car engine, meaning it increases all attacks by 25% and reduces HP by 10%. The second use, at the cost of reducing attacks to 80% of their value, already sets off a chain reaction and after 5 seconds gabrysiaSotoła shoots 12 salamiters that are on fire! Not every one will hit, but rest assured - at least one salamite will hit.",
+                pl: "Pierwsze użycie powoduje, że rozgrzewa do czerwoności wirtualny silnik samochodowy, czyli zwiększa wszystkie ataki o 25% i zmniejsza HP o 10%. Drugie użycie, kosztem zmniejszenia ataków do 80% ich wartości, już uruchamia reakcję łańcuchową i po 5 sekundach {{charaName.gabrysiaSotoła}} strzela 12 salamitkami, które płoną! Nie każda uderzy, ale spokojnie - przynajmniej jedna salamitka trafi.",
+                en: "The first use heats up the virtual car engine, meaning it increases all attacks by 25% and reduces HP by 10%. The second use, at the cost of reducing attacks to 80% of their value, already sets off a chain reaction and after 5 seconds {{charaName.gabrysiaSotoła}} shoots 12 salamiters that are on fire! Not every one will hit, but rest assured - at least one salamite will hit.",
             },
             maxUses: 2,
         },
-        tags: [],
+        tags: ["double"],
     },
     snackowyAdmin: {
         battle: [
@@ -1346,7 +1785,7 @@ export const charaList = {
         ],
         description: {
             pl: "Administrator fanpage'a Super Snacki - stronie poświęconej najlepszym przekąskom mięsnych (wg. konsumentów). Idol, jak i przyjaciel wszystkich osób z tego wymiaru. Poza kabanosami uwielbia też koty (oczywiście ich nie zjada). Jako że nie pozwolił na umieszczanie swego wizerunku, jądro Internetu postanowiło, że wizerunek zamieni na jednego z jego memów. Nie jest jakiś walczący, ale spróbuj go tylko wkurzyć, to oberwiesz mocno!",
-            en: "Administrator of the fanpage Super Snacki - a page dedicated to the best meat snacks (according to consumers). An idol, as well as a friend of all the people in this dimension. In addition to cabanas, he also loves cats (he doesn't eat them, of course). As he did not allow his image to be posted, the core of the internet decided to turn the image into one of his memes. He's not some fighter, but just try to piss him off, you'll flop hard!",
+            en: "Administrator of the fanpage Super Snacki - a page dedicated to the best meat snacks (according to consumers). An idol, as well as a friend of all the people in this dimension. In addition to cabanas, he also loves cats (he doesn't eat them, of course). As he did not allow his image to be posted, the Internet core decided to turn the image into one of his memes. He's not some fighter, but just try to piss him off, you'll flop hard!",
         },
         dimension: "Gang Sokołów",
         hp: 8300,
@@ -1366,7 +1805,7 @@ export const charaList = {
         image: "https://cdn.discordapp.com/attachments/1177876489421738014/1194706073534341260/sketch-1704910472268.png?ex=65b153bc&is=659edebc&hm=228aeb04085a41b3be9ae5c6fd7b7ab606509d97a1beb7fcdd3e3755d1b5e762&",
         level_up: {
             hp: 3.1,
-            battle: [2, 3.1, 3.9],
+            battle: [2, 3, 4],
             types: {
                 strong: 50,
                 weak: 120,
@@ -1378,28 +1817,28 @@ export const charaList = {
                 en: "Snack break",
             },
             description: {
-                pl: `Czemu ktoś zabroni zrobić przerwę, aby mógł sobie snackowyAdmin zjeść smacznie przekąskę? A nie wszyscy wiedzą, że każda przekąska ma swoje unikalne moce!<br />
+                pl: `Czemu ktoś zabroni zrobić przerwę, aby mógł {{charaName.snackowyAdmin}} sobie zjeść smacznie przekąskę? A nie wszyscy wiedzą, że każda przekąska ma swoje unikalne moce!<br />
                 - kabanosy francuskie zwiększają wszystkie ataki o 8%.<br />
                 - kabanosy polskie zwiększają losowy atak o 25%.<br />
                 - czosnkowe Salami Chips powodują dodanie BTP.<br />
-                - ketchupowe Salami Chips zwiększają losowy atak o 5% i leczą snackowegoAdmina.<br />
+                - ketchupowe Salami Chips zwiększają losowy atak o 5% i leczą {{charaName.snackowyAdmin|snackowegoAdmina}}.<br />
                 - CHRUP 'US Salami Chips zmniejszają szansę krytycznego ciosu.<br />
                 - Beef Jerky powodują, że jego maksymalne HP się zwiększa o 10%, i nie wpływa na posiadane.<br />
-                - Mini Snacki działają jak apteczka - leczą snackowegoAdmina.<br />
+                - Mini Snacki działają jak apteczka - leczą {{charaName.snackowyAdmin|snackowegoAdmina}}.<br />
                 - Mix Snacków powodują zmniejszenie szansy krytycznego ciosu, zwiększenie wszystkich ataków o 5%, i zwiększenie maksymalnego HP o 3%.<br />
                 - Wędlinka Sokołów zwiększa wszystkie ataki o 6%, maksymalne HP o 3%, ilość BTP i szansę krytycznego ciosu oraz powodują leczenie.<br />
-                Przeszkodą dla niego jest paty - twierdzi, że takie przerwy nie są dozwolone, więc jeżeli to właśnie z nim jest toczona walka, od czasu do czasu nie pozwoli na kabanosy, tym samym go atakując.`,
-                en: `Why forbid anyone from taking a break so they can snackowyAdmin a tasty snack? And not everyone knows that every snack has its own unique powers!<br />
+                Przeszkodą dla niego jest {{charaName.paty}} - twierdzi, że takie przerwy nie są dozwolone, więc jeżeli to właśnie z nim jest toczona walka, od czasu do czasu nie pozwoli na kabanosy, tym samym go atakując.`,
+                en: `Why forbid anyone from taking a break so they can {{charaName.snackowyAdmin}} a tasty snack? And not everyone knows that every snack has its own unique powers!<br />
                 - French cabanas increase all attacks by 8%.<br />
                 - Polish cabanas increase the random attack by 25%.<br />
                 - Garlic Salami Chips cause BTP to be added.<br />
-                - Ketchup Salami Chips increase the random attack by 5% and heal snackowyAdmin.<br />
+                - Ketchup Salami Chips increase the random attack by 5% and heal {{charaName.snackowyAdmin}}.<br />
                 - CHRUP 'US Salami Chips reduce the chance of a critical blow.<br />
                 - Beef Jerky causes his maximum HP to increase by 10%, and does not affect his possession.<br />
-                - Mini Snacks act like a first-aid kit - they heal snackowyAdmin.<br />
+                - Mini Snacks act like a first-aid kit - they heal {{charaName.snackowyAdmin}}.<br />
                 - Mixed Snacks cause a reduced chance of a critical blow, increase all attacks by 5%, and increase maximum HP by 3%.<br />
                 - Sokołów's sausage increases all attacks by 6%, maximum HP by 3%, the amount of BTP and the chance of a critical blow, and causes healing.<br />
-                The obstacle for him is paty - he claims that such interruptions are not allowed, so if it is him that the fight is with, he will occasionally not allow cabanas, thus attacking him.`,
+                The obstacle for him is {{charaName.paty}} - he claims that such interruptions are not allowed, so if it is him that the fight is with, he will occasionally not allow cabanas, thus attacking him.`,
             },
             maxUses: 10,
         },
@@ -1417,12 +1856,12 @@ export const charaList = {
             { name: "<i>Planet Befall</i>", points: 110 },
         ],
         description: {
-            pl: "Postać z gry Genshin Impact. Wysoki i szczupły mężczyzna potrafi wojować kryształami i wielką profesjonalnie zrobioną włócznią. Jak wielu postaci, został porwany do tego miejsca. Do tej pory jemu się tu nie podoba, i stara się uciec z tej symulacji tak, żeby nikt się nie domyślał...",
-            en: "A character from the Genshin Impact game. A tall and slender man, he can war with crystals and a large professionally made spear. Like many characters, he was taken to this place. So far he doesn't like it here, and is trying to escape this simulation so that no one will guess...",
+            pl: "Postać z gry Genshin Impact. Wysoki i szczupły mężczyzna potrafi wojować kryształami i wielką profesjonalnie zrobioną włócznią. Jak wielu postaci, został porwany do tego miejsca. Do tej pory jemu się tu nie podoba, i stara się uciec z tej symulacji tak, żeby nikt się nie domyślał…",
+            en: "A character from the Genshin Impact game. A tall and slender man, he can war with crystals and a large professionally made spear. Like many characters, he was taken to this place. So far he doesn't like it here, and is trying to escape this simulation so that no one will guess…",
         },
         dimension: "HoYoverse",
-        hp: 8200,
-        class: "legendary",
+        hp: 7000,
+        class: "epic",
         max_lvl: 40,
         types: {
             have: ["Ziemia", "Chi", "Duchoznactwo"],
@@ -1437,31 +1876,82 @@ export const charaList = {
         },
         image: "https://cdn.discordapp.com/attachments/1047919900875825293/1146059889332994078/Character_Zhongli_Game.png",
         level_up: {
-            hp: 2.025,
+            hp: 2.04044,
             battle: [2, 2.3, 3.15],
             types: {
                 strong: 0,
-                weak: 110,
+                weak: 11,
             },
             cost: "500+50*{lvl}",
         },
         sp: {
             name: "Mega Dominus Lapidis",
             description: {
-                pl: `Każdy gracz Genshin Impact kojarzy skill Dominus Lapidis - zhongli dostał tutaj ulepszoną wersję. Dla przeciwnika zadaje obrażenia i tym samym ustawia minimalną szansę krytycznego ciosu na 35%; dla siebie przez 5 ruchów regeneruje siebie, wzmacnia ataki o 13.5%, i tymczasowo zmniejsza szansę krytycznego ciosu o połowę - po 5 ruchach powraca do stanu przed użyciem.`,
-                en: `Every Genshin Impact player is familiar with the Dominus Lapidis skill - zhongli got an improved version here. For the opponent, it deals damage and thus sets the minimum critical strike chance to 35%; for himself, for 5 moves, he regenerates himself, strengthens attacks by 13.5%, and temporarily halves the critical strike chance - after 5 moves, he returns to his state before use.`,
+                pl: `Każdy gracz Genshin Impact kojarzy skill Dominus Lapidis - {{charaName.zhongli}} dostał tutaj ulepszoną wersję. Dla przeciwnika zadaje obrażenia i tym samym ustawia minimalną szansę krytycznego ciosu na 35%; dla siebie przez 5 ruchów regeneruje siebie, wzmacnia ataki o 13.5%, i tymczasowo zmniejsza szansę krytycznego ciosu o połowę - po 5 ruchach powraca do stanu przed użyciem.`,
+                en: `Every Genshin Impact player is familiar with the Dominus Lapidis skill - {{charaName.zhongli}} got an improved version here. For the opponent, it deals damage and thus sets the minimum critical strike chance to 35%; for himself, for 5 moves, he regenerates himself, strengthens attacks by 13.5%, and temporarily halves the critical strike chance - after 5 moves, he returns to his state before use.`,
             },
             maxUses: 1,
         },
         tags: [],
     },
+    topazAndNumby: {
+        battle: [
+            {
+                name: { pl: "Deficyt…", en: "Deficit…" },
+                points: 10,
+            },
+            {
+                name: "«Difficulty Paying?»",
+                points: 75,
+            },
+        ],
+        description: {
+            pl: "Postać z gry Honkai: Star Rail. {{charaName.topaz}} jest starszym menadżerem działu Inwestycji Strategicznych w Interastral Peace Corporation, jednym z Dziesięciu Kamiennych Serc oraz liderem zespołu ds. specjalnych długów. Partner {{charaName.topaz}}, {{charaName.numby}} (formalnie <i>Warp Trotter „Numby”</i>), jest zdolny precyzyjnie dostrzec gdzie znajdują się „bogactwa”. Może nawet wykonywać prace związane z bezpieczeństwem, windykacją długów i naukami aktuarialnymi.",
+            en: "A character from Honkai: Star Rail game. {{charaName.topaz}} is a Senior Manager of the Strategic Investment Department in the Interastral Peace Corporation, one of the Ten Stonehearts and leader of the Special Debts Picket Team. {{charaName.topaz's}} partner, {{charaName.numby}} (in formal, <i>Warp Trotter „Numby”</i>), is also capable of acutely perceiving where „riches” are located. It can even perform jobs involving security, debt collection, and actuarial sciences.",
+        },
+        dimension: "HoYoverse",
+        hp: 10000,
+        class: "legendary",
+        max_lvl: 40,
+        types: {
+            have: ["Galaktyka", "Ogień"],
+            strong: {
+                def: 3000,
+                ind: ["Duchoznactwo", "Informatyka", "Ziemia"],
+            },
+            weak: {
+                def: 3000,
+                ind: ["Trucizna", "Chi", "Woda"],
+            },
+        },
+        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1198733536958623955/IMG_20240113_224127-removebg.png?ex=65bffa9a&is=65ad859a&hm=182df5e926673e1157406e8c794b2ddcee588a48b7c8314bfb29e71b25674613&",
+        level_up: {
+            hp: 1.2,
+            battle: [2, 3],
+            types: {
+                strong: -5,
+                weak: 10,
+            },
+            cost: "700+70*{lvl}",
+        },
+        sp: {
+            name: {
+                pl: "Osiągalny Zysk!",
+                en: "Turn a Profit!",
+            },
+            description: {
+                pl: `{{charaName.numby}} wchodzi w stan o nazwie <i>Windfall Bonanza!</i>, który powoduje zwiększenie ataków o procent zależny od poziomu (od 11/50% do 40/118%) oraz zwiększa podwójnie szansę na krytyczny cios u przeciwnika. Po zakończeniu tego stanu (po pięciu ruchach) ataki wracają prawie do normy, lecz krytyczny cios zostaje. Jeżeli przeciwnik ma moc Metal lub Informatyka, zostaje też wtedy atakowany.`,
+                en: `{{charaName.numby}} enters a state called <i>Windfall Bonanza!</i> which increases attacks by a percentage depending on the level (from 11/50% to 40/118%) and doubles the chance of a critical blow to the opponent. When this condition ends (after five moves), attacks return almost to normal, but the critical blow remains. If the opponent has Metallic or IT power, he is also attacked at that time.`,
+            },
+            maxUses: 1,
+        },
+        tags: ["btpwa", "double"],
+    },
 }
 
-/*
-    sp: {
-        name: "",
-        description: { pl: "" }
-        maxUses: 0,
-        function: function() {}
-    }
-*/
+/**
+ * Co oznaczają tagi
+ * {{charaName.<nazwaPostaci>}} - daje kolorową nazwę postaci (lub pogrubioną, jeżeli nie zindeksuje)
+ * {{charaName.<nazwaPostaci>|<wyświetlanaNazwa>}} - to samo co tag wyżej, ale zamiast <nazwaPostaci> masz <wyświetlanaNazwa>
+ * {{desc.db.klucz>}} - klucz z bazy danych (zarządzanej przez "serwer"; już nie funkcjonuje, jak narazie)
+ */
