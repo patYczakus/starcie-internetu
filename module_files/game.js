@@ -1152,7 +1152,7 @@ function startMatch() {
         characters_json[matchSettings.player.name].level_up.hp,
         data.characters[matchSettings.player.name].lvl
     )
-    matchSettings.player.health = Math.round(matchSettings.player.health * (1 + 1.5 * characters_json[matchSettings.player.name].tags.includes("tanker")))
+    matchSettings.player.health = Math.round(matchSettings.player.health * (1 + 1.3 * characters_json[matchSettings.player.name].tags.includes("tanker")))
     matchSettings.player.lvl = data.characters[matchSettings.player.name].lvl
     matchSettings.player.spHave = data.characters[matchSettings.player.name].sp
     if (typeof characters_json[matchSettings.player.name].sp.name == "object") {

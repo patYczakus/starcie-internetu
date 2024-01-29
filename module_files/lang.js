@@ -145,8 +145,8 @@ export var langText = {
                 en: "<b>Greater healing rations</b> - healing in the base has +200 HP.",
             },
             tanker: {
-                pl: "<b>Korzenie tanka</b> - wartość HP ma w grze wartość 250%, a ataki 30%.",
-                en: "<b>Family tree of Tanks</b> - HP value is 250% in the game and attacks are 30%.",
+                pl: "<b>Korzenie tanka</b> - wartość HP ma w grze wartość 230%, a ataki 30%.",
+                en: "<b>Family tree of Tanks</b> - HP value is 230% in the game and attacks are 30%.",
             },
         },
     },
