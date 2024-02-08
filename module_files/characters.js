@@ -1907,7 +1907,7 @@ export const charaList = {
         ],
         description: {
             pl: "Postać z gry Honkai: Star Rail. {{charaName.topaz}} jest starszym menadżerem działu Inwestycji Strategicznych w Interastral Peace Corporation, jednym z Dziesięciu Kamiennych Serc oraz liderem zespołu ds. specjalnych długów. Partner {{charaName.topaz}}, {{charaName.numby}} (formalnie <i>Warp Trotter „Numby”</i>), jest zdolny precyzyjnie dostrzec gdzie znajdują się „bogactwa”. Może nawet wykonywać prace związane z bezpieczeństwem, windykacją długów i naukami aktuarialnymi.",
-            en: "A character from Honkai: Star Rail game. {{charaName.topaz}} is a Senior Manager of the Strategic Investment Department in the Interastral Peace Corporation, one of the Ten Stonehearts and leader of the Special Debts Picket Team. {{charaName.topaz's}} partner, {{charaName.numby}} (in formal, <i>Warp Trotter „Numby”</i>), is also capable of acutely perceiving where „riches” are located. It can even perform jobs involving security, debt collection, and actuarial sciences.",
+            en: "A character from Honkai: Star Rail game. {{charaName.topaz}} is a Senior Manager of the Strategic Investment Department in the Interastral Peace Corporation, one of the Ten Stonehearts and leader of the Special Debts Picket Team. {{charaName.topaz|topaz's}} partner, {{charaName.numby}} (in formal, <i>Warp Trotter „Numby”</i>), is also capable of acutely perceiving where „riches” are located. It can even perform jobs involving security, debt collection, and actuarial sciences.",
         },
         dimension: "HoYoverse",
         hp: 10000,
