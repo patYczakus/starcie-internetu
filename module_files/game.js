@@ -1965,17 +1965,16 @@ var gameModify = {
                     /**
                      * Ustawia wartość HP na zasadzie liczbowej
                      * @param {number} value
-                     * @param {boolean} maxHPToo Czy maksymalne HP też ma być wpływane
+                     * @param {boolean} maxHP Czy ma zmienić maksymalne HP
                      */
-                    setValue: function (value, maxHPToo) {
+                    setValue: function (value, maxHP) {
                         value = Math.round(value)
                         var element = document.querySelector(`div#game.match div[gameplay="${playerSPUType}"] div.healthBar div.health`)
 
-                        matchSettings.player.health = value
-                        if (maxHPToo) {
+                        if (maxHP) {
                             element.style.setProperty("--healthMax", value)
                         } else {
-                            matchSettings[playerSPUType].health = Math.min(matchSettings[playerSPUType].health, Number(element.style.getPropertyValue("--healthMax")))
+                            matchSettings[playerSPUType].health = Math.min(matchSettings[playerSPUType].health + value, Number(element.style.getPropertyValue("--healthMax")))
                         }
 
                         updateHP(playerSPUType)

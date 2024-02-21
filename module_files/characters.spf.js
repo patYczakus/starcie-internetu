@@ -380,12 +380,13 @@ const spf = {
     szymekDymek: function () {
         gameModify.getColab().you.atk.setPrectange(115, "last")
         gameModify.getColab().setTimeoutInMoves("each", Infinity, (type, rm) => {
+            gameModify.getColab(type).you.JSON.change({ points: gameModify.getColab(type).you.JSON.get("points") + Math.round(Math.abs(Math.sin(rm * 5) * 15)) })
             gameModify
                 .getColab(type)
                 .you.hp.setValue(
-                    gameModify.getColab(type).you.hp.get() + gameModify.calc(0, 40 + Math.sin(rm) * 30, 1.5 + Math.sin(rm / 4) * 0.5, gameModify.getColab(type).you.getLevel())
+                    gameModify.getColab(type).you.hp.get() + gameModify.calc(0, 40 + Math.sin(rm) * 30, 1.5 + Math.sin(rm / 4) * 0.5, gameModify.getColab(type).you.getLevel()),
+                    false
                 )
-            gameModify.getColab(type).you.JSON.change({ points: gameModify.getColab(type).you.JSON.get("points") + Math.round(Math.abs(Math.sin(rm * 5) * 15)) })
 
             var chance = Math.round(Math.random() * 99) + 1
             console.log(`[DEBUG/game/szymekDymek] Szansa postaci wynosi ${chance}%`)
