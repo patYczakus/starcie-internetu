@@ -45,8 +45,23 @@
         <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png" />
         <link rel="manifest" href="favicons/site.webmanifest" />
 
-        <script src="main.js" type="module"></script>
+        <!--<script src="main.js" type="module"></script>-->
         <link rel="stylesheet" href="style.css" />
+        <script>
+            window.onload = () => {
+                if (new URL(location.href).searchParams.get("lang") == "en")
+                    document.getElementById("s23c").innerText =
+                        "Due to the loss of a large amount of multimedia, the project is being shut down. It served from October 22, 2022 to February 25, 2024. I apologize to all who are disappointed, but it is not my fault.... see you in the second edition!\n~patYczakus"
+                else
+                    document.getElementById("s23c").innerText =
+                        "Z powodu utracenia dużej ilości multimediów projekt zostaje wyłączony. Służył on od 22 października 2022 roku do 25 lutego 2024. Przepraszam wszystkich, którzy są zawiedzeni, ale nie jest to moja wina... do zobaczenia w druguiej edycji!\n~patYczakus"
+            }
+        </script>
     </head>
-    <body></body>
+    <body>
+        <div id="sdc">
+            <h1></h1>
+            <div id="s23c"></div>
+        </div>
+    </body>
 </html>

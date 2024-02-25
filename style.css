@@ -739,6 +739,35 @@ button#skipThisSong {
 ---------------------------------------------------------------------------
 -------------------------------------------------------------------------*/
 
+div#sdc {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    box-sizing: border-box;
+    margin-left: 50px
+}
+
+div#sdc h1::before {
+    content: "Starcie 🌐 Internetu";
+    font-weight: normal;
+    font-size: 40px
+}
+
+div#sdc div {
+    width: 90%;
+}
+
+@media (max-width: 570px) {
+    div#sdc {
+        margin-left: 25px
+    }
+
+    div#sdc h1::before {
+        content: "Starcie Internetu";
+    }
+}
+
 @keyframes showEndMatch {
     from {
         transform: scale(1.2);
