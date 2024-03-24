@@ -1,6 +1,7 @@
-import { charaList } from "./characters.js"
+import { getCharaList } from "./characters.js"
 import { app } from "./database.js"
 import { gameModify } from "./game.js"
+import { atkFromBtp } from "./listsAndOtherFunctions.js"
 import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js"
 
 /**
@@ -9,7 +10,8 @@ import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/9.14.0
  * @returns {boolean}
  */
 var isPlaying = function (audio) {
-    return audio && audio.currentTime > 0 && !audio.paused && !audio.ended && audio.readyState > 2
+    if (!audio || typeof audio !== "object" || !audio instanceof HTMLAudioElement) throw console.error('[DEBUG] Parametr "audio" nie jest klasą HTMLAudioElement')
+    return audio.currentTime > 0 && !audio.paused && !audio.ended && audio.readyState > 2
 }
 
 /**
@@ -18,10 +20,11 @@ var isPlaying = function (audio) {
 const spf = {
     // stin
     habby: function () {
-        let hpCh = gameModify.getColab().you.hp.setPrectange(90, true)
+        let hpCh = gameModify.getColab().you.hp.setPrectange(85, true)
 
-        for (let i = 0; i < gameModify.getColab().you.atk.getLenght(); i++) {
-            gameModify.getColab().you.atk.setValue(gameModify.getColab().you.atk.getValue(i) - (hpCh / 2) * i, i)
+        var l = gameModify.getColab().you.atk.getLenght()
+        for (let i = 0; i < l; i++) {
+            gameModify.getColab().you.atk.setValue(gameModify.getColab().you.atk.getValue(i) - (hpCh / (l + 1)) * (i + 1), i)
         }
         console.log("[DEBUG/game/habby] Wartości ataków: ", gameModify.getColab().you.atk.getValue("all"))
 
@@ -30,19 +33,18 @@ const spf = {
         gameModify.getColab().endSP()
     },
     rycerzOceanu: function () {
-        gameModify.getColab().you.hp.setPrectange(117, true)
+        gameModify.getColab().you.hp.setPrectange(127, true)
         gameModify.getColab().you.JSON.change({
             critChance: gameModify.getColab().you.JSON.get("critChance") * 0.85,
         })
-        gameModify.getColab().you.atk.setPrectange(120, "random")
+        gameModify.getColab().you.atk.setPrectange(118, "random")
+        gameModify.getColab().you.atk.setPrectange(105, "all")
 
         gameModify.spSounds.magic.currentTime = 0
         if (!isPlaying(gameModify.spSounds.magic)) gameModify.spSounds.magic.play()
         gameModify.getColab().endSP()
     },
     trajom: function () {
-        const atkFromBtp = (btp) => Math.ceil(btp * Math.pow(btp, 0.45) + 20 - Math.min(btp, 15))
-
         gameModify.getColab().enemy.attack(gameModify.getColab().you.atk.getValue(0))
         setTimeout(() => {
             gameModify.getColab().enemy.attack(gameModify.getColab().you.atk.getValue(0))
@@ -51,38 +53,18 @@ const spf = {
             gameModify.getColab().enemy.attack(gameModify.getColab().you.atk.getValue(0))
         }, 500)
         setTimeout(() => {
-            const LVL = Math.round(gameModify.getColab().you.getLevel() / 2)
+            const LVL = gameModify.getColab().you.getLevel()
 
-            if (gameModify.getColab().type == "player")
-                gameModify.getColab().you.JSON.set({
-                    points: 30,
-                    name: "trajom",
-                    critChance: gameModify.calcCritChance("trajom", LVL, gameModify.getColab().enemy.name()),
-                    health: gameModify.calc(0, 1000, 2.15, LVL),
-                    atk: [
-                        gameModify.calc(0, atkFromBtp(charaList.trajom.battle[0].points), charaList.trajom.level_up.battle[0], LVL),
-                        gameModify.calc(0, atkFromBtp(charaList.trajom.battle[1].points), charaList.trajom.level_up.battle[1], LVL),
-                        gameModify.calc(0, atkFromBtp(charaList.trajom.battle[2].points), charaList.trajom.level_up.battle[2], LVL),
-                        gameModify.calc(0, atkFromBtp(charaList.trajom.battle[3].points), charaList.trajom.level_up.battle[3], LVL),
-                    ],
-                    spUses: 2,
-                })
-            else
-                gameModify.getColab().you.JSON.set({
-                    points: 30,
-                    name: "trajom",
-                    critChance: gameModify.calcCritChance("trajom", LVL, gameModify.getColab().enemy.name()),
-                    health: gameModify.calc(0, 1000, 2.15, LVL),
-                    atk: [
-                        gameModify.calc(0, atkFromBtp(charaList.trajom.battle[0].points), charaList.trajom.level_up.battle[0], LVL),
-                        gameModify.calc(0, atkFromBtp(charaList.trajom.battle[1].points), charaList.trajom.level_up.battle[1], LVL),
-                        gameModify.calc(0, atkFromBtp(charaList.trajom.battle[2].points), charaList.trajom.level_up.battle[2], LVL),
-                        gameModify.calc(0, atkFromBtp(charaList.trajom.battle[3].points), charaList.trajom.level_up.battle[3], LVL),
-                    ],
-                    spUses: 2,
-                    lvl: gameModify.getColab().you.JSON.get("lvl"),
-                    spHave: true,
-                })
+            gameModify.getColab().you.JSON.set({
+                points: 25,
+                name: "trajom",
+                critChance: gameModify.calcCritChance("trajom", LVL, gameModify.getColab().enemy.name()) * 1.06,
+                health: gameModify.calc(0, 1000, 2.15, LVL),
+                atk: getCharaList().trajom.battle.map((x, i) => gameModify.calc(0, atkFromBtp(x.points), getCharaList().trajom.level_up.battle[i], LVL)),
+                spUses: 0,
+                lvl: LVL,
+                spHave: false,
+            })
 
             gameModify.spSounds.vanish.currentTime = 0
             if (!isPlaying(gameModify.spSounds.vanish)) gameModify.spSounds.vanish.play()
@@ -106,7 +88,7 @@ const spf = {
         spf[gameModify.getColab().enemy.name()]()
         if (Math.round() < 0.1) {
             const maxHP = Number(
-                element.document
+                document
                     .querySelector(`div#game.match div[gameplay="${gameModify.getColab().type == "player" ? "bot" : "player"}"] div.healthBar div.health`)
                     .getPropertyValue("--healthMax")
             )
@@ -115,7 +97,7 @@ const spf = {
             gameModify.getColab().you.hp.set(maxHP, true)
             gameModify.getColab().you.hp.set(aHP, false)
         }
-        if (gameModify.getColab().you.JSON.get("spUses") >= charaList[gameModify.getColab().enemy.name()].sp.maxUses) {
+        if (gameModify.getColab().you.JSON.get("spUses") >= getCharaList()[gameModify.getColab().enemy.name()].sp.maxUses) {
             gameModify.getColab().setTimeoutInMoves("end", 1, (type) => {
                 gameModify.getColab(type).you.JSON.change({ spUses: Infinity })
                 gameModify.spSounds.magic.currentTime = 0
@@ -130,8 +112,8 @@ const spf = {
             atkPrecSet: 10 + (BTP - 200) * 0.3,
             atkTO: gameModify.calc(0, 250, 1.8532, gameModify.getColab().you.getLevel()),
         }
-        if (charaList[gameModify.getColab().enemy.name()].dimension === "Gang Sokołów") var multiplier = 1.3
-        else if (charaList[gameModify.getColab().enemy.name()].dimension === "HoYoverse") var multiplier = 0.8
+        if (getCharaList()[gameModify.getColab().enemy.name()].dimension === "Gang Sokołów") var multiplier = 1.3
+        else if (getCharaList()[gameModify.getColab().enemy.name()].dimension === "HoYoverse") var multiplier = 0.8
         else var multiplier = 1
 
         gameModify.getColab().setTimeoutInMoves("each", Infinity, (type, rm) => {
@@ -162,6 +144,32 @@ const spf = {
 
         gameModify.getColab().endSP()
     },
+    naładowanaAva: function () {
+        gameModify.spSounds.alarm.currentTime = 0
+        if (!isPlaying(gameModify.spSounds.alarm)) gameModify.spSounds.alarm.play()
+        setTimeout(() => {
+            gameModify.spSounds.alarm.currentTime = 0
+            if (!isPlaying(gameModify.spSounds.alarm)) gameModify.spSounds.alarm.play()
+        }, 1000)
+        setTimeout(() => {
+            gameModify.getColab().you.atk.setPrectange(124, 1)
+            gameModify.getColab().you.atk.setPrectange(124, 2)
+
+            const data = gameModify.getColab().enemy.attack(gameModify.calc(0, 2345, 3.8, gameModify.getColab().you.getLevel()))
+            var prec = Math.random() * 0.25 + 0.25
+            gameModify.getColab().you.JSON.change({
+                points: gameModify.getColab().you.JSON.get("points") + Math.round(gameModify.getColab().enemy.JSON.get("points") * prec),
+            })
+            gameModify.getColab().enemy.JSON.change({
+                points: Math.round(gameModify.getColab().enemy.JSON.get("points") * (1 - prec)),
+                critChance: gameModify.getColab().enemy.JSON.get("critChance") + 35 * data.crit,
+            })
+
+            gameModify.spSounds.uAttack.currentTime = 0
+            if (!isPlaying(gameModify.spSounds.uAttack)) gameModify.spSounds.uAttack.play()
+            gameModify.getColab().endSP()
+        }, 2000)
+    },
 
     // rl
     sylwestrowyOctane: function () {
@@ -187,7 +195,7 @@ const spf = {
     platynowyDominus: function () {
         gameModify.getColab().you.atk.setPrectange(116, "all")
         gameModify.getColab().you.JSON.change({ critChance: 0 })
-        gameModify.getColab().enemy.crit.change(gameModify.getColab().enemy.crit.get * 1.27)
+        gameModify.getColab().enemy.crit.change(gameModify.getColab().enemy.crit.get() * 1.27)
 
         gameModify.spSounds.alarm.currentTime = 0
         if (!isPlaying(gameModify.spSounds.alarm)) gameModify.spSounds.alarm.play()
@@ -523,6 +531,88 @@ const spf = {
                 gameModify.getColab().endSP()
             }
         }, 1000)
+    },
+    kruczaWładczyniNekro: function () {
+        const chances = [
+            "sushi",
+            "sushi",
+            "sushi",
+            "sushi",
+            "sushi",
+            "sushi",
+            "sushi",
+            "sushi",
+            "sushi",
+            "sushi",
+            "sushi",
+            "sushi",
+            "sushi",
+            "sushi",
+            "szczecin",
+            "szczecin",
+            "szczecin",
+            "szczecin",
+            "szczecin",
+            "kebab",
+        ]
+
+        setTimeout(() => {
+            switch (chances[Math.floor(Math.random() * chances.length)]) {
+                case "sushi":
+                    if (gameModify.getColab().you.hp.factor < 0.5)
+                        gameModify.getColab().you.hp.setValue(gameModify.getColab().you.hp.get() + gameModify.calc(0, 250, 1.95, gameModify.getColab().you.getLevel()))
+                    else gameModify.getColab().you.JSON.change({ points: gameModify.getColab().you.JSON.get("points") + 15 })
+                    break
+                case "szczecin":
+                    gameModify.getColab().you.hp.setPrectange(123, true)
+                    gameModify.getColab().you.hp.setPrectange(100 / 1.23, false)
+                    gameModify.getColab().you.atk.setPrectange(105, "random")
+                    break
+                case "kebab":
+                    gameModify.getColab().setTimeoutInMoves("each", 5, (type) => {
+                        gameModify.getColab(type).you.JSON.change({ points: gameModify.getColab().you.JSON.get("points") + 5 })
+                    })
+                    gameModify.getColab().setTimeoutInMoves("end", 5, (type) => {
+                        gameModify.getColab(type).you.atk.setPrectange(50, "all")
+                    })
+                    gameModify.getColab().you.hp.setPrectange(120, true)
+                    gameModify.getColab().you.atk.setPrectange(200, "all")
+                    break
+            }
+
+            gameModify.spSounds.num_num_num.currentTime = 0
+            if (!isPlaying(gameModify.spSounds.num_num_num)) gameModify.spSounds.num_num_num.play()
+            gameModify.getColab().endSP()
+        }, 200)
+    },
+    fobix: function () {
+        gameModify.spSounds.imagination.currentTime = 0
+        if (!isPlaying(gameModify.spSounds.imagination)) gameModify.spSounds.imagination.play()
+        gameModify.getColab().you.atk.setPrectange(260, "all")
+        gameModify.getColab().you.JSON.change({
+            critChance: 0,
+        })
+        gameModify.getColab().setTimeoutInMoves("each", 10, (type) => {
+            gameModify.getColab(type).enemy.attack(Math.max(Math.round(gameModify.getColab(type).enemy.hp.value() * 0.035), 100 * gameModify.getColab().you.getLevel()))
+        })
+        gameModify.getColab().setTimeoutInMoves("end", 10, (type) => {
+            const LVL = Math.max(gameModify.getColab(type).you.getLevel() - 2, 1)
+
+            gameModify.getColab(type).you.JSON.set({
+                points: 0,
+                name: "fobix",
+                critChance: gameModify.calcCritChance("fobix", LVL, gameModify.getColab(type).enemy.name()),
+                health: gameModify.calc(0, getCharaList().fobix.hp, getCharaList().fobix.level_up.hp, LVL),
+                atk: getCharaList().fobix.battle.map((x, i) => gameModify.calc(0, atkFromBtp(x.points), getCharaList().fobix.level_up.battle[i], LVL)),
+                spUses: 0,
+                lvl: LVL,
+                spHave: false,
+            })
+
+            gameModify.spSounds.vanish.currentTime = 0
+            if (!isPlaying(gameModify.spSounds.vanish)) gameModify.spSounds.vanish.play()
+        })
+        gameModify.getColab().endSP()
     },
 
     // pokemon
@@ -874,8 +964,8 @@ const spf = {
         gameModify.getColab().setTimeoutInMoves("end", 5, (type) => {
             gameModify.getColab(type).you.atk.setPrectange(11000 / (100 + atkprec), "all")
             if (
-                charaList[gameModify.getColab(type).enemy.name()].types.have.includes("Metal") ||
-                charaList[gameModify.getColab(type).enemy.name()].types.have.includes("Informatyka")
+                getCharaList()[gameModify.getColab(type).enemy.name()].types.have.includes("Metal") ||
+                getCharaList()[gameModify.getColab(type).enemy.name()].types.have.includes("Informatyka")
             ) {
                 gameModify.getColab(type).enemy.attack(gameModify.calc(0, 400, 3.1, gameModify.getColab(type).you.getLevel()))
             } else {
@@ -896,13 +986,13 @@ const spf = {
  * @returns Kompletna lista postaci
  */
 export const createCharacterWithSPFunctions = function () {
-    console.log(`[DEBUG] Ilość postaci: ${Object.keys(charaList).length}`)
-    var CharaList_func = charaList
-    Object.keys(charaList).forEach((key) => {
-        CharaList_func[key].sp.function = spf[key]
+    console.log(`[DEBUG] Ilość postaci: ${Object.keys(getCharaList()).length}`)
+    var cl_func = getCharaList()
+    Object.keys(getCharaList()).forEach((key) => {
+        cl_func[key].sp.function = spf[key]
     })
 
-    return CharaList_func
+    return cl_func
 }
 
 //const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches

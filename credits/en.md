@@ -52,4 +52,5 @@ Rights: [Privacy Policy](https://account.hoyoverse.com/#/about/privacy) i [Terms
 I would like to express my gratitude to:
 
 -   Gabrysia (character as `gabrysiaSotoła`) for her assistance in creating the characters for the _Gang Sokołów_ dimension.
--   Ewa (character as `starlight`) for her help in creating the character `topazAndNumby`.
+-   Ewa (character as `starlight`) for her help in creating the character `topazAndNumby` and giving propositions about new characters for the _VTuberzy, do ataku!_ dimension.
+-   Wiktoria (character as `kruczaWładczyniNekro`) for her engagement in rehabilitating game.

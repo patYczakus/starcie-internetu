@@ -4,37 +4,57 @@ import { getAuth, signInWithPopup, signOut, GoogleAuthProvider } from "https://w
 
 export var auth = getAuth(app)
 
-export function createForm() {
-    if (new URL(location.href).searchParams.get("lang") == "en") {
-        var date = ["January", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+function loading() {
+    document.querySelector('span[execute="loginForm"]').innerHTML = `<div class="loading small"></div>`
+    setTimeout(() => {
+        console.log("[DEBUG] Logowanie się...")
+        signInWithPopup(auth, new GoogleAuthProvider()).catch((error) => {
+            console.log(`[DEBUG] ${error}`)
+            switch (new URL(location.href).searchParams.get("lang")) {
+                case "en":
+                    document.querySelector('span[execute="loginForm"]').innerHTML = `<button class="loginForm">Login (Google)</button>`
+                    break
+                default:
+                    document.querySelector('span[execute="loginForm"]').innerHTML = `<button class="loginForm">Zaloguj się (Google)</button>`
+            }
+            document.querySelector('span[execute="loginForm"] button.loginForm').addEventListener("click", loading)
+        })
+    }, 500)
+}
 
-        document.body.innerHTML = `<div id="start">
-            <div id="header">
-                <span id="title" style="font-size: 32px; margin-right: 25px;"></span>
-                <span execute="loginForm"><button class="loginForm">Login (Google)</button></span>
-            </div>
-            Server support isn't available in your language right now.<br />
-            Last update (version <u>${projectInfo.version}</u>) released <u>${date[projectInfo.date[1] - 1]} ${projectInfo.date[0]}, ${projectInfo.date[2]}</u>.
-        </div>`
-    } else {
-        document.body.innerHTML = `<div id="start">
-        <div id="header">
-            <span id="title" style="font-size: 32px; margin-right: 25px;"></span>
-            <span execute="loginForm"><button class="loginForm">Zaloguj się (Google)</button></span>
-        </div>
-        <i>⚠️ Hi, English person! If you don't understand Polish language, <a href="?lang=en">this link</a> makes the English interface.</i>
-        <br /><br />
-        Ostatnia aktualizacja (wersja <u>${projectInfo.version}</u>) wydana została <u>${projectInfo.date.map((x) => (x < 10 ? "0" + x : x)).join(".")} roku</u><br />
-        Inne linki: <br />
-        - <a href="./charaList">Lista z postaciami</a><br />
-        - <a href="https://www.patreon.com/user/membership?u=102227103" target="_blank">Patreon</a> (jeżeli czujesz, że robię dobrą robotę i chcesz mnie wynagrodzić)<br />
-        - <a href="https://discord.gg/7S3P2DUwAm" target="_blank">Serwer support gry</a> i nie tylko<br />
-        <br />
-        <iframe src="https://discord.com/widget?id=1173722642004574359&theme=dark" width="350" height="350" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-        </div>`
+export function createForm(useOtherFunct = false, func = () => {}, name = "") {
+    switch (new URL(location.href).searchParams.get("lang")) {
+        case "en":
+            var date = ["January", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+            document.getElementById("s23c").innerHTML = `Hello user! You are just in the rehabilitation version <u>${projectInfo.version}</u> released <u><u>${
+                date[projectInfo.date[1] - 1]
+            } ${projectInfo.date[0]}, ${projectInfo.date[2]}</u></u>. You can play it by clicking on the <i>${
+                useOtherFunct ? "Play" : "Login"
+            }</i> button. Please note that the game may be disabled while doing the second edition!<br /><br />
+            <span execute="loginForm"><button class="loginForm">${useOtherFunct ? "Play" : "Login (Google)"}</button> ${
+                useOtherFunct ? `Logged as <i>${name}</i>. Isn't your account? <a style="color: blue;">Log out here</a>` : ""
+            }</span><br />`
+            break
+        default:
+            document.getElementById("s23c").innerHTML = `
+            <i>⚠️ Hi, English person! If you don't understand Polish language, <a href="?lang=en">this link</a> makes the English interface.</i><br /><br />
+            Cześć użytkowniku! Właśnie jesteś w wersji rehabilitowej <u>${projectInfo.version}</u> wydanej <u>${projectInfo.date
+                .map((x) => (x < 10 ? "0" + x : x))
+                .join(".")} roku</u>. Możesz w nią zagrać klikając w przycisk <i>${
+                useOtherFunct ? "Zagraj" : "Zaloguj się"
+            }</i>. Pamiętaj, że gra podczas robienia edycji drugiej może być wyłączona!
+            <br /><a href="./getCharaList()">Lista z postaciami</a> | <a href="https://www.patreon.com/user/membership?u=102227103" target="_blank">Patreon</a> | <a href="https://discord.gg/7S3P2DUwAm" target="_blank">Serwer support gry</a> i nie tylko<br /><br />
+            <span execute="loginForm"><button class="loginForm">${useOtherFunct ? "Zagraj" : "Zaloguj się (Google)"}</button> ${
+                useOtherFunct ? `Zalogowany jako <i>${name}</i>. To nie Ty? <a style="color: blue;">Wyloguj się</a>` : ""
+            }</span><br />`
     }
 
-    document.querySelector('div#start div#header span[execute="loginForm"] button.loginForm').addEventListener("click", loading)
+    document.querySelector('span[execute="loginForm"] button.loginForm').addEventListener("click", () => {
+        if (!useOtherFunct) loading()
+        else func()
+    })
+    if (document.querySelector('span[execute="loginForm"] a') !== null) document.querySelector('span[execute="loginForm"] a').addEventListener("click", logOut)
 
     if (!playableRightNow) {
         var x
@@ -45,22 +65,8 @@ export function createForm() {
             default:
                 x = "✋ Ta gra jest jeszcze w fazie tworzenia!"
         }
-        document.querySelector('div#start div#header span[execute="loginForm"]').innerHTML = x
+        document.querySelector('span[execute="loginForm"]').innerHTML = x
     }
-}
-
-function loading() {
-    document.querySelector('div#start div#header span[execute="loginForm"]').innerHTML = `<div class="loading small"></div>`
-    setTimeout(() => {
-        console.log("[DEBUG] Logowanie się...")
-        signInWithPopup(auth, new GoogleAuthProvider()).catch((error) => {
-            console.log("[DEBUG] ${error}")
-            if (new URL(location.href).searchParams.get("lang") == "en")
-                document.querySelector('div#start div#header span[execute="loginForm"]').innerHTML = `<button class="loginForm">Login (Google)</button>`
-            else document.querySelector('div#start div#header span[execute="loginForm"]').innerHTML = `<button class="loginForm">Zaloguj się (Google)</button>`
-            document.querySelector('div#start div#header span[execute="loginForm"] button.loginForm').addEventListener("click", loading)
-        })
-    }, 500)
 }
 
 export function logOut() {

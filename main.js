@@ -4,15 +4,24 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.14.0/fi
 import { start } from "./module_files/game.js"
 
 export const playableRightNow = true
+var ft = true
 
 const create = () => {
     onAuthStateChanged(auth, (user) => {
         if (user && playableRightNow) {
             console.log(`[DEBUG/authorization] Użytkownik był wcześniej zalogowany jako "${user.displayName}"`)
-            document.body.innerHTML = `<div class="loading" style="margin: 50px"></div><div class="info" style="margin: 15px; font-size: 120%"></div>`
-            start(user.uid)
+            if (ft)
+                createForm(
+                    true,
+                    () => {
+                        start(user.uid)
+                    },
+                    user.displayName
+                )
+            else start(user.uid)
+            ft = false
         } else {
-            createForm()
+            createForm(false)
         }
     })
 }
@@ -41,6 +50,6 @@ function warning() {
 }
 
 export const projectInfo = {
-    version: "1.6.0.1",
-    date: [21, 2, 2024],
+    version: "R#1",
+    date: [24, 3, 2024],
 }

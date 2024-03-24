@@ -167,3 +167,5 @@ export function shortNumber(number, langCode = String("--auto")) {
     } else number = String(number)
     return number
 }
+
+export const atkFromBtp = (btp) => Math.ceil(btp * Math.pow(btp, 0.45) + 20 - Math.min(btp, 15))

@@ -163,19 +163,21 @@ div.loading {
     animation-timing-function: cubic-bezier(0.55, 2, 0.4, -0.97);
     font-size: 0;
     cursor: wait;
-    border: 5px solid transparent;
+    border: 20px solid transparent;
     border-top-color: gray;
     border-bottom-color: gray;
     display: inline-block;
-    width: 35px;
-    height: 35px;
+    position: relative;
     border-radius: 15rem;
-}
-
-div.loading.big {
-    border-width: 10px;
     width: 70px;
     height: 70px;
+}
+
+div.loading.small {
+    cursor: progress;
+    border-width: 10px;
+    width: 35px;
+    height: 35px;
 }
 
 div#game {
@@ -754,7 +756,7 @@ div#sdc h1::before {
     font-size: 40px
 }
 
-div#sdc div {
+div#sdc div:not(.loading) {
     width: 90%;
 }
 

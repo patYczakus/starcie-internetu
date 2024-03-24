@@ -84,10 +84,10 @@ export var langText = {
             {upgradeBTN}`,
         },
         nosp: {
-            pl: `Aby zobaczyć opis i ilość użyć na mecz, musisz zakupić za 5000<img width="15" height="15" draggable="false" src="https://cdn.discordapp.com/attachments/1047919900875825293/1078345031812911275/ezgif.com-gif-maker.gif" alt="🪙"><br />
-            <button id="buySP">Kup SP <img draggable="false" width="15" height="15" src="https://cdn.discordapp.com/attachments/1047919900875825293/1071343616821305344/sketch-1675498411589.png"></button>`,
-            en: `To see the description and number of uses per match, you must purchase for 5000<img width="15" height="15" draggable="false" src="https://cdn.discordapp.com/attachments/1047919900875825293/1078345031812911275/ezgif.com-gif-maker.gif" alt="🪙"><br />
-            <button id="buySP">Buy SP <img draggable="false" width="15" height="15" src="https://cdn.discordapp.com/attachments/1047919900875825293/1071343616821305344/sketch-1675498411589.png"></button>`,
+            pl: `Aby zobaczyć opis i ilość użyć na mecz, musisz zakupić za 5000<img width="15" height="15" draggable="false" src="${interfaceImages.money}" alt="🪙"><br />
+            <button id="buySP">Kup SP <img draggable="false" width="15" height="15" src="${interfaceImages.Gamepad_Kwadrat_X}"></button>`,
+            en: `To see the description and number of uses per match, you must purchase for 5000<img width="15" height="15" draggable="false" src="${interfaceImages.money}" alt="🪙"><br />
+            <button id="buySP">Buy SP <img draggable="false" width="15" height="15" src="${interfaceImages.Gamepad_Kwadrat_X}"></button>`,
         },
         nopow: {
             pl: "brak",
@@ -121,8 +121,8 @@ export var langText = {
         },
         tags: {
             sochr: {
-                pl: "<b>Startowa ochrona</b> - początkowa szansa krytyczna jest zmniejszona do 50.",
-                en: "<b>Start protection</b> - the initial critical chance is reduced to 50",
+                pl: "<b>Startowa ochrona</b> - początkowa szansa krytyczna jest zmniejszona do połowy.",
+                en: "<b>Start protection</b> - the initial critical chance is reduced to half.",
             },
             toks: {
                 pl: "<b>Toksyna</b> - każdy atak w przeciwnika powoduje dla niego truciznę zadająca 5% wartości ataku przez 2 rundy.",
@@ -137,7 +137,7 @@ export var langText = {
                 en: "<b>Return message</b> - each attack from an opponent results in 8% of the attack value being given back to the opponent.",
             },
             double: {
-                pl: "<b>Atk x2</b> - każdy atak postaci zostaje podwojona.",
+                pl: "<b>Atk x2</b> - każdy atak postaci zostaje podwojony.",
                 en: "<b>Atk x2</b> - each character attack doubles up.",
             },
             ahealth: {
@@ -147,6 +147,14 @@ export var langText = {
             tanker: {
                 pl: "<b>Korzenie tanka</b> - wartość HP ma w grze wartość 230%, a ataki 30%.",
                 en: "<b>Family tree of Tanks</b> - HP value is 230% in the game and attacks are 30%.",
+            },
+            stormbtp: {
+                pl: "<b>Konwersja energii</b> - BTP zostaje dodane podczas kontaktu z uderzeniem od jądra Internetu.",
+                en: "<b>Energy convert</b> - BTP is added during contact with the blow from the Internet core.",
+            },
+            time: {
+                pl: "<b>Wzmożona aktywność</b> - BTP jest dodawane z czasem.",
+                en: "<b><i>CharaActive</i></b> - BTP is added gradually.",
             },
         },
     },
@@ -214,12 +222,12 @@ export var langText = {
         },
         msgIfHave: {
             ifMaxLvl: {
-                pl: 'W ramach posiadania dostajesz {mon}<img class="cnsl" width="13" height="13" draggable="false" src="https://cdn.discordapp.com/attachments/1047919900875825293/1078345031812911275/ezgif.com-gif-maker.gif" alt="🪙"> oraz +{xp}xp do twojego konta.',
-                en: 'As part of the owning you get {mon}<img class="cnsl" width="13" height="13" draggable="false" src="https://cdn.discordapp.com/attachments/1047919900875825293/1078345031812911275/ezgif.com-gif-maker.gif" alt="🪙"> and +{xp}xp to your account.',
+                pl: `W ramach posiadania dostajesz {mon}<img class="cnsl" width="13" height="13" draggable="false" src="${interfaceImages.money}" alt="🪙"> oraz +{xp}xp do twojego konta.`,
+                en: `As part of the owning you get {mon}<img class="cnsl" width="13" height="13" draggable="false" src="${interfaceImages.money}" alt="🪙"> and +{xp}xp to your account.`,
             },
             ifNotMaxLvl: {
-                pl: 'W ramach posiadania dostajesz {mon}<img class="cnsl" width="13" height="13" draggable="false" src="https://cdn.discordapp.com/attachments/1047919900875825293/1078345031812911275/ezgif.com-gif-maker.gif" alt="🪙"> oraz poziom wyżej postaci.',
-                en: 'As part of the owning you get {mon}<img class="cnsl" width="13" height="13" draggable="false" src="https://cdn.discordapp.com/attachments/1047919900875825293/1078345031812911275/ezgif.com-gif-maker.gif" alt="🪙"> and a level up of the character.',
+                pl: `W ramach posiadania dostajesz {mon}<img class="cnsl" width="13" height="13" draggable="false" src="${interfaceImages.money}" alt="🪙"> oraz poziom wyżej postaci.`,
+                en: `As part of the owning you get {mon}<img class="cnsl" width="13" height="13" draggable="false" src="${interfaceImages.money}" alt="🪙"> and a level up of the character.`,
             },
         },
     },

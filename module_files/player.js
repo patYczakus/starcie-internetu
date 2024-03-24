@@ -7,7 +7,7 @@ var i = 0,
 
 var playerList = [
     {
-        src: new Audio("https://cdn.discordapp.com/attachments/1047919900875825293/1070699659007381535/Motyw_Starcia_Internetu.mp3"),
+        src: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/player/Motyw%20Starcia%20Internetu.mp3"),
         name: "Motyw Starcia Internetu",
         author: "patYczakus",
         licenseInfo: {
@@ -16,17 +16,17 @@ var playerList = [
         },
     },
     {
-        src: new Audio("https://cdn.discordapp.com/attachments/1047919900875825293/1070709574321053756/AfterShock.mp3"),
+        src: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/player/AfterShock.mp3"),
         name: "AfterShock",
         author: "patYczakus",
     },
     {
-        src: new Audio("https://cdn.discordapp.com/attachments/1047919900875825293/1070710254561669222/Decormer.mp3"),
+        src: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/player/Decormer.mp3"),
         name: "Decormer",
         author: "patYczakus",
     },
     {
-        src: new Audio("https://cdn.discordapp.com/attachments/1047919900875825293/1071111638142427176/Jim_Yosef_-_Volcano_feat._Scarlett_NCS_Release_320_kbps.mp3"),
+        src: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/player/Volcano.mp3"),
         name: "Volcano",
         author: "Jim Yosef & Scarlett",
         licenseInfo: {
@@ -35,7 +35,7 @@ var playerList = [
         },
     },
     {
-        src: new Audio("https://cdn.discordapp.com/attachments/1047919900875825293/1071111640948408460/NOYSE__STR_-_La_Manera_De_Vivir_NCS_Release_320_kbps.mp3"),
+        src: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/player/La%20Manera%20De%20Vivir.mp3"),
         name: "La Manera De Vivir",
         author: "NOYSE & ÆSTRØ",
         licenseInfo: {
@@ -44,7 +44,7 @@ var playerList = [
         },
     },
     {
-        src: new Audio("https://cdn.discordapp.com/attachments/1047919900875825293/1119282617091637248/John_Dee_Litil_Elle_Vee_-_Set_It_Free_Arcade_Release.mp3"),
+        src: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/player/Set%20It%20Free.mp3"),
         name: "Set It Free",
         author: "John Dee, Litil & Elle Vee",
         licenseInfo: {

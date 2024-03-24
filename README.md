@@ -11,7 +11,7 @@ I tak powstało Starcie Internetu...</i>
 ## Informacje projektu
 
 Wersja: **1.0**<br />
-Gra na podstawie licencji **MIT** (Wcześniej: **Apache 2.0**)<br />
+Gra na podstawie licencji **MIT** (Wcześniej: **Apache 2.0**).<br />
 Autorzy:
 
 -   patYczakus ([Strona](https://patryktopek.tk) | [GitHub](https://github.com/Patyczakus))
@@ -19,9 +19,13 @@ Autorzy:
 <br />Używane narzędzia:
 
 -   [ChatGPT](https://chat.openai.com/)
+-   [Microsoft Copilot](https://copilot.microsoft.com/)
 -   GitHub
 -   [Firebase](https://firebase.google.com/)
+-   [WeatherAPI](https://www.weatherapi.com/)
 
 ## Informacje prawne i podziękowania
 
 Ta sekcja znajduje się w innym pliku. [Kliknij tutaj, aby się przenieść!](credits/pl.md)
+
+> If you can't read in polish, there's a english version [here](credits/en.md).

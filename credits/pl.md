@@ -52,4 +52,5 @@ Objęte prawa: [_Privacy Policy_ (Polityka prywatności)](https://account.hoyove
 Podziękowania chciałbym nadać dla:
 
 -   Gabrysi (postać jako `gabrysiaSotoła`) za pomoc w realizacji postaci do wymiaru _Gang Sokołów_.
--   Ewie (postać jako `starlight`) za pomoc w utworzeniu postaci `topazAndNumby`.
+-   Ewie (postać jako `starlight`) za pomoc w utworzeniu postaci `topazAndNumby` oraz za zaproponowanie kilku postaci dla wymiaru _VTuberzy, do ataku!_.
+-   Wiktorii (postać jako `kruczaWładczyniNekro`) za chęci w pomocy rehabilitacji gry.

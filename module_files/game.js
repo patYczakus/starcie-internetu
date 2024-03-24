@@ -1,7 +1,7 @@
 import { app } from "./database.js"
 import { getDatabase, ref, child, get, onValue, set } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js"
 import { logOut } from "./login.js"
-import { chest, classes, shortNumber } from "./listsAndOtherFunctions.js"
+import { chest, classes, shortNumber, atkFromBtp } from "./listsAndOtherFunctions.js"
 import { checkSettings, settingsList } from "./settingsFunction.js"
 import { changeVolume, playSound, whatIsPlayed, skipMusic } from "./player.js"
 import { langText } from "./lang.js"
@@ -9,13 +9,17 @@ import { createCharacterWithSPFunctions } from "./characters.spf.js"
 import { interfaceImages } from "./otherImages.js"
 import * as _jk from "https://patyczakus.github.io/javakit/module.js"
 const JK = _jk.default,
-    accualVersion = 2,
+    accualVersion = 4,
     database = getDatabase(app),
     characterDataVars = {
         name: ["lvl", "sp"],
         type: ["number", "boolean"],
     },
-    atkFromBtp = (btp) => Math.ceil(btp * Math.pow(btp, 0.45) + 20 - Math.min(btp, 15))
+    healInfo = (who, lvl) =>
+        Math.round(
+            Math.pow(1.37 + 0.4 * characters_json[who].tags.includes("tanker") + 0.01 * classes.indexOf(characters_json[who].class), lvl - 1) *
+                (500 + 200 * characters_json[who].tags.includes("ahealth"))
+        )
 
 var data = {
         version: accualVersion,
@@ -57,30 +61,31 @@ var data = {
     uidd,
     msBefore = {},
     audios = {
-        counting: new Audio("https://patyczakus.github.io/starcie-internetu/audios/counting.mp3"),
-        start: new Audio("https://patyczakus.github.io/starcie-internetu/audios/start.mp3"),
-        attack: new Audio("https://patyczakus.github.io/starcie-internetu/audios/attack.wav"),
-        criticalAttack: new Audio("https://patyczakus.github.io/starcie-internetu/audios/critical.wav"),
-        punkty: new Audio("https://patyczakus.github.io/starcie-internetu/audios/exp.mp3"),
-        heal: new Audio("https://patyczakus.github.io/starcie-internetu/audios/heal.mp3"),
-        burza: new Audio("https://cdn.discordapp.com/attachments/1177876489421738014/1201259145895088238/BeepBox-Song_1_mp3cut.net.mp3"),
+        counting: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/addtionals/counting.mp3"),
+        start: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/addtionals/start.mp3"),
+        attack: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/addtionals/attack.wav"),
+        criticalAttack: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/addtionals/critical.wav"),
+        punkty: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/addtionals/exp.mp3"),
+        heal: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/addtionals/heal.mp3"),
+        burza: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/addtionals/burza.mp3"),
         sp: {
-            magic: new Audio("https://patyczakus.github.io/starcie-internetu/audios/sp1.wav"),
-            vanish: new Audio("https://patyczakus.github.io/starcie-internetu/audios/vanish.mp3"),
-            alarm: new Audio("https://patyczakus.github.io/starcie-internetu/audios/alarm.mp3"),
-            uAttack: new Audio("https://patyczakus.github.io/starcie-internetu/audios/uAttack.mp3"),
-            miss: new Audio("https://patyczakus.github.io/starcie-internetu/audios/miss.mp3"),
-            num_num_num: new Audio("https://patyczakus.github.io/starcie-internetu/audios/numnumnum.mp3"),
-            regen: new Audio("https://patyczakus.github.io/starcie-internetu/audios/regen.mp3"),
+            magic: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/addtionals/sp1.wav"),
+            vanish: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/addtionals/vanish.mp3"),
+            alarm: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/addtionals/alarm.mp3"),
+            uAttack: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/addtionals/uAttack.mp3"),
+            miss: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/addtionals/miss.mp3"),
+            num_num_num: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/addtionals/numnumnum.mp3"),
+            regen: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/addtionals/regen.mp3"),
+            imagination: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/addtionals/imagination.wav"),
             tractor: {
-                start: new Audio("https://patyczakus.github.io/starcie-internetu/audios/starting-a-tractor.mp3"),
-                horn: new Audio("https://patyczakus.github.io/starcie-internetu/audios/car-horn.mp3"),
+                start: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/addtionals/starting-a-tractor.mp3"),
+                horn: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/addtionals/car-horn.mp3"),
             },
             discord: {
-                userMoved: new Audio("https://patyczakus.github.io/starcie-internetu/audios/DiscordUM.mp3"),
+                userMoved: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/addtionals/DiscordUM.mp3"),
             },
-            galaxyMagic: new Audio("https://cdn.discordapp.com/attachments/1177876489421738014/1197985182918123580/magic-6976.mp3"),
-            gg_a: new Audio("https://cdn.discordapp.com/attachments/1177876489421738014/1200161061194715136/Gawr_Gura_a_mp3cut.net.mp3"),
+            galaxyMagic: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/addtionals/galamagic.mp3"),
+            gg_a: new Audio("https://patyczakus.github.io/starcie-internetu/others/audios/addtionals/gura.mp3"),
         },
     },
     gType = "home",
@@ -393,11 +398,11 @@ export class miniAlert {
 
 /**
  * Sprawdza język i zwraca tekst
- * @param {JSON} JSON Kod JSON języka
+ * @param {{ [lang: string]: string }} JSON Kod JSON języka
  * @param {string} language Odpowiednia proporcja językowa
  * @returns {string} Tekst zwrócony w tłumaczeniu lub w języku polskim (ewentualnie jeżeli wystąpi błąd)
  *
- * W razie błędów w ko
+ * W razie błędów w kodzie zwraca `"[err#2DC]"`, wartość niestruktualną lub pierwszą z możliwych kluczy, jeżeli polski odpowiednik nie wystąpi
  */
 function checkLanguage(JSON, language) {
     //console.log(JSON, language, typeof JSON)
@@ -434,6 +439,20 @@ export function start(uid) {
     uidd = uid
 
     function second_task() {
+        if (window.ptkdevvars) {
+            window.ptkdevvars.getVars = function () {
+                return {
+                    f1: function () {
+                        return data
+                    },
+                    f2: function () {
+                        return matchSettings
+                    },
+                }
+            }
+        } else {
+        }
+
         if (data.settings.resetFont) document.body.classList.add("resetFont")
         characters_list_names = Object.keys(characters_json)
 
@@ -554,8 +573,8 @@ export function start(uid) {
             //gfr
             set(ref(database, `starcie-internetu/data/${uid}`), data).then(() => {
                 var images = Object.values(characters_json).map((a) => a.image)
-                images.concat(Object.values(interfaceImages))
-                document.querySelector("div.info").innerHTML = "<div A>Ładowanie zdjęć...</div><div B></div>"
+                images.concat(...Object.values(interfaceImages))
+                document.body.innerHTML = `<div class="info" style="margin: 20px"><div class="loading"></div><div A style="margin-top: -90px; margin-left: 135px; font-size: 150%">Ładowanie zdjęć...</div><div B style="margin-left: 120px;"></div></div>`
                 setTimeout(() => {
                     if (document.querySelector("div.info div[B]") != null) {
                         var btn = document.createElement("button")
@@ -603,7 +622,7 @@ export function start(uid) {
 /** Buduje podstawowy panel z postaciami */
 function index() {
     if (data.settings.useGamepad)
-        document.querySelector("div#game.home").innerHTML = `<span style="font-size: 180%">${checkLanguage(langText.infoOnCharaList, data.settings.lang)}</span><br />`
+        document.querySelector("div#game.home").innerHTML = `<span style="font-size: 180%">${checkLanguage(langText.infoOngetCharaList(), data.settings.lang)}</span><br />`
     else document.querySelector("div#game.home").innerHTML = ``
     var text = ""
     var characters_have_list_names = Object.keys(data.characters)
@@ -1050,13 +1069,7 @@ var fightFunctions = {
     heal: function () {
         if (gameModify.getColab("player").you.hp.factor() > 0.75) return
         if (matchSettings.player.points < 25) return
-        gameModify
-            .getColab("player")
-            .you.hp.setValue(
-                gameModify.getColab("player").you.hp.get() +
-                    Math.pow(2, data.characters[matchSettings.player.name].lvl) * (500 + 200 * characters_json[matchSettings.player.name].tags.includes("ahealth")),
-                false
-            )
+        gameModify.getColab("player").you.hp.setValue(gameModify.getColab("player").you.hp.get() + healInfo(matchSettings.player.name, matchSettings.player.lvl), false)
         matchSettings.player.points -= 25
         audios.heal.currentTime = 0
         audios.heal.play()
@@ -1285,11 +1298,15 @@ function startMatch() {
             matchSettings[type].health -= a(matchSettings[type].lvl)
             updateHP(type)
 
+            if (characters_json[matchSettings[type].name].tags.includes("stormbtp")) matchSettings[type].points += Math.floor(Math.log10(a(matchSettings[type].lvl)) * 3)
+
             if (type === "player") {
                 audios.burza.currentTime = 0
                 audios.burza.play()
             }
         }
+        if (characters_json[matchSettings[type].name].tags.includes("time")) matchSettings[type].points += 3
+        if (type == "player") document.querySelector(`div#game.match div[gameplay="player"] div.btns span#BTPNumber`).innerText = matchSettings[type].points
     }
 
     gameModify.getColab("player").setTimeoutInMoves("each", Infinity, _$attack)
@@ -1339,9 +1356,9 @@ function startMatch() {
             document.querySelector(`div#game.match div[gameplay="player"] div.btns`).innerHTML += `<button id="heal" style="width: 100%; margin: 5px">${checkLanguage(
                 langText.fight.healBTN,
                 data.settings.lang
-            )} (+${
-                Math.pow(2, data.characters[matchSettings.player.name].lvl) * (500 + 200 * characters_json[matchSettings.player.name].tags.includes("ahealth"))
-            } HP, -25 BTP) <img draggable="false" width="15" height="15" src="${interfaceImages.Gamepad_Trójkąt_Y}"></button>`
+            )} (+${healInfo(matchSettings.player.name, matchSettings.player.lvl)} HP, -25 BTP) <img draggable="false" width="15" height="15" src="${
+                interfaceImages.Gamepad_Trójkąt_Y
+            }"></button>`
         }, 50 * matchSettings.player.atk.length)
         setTimeout(() => {
             document.querySelector(`div#game.match div[gameplay="player"] div.btns`).innerHTML += `<button id="whiteFlag" style="width: 100%; margin: 5px">${checkLanguage(
@@ -1552,12 +1569,10 @@ function regenerate(type, keepMaxHP) {
         ${shortNumber(matchSettings[type].health, data.settings.lang)}/${shortNumber(maxHP, data.settings.lang)}
     </div>
     <div class="healthBar"><div class="health" style="--health: ${matchSettings[type].health}; --healthMax: ${maxHP};"></div></div><img ${
-        type == "player" ? (data.characters[matchSettings.player.name].sp ? "matchsp" : "") : matchSettings.bot.spHave ? "matchsp" : ""
+        matchSettings[type].spHave ? "matchsp" : ""
     } draggable="false" class="${characters_json[matchSettings[type].name].class} character" width="170" height="170" src="${
         characters_json[matchSettings[type].name].image
-    }" /><span style="font-size: 35%">LVL: ${type == "player" ? data.characters[matchSettings[type].name].lvl : matchSettings.bot.lvl}</span><span class="name">${
-        matchSettings[type].name
-    }</span></div>`
+    }" /><span style="font-size: 35%">LVL: ${matchSettings[type].lvl}</span><span class="name">${matchSettings[type].name}</span></div>`
     if (type == "player") {
         document.querySelector(`div#game.match div[gameplay="player"]`).innerHTML += `<div class="btns"></div>`
         for (let i = 0; i < matchSettings[type].atk.length; i++) {
@@ -1576,9 +1591,9 @@ function regenerate(type, keepMaxHP) {
         document.querySelector(`div#game.match div[gameplay="player"] div.btns`).innerHTML += `<button id="heal" style="width: 100%; margin: 5px">${checkLanguage(
             langText.fight.healBTN,
             data.settings.lang
-        )} (+${
-            Math.pow(2, data.characters[matchSettings.player.name].lvl) * 500 + 200 * characters_json[matchSettings.player.name].tags.includes("ahealth")
-        } HP, -25 BTP) <img draggable="false" width="15" height="15" src="${interfaceImages.Gamepad_Trójkąt_Y}"></button>`
+        )} (+${healInfo(matchSettings.player.name, matchSettings.player.lvl)} HP, -25 BTP) <img draggable="false" width="15" height="15" src="${
+            interfaceImages.Gamepad_Trójkąt_Y
+        }"></button>`
         document.querySelector(`div#game.match div[gameplay="player"] div.btns`).innerHTML += `<button id="whiteFlag" style="width: 100%; margin: 5px">${checkLanguage(
             langText.fight.surBTN,
             data.settings.lang
@@ -1589,7 +1604,7 @@ function regenerate(type, keepMaxHP) {
             langText.fight.BTPInfo,
             data.settings.lang
         )}: <span id="BTPNumber">${matchSettings[type].points}</span></div></div>`
-        if (data.characters[matchSettings.player.name].sp)
+        if (matchSettings.player.spHave)
             document.querySelector(
                 `div#game.match div[gameplay="player"] div.btns`
             ).innerHTML += `<button id="sp" style="width: 100%; margin: 5px; background: gold">SP - ${textesTranslated.sp} <img  draggable="false" width="15" height="15" src="${interfaceImages.Gamepad_X_A}"></button>`
@@ -1617,7 +1632,7 @@ function regenerate(type, keepMaxHP) {
         document.querySelector(`div#game.match div[gameplay="player"] div.btns button#getBTP`).addEventListener("click", () => {
             fightFunctions.getBTP()
         })
-        if (data.characters[matchSettings.player.name].sp)
+        if (matchSettings.player.spHave)
             document.querySelector(`div#game.match div[gameplay="player"] div.btns button#sp`).addEventListener("click", () => {
                 starPover("player")
             })
@@ -1625,6 +1640,10 @@ function regenerate(type, keepMaxHP) {
             if (!confirm("Czy na pewno chcesz się poddać?")) return
             endGame(2)
         })
+        if (type === "player" && matchSettings.player.spUses >= characters_json[matchSettings.player.name].sp.maxUses) {
+            document.querySelector(`div#game.match div[gameplay="player"] button#sp`).disabled = true
+            document.querySelector(`div#game.match div[gameplay="player"] button#sp`).style.opacity = "0.5"
+        }
     }
 }
 
@@ -1640,8 +1659,11 @@ function starPover(type) {
     matchSettings[type].spUses++
     characters_json[matchSettings[type].name].sp.function()
 
-    if (type == "player" && matchSettings.player.spUses >= characters_json[matchSettings.player.name].sp.maxUses)
-        document.querySelector(`div#game.match div[gameplay="player"] div.btns button#sp`).style.opacity = "0.5"
+    if (type === "player" && matchSettings.player.spUses >= characters_json[matchSettings.player.name].sp.maxUses) {
+        console.log("[DEBUG] Ukryto pomyślnie!")
+        document.querySelector(`div#game.match div[gameplay="player"] button#sp`).disabled = true
+        document.querySelector(`div#game.match div[gameplay="player"] button#sp`).style.opacity = "0.5"
+    }
 }
 
 /**
@@ -1649,7 +1671,7 @@ function starPover(type) {
  * @param {"player" | "bot"} type Typ do zaatakowania
  * @param {number} atk Wartość ataku
  * @param {boolean} returns Warunek czy ma zwracać czy nie; przydatne do SP
- * @returns {{ atk: number, btp: number } | void} Jeżeli *`returns`* jst ustawione na **`true`**, zwraca kod JSON.
+ * @returns {{ atk: number, btp: number, crit: boolean } | void} Jeżeli *`returns`* jest ustawione na **`true`**, zwraca kod JSON.
  */
 function dmg(type, atk, returns = Boolean(false)) {
     gCheckedNum.match = -1
@@ -1685,7 +1707,7 @@ function dmg(type, atk, returns = Boolean(false)) {
         if (type == "player") document.querySelector(`div#game.match div[gameplay="player"] div.btns span#BTPNumber`).innerText = matchSettings[type].points
     }
 
-    if (returns) return { atk: atk * (4 - crit * 3), btp: d_btp }
+    if (returns) return { atk: atk * (4 - crit * 3), btp: d_btp, crit }
 
     if (characters_json[matchSettings[type2].name].tags.includes("toks")) {
         gameModify.getColab(type2).setTimeoutInMoves("each", 2, (colabed) => {
@@ -1725,7 +1747,7 @@ function analyze() {
                 if (gameModify.getColab("bot").you.hp.factor() < 0.75 && matchSettings.bot.points >= 25) {
                     canskip = true
                     matchSettings.bot.points -= 25
-                    matchSettings.bot.health += Math.pow(2, matchSettings.bot.lvl) * (500 + 200 * characters_json[matchSettings.bot.name].tags.includes("ahealth"))
+                    matchSettings.bot.health += healInfo(matchSettings.bot.name, matchSettings.bot.lvl)
                     audios.heal.currentTime = 0
                     audios.heal.play()
 
@@ -2063,7 +2085,7 @@ var gameModify = {
                 JSON: {
                     /**
                      * Ustawia cały kod JSON (powoduje też reset średniej HP na 1)
-                     * @param {JSON} JSON Kod JSON odpowiedni ze zmienną `matchSettings[playerSPUser]`
+                     * @param {{}} JSON Kod JSON odpowiedni ze zmienną `matchSettings[playerSPUser]`
                      */
                     set: function (JSON) {
                         matchSettings[playerSPUType] = JSON
@@ -2072,18 +2094,25 @@ var gameModify = {
                     },
                     /**
                      * Podmienia klucze JSON
-                     * @param {JSON} JSON Kod JSON odpowiedni z parametrami `matchSettings[playerSPUser]`
+                     * @param {{}} JSON Kod JSON odpowiedni z parametrami `matchSettings[playerSPUser]`
                      */
                     change: function (JSON) {
                         let JSON_keys = Object.keys(JSON)
 
                         for (let i = 0; i < JSON_keys.length; i++) matchSettings[playerSPUType][JSON_keys[i]] = JSON[JSON_keys[i]]
-                        regenerate(playerSPUType, true)
+                        if (
+                            JSON_keys.includes("health") ||
+                            JSON_keys.includes("lvl") ||
+                            JSON_keys.includes("spHave") ||
+                            JSON_keys.includes("name") ||
+                            (playerSPUType === "player" && JSON_keys.includes("points"))
+                        )
+                            regenerate(playerSPUType, true)
                     },
                     /**
                      * Pobiera kod JSON dla danego gracza
                      * @param {string} keys Klucz JSON
-                     * @returns {string | number | number[] | undefined} Wyświetla typ wartości odpowiedni dla *`keys`*
+                     * @returns {string | number | number[] | undefined | {}} Wyświetla typ wartości odpowiedni dla *`keys`*
                      * @example gameModify.getColab().JSON.get("spUses")
                      * // => 3
                      *
@@ -2098,7 +2127,7 @@ var gameModify = {
                      * gameModify.getColab().you.JSON.get("variables.notDefined")
                      * // => undefined
                      */
-                    get: function (keys = String("")) {
+                    get: function (keys = "") {
                         var JSONKey = matchSettings[playerSPUType]
                         if (keys != "") {
                             keys = keys.split(".")
@@ -2114,6 +2143,10 @@ var gameModify = {
                         return JSONKey
                     },
                 },
+                /**
+                 * Zwraca poziom postaci
+                 * @returns {number}
+                 */
                 getLevel: function () {
                     return playerSPUType == "player" ? data.characters[matchSettings.player.name].lvl : matchSettings.bot.lvl
                 },
@@ -2122,7 +2155,7 @@ var gameModify = {
                 /**
                  * Atakuje przeciwnika
                  * @param {number} value
-                 * @returns {{ atk: number, btp: number }}
+                 * @returns {{ atk: number, btp: number, crit: boolean }}
                  */
                 attack: function (value) {
                     return dmg(playerSPUType == "bot" ? "player" : "bot", value, true)
@@ -2140,13 +2173,13 @@ var gameModify = {
                 name: function () {
                     return matchSettings[playerSPUType == "bot" ? "player" : "bot"].name
                 },
-                health: {
+                hp: {
                     /*  
                         return (
                             matchSettings[playerSPUType].health / Number(element.style.getPropertyValue("--healthMax"))
                         ) */
                     value: function () {
-                        return matchSettings[playerSPUType == "bot" ? "player" : "bot"].x
+                        return matchSettings[playerSPUType == "bot" ? "player" : "bot"].health
                     },
                     factor: function () {
                         var element = document.querySelector(`div#game.match div[gameplay="${playerSPUType == "bot" ? "player" : "bot"}"] div.healthBar div.health`)
@@ -2164,12 +2197,22 @@ var gameModify = {
                     },
                     change: function (JSON) {
                         var type = playerSPUType == "player" ? "bot" : "player"
-                        let JSON_keys = Object.keys(JSON)
+                        const JSON_keys = Object.keys(JSON)
 
                         for (let i = 0; i < JSON_keys.length; i++) matchSettings[type][JSON_keys[i]] = JSON[JSON_keys[i]]
-                        regenerate(type, true)
+                        if (
+                            JSON_keys.includes("health") ||
+                            JSON_keys.includes("lvl") ||
+                            JSON_keys.includes("spHave") ||
+                            JSON_keys.includes("name") ||
+                            (type === "player" && JSON_keys.includes("points"))
+                        )
+                            regenerate(type, true)
                     },
-                    get: function (keys = String("")) {
+                    /**
+                     * @.returns {string | number | number[] | undefined | {}}
+                     */
+                    get: function (keys = "") {
                         const x = matchSettings[playerSPUType == "player" ? "bot" : "player"]
                         var JSONKey = x
                         if (keys != "") {

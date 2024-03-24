@@ -1,11 +1,11 @@
-import { charaList } from "../module_files/characters.js"
+import { getCharaList } from "../module_files/characters.js"
 import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js"
 import * as _jk from "https://patyczakus.github.io/javakit/module.js"
 import { app } from "../module_files/database.js"
 const JK = _jk.default
 
 window.onload = () => {
-    JK.HTMLFunctions.loadImages(Object.values(charaList).map((x) => x.image)).then(() => {
+    JK.HTMLFunctions.loadImages(Object.values(getCharaList()).map((x) => x.image)).then(() => {
         var __root__ = document.createElement("div")
         var __navi__ = document.createElement("div")
         document.body.innerHTML = ""
@@ -16,17 +16,17 @@ window.onload = () => {
                 (match, arg) => {
                     switch (arg) {
                         case "*": {
-                            return `<span class="classNameColor">${Object.keys(charaList).length}</span>`
+                            return `<span class="classNameColor">${Object.keys(getCharaList()).length}</span>`
                         }
                         default: {
-                            return `<span class="classNameColor ${arg}">${Object.values(charaList).filter((info) => info.class === arg).length}</span>`
+                            return `<span class="classNameColor ${arg}">${Object.values(getCharaList()).filter((info) => info.class === arg).length}</span>`
                         }
                     }
                 }
             )
         __navi__.appendChild(info)
-        Object.keys(charaList).forEach((characterName, i) => {
-            var characterInfo = charaList[characterName]
+        Object.keys(getCharaList()).forEach((characterName, i) => {
+            var characterInfo = getCharaList()[characterName]
             //<hr />
             var hr = document.createElement("hr")
 
@@ -117,12 +117,12 @@ window.onload = () => {
                 .replace(/{{desc\.db\.(\w+)}}/g, (match, arg) => snpsht.val()[arg])
                 .replace(/{{charaName\.([\węółżźćń]+)}}|{{charaName\.([\węółżźćń]+)\|([^{}|]+)}}/g, (match, arg1, arg2, arg3) => {
                     if (arg1) {
-                        return Object.keys(charaList).includes(arg1)
-                            ? `<span class="classNameColor ${charaList[arg1].class}" style="font-size: 100%; --fbs: 0.5px">${arg1}</span>`
+                        return Object.keys(getCharaList()).includes(arg1)
+                            ? `<span class="classNameColor ${getCharaList()[arg1].class}" style="font-size: 100%; --fbs: 0.5px">${arg1}</span>`
                             : `<span class="classNameColor" style="font-size: 100%; --fbs: 1px">${arg1}</span>`
                     } else {
-                        return Object.keys(charaList).includes(arg2)
-                            ? `<span class="classNameColor ${charaList[arg2].class}" style="font-size: 100%; --fbs: 0.5px">${arg3}</span>`
+                        return Object.keys(getCharaList()).includes(arg2)
+                            ? `<span class="classNameColor ${getCharaList()[arg2].class}" style="font-size: 100%; --fbs: 0.5px">${arg3}</span>`
                             : `<span class="classNameColor" style="font-size: 100%; --fbs: 1px">${arg3}</span>`
                     }
                 })

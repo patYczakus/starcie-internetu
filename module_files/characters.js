@@ -1,4 +1,4 @@
-export const charaList = {
+const charaList = {
     // Starcie internetu
     habby: {
         battle: [
@@ -19,12 +19,11 @@ export const charaList = {
         class: "common",
         dimension: "Starcie internetu",
         hp: 10010,
-        image: "https://cdn.discordapp.com/attachments/1047919900875825293/1047920069646233671/sketch-1669913931505.png",
         level_up: {
             battle: [1.5, 2, 2.7],
             hp: 2.2,
             types: {
-                strong: 100,
+                strong: 50,
                 weak: 50,
             },
         },
@@ -32,8 +31,8 @@ export const charaList = {
         types: {
             have: ["Metal", "Ogień", "Informatyka", "Elektryczność"],
             strong: {
-                def: 3500,
-                ind: ["Powietrze", "Chi"],
+                def: 2000,
+                ind: ["Powietrze", "Chi", "Duchoznactwo"],
             },
             weak: {
                 def: 2000,
@@ -46,8 +45,8 @@ export const charaList = {
                 en: "Change mode to…",
             },
             description: {
-                pl: "Dzięki luźnym kablom {{charaName.habby}} potrafi przekształcić miejsce zarezerwowane dla HP miejscem na ataki.",
-                en: "With loose cables {{charaName.habby}} is able to transform the space reserved for HP into a place for attacks.",
+                pl: "Dzięki luźnym kablom {{charaName.habby}} potrafi przekształcić miejsce zarezerwowane dla 15% HP miejscem na ataki - im silniejszy atak, tym więcej dostaje.",
+                en: "With loose cables {{charaName.habby}} is able to transform the space reserved for 15% HP into a place for attacks - the stronger the attack, the more it gets.",
             },
             maxUses: 2,
         },
@@ -71,7 +70,6 @@ export const charaList = {
         class: "common",
         dimension: "Starcie internetu",
         hp: 8700,
-        image: "https://cdn.discordapp.com/attachments/1047919900875825293/1059455609642164304/sketch-1672645955461.png",
         level_up: {
             battle: [1.8, 2.2],
             hp: 2.4,
@@ -98,8 +96,8 @@ export const charaList = {
                 en: "Man made of water",
             },
             description: {
-                pl: "Nie po to {{charaName.rycerzOceanu}} ukończył najlepszą szkołę magii, aby nie używać czarów! Tworzy sobie specjalną osłonę redukującą szansę na krytyczny cios o 15%, zwiększa swoje HP o 17% oraz losowy atak o 20%.",
-                en: "This is not why {{charaName.rycerzOceanu}} graduated from the best school of magic not to use spells! He creates a special shield for himself that reduces the chance of a critical blow by 15%, increases his HP by 17% and his random attack by 20%.",
+                pl: "Nie po to {{charaName.rycerzOceanu}} ukończył najlepszą szkołę magii, aby nie używać czarów! Tworzy sobie specjalną osłonę redukującą szansę na krytyczny cios o 15%, zwiększa swoje HP o 27% oraz losowy atak o 18%.",
+                en: "This is not why {{charaName.rycerzOceanu}} graduated from the best school of magic not to use spells! He creates a special shield for himself that reduces the chance of a critical blow by 15%, increases his HP by 27% and his random attack by 18%.",
             },
             maxUses: 1,
         },
@@ -113,7 +111,6 @@ export const charaList = {
         },
         dimension: "Starcie internetu",
         hp: 4500,
-        image: "https://cdn.discordapp.com/attachments/1047919900875825293/1116783655734480997/sketch-1686332349213.png",
         battle: [
             {
                 name: { pl: "Nożyk", en: "Knife" },
@@ -160,7 +157,6 @@ export const charaList = {
         },
         dimension: "Starcie internetu",
         hp: 9000,
-        image: "https://cdn.discordapp.com/attachments/1048341996533731359/1050498063338328114/sketch-1670528511856.png",
         battle: [
             {
                 name: { pl: "Ręka", en: "Hand" },
@@ -202,8 +198,8 @@ export const charaList = {
                 en: "Second live",
             },
             description: {
-                pl: "{{charaName.trajom}}, w sytuacji zagrożenia, atakuje trzy razy pięścią, po czym resetuje swoje informacje zredukowanej do połowy poziomu. Dodatkowo posiada 30 BTP po resecie.",
-                en: "{{charaName.trajom}}, in a threatening situation, attacks three times with his fist, after which he resets his information reduced to half a level. Additionally, it has 30 BTP after the reset.",
+                pl: "{{charaName.trajom}}, w sytuacji zagrożenia, atakuje trzy razy pięścią, po czym resetuje swoje informacje, ale się zwiększa szansa krytyczna o 6%. Dodatkowo posiada 25 BTP po resecie.",
+                en: "{{charaName.trajom}}, in a threatening situation, attacks three times with his fist, after which he resets his information, but his crit chance increases to 6%. Additionally, it has 25 BTP after the reset.",
             },
             maxUses: 1,
         },
@@ -243,7 +239,6 @@ export const charaList = {
                 ind: ["Woda", "Galaktyka", "Ziemia", "Powietrze"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1047919900875825293/1066320173931442186/aatbio_com_image_export_Jan_21_2023_2.png",
         level_up: {
             hp: 2.163,
             battle: [2.8, 3, 3.125],
@@ -263,7 +258,7 @@ export const charaList = {
             },
             maxUses: 10,
         },
-        tags: [],
+        tags: ["atkback"],
     },
     haker1000: {
         description: {
@@ -289,7 +284,6 @@ export const charaList = {
                 ind: ["Galaktyka", "Chi", "Duchoznactwo"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1177880327587369010/sketch-1700898905906.png?ex=6586928a&is=65741d8a&hm=3cc7efbe29dd42711063e34604fdf61ea937dcf66db9b06dfed2dba234bfff49&",
         level_up: {
             hp: 3.813479,
             battle: [2.2, 3.5],
@@ -314,9 +308,18 @@ export const charaList = {
             en: "A closed-off and mysterious girl, she was created from a mythical star created at the same time as the first atom, from another space-time. She has an unusual passion for astronomy and the cosmic system - she sees idealism and harmony in it; she identifies with the aforementioned stars, explaining that they can show the way to any place. She is also a fan of the HoYoverse dimension - in fact, she would like to be there herself as an official character, but unfortunately she can only dream…",
         },
         battle: [
-            { name: { pl: "Mała fala galaktyczna", en: "Little Galactic Wave" }, points: 0 },
-            { name: { pl: "Grawitacyjny miecz", en: "Gravitional sword" }, points: 20 },
-            { name: { pl: "Strzał gwiazdką", en: "StarShooter" }, points: 100 },
+            {
+                name: { pl: "Mała fala galaktyczna", en: "Little Galactic Wave" },
+                points: 0,
+            },
+            {
+                name: { pl: "Grawitacyjny miecz", en: "Gravitional sword" },
+                points: 20,
+            },
+            {
+                name: { pl: "Strzał gwiazdką", en: "StarShooter" },
+                points: 100,
+            },
             { name: "<i>MeteoHynnon</i>", points: 330 },
         ],
         dimension: "Starcie internetu",
@@ -330,7 +333,6 @@ export const charaList = {
                 ind: ["Duchoznactwo", "Informatyka"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1177934284342964306/1196084111371161672/Untitled33_20240114142846.png?ex=65b65722&is=65a3e222&hm=e109210b9930b19a4758d2eef4dc256ee49617b05f40484b6964f5147254b864&",
         level_up: {
             hp: 3.030174,
             battle: [2.34, 2.8, 3.3, 4.3],
@@ -349,7 +351,62 @@ export const charaList = {
             },
             maxUses: 1,
         },
-        tags: ["ahealth", "atkback"],
+        tags: ["ahealth", "stormbtp"],
+    },
+    naładowanaAva: {
+        description: {
+            pl: "Energiczna i pełna poczucia humoru koleżanka. Chętna władzy i potęgi. Jako pierwsza umie połączyć ogień i prąd, tworząc tzw. naładowany ogień. Nie wkurzaj jej choć trochę, albo poczuj smak jej tortur!",
+            en: "An energetic and humorous colleague. Eager for power and might. She is the first to know how to combine fire and electricity, creating the so-called charged fire. Don't piss her off just a little, or get a taste of her torture!",
+        },
+        battle: [
+            {
+                name: { pl: "Paletka", en: "Mallet" },
+                points: 5,
+            },
+            {
+                name: { pl: "Naładowany ogień", en: "Charged fire" },
+                points: 35,
+            },
+            {
+                name: { pl: "Szarża", en: "Chargeby" },
+                points: 130,
+            },
+        ],
+        dimension: "Starcie internetu",
+        hp: 5000,
+        class: "epic",
+        max_lvl: 16,
+        types: {
+            have: ["Ogień", "Elektryczność"],
+            strong: {
+                def: 1000,
+                ind: ["Lód", "Ogień", "Duchoznactwo"],
+            },
+            weak: {
+                def: 3600,
+                ind: ["Woda", "Powietrze", "Chi", "Informatyka"],
+            },
+        },
+        level_up: {
+            hp: 2.798505,
+            battle: [2.2, 2.4732, 2.876505],
+            types: {
+                strong: 50,
+                weak: 100,
+            },
+        },
+        sp: {
+            name: {
+                pl: "Poddymienie",
+                en: "Undersmoke",
+            },
+            description: {
+                pl: "Nigdy nie bądź zawzięty wygranej, albo {{charaName.naładowanaAva}} pokaże Ci, że Cię zdominuje. Tworzy ona ogniste tornado, które jest w stanie zebrać ogromną ilość prądu (gdzie po dwóch sekundach nim atakuje). Dzięki takiej dawce zwiększa swoje ataki <i>Naładowany ogień</i> oraz <i>Szarża</i> o 24%, a zadany atak zabiera 25-50% BTP przeciwnikowi - w razie zadania krytycznym ciosem zwiększa się u przeciwnika także cios krytyczny.",
+                en: "Never be giddy about winning, or the {{charaName.naładowanaAva}} will show you that it will dominate you. She creates a fiery tornado that is able to gather a huge amount of electricity (where after two seconds she attacks with it). With such a charge, it increases its attacks <i>Charged fire</i> and <i>Chargeby</i> 24%, and the inflicted attack takes away 25-50% of the opponent's BTP - if dealt a critical blow, the opponent's critical blow is also increased.",
+            },
+            maxUses: 1,
+        },
+        tags: ["time", "toks"],
     },
 
     // Rocket League
@@ -376,7 +433,6 @@ export const charaList = {
         class: "legendary",
         dimension: "Rocket League",
         hp: 9000,
-        image: "https://cdn.discordapp.com/attachments/1047919900875825293/1053693870111731813/IMG_20221217_162158.png",
         level_up: {
             battle: [2, 2.5, 3, 4],
             hp: 2.862,
@@ -421,7 +477,6 @@ export const charaList = {
         class: "import",
         dimension: "Rocket League",
         hp: 10000,
-        image: "https://cdn.discordapp.com/attachments/1047919900875825293/1053693870476628089/IMG_20221217_162215.png",
         level_up: {
             battle: [1.9, 3.3, 4.1],
             hp: 3.25,
@@ -466,7 +521,6 @@ export const charaList = {
         class: "rare",
         dimension: "Rocket League",
         hp: 8800,
-        image: "https://cdn.discordapp.com/attachments/1047919900875825293/1053693870875091035/IMG_20221217_162240.png",
         level_up: {
             battle: [2, 2.1, 2.4],
             hp: 2.25,
@@ -522,7 +576,6 @@ export const charaList = {
         class: "epic",
         dimension: "Rocket League",
         hp: 7750,
-        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1201477057390051380/ms.png?ex=65c9f5b4&is=65b780b4&hm=f3b73b0c8047dbc2196e98635747f86647c235297d7918708d00a0e5a436be13&",
         level_up: {
             battle: [1.9, 2.4, 3.1],
             hp: 2.75,
@@ -592,7 +645,6 @@ export const charaList = {
                 ind: ["Galaktyka", "Duchoznactwo", "Chi", "Powietrze"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1177880326958219264/sketch-1700898906294.png?ex=65741d89&is=6561a889&hm=510ccd0816b505e1c71acb5b2f0ff478285a46ce4b91a6a00c5dbfed20f47be5&",
         level_up: {
             hp: 2.86201,
             battle: [1.8, 2.5, 4],
@@ -656,7 +708,6 @@ export const charaList = {
                 ind: ["Chi", "Galaktyka", "Duchoznactwo"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1047919900875825293/1057697621159968858/The_Chosen_One1.png",
         level_up: {
             hp: 3.6,
             battle: [2.5, 2.5, 2.65, 3.2, 3.2, 4.2],
@@ -696,7 +747,6 @@ export const charaList = {
         class: "import",
         dimension: "Stick'y-land",
         hp: 10000,
-        image: "https://cdn.discordapp.com/attachments/1047919900875825293/1120025997337694228/The_Dark_Lord1.png",
         level_up: {
             battle: [2, 3, 4],
             hp: 3.25,
@@ -751,7 +801,6 @@ export const charaList = {
         class: "dark_shop",
         dimension: "Stick'y-land",
         hp: 10000,
-        image: "https://cdn.discordapp.com/attachments/1047919900875825293/1057697620467920906/Tsc__1.png",
         level_up: {
             battle: [2, 2.7, 3.3, 4, 4.57],
             hp: 3.605,
@@ -812,7 +861,6 @@ export const charaList = {
                 ind: ["Informatyka", "Galaktyka"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1047919900875825293/1067367738718290010/sketch-1674550680441.png",
         level_up: {
             hp: 2.8,
             battle: [2.8, 3.5],
@@ -865,7 +913,6 @@ export const charaList = {
                 ind: ["Galaktyka", "Metal"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1047919900875825293/1067367738936401920/sketch-1674550680025.png",
         level_up: {
             hp: 3.274,
             battle: [1.9, 2.4, 3.2, 3.447],
@@ -910,7 +957,6 @@ export const charaList = {
         },
         max_lvl: 16,
         hp: 5000,
-        image: "https://cdn.discordapp.com/attachments/1047919900875825293/1095259942119800882/sketch-1681199825931.png",
         types: {
             have: ["Powietrze", "Informatyka", "Trucizna"],
             strong: {
@@ -979,7 +1025,6 @@ export const charaList = {
                 ind: ["Chi"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1047919900875825293/1116783654602014790/sketch-1686332309796.png",
         level_up: {
             hp: 3.5,
             battle: [2.5, 2.5, 3.25, 3.25, 4, 4],
@@ -1034,7 +1079,6 @@ export const charaList = {
                 ind: ["Ogień", "Chi", "Metal", "Elektryczność"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1177880327289589831/sketch-1700898905341.png?ex=65741d89&is=6561a889&hm=b392ce985d244fbe4408e6d0611ca1ee6c7be438bef7613875fc4bbae2eb47d8&",
         level_up: {
             hp: 2.55,
             battle: [2, 2.7, 3.35],
@@ -1082,7 +1126,6 @@ export const charaList = {
                 ind: ["Powietrze", "Galaktyka"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1177880328149405786/sketch-1700898904766.png?ex=658fcd0a&is=657d580a&hm=1521c3f7cf2be8b7e49d79844ace11f1d3fa5e21d41f53e256d2129a0c37272f&",
         level_up: {
             hp: 2.3,
             battle: [2.2, 3],
@@ -1134,7 +1177,6 @@ export const charaList = {
                 ind: ["Woda", "Ogień", "Elektryczność", "Powietrze", "Lód"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1177880327872598026/sketch-1700898904244.png?ex=6586928a&is=65741d8a&hm=6a270351a435531c0ed7fe8ddab737c01d981562a58d28ee2a3d1eea686f7aa8&",
         level_up: {
             hp: 3,
             battle: [2.2, 2.4, 3.95],
@@ -1191,7 +1233,6 @@ export const charaList = {
                 ind: ["Powietrze", "Metal"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1185653831325995008/sketch-1702752107595.png?ex=6590652d&is=657df02d&hm=cb29215a6e2cd2352eafe5e3b441df26e90abdd32f66f22dc6d033dfc49c1a00&",
         level_up: {
             hp: 3.5,
             battle: [1.85, 2.4, 2.8, 3.05, 3.474],
@@ -1242,7 +1283,6 @@ export const charaList = {
                 ind: ["Trucizna", "Ogień"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1198399146613284924/sketch-1705790788892.png?ex=65bec32d&is=65ac4e2d&hm=9e371f8e4e4cd30418cd2e1bc2b6e441c6aa9c171e94d4341e69f3022237ff55&",
         level_up: {
             hp: 3,
             battle: [2, 3.1821951],
@@ -1263,6 +1303,103 @@ export const charaList = {
             maxUses: 1,
         },
         tags: ["double"],
+    },
+    kruczaWładczyniNekro: {
+        battle: [
+            {
+                name: { pl: "Ogon", en: "Tail" },
+                points: 0,
+            },
+            {
+                name: { pl: "Ostre mochi", en: "Sharp mochi" },
+                points: 22,
+            },
+            {
+                name: { pl: "Kruczy atak", en: "Crowy attack" },
+                points: 100,
+            },
+        ],
+        description: {
+            pl: "Królowa wszystkich kruków oraz druga postać podnosząca na duchu dla tych, którym nie została poświęcona uwaga od {{charaName.nikolixia|nikolixii}}. Mimo bycia szatańską postacią ma dobre serce i jest najlepszą przyjaciółką, choć zdarza się jej mieć napady ADHD. Ci, którzy zasłużyli, mogą po prostu na nią mówić {{charaName.kruczaWładczyniNekro|nekro}}, ale zdarzyło się to tylko {{charaName.havier|havierowi}} oraz {{charaName.twinz|twinzom}}; powód - nieznany. Prosi cały czas jądra Internetu, aby eleven też mógł być tutaj, ale w odpowiedzi zwrotnej dostaje informację żeby zaczekała - szczęśliwi bowiem czasu nie mierzą.",
+            en: "Queen of all crows and the other uplifting character for those who have not received the attention from {{charaName.nikolixia}}. Despite being a fiendish character, she has a good heart and is the best of friends, although she does happen to have ADHD attacks. Those who deserve it can just call her {{charaName.kruczaWładczyniNekro|nekro}}, but this has only happened to {{charaName.havier}} and {{charaName.twinz}}; reason - unknown. She asks the Internet core all the time so that eleven can be here too, but in return she is told to wait - because happy people don't measure time.",
+        },
+        dimension: "Stick'y-land",
+        hp: 8500,
+        class: "dark_shop",
+        max_lvl: 10,
+        types: {
+            have: ["Duchoznactwo", "Chi", "Powietrze"],
+            weak: {
+                def: 1000,
+                ind: ["Duchoznactwo", "Chi", "Powietrze", "Elektryczność"],
+            },
+        },
+        level_up: {
+            hp: 3.7,
+            battle: [2.2, 2.4, 2.65],
+            types: {
+                weak: -20,
+            },
+        },
+        sp: {
+            name: {
+                pl: "Kruczy dar",
+                en: "Corbie's gift",
+            },
+            description: {
+                pl: "Kruk {{charaName.kruczaWładczyniNekro|nekro}} przynosi losowy dar dla niej w postaci jedzenia. Może to być:<br />- Sushi (70%) - leczy ją, gdy ma poniżej 50% HP, w przeciwnym razie dodaje trochę BTP<br />- Pasztecik szczeciński (25%) - maksymalne HP zostaje zwiększone bez wpływu na aktualne wraz z losowym atakiem (HP - 23%, atak - 5%).<br />- Najostrzejszy kebab (5%) - na 5 ruchów ataki się zwiększają dwukrotnie, a BTP zostaje dodane. Przez całą rundę maksymalne HP, jak i aktualne zostają zwiększone o 20%.",
+                en: "The {{charaName.kruczaWładczyniNekro|nekro's}} raven brings a random gift of food for her. This can be: <br />- Sushi (70%) - heals her when she is below 50% HP, otherwise adds some BTP <br />- Pasztecik szczciciński (25%) - maximum HP is increased without affecting current ones along with a random attack (HP - 23%, attack - 5%).<br />- The spiciest kebab (5%) - for 5 moves, attacks double and BTP is added. For the rest of match maximum HP as well as current HP are increased by 20%.",
+            },
+            maxUses: 3,
+        },
+        tags: ["stormbtp", "ahealth", "btpwa"],
+    },
+    fobix: {
+        battle: [
+            {
+                name: { pl: "Oddech nieśmiałości", en: "Breath of shyness" },
+                points: 2,
+            },
+            {
+                name: { pl: "Echo lęku", en: "Echo of fear" },
+                points: 22,
+            },
+            {
+                name: { pl: "Wir paniki", en: "Vortex of panic" },
+                points: 100,
+            },
+            {
+                name: { pl: "Cień strachu", en: "Shadow of fear" },
+                points: 150,
+            },
+        ],
+        description: {
+            pl: "Stickman z dużą ilością fobii - największą w wymiarze, a co dopiero ze wszystkich. Niesamodzielny, zamknięty w swoim świecie, z problemami wymowy, wstydliwy… wierzy, że istnieje taki świat, w którym strach nie istnieje.",
+            en: "A character with a lot of phobias - the biggest in the dimension, let alone of all. Indifferent, closed in his world, with speech problems, shy… he believes that there is such a world where fear does not exist.",
+        },
+        dimension: "Stick'y-land",
+        hp: 9000,
+        class: "common",
+        max_lvl: 22,
+        types: {
+            have: ["Chi", "Powietrze"],
+        },
+        level_up: {
+            hp: 2.3,
+            battle: [1.95, 2.05, 2.05, 2.05],
+        },
+        sp: {
+            name: {
+                pl: "Wyimaginowany świat",
+                en: "Imaginary world",
+            },
+            description: {
+                pl: "{{charaName.fobix}} w końcu otwiera się w twierdzeniu, że jest w swoim wymyślonym świecie. Zwiększa więc swoje ataki o 160% oraz zanika u niego krytyczny cios, a każdy ruch to procentowe zadawanie obrażeń (3,5% HP, min. poziom postaci x100). Po dziesięciu ruchach staje się odświeżoną postacią zaniżoną o 2 poziomy.",
+                en: "{{charaName.fobix}} finally opens up in claiming to be in his imaginary world, so he increases his attacks by 160% and his critical blow disappears, and each move is a percentage damage (3.5% HP + 500, min character's level x100). After ten moves, he becomes a refreshed character underrated by 2 levels.",
+            },
+            maxUses: 1,
+        },
+        tags: [],
     },
 
     // Pokemon
@@ -1300,7 +1437,6 @@ export const charaList = {
                 ind: ["Ziemia"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1047919900875825293/1067390387024576522/aatbio_com_image_export_Jan_24_2023.png",
         level_up: {
             hp: 3.2,
             battle: [2, 3, 3.5],
@@ -1349,7 +1485,6 @@ export const charaList = {
                 ind: ["Ziemia", "Woda", "Lód"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1047919900875825293/1112680164887904336/R_3.png",
         level_up: {
             hp: 2.525,
             battle: [1.9, 3],
@@ -1390,7 +1525,6 @@ export const charaList = {
         types: {
             have: ["Ziemia", "Powietrze"],
         },
-        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1198014162303975586/pngfind.com-snorlax-png-875272.png?ex=65bd5ca2&is=65aae7a2&hm=7ad9495be0dfe3bd57f9cd4e2627e76eeca6101bbdaeb09e4986582bb7ff1db7&",
         level_up: {
             hp: 2.3,
             battle: [1.7, 2.1],
@@ -1442,7 +1576,6 @@ export const charaList = {
                 ind: ["Woda", "Lód"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1047919900875825293/1115728294076227705/aatbio_com_image_export_Jun_6_2023.png",
         level_up: {
             hp: 3.599908,
             battle: [2.01, 2.5, 3, 4.2],
@@ -1493,7 +1626,6 @@ export const charaList = {
                 ind: ["Galaktyka", "Trucizna"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1199684765738086400/Ayunda_Risu_-_Portrait_convert.io.png?ex=65c37081&is=65b0fb81&hm=2f9246365d015cfb55285a4bbcdf5b4ce0c91a5ffacf8ae1e2c371bba1e88845&",
         level_up: {
             hp: 2.38,
             battle: [1.92, 1.92],
@@ -1542,7 +1674,6 @@ export const charaList = {
                 ind: ["Galaktyka", "Trucizna"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1177934284342964306/1198731357048815666/800px-Watson_Amelia_-_Portrait_01.png?ex=65bff892&is=65ad8392&hm=4f0df403a880caf98e0acb9c7e409926160fd775e5b92c9c419b9faf2600aef4&",
         level_up: {
             hp: 2.38,
             battle: [2, 2.4, 3],
@@ -1597,7 +1728,6 @@ export const charaList = {
                 ind: ["Lód"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1200162600307134594/Gawr_Gura_Full_body.png?ex=65c52d85&is=65b2b885&hm=fec0e8215e466d0a345e1564b4d22eb47c3895f56cab7d087650b82dd75e758f&",
         level_up: {
             hp: 2.75,
             battle: [1.8, 2.2, 2.72],
@@ -1645,7 +1775,6 @@ export const charaList = {
                 ind: ["Duchoznactwo", "Trucizna"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1200866827983654992/request__fire_cutie_mark_by_1mbean_d6e7133-fullview.png?ex=65c7bd62&is=65b54862&hm=efc1db970290f3e02db5c9e34d725540e27f365e7e73fb2121a9f76ce34e923d&",
         level_up: {
             hp: 3.32501,
             battle: [2, 2.5, 3],
@@ -1678,7 +1807,7 @@ export const charaList = {
             },
             {
                 name: "📸",
-                points: 72,
+                points: 74,
             },
         ],
         description: {
@@ -1692,10 +1821,9 @@ export const charaList = {
         types: {
             have: ["Informatyka", "Trucizna"],
         },
-        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1201490318638452736/72124301_545695042843805_1419594415274933299_n-ai-brush-removebg-7w34xvr5.png?ex=65ca020e&is=65b78d0e&hm=f0aea019d81af364ee56429b22b4d253df99f2af2029e96c6d6f748065e8e12f&",
         level_up: {
             hp: 2.9,
-            battle: [3, 3, 3],
+            battle: [3, 2.8, 2.6],
         },
         sp: {
             name: {
@@ -1708,7 +1836,7 @@ export const charaList = {
             },
             maxUses: 15,
         },
-        tags: [],
+        tags: ["stormbtp"],
     },
 
     // Gang Sokołów
@@ -1746,7 +1874,6 @@ export const charaList = {
                 ind: ["Chi", "Ogień"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1194706073119117312/sketch-1704910473103.png?ex=65b153bc&is=659edebc&hm=61b0e938b7a95ec3071463b77262e73530d7bd2b960da975e1746b736d13ae6f&",
         level_up: {
             hp: 2.85,
             battle: [3, 4.5, 5.5],
@@ -1802,7 +1929,6 @@ export const charaList = {
                 ind: ["Trucizna", "Ogień", "Woda", "Lód"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1194706073534341260/sketch-1704910472268.png?ex=65b153bc&is=659edebc&hm=228aeb04085a41b3be9ae5c6fd7b7ab606509d97a1beb7fcdd3e3755d1b5e762&",
         level_up: {
             hp: 3.1,
             battle: [2, 3, 4],
@@ -1874,7 +2000,6 @@ export const charaList = {
                 ind: ["Informatyka", "Galaktyka"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1047919900875825293/1146059889332994078/Character_Zhongli_Game.png",
         level_up: {
             hp: 2.04044,
             battle: [2, 2.3, 3.15],
@@ -1924,7 +2049,6 @@ export const charaList = {
                 ind: ["Trucizna", "Chi", "Woda"],
             },
         },
-        image: "https://cdn.discordapp.com/attachments/1177876489421738014/1198733536958623955/IMG_20240113_224127-removebg.png?ex=65bffa9a&is=65ad859a&hm=182df5e926673e1157406e8c794b2ddcee588a48b7c8314bfb29e71b25674613&",
         level_up: {
             hp: 1.2,
             battle: [2, 3],
@@ -1953,5 +2077,14 @@ export const charaList = {
  * Co oznaczają tagi
  * {{charaName.<nazwaPostaci>}} - daje kolorową nazwę postaci (lub pogrubioną, jeżeli nie zindeksuje)
  * {{charaName.<nazwaPostaci>|<wyświetlanaNazwa>}} - to samo co tag wyżej, ale zamiast <nazwaPostaci> masz <wyświetlanaNazwa>
- * {{desc.db.klucz>}} - klucz z bazy danych (zarządzanej przez "serwer"; już nie funkcjonuje, jak narazie)
+ * {{desc.db.<klucz>}} - klucz z bazy danych (zarządzanej przez "serwer"; już nie funkcjonuje, jak narazie)
  */
+
+export function getCharaList() {
+    var cl = charaList
+    Object.keys(charaList).forEach((key) => {
+        cl[key].image = "https://patyczakus.github.io/starcie-internetu/others/imgs/characters/" + key + ".png" // automatically added images
+    })
+
+    return cl
+}
