@@ -1306,7 +1306,8 @@ function startMatch() {
             }
         }
         if (characters_json[matchSettings[type].name].tags.includes("time")) matchSettings[type].points += 3
-        if (type == "player") document.querySelector(`div#game.match div[gameplay="player"] div.btns span#BTPNumber`).innerText = matchSettings[type].points
+        if (type == "player" || document.querySelector(`div#game.match div[gameplay="player"] span#BTPNumber`) !== null)
+            document.querySelector(`div#game.match div[gameplay="player"] span#BTPNumber`).innerText = matchSettings.player.points
     }
 
     gameModify.getColab("player").setTimeoutInMoves("each", Infinity, _$attack)

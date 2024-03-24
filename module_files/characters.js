@@ -101,7 +101,7 @@ const charaList = {
             },
             maxUses: 1,
         },
-        tags: [],
+        tags: ["ahealth"],
     },
     glalirthor: {
         class: "uncommon",
@@ -203,7 +203,7 @@ const charaList = {
             },
             maxUses: 1,
         },
-        tags: [],
+        tags: ["stormbtp"],
     },
     kira: {
         description: {
@@ -300,7 +300,7 @@ const charaList = {
             },
             maxUses: Infinity,
         },
-        tags: ["btpwa", "atkback", "double"],
+        tags: ["btpwa", "atkback", "double", "sochr"],
     },
     starlight: {
         description: {
