@@ -10,7 +10,7 @@ I tak powstało Starcie Internetu...</i>
 
 ## Informacje projektu
 
-Wersja: **1.0**<br />
+Wersja: **R#1**<br />
 Gra na podstawie licencji **MIT** (Wcześniej: **Apache 2.0**).<br />
 Autorzy:
 
