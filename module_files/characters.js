@@ -418,12 +418,12 @@ const charaList = {
             },
             {
                 name: { pl: "Taran + nitro", en: "Ram with nitro" },
-                points: 20,
+                points: 25,
             },
-            { name: "Dash", points: 72 },
+            { name: "Dash", points: 82 },
             {
                 name: { pl: "Naddźwiękowy dash", en: "Supersonic dash" },
-                points: 120,
+                points: 145,
             },
         ],
         description: {
@@ -463,11 +463,11 @@ const charaList = {
             { name: "Dash", points: 5 },
             {
                 name: { pl: "Atak z powietrza", en: "Attack from the sky" },
-                points: 55,
+                points: 75,
             },
             {
                 name: { pl: "Pocisk naprowadzany", en: "Heatseeker" },
-                points: 130,
+                points: 170,
             },
         ],
         description: {
@@ -500,7 +500,7 @@ const charaList = {
             },
             maxUses: 1,
         },
-        tags: [],
+        tags: ["sochr"],
     },
     zimowyHotshot: {
         battle: [
@@ -510,9 +510,9 @@ const charaList = {
             },
             {
                 name: { pl: "Mróz", en: "Frost" },
-                points: 18,
+                points: 26,
             },
-            { name: "Power Hitter", points: 40 },
+            { name: "Power Hitter", points: 60 },
         ],
         description: {
             pl: "Pojazd, który bardzo lubi zimno; wychowywany w lodowisku. Obdarzony trzema mocami z Rumble. Na pewno polega na szczęściu i potrafi wygrać walkę.",
@@ -562,11 +562,11 @@ const charaList = {
             },
             {
                 name: { pl: "Rzut o podłogę", en: "Throw to the floor" },
-                points: 50,
+                points: 60,
             },
             {
                 name: { pl: "Naddźwiękowy dash", en: "Supersonic dash" },
-                points: 110,
+                points: 130,
             },
         ],
         description: {
@@ -607,7 +607,7 @@ const charaList = {
             },
             maxUses: 3,
         },
-        tags: [],
+        tags: ["sochr"],
     },
 
     // Stick'y-land
@@ -736,9 +736,9 @@ const charaList = {
             },
             {
                 name: { pl: "Odrzut powietrzny", en: "Air knockback" },
-                points: 20,
+                points: 30,
             },
-            { name: "Vira-Blade", points: 60 },
+            { name: "Vira-Blade", points: 75 },
         ],
         description: {
             pl: "Ten stickman też ujawniający się z osobą noogai3 stał się czarnym charakterem z powodu, że jego twórca go olał w walce przeciwko {{charaName.theChosenOne}} grając w Pasjansa. Finalnie został wyeliminowany przez {{charaName.theSecondComing}}. Jądro Internetu postanowiło go przywrócić do żywych z takim samym charakterem, choć pod pewnymi warunkami. Na początku dochodziło do spięć ze stron {{charaName.theChosenOne}} i {{charaName.theSecondComing}}, ale po pewnym czasie to złagodzono i stał się pełnoprawnym stickmanem w tym wymiarze.",
@@ -2035,7 +2035,7 @@ const charaList = {
             en: "A character from Honkai: Star Rail game. {{charaName.topaz}} is a Senior Manager of the Strategic Investment Department in the Interastral Peace Corporation, one of the Ten Stonehearts and leader of the Special Debts Picket Team. {{charaName.topaz|topaz's}} partner, {{charaName.numby}} (in formal, <i>Warp Trotter „Numby”</i>), is also capable of acutely perceiving where „riches” are located. It can even perform jobs involving security, debt collection, and actuarial sciences.",
         },
         dimension: "HoYoverse",
-        hp: 10000,
+        hp: 8000,
         class: "legendary",
         max_lvl: 40,
         types: {
@@ -2050,7 +2050,7 @@ const charaList = {
             },
         },
         level_up: {
-            hp: 1.2,
+            hp: 1.5,
             battle: [2, 3],
             types: {
                 strong: -5,

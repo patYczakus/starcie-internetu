@@ -61,7 +61,8 @@ export var langText = {
             <br /><hr style="height: 5px; width: calc(100% - 35px);" />
             <span style="display: block; font-size: 150%; padding: 25px 0">Gwiezdna moc (SP)<br />{ch_sp_name}</span>
             {starpover_bulid}<br />
-            {upgradeBTN}`,
+            {upgradeBTN}
+            <br /><button id="playThisCharacter" style="font-size:120%">Zagraj tą postacią!</button>`,
             en: `<span style="display: block; font-size: 200%; padding: 25px 0">{ch_name}<br />(LVL {ch_lvl}/{ch_lvl.max})</span>
             {ch_desc}<br />
             <ul>
@@ -81,7 +82,8 @@ export var langText = {
             <br /><hr style="height: 5px; width: calc(100% - 35px);" />
             <span style="display: block; font-size: 150%; padding: 25px 0">Star Power (SP)<br />{ch_sp_name}</span>
             {starpover_bulid}<br /><br />
-            {upgradeBTN}`,
+            {upgradeBTN}
+            <br /><button id="playThisCharacter" style="font-size:120%">Play this character!</button>`,
         },
         nosp: {
             pl: `Aby zobaczyć opis i ilość użyć na mecz, musisz zakupić za 5000<img width="15" height="15" draggable="false" src="${interfaceImages.money}" alt="🪙"><br />

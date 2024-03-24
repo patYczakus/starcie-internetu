@@ -19,7 +19,32 @@ const JK = _jk.default,
         Math.round(
             Math.pow(1.37 + 0.4 * characters_json[who].tags.includes("tanker") + 0.01 * classes.indexOf(characters_json[who].class), lvl - 1) *
                 (500 + 200 * characters_json[who].tags.includes("ahealth"))
-        )
+        ),
+    create_matchSettings_structure = function () {
+        return {
+            player: {
+                points: 0,
+                lvl: 0,
+                spHave: false,
+                name: "",
+                critChance: 100,
+                health: 0,
+                atk: [],
+                spUses: 0,
+            },
+            bot: {
+                points: 0,
+                lvl: 0,
+                spHave: false,
+                name: "",
+                critChance: 100,
+                health: 0,
+                atk: [],
+                spUses: 0,
+            },
+            moves: 0,
+        }
+    }
 
 var data = {
         version: accualVersion,
@@ -33,29 +58,7 @@ var data = {
         settings: {},
     },
     texts = {},
-    matchSettings = {
-        player: {
-            points: 0,
-            lvl: 0,
-            spHave: false,
-            name: "",
-            critChance: 100,
-            health: 0,
-            atk: [],
-            spUses: 0,
-        },
-        bot: {
-            points: 0,
-            lvl: 0,
-            spHave: false,
-            name: "",
-            critChance: 100,
-            health: 0,
-            atk: [],
-            spUses: 0,
-        },
-        moves: 0,
-    },
+    matchSettings = create_matchSettings_structure(),
     gmx = 0,
     characters_list_names = [],
     uidd,
@@ -783,6 +786,10 @@ function createCharacterInfo(name) {
     document.querySelector("div#info").classList.add("active")
     document.querySelector(`div#info div.o button#close`).addEventListener("click", closeInfo)
 
+    document.querySelector(`button#playThisCharacter`).addEventListener("click", () => {
+        startMatch(name, [0.51, 0.335])
+    })
+
     if (!data.characters[name].sp)
         document.querySelector("div#info div.o button#buySP").addEventListener("click", () => {
             if (data.coins < 5000) return new miniAlert(checkLanguage(langText.characterInfo.buy.noenought, data.settings.lang), "error").show(2000)
@@ -888,7 +895,9 @@ function createHome() {
     ID: <span class="autoSelectable"><button id="uid">${checkLanguage(langText.home.idt, data.settings.lang)}</button></span><br />`
 
     document.querySelector("#info #chest").addEventListener("click", openChest)
-    document.querySelector("#info #match").addEventListener("click", startMatch)
+    document.querySelector("#info #match").addEventListener("click", () => {
+        startMatch()
+    })
     document.querySelector("#info #log-out").addEventListener("click", () => {
         save(false).then(logOut)
     })
@@ -1089,39 +1098,21 @@ var fightFunctions = {
 
 /**
  * Rozpoczyna mecz z botem
+ * @param {string | undefined} [character=undefined] nazwa postaci
+ * @param {number[]} [stats = [1, 1]] mnożniki do statystyk
  * @tags #StartGame #StartMatch
  */
-function startMatch() {
+function startMatch(character = undefined, stats = [1, 1]) {
     gBlock = true
     gType = "match"
     gCheckedNum.match = -1
     showedCheck = false
-    matchSettings = {
-        player: {
-            points: 0,
-            lvl: 0,
-            spHave: false,
-            name: "",
-            critChance: 100,
-            health: 0,
-            atk: [],
-            spUses: 0,
-        },
-        bot: {
-            points: 0,
-            lvl: 0,
-            spHave: false,
-            name: "",
-            critChance: 100,
-            health: 0,
-            atk: [],
-            spUses: 0,
-        },
-        moves: 0,
-    }
+    matchSettings = create_matchSettings_structure()
 
     // usuwa ten śmieszny bład
     matchSettings.moves = 0
+
+    matchSettings.stats = stats
 
     var textesTranslated = { sp: "", atk: [] }
 
@@ -1134,14 +1125,14 @@ function startMatch() {
 
     // wybieranie odpowiednich postaci i nadawanie odpowiednich wartości
     let list = Object.keys(data.characters)
-    matchSettings.player.name = list[Math.floor(Math.random() * list.length)]
+    console.log(`[DEBUG] Opcje do wyboru: `, list, `    Postać wg argumentu: ${character || list[Math.floor(Math.random() * list.length)]}`)
+    matchSettings.player.name = character || list[Math.floor(Math.random() * list.length)]
     console.log(
         `[DEBUG] Postać jako "player": ${matchSettings.player.name} (poziom: ${data.characters[matchSettings.player.name].lvl}, ma SP: ${
             data.characters[matchSettings.player.name].sp
         })`
     )
 
-    //losowanie time
     for (let i = 0; i < characters_json[matchSettings.player.name].battle.length; i++) {
         matchSettings.player.atk[i] = gameModify.calc(
             0,
@@ -1306,7 +1297,7 @@ function startMatch() {
             }
         }
         if (characters_json[matchSettings[type].name].tags.includes("time")) matchSettings[type].points += 3
-        if (type == "player" || document.querySelector(`div#game.match div[gameplay="player"] span#BTPNumber`) !== null)
+        if (type == "player" && document.querySelector(`div#game.match div[gameplay="player"] span#BTPNumber`) !== null)
             document.querySelector(`div#game.match div[gameplay="player"] span#BTPNumber`).innerText = matchSettings.player.points
     }
 
@@ -1454,6 +1445,7 @@ function endGame(type) {
         if (type == 0) {
             gType = "endScreen"
             var ticketChange = Math.round(Math.random() * 9)
+            var ticketCount = Math.floor(Math.sqrt(Math.random() * 8 + 1))
             var xp = Math.round(Math.random() * 50 + Math.log10(matchSettings.player.health) * matchSettings.moves) + 32
 
             var mon =
@@ -1461,6 +1453,8 @@ function endGame(type) {
                     Math.pow(Math.log10(matchSettings.player.health), 2) * (1 + Math.max(matchSettings.moves - 10, 0) / 10) +
                         Math.max(matchSettings.moves - 10, 0) * Math.max(1 - factorNumber, 0.25)
                 ) * 2
+            mon = Math.round(mon * matchSettings.stats[0])
+            xp = Math.round(xp * matchSettings.stats[1])
             document.querySelector("div#game.match").innerHTML = `<div id="runCenter">
                 <div id="theBigText">${checkLanguage(langText.endgameMessages.win, data.settings.lang)}</div>
                 <div id="presents">
@@ -1476,7 +1470,7 @@ function endGame(type) {
                         ticketChange == 1
                             ? `<div class="card">
                         <div class="emoji">🎫</div>
-                        <div class="info">1</div>
+                        <div class="info">${ticketCount}</div>
                     </div>`
                             : ""
                     }
@@ -1485,7 +1479,7 @@ function endGame(type) {
 
             data.coins += mon
             data.xp += xp
-            data.tokens += ticketChange == 1
+            data.tokens += (ticketChange == 1) * ticketCount
 
             save(false).then(() => {
                 gBlock = false
