@@ -622,7 +622,7 @@ export function start(uid) {
 /** Buduje podstawowy panel z postaciami */
 function index() {
     if (data.settings.useGamepad)
-        document.querySelector("div#game.home").innerHTML = `<span style="font-size: 180%">${checkLanguage(langText.infoOngetCharaList(), data.settings.lang)}</span><br />`
+        document.querySelector("div#game.home").innerHTML = `<span style="font-size: 180%">${checkLanguage(langText.infoOnCharaList, data.settings.lang)}</span><br />`
     else document.querySelector("div#game.home").innerHTML = ``
     var text = ""
     var characters_have_list_names = Object.keys(data.characters)

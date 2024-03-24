@@ -245,12 +245,12 @@ export var langText = {
             en: "you have",
         },
         PadInfo: {
-            pl: `<img class="cnsl" draggable="false" width="20" height="20" src="https://cdn.discordapp.com/attachments/1047919900875825293/1071343616599015474/sketch-1675498411474.png"> - wybieranie ataku w lewo<br />
-            <img class="cnsl" draggable="false" width="20" height="20" src="https://cdn.discordapp.com/attachments/1047919900875825293/1071343655958347847/sketch-1675498411799.png"> - wybieranie ataku w prawo<br />
-            <img class="cnsl" draggable="false" width="20" height="20" src="https://cdn.discordapp.com/attachments/1047919900875825293/1071343617031032852/sketch-1675498411625.png"> - potwierdzenie wybranego ataku`,
-            en: `<img class="cnsl" draggable="false" width="20" height="20" src="https://cdn.discordapp.com/attachments/1047919900875825293/1071343616599015474/sketch-1675498411474.png"> - selecting an attack to the left<br />
-            <img class="cnsl" draggable="false" width="20" height="20" src="https://cdn.discordapp.com/attachments/1047919900875825293/1071343655958347847/sketch-1675498411799.png"> - selecting an attack to the right<br />
-            <img class="cnsl" draggable="false" width="20" height="20" src="https://cdn.discordapp.com/attachments/1047919900875825293/1071343617031032852/sketch-1675498411625.png"> - confirming a selected attack`,
+            pl: `<img class="cnsl" draggable="false" width="20" height="20" src="${interfaceImages.Gamepad_LB}"> - wybieranie ataku w lewo<br />
+            <img class="cnsl" draggable="false" width="20" height="20" src="${interfaceImages.Gamepad_RB}"> - wybieranie ataku w prawo<br />
+            <img class="cnsl" draggable="false" width="20" height="20" src="${interfaceImages.Gamepad_O_B}"> - potwierdzenie wybranego ataku`,
+            en: `<img class="cnsl" draggable="false" width="20" height="20" src="${interfaceImages.Gamepad_LB}"> - selecting an attack to the left<br />
+            <img class="cnsl" draggable="false" width="20" height="20" src="${interfaceImages.Gamepad_RB}"> - selecting an attack to the right<br />
+            <img class="cnsl" draggable="false" width="20" height="20" src="${interfaceImages.Gamepad_O_B}"> - confirming a selected attack`,
         },
         movefalse: {
             pl: `Ruch #{num} (nie można jeszcze używać SP)`,
