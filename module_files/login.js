@@ -44,7 +44,7 @@ export function createForm(useOtherFunct = false, func = () => {}, name = "") {
                 .join(".")} roku</u>. Możesz w nią zagrać klikając w przycisk <i>${
                 useOtherFunct ? "Zagraj" : "Zaloguj się"
             }</i>. Pamiętaj, że gra podczas robienia edycji drugiej może być wyłączona!
-            <br /><a href="./getCharaList()">Lista z postaciami</a> | <a href="https://www.patreon.com/user/membership?u=102227103" target="_blank">Patreon</a> | <a href="https://discord.gg/7S3P2DUwAm" target="_blank">Serwer support gry</a> i nie tylko<br /><br />
+            <br /><a href="./charaList">Lista z postaciami</a> | <a href="https://www.patreon.com/user/membership?u=102227103" target="_blank">Patreon</a> | <a href="https://discord.gg/7S3P2DUwAm" target="_blank">Serwer support gry</a> i nie tylko<br /><br />
             <span execute="loginForm"><button class="loginForm">${useOtherFunct ? "Zagraj" : "Zaloguj się (Google)"}</button> ${
                 useOtherFunct ? `Zalogowany jako <i>${name}</i>. To nie Ty? <a style="color: blue;">Wyloguj się</a>` : ""
             }</span><br />`
