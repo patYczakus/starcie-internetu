@@ -117,6 +117,25 @@ body .autoSelectable {
     user-select: all;
 }
 
+div#sdc h1::before {
+    content: "Starcie 🌐 Internetu";
+    font-weight: normal;
+    font-size: 40px
+}
+
+div#sdc div:not(.loading) {
+    width: 90%;
+}
+
+div#sdc {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    box-sizing: border-box;
+    margin-left: 50px
+}
+
 div#start {
     padding: 10px;
     background: linear-gradient(white 60px, transparent 80px);
@@ -605,6 +624,16 @@ img.animateTagAtkback {
 ---------------------------------------------------------------------------
 -------------------------------------------------------------------------*/
 
+@media (max-width: 570px) {
+    div#sdc {
+        margin-left: 25px
+    }
+
+    div#sdc h1::before {
+        content: "Starcie Internetu";
+    }
+}
+
 @media (max-width: 575px) {
 
     div#info.active,
@@ -740,35 +769,6 @@ button#skipThisSong {
 ---------------------------------------------------------------------------
 ---------------------------------------------------------------------------
 -------------------------------------------------------------------------*/
-
-div#sdc {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    height: 100vh;
-    box-sizing: border-box;
-    margin-left: 50px
-}
-
-div#sdc h1::before {
-    content: "Starcie 🌐 Internetu";
-    font-weight: normal;
-    font-size: 40px
-}
-
-div#sdc div:not(.loading) {
-    width: 90%;
-}
-
-@media (max-width: 570px) {
-    div#sdc {
-        margin-left: 25px
-    }
-
-    div#sdc h1::before {
-        content: "Starcie Internetu";
-    }
-}
 
 @keyframes showEndMatch {
     from {
