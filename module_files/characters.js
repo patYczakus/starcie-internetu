@@ -1456,7 +1456,7 @@ const charaList = {
             },
             maxUses: 1,
         },
-        tags: [],
+        tags: ["toks"],
     },
     lunatone: {
         battle: [
@@ -1642,7 +1642,7 @@ const charaList = {
             },
             maxUses: 1,
         },
-        tags: [],
+        tags: ["stormbtp"],
     },
     ameliaWatson: {
         battle: [
@@ -2017,7 +2017,7 @@ const charaList = {
             },
             maxUses: 1,
         },
-        tags: [],
+        tags: ["sochr"],
     },
     topazAndNumby: {
         battle: [
