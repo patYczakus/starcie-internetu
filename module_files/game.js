@@ -1069,7 +1069,7 @@ var fightFunctions = {
     heal: function () {
         if (gameModify.getColab("player").you.hp.factor() > 0.75) return
         if (matchSettings.player.points < 25) return
-        gameModify.getColab("player").you.hp.setValue(gameModify.getColab("player").you.hp.get() + healInfo(matchSettings.player.name, matchSettings.player.lvl), false)
+        matchSettings.player.health += healInfo(matchSettings.player.name, matchSettings.player.lvl)
         matchSettings.player.points -= 25
         audios.heal.currentTime = 0
         audios.heal.play()
