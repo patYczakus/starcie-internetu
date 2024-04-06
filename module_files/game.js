@@ -787,7 +787,7 @@ function createCharacterInfo(name) {
     document.querySelector(`div#info div.o button#close`).addEventListener("click", closeInfo)
 
     document.querySelector(`button#playThisCharacter`).addEventListener("click", () => {
-        startMatch(name, [0.51, 0.335])
+        startMatch(name, [0.56, 0.34])
     })
 
     if (!data.characters[name].sp)

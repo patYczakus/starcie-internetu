@@ -173,11 +173,11 @@ const spf = {
 
     // rl
     sylwestrowyOctane: function () {
-        var atk = gameModify.calc(0, Math.round(Math.random() * 25) * 500 + 5000, Math.round(Math.random() * 50) / 10 + 1.3, gameModify.getColab().you.getLevel())
+        var atk = gameModify.calc(0, Math.round(Math.random() * 20) * 500 + 4000, Math.round(Math.random() * 450) / 100 + 1.5, gameModify.getColab().you.getLevel())
         gameModify.spSounds.alarm.currentTime = 0
         if (!isPlaying(gameModify.spSounds.alarm)) gameModify.spSounds.alarm.play()
 
-        if (Math.floor(Math.random() * 10) < 4)
+        if (Math.random() < 0.25 + 0.15 * getCharaList()[gameModify.getColab().enemy.name()].tags.includes("tanker"))
             setTimeout(() => {
                 gameModify.spSounds.uAttack.currentTime = 0
                 if (!isPlaying(gameModify.spSounds.uAttack)) gameModify.spSounds.uAttack.play()
@@ -188,12 +188,12 @@ const spf = {
             setTimeout(() => {
                 gameModify.spSounds.miss.currentTime = 0
                 if (!isPlaying(gameModify.spSounds.miss)) gameModify.spSounds.miss.play()
-                gameModify.getColab().you.hp.setValue(gameModify.getColab().you.hp.get() - atk * 0.25, false)
+                gameModify.getColab().you.hp.setValue(gameModify.getColab().you.hp.get() - atk * 0.13, false)
                 gameModify.getColab().endSP()
             }, 1000)
     },
     platynowyDominus: function () {
-        gameModify.getColab().you.atk.setPrectange(116, "all")
+        gameModify.getColab().you.atk.setPrectange(119, "all")
         gameModify.getColab().you.JSON.change({ critChance: 0 })
         gameModify.getColab().enemy.crit.change(gameModify.getColab().enemy.crit.get() * 1.27)
 
@@ -601,8 +601,8 @@ const spf = {
             gameModify.getColab(type).you.JSON.set({
                 points: 0,
                 name: "fobix",
-                critChance: gameModify.calcCritChance("fobix", LVL, gameModify.getColab(type).enemy.name()),
-                health: gameModify.calc(0, getCharaList().fobix.hp, getCharaList().fobix.level_up.hp, LVL),
+                critChance: gameModify.calcCritChance("fobix", LVL, gameModify.getColab(type).enemy.name()) * 1.15,
+                health: Math.round(gameModify.calc(0, getCharaList().fobix.hp, getCharaList().fobix.level_up.hp, LVL) * 0.7645),
                 atk: getCharaList().fobix.battle.map((x, i) => gameModify.calc(0, atkFromBtp(x.points), getCharaList().fobix.level_up.battle[i], LVL)),
                 spUses: 0,
                 lvl: LVL,

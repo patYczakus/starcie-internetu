@@ -451,8 +451,8 @@ const charaList = {
         sp: {
             name: "«Pa tera!»",
             description: {
-                pl: "Tak, nazwa mówi sama za siebie. {{charaName.sylwestrowyOctane}} już wsiąknął niekoniecznie legalne środki odurzające, i pokazuje, na co jego stać. Atak inny niż wszystkie, zadaje naprawdę dużo, ale właśnie - skoro już wsiąknął, to niekoniecznie musi trafić. Szansa na trafienie wynosi 40% i albo uderzy w przeciwnika, albo sam oberwie tym atakiem (25% wartości ataku).",
-                en: "The Polish SP name does not mean something specific to a foreigner, but when translated it already gives food for thought. {{charaName.sylwestrowyOctane}} has already soaked up the not necessarily legal drugs, and is showing what he can do. An attack unlike any other, it inflicts a really big amount, but precisely - since it has already soaked in, it doesn't necessarily hit. The chance of hitting is 40%, and he will either hit his opponent or get hit himself with this attack (25% of the attack value).",
+                pl: "Tak, nazwa mówi sama za siebie. {{charaName.sylwestrowyOctane}} już wsiąknął niekoniecznie legalne środki odurzające, i pokazuje, na co jego stać. Atak inny niż wszystkie, zadaje naprawdę dużo, ale właśnie - skoro już wsiąknął, to niekoniecznie musi trafić. Szansa na trafienie wynosi 25% (+15% kiedy przeciwnik ma atrybut <b>Korzenie tanka</b>) i albo uderzy w przeciwnika, albo sam oberwie tym atakiem (13% wartości ataku).",
+                en: "The Polish SP name does not mean something specific to a foreigner, but when translated it already gives food for thought. {{charaName.sylwestrowyOctane}} has already soaked up the not necessarily legal drugs, and is showing what he can do. An attack unlike any other, it inflicts a really big amount, but precisely - since it has already soaked in, it doesn't necessarily hit. The chance of hitting is 25% (+15% when enemy have <b>Family tree of Tanks</b> attribute), and he will either hit his opponent or get hit himself with this attack (13% of the attack value).",
             },
             maxUses: 3,
         },
@@ -495,8 +495,8 @@ const charaList = {
         sp: {
             name: "«Podnieca cię „What a save!”?»",
             description: {
-                pl: "Jak to wkurza {{charaName.platynowyDominus|platynowegoDominusa}}, gdy ktoś poniża lepszego gracza wymienionym tekstem („What a save!”). Zwiększa każdy atak o 16%, ogranicza zadanie crita do 0 i zwiększa przeciwnikowi crita o 27%",
-                en: "How it annoys {{charaName.platynowyDominus}} when someone humiliates a better player with the text „What a save!”. Increases each attack by 16%, limits the crit task to 0 and increases the opponent's crit by 27%",
+                pl: "Jak to wkurza {{charaName.platynowyDominus|platynowegoDominusa}}, gdy ktoś poniża lepszego gracza wymienionym tekstem („What a save!”). Zwiększa każdy atak o 19%, ogranicza zadanie crita do 0 i zwiększa przeciwnikowi crita o 27%",
+                en: "How it annoys {{charaName.platynowyDominus}} when someone humiliates a better player with the text „What a save!”. Increases each attack by 19%, limits the crit task to 0 and increases the opponent's crit by 27%",
             },
             maxUses: 1,
         },
@@ -1394,8 +1394,8 @@ const charaList = {
                 en: "Imaginary world",
             },
             description: {
-                pl: "{{charaName.fobix}} w końcu otwiera się w twierdzeniu, że jest w swoim wymyślonym świecie. Zwiększa więc swoje ataki o 160% oraz zanika u niego krytyczny cios, a każdy ruch to procentowe zadawanie obrażeń (3,5% HP, min. poziom postaci x100). Po dziesięciu ruchach staje się odświeżoną postacią zaniżoną o 2 poziomy.",
-                en: "{{charaName.fobix}} finally opens up in claiming to be in his imaginary world, so he increases his attacks by 160% and his critical blow disappears, and each move is a percentage damage (3.5% HP + 500, min character's level x100). After ten moves, he becomes a refreshed character underrated by 2 levels.",
+                pl: "{{charaName.fobix}} w końcu otwiera się w twierdzeniu, że jest w swoim wymyślonym świecie. Zwiększa więc swoje ataki o 160% oraz zanika u niego krytyczny cios, a każdy ruch to procentowe zadawanie obrażeń (3,5% HP, min. poziom postaci x100). Po dziesięciu ruchach staje się odświeżoną postacią zaniżoną o 2 poziomy i osłabioną.",
+                en: '{{charaName.fobix}} finally opens up in claiming to be in his imaginary world, so he increases his attacks by 160% and his critical blow disappears, and each move is a percentage damage (3.5% HP + 500, min character\'s level x100). After ten moves, he becomes a refreshed character underrated by 2 levels and "nerfed".',
             },
             maxUses: 1,
         },
