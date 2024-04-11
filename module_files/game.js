@@ -480,7 +480,10 @@ export function start(uid) {
         onValue(ref(database, `starcie-internetu/data/${uid}`), (snpsht) => {
             if (data.settings.resetFont && !document.body.classList.contains("resetFont")) document.body.classList.add("resetFont")
             if (!data.settings.resetFont && document.body.classList.contains("resetFont")) document.body.classList.remove("resetFont")
-            if (data.settings.useGamepad) gamepadMain = $saveFunction
+            if (data.settings.useGamepad)
+                gamepadMain = () => {
+                    $saveFunction(navigator.getGamepads()[0])
+                }
             else gamepadMain = () => {}
 
             if (data.xp >= 10000) {
