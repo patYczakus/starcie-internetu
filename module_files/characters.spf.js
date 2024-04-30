@@ -24,7 +24,7 @@ const spf = {
 
         var l = gameModify.getColab().you.atk.getLenght()
         for (let i = 0; i < l; i++) {
-            gameModify.getColab().you.atk.setValue(gameModify.getColab().you.atk.getValue(i) - (hpCh / (l + 1)) * (i + 1), i)
+            gameModify.getColab().you.atk.setValue(gameModify.getColab().you.atk.getValue(i) - (hpCh / (l * 2 + 1)) * (i * 2 + 1), i)
         }
         console.log("[DEBUG/game/habby] Wartości ataków: ", gameModify.getColab().you.atk.getValue("all"))
 
