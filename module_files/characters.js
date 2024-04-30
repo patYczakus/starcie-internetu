@@ -24,7 +24,7 @@ const charaList = {
         dimension: "Starcie internetu",
         hp: 10010,
         level_up: {
-            battle: [1.5, 2, 2.7],
+            battle: [1.5, 2, 2.7, 3],
             hp: 2.2,
             types: {
                 strong: 50,
@@ -64,7 +64,7 @@ const charaList = {
             },
             {
                 name: { pl: "Uderzenie falowe", en: "Waveform impact" },
-                points: 50,
+                points: 55,
             },
         ],
         description: {
@@ -75,7 +75,7 @@ const charaList = {
         dimension: "Starcie internetu",
         hp: 8700,
         level_up: {
-            battle: [1.8, 2.2],
+            battle: [1.8, 2.3],
             hp: 2.4,
             types: {
                 strong: 80,
