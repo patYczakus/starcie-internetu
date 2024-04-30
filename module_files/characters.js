@@ -11,6 +11,10 @@ const charaList = {
                 name: { pl: "Ognista kula", en: "Fireball" },
                 points: 100,
             },
+            {
+                name: { pl: "Potężne pole uderzeniowe", en: "Powerful blast field" },
+                points: 185,
+            }, 
         ],
         description: {
             pl: "Pierwotny wzór postaci; robot zaprogramowany do walki między innymi spoza własnego wymiaru. Piła pozwala unicestwić konającego, ognisty żar w kuli - spalić na popiół, a jego kable - ogłuszyć przeciwnika.",
