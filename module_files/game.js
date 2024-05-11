@@ -1672,15 +1672,15 @@ function starPover(type) {
  * @returns {{ atk: number, btp: number, crit: boolean } | void} Jeżeli *`isSP`* jest ustawione na **`true`**, zwraca kod JSON.
  */
 function dmg(type, atk, isSP = Boolean(false)) {
+    var type2 = type == "player" ? "bot" : "player"
+
     gCheckedNum.match = -1
     showedCheck = false
 
     if (characters_json[matchSettings[type2].name].tags.includes("furr")) atk *= 1 + (matchSettings.moves + 1) / 200
-
     var rand = Math.round(Math.random() * 70) / 100 + 0.5
     atk = Math.round(atk * rand)
 
-    var type2 = type == "player" ? "bot" : "player"
     var lvl = type2 == "player" ? data.characters[matchSettings.player.name].lvl : matchSettings.bot.lvl
     var crit = Math.round(Math.random() * 1000) > matchSettings[type].critChance * (0.9 + rand / 4)
     var d_btp = Math.log10(atk) * (2 + 0.05 * String(atk).length)
