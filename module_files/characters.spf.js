@@ -20,11 +20,12 @@ var isPlaying = function (audio) {
 const spf = {
     // stin
     habby: function () {
-        let hpCh = gameModify.getColab().you.hp.setPrectange(85, true)
+        let hpCh = gameModify.getColab().you.hp.setPrectange(75, true)
+        const multi = 3
 
         var l = gameModify.getColab().you.atk.getLenght()
         for (let i = 0; i < l; i++) {
-            gameModify.getColab().you.atk.setValue(gameModify.getColab().you.atk.getValue(i) - (hpCh / (l * 2 + 1)) * (i * 2 + 1), i)
+            gameModify.getColab().you.atk.setValue(gameModify.getColab().you.atk.getValue(i) - (hpCh / (l * multi + 1)) * (i * multi + 1), i)
         }
         console.log("[DEBUG/game/habby] Wartości ataków: ", gameModify.getColab().you.atk.getValue("all"))
 
@@ -37,8 +38,8 @@ const spf = {
         gameModify.getColab().you.JSON.change({
             critChance: gameModify.getColab().you.JSON.get("critChance") * 0.85,
         })
-        gameModify.getColab().you.atk.setPrectange(118, "random")
-        gameModify.getColab().you.atk.setPrectange(105, "all")
+        gameModify.getColab().you.atk.setPrectange(130, "random")
+        gameModify.getColab().you.atk.setPrectange(108, "all")
 
         gameModify.spSounds.magic.currentTime = 0
         if (!isPlaying(gameModify.spSounds.magic)) gameModify.spSounds.magic.play()

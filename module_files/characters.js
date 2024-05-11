@@ -14,7 +14,7 @@ const charaList = {
             {
                 name: { pl: "Potężne pole uderzeniowe", en: "Powerful blast field" },
                 points: 185,
-            }, 
+            },
         ],
         description: {
             pl: "Pierwotny wzór postaci; robot zaprogramowany do walki między innymi spoza własnego wymiaru. Piła pozwala unicestwić konającego, ognisty żar w kuli - spalić na popiół, a jego kable - ogłuszyć przeciwnika.",
@@ -49,8 +49,8 @@ const charaList = {
                 en: "Change mode to…",
             },
             description: {
-                pl: "Dzięki luźnym kablom {{charaName.habby}} potrafi przekształcić miejsce zarezerwowane dla 15% HP miejscem na ataki - im silniejszy atak, tym więcej dostaje.",
-                en: "With loose cables {{charaName.habby}} is able to transform the space reserved for 15% HP into a place for attacks - the stronger the attack, the more it gets.",
+                pl: "Dzięki luźnym kablom {{charaName.habby}} potrafi przekształcić miejsce zarezerwowane dla 25% HP miejscem na ataki - im silniejszy atak, tym więcej dostaje.",
+                en: "With loose cables {{charaName.habby}} is able to transform the space reserved for 25% HP into a place for attacks - the stronger the attack, the more it gets.",
             },
             maxUses: 2,
         },
@@ -64,7 +64,7 @@ const charaList = {
             },
             {
                 name: { pl: "Uderzenie falowe", en: "Waveform impact" },
-                points: 55,
+                points: 70,
             },
         ],
         description: {
@@ -75,7 +75,7 @@ const charaList = {
         dimension: "Starcie internetu",
         hp: 8700,
         level_up: {
-            battle: [1.8, 2.3],
+            battle: [1.8, 2.2],
             hp: 2.4,
             types: {
                 strong: 80,
@@ -100,8 +100,8 @@ const charaList = {
                 en: "Man made of water",
             },
             description: {
-                pl: "Nie po to {{charaName.rycerzOceanu}} ukończył najlepszą szkołę magii, aby nie używać czarów! Tworzy sobie specjalną osłonę redukującą szansę na krytyczny cios o 15%, zwiększa swoje HP o 27% oraz losowy atak o 18%.",
-                en: "This is not why {{charaName.rycerzOceanu}} graduated from the best school of magic not to use spells! He creates a special shield for himself that reduces the chance of a critical blow by 15%, increases his HP by 27% and his random attack by 18%.",
+                pl: "Nie po to {{charaName.rycerzOceanu}} ukończył najlepszą szkołę magii, aby nie używać czarów! Tworzy sobie specjalną osłonę redukującą szansę na krytyczny cios o 15%, zwiększa swoje HP o 27% oraz losowy atak o 30%.",
+                en: "This is not why {{charaName.rycerzOceanu}} graduated from the best school of magic not to use spells! He creates a special shield for himself that reduces the chance of a critical blow by 15%, increases his HP by 27% and his random attack by 30%.",
             },
             maxUses: 1,
         },
@@ -151,7 +151,7 @@ const charaList = {
             },
             maxUses: 1,
         },
-        tags: ["double"],
+        tags: ["double", "furr"],
     },
     trajom: {
         class: "legendary",
@@ -304,7 +304,7 @@ const charaList = {
             },
             maxUses: Infinity,
         },
-        tags: ["btpwa", "atkback", "double", "sochr"],
+        tags: ["btpwa", "atkback", "double", "sochr", "furr"],
     },
     starlight: {
         description: {
@@ -418,11 +418,11 @@ const charaList = {
         battle: [
             {
                 name: { pl: "Taran", en: "Ram" },
-                points: 4,
+                points: 3,
             },
             {
                 name: { pl: "Taran + nitro", en: "Ram with nitro" },
-                points: 25,
+                points: 30,
             },
             { name: "Dash", points: 82 },
             {
@@ -460,7 +460,7 @@ const charaList = {
             },
             maxUses: 3,
         },
-        tags: [],
+        tags: ["stormbtp"],
     },
     platynowyDominus: {
         battle: [
@@ -562,15 +562,15 @@ const charaList = {
         battle: [
             {
                 name: { pl: "Uderzenie", en: "Hit" },
-                points: 5,
+                points: 10,
             },
             {
                 name: { pl: "Rzut o podłogę", en: "Throw to the floor" },
-                points: 60,
+                points: 75,
             },
             {
                 name: { pl: "Naddźwiękowy dash", en: "Supersonic dash" },
-                points: 130,
+                points: 140,
             },
         ],
         description: {
@@ -611,7 +611,7 @@ const charaList = {
             },
             maxUses: 3,
         },
-        tags: ["sochr"],
+        tags: ["sochr", "time"],
     },
 
     // Stick'y-land
@@ -678,23 +678,23 @@ const charaList = {
             },
             {
                 name: { pl: "Atak lodu", en: "Ice attack" },
-                points: 5,
-            },
-            {
-                name: { pl: "Atak ognia", en: "Fire attack" },
-                points: 10,
-            },
-            {
-                name: "ShOcK",
                 points: 20,
             },
             {
+                name: { pl: "Atak ognia", en: "Fire attack" },
+                points: 50,
+            },
+            {
+                name: "ShOcK",
+                points: 75,
+            },
+            {
                 name: { pl: "Laser" },
-                points: 30,
+                points: 130,
             },
             {
                 name: { pl: "Armagedon" },
-                points: 100,
+                points: 350,
             },
         ],
         description: {
@@ -730,7 +730,7 @@ const charaList = {
             },
             maxUses: 1,
         },
-        tags: [],
+        tags: ["sochr", "furr"],
     },
     theDarkLord: {
         battle: [
@@ -740,9 +740,9 @@ const charaList = {
             },
             {
                 name: { pl: "Odrzut powietrzny", en: "Air knockback" },
-                points: 30,
+                points: 37,
             },
-            { name: "Vira-Blade", points: 75 },
+            { name: "Vira-Blade", points: 100 },
         ],
         description: {
             pl: "Ten stickman też ujawniający się z osobą noogai3 stał się czarnym charakterem z powodu, że jego twórca go olał w walce przeciwko {{charaName.theChosenOne}} grając w Pasjansa. Finalnie został wyeliminowany przez {{charaName.theSecondComing}}. Jądro Internetu postanowiło go przywrócić do żywych z takim samym charakterem, choć pod pewnymi warunkami. Na początku dochodziło do spięć ze stron {{charaName.theChosenOne}} i {{charaName.theSecondComing}}, ale po pewnym czasie to złagodzono i stał się pełnoprawnym stickmanem w tym wymiarze.",
@@ -779,7 +779,7 @@ const charaList = {
             },
             maxUses: 1,
         },
-        tags: ["atkback"],
+        tags: ["atkback", "furr"],
     },
     theSecondComing: {
         battle: [
@@ -789,14 +789,14 @@ const charaList = {
             },
             {
                 name: { pl: "Noga", en: "Leg" },
-                points: 5,
+                points: 12,
             },
             {
                 name: { pl: "Miecz z diamentów (Minecraft)", en: "Diamond sword (Minecraft)" },
-                points: 25,
+                points: 35,
             },
-            { name: "Creative mode (Minecraft)", points: 75 },
-            { name: "Awakened", points: 150 },
+            { name: "Creative mode (Minecraft)", points: 100 },
+            { name: "Awakened", points: 175 },
         ],
         description: {
             pl: "Druga wersja {{charaName.theChosenOne}}; też związany z atakiem na noogai3, ale nie spowodował krytycznych szkód. Ma nietypowy styl walki; posiada możliwość użycia „ostatecznej siły”, co pokazuje jego potęgę w walce.",
@@ -833,7 +833,7 @@ const charaList = {
             },
             maxUses: 1,
         },
-        tags: [],
+        tags: ["furr"],
     },
     havier: {
         battle: [
@@ -843,7 +843,11 @@ const charaList = {
             },
             {
                 name: { pl: "Żar ognisty", en: "Fiery embers" },
-                points: 35,
+                points: 60,
+            },
+            {
+                name: "TNT",
+                points: 200,
             },
         ],
         description: {
@@ -884,7 +888,7 @@ const charaList = {
             },
             maxUses: 1,
         },
-        tags: [],
+        tags: ["atkback"],
     },
     paty: {
         battle: [
@@ -894,12 +898,12 @@ const charaList = {
             },
             {
                 name: { pl: "Atak obrotowy", en: "Rotational attack" },
-                points: 10,
+                points: 20,
             },
-            { name: "ShOcK", points: 30 },
+            { name: "ShOcK", points: 59 },
             {
                 name: { pl: "Piorunowy dash", en: "Thunderbolt dash" },
-                points: 75,
+                points: 123,
             },
         ],
         description: {
@@ -938,19 +942,19 @@ const charaList = {
         battle: [
             {
                 name: { pl: "Dalekobieżny atak ramion", en: "Long-distance arm attack" },
-                points: 1,
+                points: 3,
             },
             {
                 name: { pl: "Odrzut", en: "Knockback" },
-                points: 8,
+                points: 15,
             },
             {
                 name: { pl: "Fale telepatyczne", en: "Telepathic waves" },
-                points: 20,
+                points: 30,
             },
             {
                 name: { pl: "Potrójny atak", en: "Tripple attack" },
-                points: 65,
+                points: 100,
             },
         ],
         class: "epic",
@@ -988,7 +992,7 @@ const charaList = {
             },
             maxUses: 2,
         },
-        tags: [],
+        tags: ["time"],
     },
     twinz: {
         battle: [
@@ -998,7 +1002,7 @@ const charaList = {
             },
             {
                 name: { pl: "O: Atak trzech pierścieni", en: "O: Three ring attack" },
-                points: 5,
+                points: 10,
             },
             {
                 name: { pl: "O: Galaktyczne pęknięcia", en: "O: Galactic cracks" },
@@ -1006,12 +1010,12 @@ const charaList = {
             },
             {
                 name: { pl: "B: Ognista kula", en: "B: Fireball" },
-                points: 55,
+                points: 65,
             },
-            { name: "O: dmg()", points: 100 },
+            { name: "O: dmg()", points: 105 },
             {
                 name: { pl: "B: Wodne tsunami", en: "B: Aqua tsunami" },
-                points: 120,
+                points: 135,
             },
         ],
         description: {
@@ -1053,11 +1057,11 @@ const charaList = {
         battle: [
             {
                 name: { pl: "Widły", en: "Pitchforks" },
-                points: 10,
+                points: 5,
             },
             {
                 name: { pl: "Grabież", en: "Plunder" },
-                points: 20,
+                points: 25,
             },
             {
                 name: { pl: "Ciągnikowy ruch", en: "Tractor load" },
@@ -1102,7 +1106,7 @@ const charaList = {
             },
             maxUses: 1,
         },
-        tags: [],
+        tags: ["stormbtp"],
     },
     młody: {
         battle: [
@@ -1112,7 +1116,7 @@ const charaList = {
             },
             {
                 name: { pl: "Shotgun pełen płonących żetonów", en: "Shotgun full of burning tokens" },
-                points: 50,
+                points: 75,
             },
         ],
         description: {
@@ -1155,11 +1159,11 @@ const charaList = {
             },
             {
                 name: { pl: "Małe kocie kły", en: "Kitty little canine" },
-                points: 10,
+                points: 20,
             },
             {
                 name: { pl: "Uderzenie ogonem", en: "Fierce tail stroke" },
-                points: 40,
+                points: 60,
             },
         ],
         description: {
@@ -1207,19 +1211,19 @@ const charaList = {
             },
             {
                 name: { pl: "Dalekobieżna pięść", en: "Long-distance fist" },
-                points: 3,
+                points: 15,
             },
             {
                 name: { pl: "Piorunowa aura", en: "Thunderbolt aura" },
-                points: 45,
-            },
-            {
-                name: { pl: "Koścista artyleria", en: "Bony artillery" },
                 points: 70,
             },
             {
+                name: { pl: "Koścista artyleria", en: "Bony artillery" },
+                points: 110,
+            },
+            {
                 name: { pl: "Czachowy dash", en: "Skull dash" },
-                points: 100,
+                points: 200,
             },
         ],
         description: {
@@ -1253,7 +1257,7 @@ const charaList = {
                 pl: "Discord Nitro pozwala {{charaName.botek|botekowi}} uleczyć się, zwiększyć ataki o 3% i dodać +10 BTP.",
                 en: "Discord Nitro allows {{charaName.botek}} to heal itself, increase attacks by 3% and add +10 BTP.",
             },
-            maxUses: 9,
+            maxUses: 14,
         },
         tags: ["toks"],
     },
@@ -1261,7 +1265,7 @@ const charaList = {
         battle: [
             {
                 name: { pl: "Lodowa pięść", en: "Ice fist" },
-                points: 10,
+                points: 15,
             },
             {
                 name: { pl: "Śnieżno-huraganowe pole rażenia", en: "Snow-hurricane field of fire" },
@@ -1306,7 +1310,7 @@ const charaList = {
             },
             maxUses: 1,
         },
-        tags: ["double"],
+        tags: ["double", "sochr"],
     },
     kruczaWładczyniNekro: {
         battle: [
@@ -1356,7 +1360,7 @@ const charaList = {
             },
             maxUses: 3,
         },
-        tags: ["stormbtp", "ahealth", "btpwa"],
+        tags: ["stormbtp", "ahealth", "btpwa", "time"],
     },
     fobix: {
         battle: [
@@ -1460,7 +1464,7 @@ const charaList = {
             },
             maxUses: 1,
         },
-        tags: ["toks"],
+        tags: ["toks", "time"],
     },
     lunatone: {
         battle: [
@@ -1468,7 +1472,7 @@ const charaList = {
                 name: { pl: "Hipnozja", en: "Hypnosis" },
                 points: 5,
             },
-            { name: "Moonblast", points: 30 },
+            { name: "Moonblast", points: 50 },
         ],
         description: {
             pl: "Rogalikowy Pokémon, stworzony z kamienia oraz posiadający moc Chi. Według Pokédexa, faza księżyca wpływa na jego moc. Aby {{charaName.pikachu}} nie czuł się samotny, nadano jemu przyjaciela w postaci niego. Był zadowolony!",
@@ -1508,15 +1512,15 @@ const charaList = {
             },
             maxUses: 5,
         },
-        tags: [],
+        tags: ["sochr"],
     },
     snorlax: {
         battle: [
             {
                 name: { pl: "Ziewny ryk", en: "Yawn roar" },
-                points: 7,
+                points: 5,
             },
-            { name: "Giga Impact", points: 70 },
+            { name: "Giga Impact", points: 80 },
         ],
         description: {
             pl: "Pokémon, gdzie jego nieodłączną rutyną jest spanie… choć dobra informacja jest taka, że to pierwsza postać z umiejętnością tanka.",
@@ -1560,10 +1564,10 @@ const charaList = {
             },
             {
                 name: { pl: "Kij baseballowy", en: "Baseball bat" },
-                points: 7,
+                points: 15,
             },
-            { name: "> pixelsword", points: 20 },
-            { name: "> byteblast", points: 110 },
+            { name: "> pixelsword", points: 47 },
+            { name: "> byteblast", points: 123 },
         ],
         description: {
             pl: `Energiczna, pełna radości i pociech VTuberka, która zaczęła swoją działalność w sierpniu 2022 roku. Posiada aktualnie {{desc.db.yk}} obserwujących na Twitchu. Została poddana próbie stania się wojowniczką, jak narazie dobrze jej idzie…`,
@@ -1598,7 +1602,7 @@ const charaList = {
             },
             maxUses: 1,
         },
-        tags: ["atkback"],
+        tags: ["atkback", "stormbtp"],
     },
     ayandaRisu: {
         battle: [
@@ -1608,7 +1612,7 @@ const charaList = {
             },
             {
                 name: { pl: "Sprej przeciw robactwu", en: "Anti-worm spray" },
-                points: 55,
+                points: 77,
             },
         ],
         description: {
@@ -1797,7 +1801,7 @@ const charaList = {
             },
             maxUses: 1,
         },
-        tags: ["sochr"],
+        tags: ["sochr", "furr"],
     },
     elsiAdajew: {
         battle: [
@@ -1852,11 +1856,11 @@ const charaList = {
             },
             {
                 name: { pl: "Shurikenowe salami chips", en: "Shuriken salami chips" },
-                points: 10,
+                points: 30,
             },
             {
                 name: { pl: "Niebiańskie ognie z wydechu wyścigowego", en: "Heavenly fires from the racing exhaust" },
-                points: 40,
+                points: 100,
             },
         ],
         description: {
@@ -1897,7 +1901,7 @@ const charaList = {
             },
             maxUses: 2,
         },
-        tags: ["double"],
+        tags: ["double", "furr"],
     },
     snackowyAdmin: {
         battle: [
@@ -1907,11 +1911,11 @@ const charaList = {
             },
             {
                 name: { pl: "Bombowy kabanos", en: "Bomb cabanas" },
-                points: 5,
+                points: 35,
             },
             {
                 name: { pl: "Kotołap", en: "<b>Cat</b>cher" },
-                points: 65,
+                points: 135,
             },
         ],
         description: {
@@ -2027,7 +2031,7 @@ const charaList = {
         battle: [
             {
                 name: { pl: "Deficyt…", en: "Deficit…" },
-                points: 10,
+                points: 5,
             },
             {
                 name: "«Difficulty Paying?»",

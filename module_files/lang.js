@@ -127,12 +127,12 @@ export var langText = {
                 en: "<b>Start protection</b> - the initial critical chance is reduced to half.",
             },
             toks: {
-                pl: "<b>Toksyna</b> - każdy atak w przeciwnika powoduje dla niego truciznę zadająca 5% wartości ataku przez 2 rundy.",
-                en: "<b>Toxin</b> - each attack on an opponent causes a special effect on the opponent inflicting 5% of the attack value for 2 rounds.",
+                pl: "<b>Toksyna</b> - każdy atak w przeciwnika powoduje dla niego truciznę zadająca 10% wartości ataku przez 2 rundy.",
+                en: "<b>Toxin</b> - each attack on an opponent causes a special effect on the opponent inflicting 10% of the attack value for 2 rounds.",
             },
             btpwa: {
-                pl: "<b>Odszkodowanie wojenne</b> - każde uderzenie od przeciwnika powoduje dodanie BTP (20% z BTP dla przeciwnika).",
-                en: "<b>War compensation</b> - each hit from an opponent adds BTP (20% from BTP for the opponent).",
+                pl: "<b>Odszkodowanie wojenne</b> - każde uderzenie od przeciwnika powoduje dodanie BTP (25% z BTP dla przeciwnika).",
+                en: "<b>War compensation</b> - each hit from an opponent adds BTP (25% from BTP for the opponent).",
             },
             atkback: {
                 pl: "<b>Sprzężenie zwrotne</b> - każdy atak od przeciwnika powoduje oddanie dla niego 8% wartości ataku.",
@@ -157,6 +157,10 @@ export var langText = {
             time: {
                 pl: "<b>Wzmożona aktywność</b> - BTP jest dodawane z czasem.",
                 en: "<b><i>CharaActive</i></b> - BTP is added gradually.",
+            },
+            furr: {
+                pl: "<b>Furia</b> - Im dłużej gra, tym większe są jego ataki (włączając ataki z Gwiezdnej Mocy).",
+                en: "<b>Furrious</b> - When he plays longer, his attacks increase (including attacks from Star Power).",
             },
         },
     },

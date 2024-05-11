@@ -1668,12 +1668,14 @@ function starPover(type) {
  * Atakuje podanego gracza podczas gry
  * @param {"player" | "bot"} type Typ do zaatakowania
  * @param {number} atk Wartość ataku
- * @param {boolean} returns Warunek czy ma zwracać czy nie; przydatne do SP
- * @returns {{ atk: number, btp: number, crit: boolean } | void} Jeżeli *`returns`* jest ustawione na **`true`**, zwraca kod JSON.
+ * @param {boolean} isSP Warunek czy atak jest spowodowany SP
+ * @returns {{ atk: number, btp: number, crit: boolean } | void} Jeżeli *`isSP`* jest ustawione na **`true`**, zwraca kod JSON.
  */
-function dmg(type, atk, returns = Boolean(false)) {
+function dmg(type, atk, isSP = Boolean(false)) {
     gCheckedNum.match = -1
     showedCheck = false
+
+    if (characters_json[matchSettings[type2].name].tags.includes("furr")) atk *= 1 + (matchSettings.moves + 1) / 200
 
     var rand = Math.round(Math.random() * 70) / 100 + 0.5
     atk = Math.round(atk * rand)
@@ -1701,15 +1703,15 @@ function dmg(type, atk, returns = Boolean(false)) {
 
     updateHP(type)
     if (characters_json[matchSettings[type].name].tags.includes("btpwa")) {
-        matchSettings[type].points += Math.round(d_btp * 0.2)
+        matchSettings[type].points += Math.round(d_btp * 0.25)
         if (type == "player") document.querySelector(`div#game.match div[gameplay="player"] div.btns span#BTPNumber`).innerText = matchSettings[type].points
     }
 
-    if (returns) return { atk: atk * (4 - crit * 3), btp: d_btp, crit }
+    if (isSP) return { atk: atk * (4 - crit * 3), btp: d_btp, crit }
 
     if (characters_json[matchSettings[type2].name].tags.includes("toks")) {
         gameModify.getColab(type2).setTimeoutInMoves("each", 2, (colabed) => {
-            gameModify.getColab(colabed).enemy.attack(Math.round(atk * (4 - crit * 3) * 0.05))
+            gameModify.getColab(colabed).enemy.attack(Math.round(atk * (4 - crit * 3) * 0.1))
 
             document.querySelector(`div#game.match div[gameplay="${colabed == "player" ? "bot" : "player"}"] img.character`).classList.add("animateTagToks")
             setTimeout(() => {
@@ -1719,7 +1721,7 @@ function dmg(type, atk, returns = Boolean(false)) {
     }
     if (characters_json[matchSettings[type].name].tags.includes("atkback")) {
         setTimeout(() => {
-            gameModify.getColab(type).enemy.attack(Math.round(atk * (4 - crit * 3) * 0.08))
+            gameModify.getColab(type).enemy.attack(Math.round(atk * (4 - crit * 3) * 0.18))
             document.querySelector(`div#game.match div[gameplay="${type2}"] img.character`).classList.add("animateTagAtkback")
             setTimeout(() => {
                 document.querySelector(`div#game.match div[gameplay="${type2}"] img.character`).classList.remove("animateTagAtkback")
@@ -2208,7 +2210,7 @@ var gameModify = {
                             regenerate(type, true)
                     },
                     /**
-                     * @.returns {string | number | number[] | undefined | {}}
+                     * @returns {string | number | number[] | undefined | {}}
                      */
                     get: function (keys = "") {
                         const x = matchSettings[playerSPUType == "player" ? "bot" : "player"]
