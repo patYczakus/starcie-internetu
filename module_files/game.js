@@ -1680,7 +1680,7 @@ function dmg(type, atk, isSP = Boolean(false)) {
     if (characters_json[matchSettings[type2].name].tags.includes("furr"))
         atk *=
             1 +
-            (matchSettings.moves + 1 + 0.1 * classes.indexOf(characters_json[matchSettings[type2].name].class)) /
+            (matchSettings.moves * (1 + 0.1 * classes.indexOf(characters_json[matchSettings[type2].name].class))) /
                 (100 + 70 * characters_json[matchSettings[type2].name].tags.length)
     var rand = Math.round(Math.random() * 70) / 100 + 0.5
     atk = Math.round(atk * rand)
