@@ -189,7 +189,7 @@ const spf = {
             setTimeout(() => {
                 gameModify.spSounds.miss.currentTime = 0
                 if (!isPlaying(gameModify.spSounds.miss)) gameModify.spSounds.miss.play()
-                gameModify.getColab().you.hp.setValue(gameModify.getColab().you.hp.get() - atk * 0.13, false)
+                gameModify.getColab().you.hp.setValue(gameModify.getColab().you.hp.get() - Math.abs(atk * 0.13), false)
                 gameModify.getColab().endSP()
             }, 1000)
     },
