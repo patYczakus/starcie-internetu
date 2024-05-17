@@ -1201,7 +1201,7 @@ const charaList = {
             },
             maxUses: 2,
         },
-        tags: [],
+        tags: ["btpwa"],
     },
     botek: {
         battle: [
@@ -1264,12 +1264,16 @@ const charaList = {
     agatea: {
         battle: [
             {
+                name: { pl: "Lodołamacz", en: "Ice breaker" }
+                points: 0
+            }
+            {
                 name: { pl: "Lodowa pięść", en: "Ice fist" },
-                points: 15,
+                points: 50,
             },
             {
                 name: { pl: "Śnieżno-huraganowe pole rażenia", en: "Snow-hurricane field of fire" },
-                points: 150,
+                points: 200,
             },
         ],
         description: {
@@ -1293,7 +1297,7 @@ const charaList = {
         },
         level_up: {
             hp: 3,
-            battle: [2, 3.1821951],
+            battle: [2, 2.5, 3.851],
             types: {
                 strong: 10,
                 weak: 70,
@@ -1310,7 +1314,7 @@ const charaList = {
             },
             maxUses: 1,
         },
-        tags: ["double", "sochr"],
+        tags: ["double", "furr"],
     },
     kruczaWładczyniNekro: {
         battle: [
