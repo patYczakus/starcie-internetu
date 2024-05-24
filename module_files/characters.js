@@ -1264,9 +1264,9 @@ const charaList = {
     agatea: {
         battle: [
             {
-                name: { pl: "Lodołamacz", en: "Ice breaker" }
-                points: 0
-            }
+                name: { pl: "Lodołamacz", en: "Ice breaker" },
+                points: 0,
+            },
             {
                 name: { pl: "Lodowa pięść", en: "Ice fist" },
                 points: 50,
