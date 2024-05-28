@@ -17,7 +17,7 @@ const JK = _jk.default,
     },
     healInfo = (who, lvl) =>
         Math.round(
-            Math.pow(1.37 + 0.4 * characters_json[who].tags.includes("tanker") + 0.01 * classes.indexOf(characters_json[who].class), lvl - 1) *
+            Math.pow(1.37 + 0.4 * characters_json[who].tags.includes("tanker") + 0.01 * classes.indexOf(characters_json[who].class), lvl) *
                 (500 + 200 * characters_json[who].tags.includes("ahealth"))
         ),
     create_matchSettings_structure = function () {
@@ -1745,18 +1745,8 @@ function analyze() {
     setTimeout(() => {
         let canskip = false
         do {
-            let action = Math.round(Math.random() * 16)
             // console.log(action)
             if (action == 0 || action == 1) {
-                if (gameModify.getColab("bot").you.hp.factor() < 0.75 && matchSettings.bot.points >= 25) {
-                    canskip = true
-                    matchSettings.bot.points -= 25
-                    matchSettings.bot.health += healInfo(matchSettings.bot.name, matchSettings.bot.lvl)
-                    audios.heal.currentTime = 0
-                    audios.heal.play()
-
-                    updateHP("bot")
-                }
             } else if (action == 2 || action == 3 || action == 4) {
                 canskip = true
                 matchSettings.bot.points += 10
@@ -1785,8 +1775,6 @@ function analyze() {
                     }
                 }
             }
-
-            console.log(`[DEBUG] Wybór bota: ${action} (możliwość wykonania: ${canskip})`)
         } while (!canskip)
         // console.log(matchSettings.bot.points, characters_json[matchSettings.bot.name].battle)
 
