@@ -2000,7 +2000,7 @@ var gameModify = {
                         if (maxHP) {
                             element.style.setProperty("--healthMax", value)
                         } else {
-                            matchSettings[playerSPUType].health = Math.min(matchSettings[playerSPUType].health + value, Number(element.style.getPropertyValue("--healthMax")))
+                            matchSettings[playerSPUType].health = Math.min(value, Number(element.style.getPropertyValue("--healthMax")))
                         }
 
                         updateHP(playerSPUType)
