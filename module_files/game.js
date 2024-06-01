@@ -1745,8 +1745,18 @@ function analyze() {
     setTimeout(() => {
         let canskip = false
         do {
+            let action = Math.round(Math.random() * 16)
             // console.log(action)
-            if (action == 0 || action == 1) {
+            if (action == 0 || action == 1 || matchSettings.moves * Math.random() > 75) {
+                if (gameModify.getColab("bot").you.hp.factor() < 0.75 && matchSettings.bot.points >= 25) {
+                    canskip = true
+                    matchSettings.bot.points -= 25
+                    matchSettings.bot.health += healInfo(matchSettings.bot.name, matchSettings.bot.lvl)
+                    audios.heal.currentTime = 0
+                    audios.heal.play()
+
+                    updateHP("bot")
+                }
             } else if (action == 2 || action == 3 || action == 4) {
                 canskip = true
                 matchSettings.bot.points += 10
