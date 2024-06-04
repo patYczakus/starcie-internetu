@@ -337,6 +337,7 @@ const spf = {
         gameModify.getColab().endSP()
     },
     paty: function () {
+        console.log("[DEBUG/game/paty] Kalkulacja: ", gameModify.getColab().you.atk.getValue("last"))
         for (let i = 1; i <= 5; i++) {
             setTimeout(() => {
                 gameModify.getColab().enemy.attack(gameModify.getColab().you.atk.getValue("last") * (i === 1 ? 0.5 : 0.05))
