@@ -337,9 +337,9 @@ const spf = {
         gameModify.getColab().endSP()
     },
     paty: function () {
-        for (let i = 1; i <= 3; i++) {
+        for (let i = 1; i <= 5; i++) {
             setTimeout(() => {
-                gameModify.getColab().enemy.attack((gameModify.getColab().you.atk.getValue("last") / i) * 10)
+                gameModify.getColab().enemy.attack(gameModify.getColab().you.atk.getValue("last") * (i === 1 ? 1 : 0.2))
             }, i * 100)
         }
         setTimeout(() => {
@@ -348,10 +348,10 @@ const spf = {
 
             gameModify.getColab().enemy.attack(gameModify.getColab().you.hp.get() * 1.21)
             gameModify.getColab().you.hp.setPrectange(100 / 1.21, false)
-        }, 1300)
+        }, 1500)
         setTimeout(() => {
             gameModify.getColab().endSP()
-        }, 1800)
+        }, 2000)
     },
     chromo: function () {
         gameModify.getColab().you.atk.setPrectange(175, "all")
