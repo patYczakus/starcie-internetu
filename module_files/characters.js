@@ -1201,7 +1201,7 @@ const charaList = {
             },
             maxUses: 2,
         },
-        tags: ["btpwa"],
+        tags: ["btpwa", "time"],
     },
     botek: {
         battle: [
