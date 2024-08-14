@@ -717,7 +717,7 @@ const spf = {
     ameliaWatson: function () {
         Promise.all(
             ["tokyo", "new+york", "jakarta"].map(async (x) => {
-                var test = await (await fetch(`http://api.weatherapi.com/v1/current.json?key=571cdb4aa8ae48a2a1e173255232509&q=${x}&aqi=no`)).json()
+                var test = await (await fetch(`https://api.weatherapi.com/v1/current.json?key=571cdb4aa8ae48a2a1e173255232509&q=${x}&aqi=no`)).json()
                 const val = Math.round((test.current.temp_f - Math.max(test.current.temp_c * 0.8, 0)) * (100 - test.current.cloud))
                 console.log(`[DEBUG/game/ameliaWatson] Pobrano z argumentem q=${x}, wartość ataku: ${val}`)
                 return val
